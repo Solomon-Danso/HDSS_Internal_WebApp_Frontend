@@ -22,6 +22,136 @@ background-color: ${colors.ivory_dark};
 
 `;
 
+export const MainDashboardContainer = styled.div`
+display: flex;
+flex-direction: row;
+padding: 0.5%;
+border-radius: 2rem;
+
+`;
+export const MenuContainer = styled.div`
+
+flex: 0.15;
+  background-color: #f4f4f4;
+  padding: 15px;
+  overflow: hidden;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  min-height: 100vh;
+
+  @media (max-width: 768px) {
+    position: fixed;
+    z-index: 999;
+    width: 85%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    transition: all 0.5s ease-in-out;
+    opacity: ${({ isOpen }) => (isOpen ? "1" : "0")};
+    top: ${({ isOpen }) => (isOpen ? "0" : "-100%")};
+    overflow-y: scroll;
+    padding-bottom: 20px;
+    &::-webkit-scrollbar {
+      --webkit-appearance: none;
+    }
+  }
+
+`;
+
+
+export const DashboardContainer = styled.div`
+flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: scroll;
+  padding: 15px;
+
+  @media (max-width: 768px) {
+    flex: 0.9;
+  }
+`;
+
+export const Navigators = styled.div`
+background-color: white;
+  border-right: 0.5px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 5px;
+
+  @media (max-width: 768px) {
+    flex: 0.1;
+  }
+  `;
+
+
+
+export const MenuButtonDiv = styled.div`
+display: flex;
+flex-direction: column;
+gap: 1rem
+
+`;
+export const MenuButtonIcon = styled.div`
+border-radius: 50%;
+  font-size: 1.5rem;
+  background-color: white;
+  height: 2rem; /* Adjust the height as needed */
+  width: 2rem; /* Adjust the width as needed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+`;
+export const MenuButtonLink = styled.div`
+color: #131313;
+font-size:1.5rem
+`;
+
+export const MenuButtonOptionLink = styled.div`
+color: #131313;
+font-size:1.2rem
+cursor: pointer;
+
+`;
+
+export const MenuButtonMain = styled.div`
+display: flex;
+flex-direction: row;
+gap: 1rem
+`;
+
+export const MenuButtonOption = styled.div`
+display:flex
+flex-direction: column;
+flex-wrap : wrap;
+justify-content: space-evenly;
+align-items: center;
+padding: 0.5rem;
+
+`;
+
+export const DropdownOptions = styled.div`
+  position: absolute;
+  top: 1%;
+  left: 0;
+  background-color: red;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  display: ${({ open }) => (open==true ? 'block' : 'none')};
+`;
+
+export const DropdownOption = styled.div`
+  margin: 0.5rem 0;
+`;
+
+
+
 
 
 export const LoginWrap = styled.div`

@@ -32,13 +32,15 @@ border-radius: 2rem;
 export const MenuContainer = styled.div`
 
 flex: 0.15;
-  background-color: #f4f4f4;
-  padding: 15px;
+  background-color: ${colors.darkBlue};
+  colors:${colors.white};
+  padding: 5px;
   overflow: hidden;
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none;
   min-height: 100vh;
+ 
 
   @media (max-width: 768px) {
     position: fixed;
@@ -66,64 +68,119 @@ flex: 1;
   flex-direction: column;
   height: 100%;
   overflow-y: scroll;
-  padding: 15px;
+  padding: 5px;
 
   @media (max-width: 768px) {
-    flex: 0.9;
+    flex: 1;
   }
 `;
 
-export const Navigators = styled.div`
-background-color: white;
-  border-right: 0.5px solid rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 5px;
 
-  @media (max-width: 768px) {
-    flex: 0.1;
-  }
-  `;
 
 
 
 export const MenuButtonDiv = styled.div`
 display: flex;
 flex-direction: column;
-gap: 1rem
+gap: 1rem;
+
 
 `;
+
+export const MenuButtonDivInner = styled.div`
+display: flex;
+flex-direction: column;
+
+`;
+
+
+
 export const MenuButtonIcon = styled.div`
 border-radius: 50%;
   font-size: 1.5rem;
-  background-color: white;
-  height: 2rem; /* Adjust the height as needed */
-  width: 2rem; /* Adjust the width as needed */
+  height: 2rem;
+  width: 2rem; 
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  color:${colors.yellow}
 
 `;
+export const MenuButtonIconAgain = styled.div`
+
+  font-size: 1.5rem;
+  height: 2rem;
+  width: 2rem; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color:${colors.white}
+
+`;
+
+
+
+export const MenuButtonIconInner = styled.div`
+border-radius: 50%;
+  font-size: 1.5rem;
+  height: 2rem;
+  width: 2rem; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color:${colors.yellow}
+  
+
+`;
+
 export const MenuButtonLink = styled.div`
-color: #131313;
-font-size:1.5rem
+color: ${colors.white};
+font-size:1.5rem;
+cursor: pointer;
+cursor: pointer;
+
+`;
+export const MenuButtonLinkInner = styled.div`
+font-size:1.2rem;
+cursor: pointer;
+cursor: pointer;
+font-weight: 500;
+color: ${colors.white};
+
 `;
 
 export const MenuButtonOptionLink = styled.div`
 color: #131313;
 font-size:1.2rem
 cursor: pointer;
+cursor: pointer;
+margin-bottom:0.5rem;
+color: ${colors.white};
+
+&:hover {
+  color: ${colors.yellow};
+  font-size:1.25rem;
+}
 
 `;
 
 export const MenuButtonMain = styled.div`
 display: flex;
 flex-direction: row;
-gap: 1rem
+justify-content: space-between;
+background-color: ${colors.darkBlue}
+
 `;
+export const MenuButtonMainInner = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+colors:${colors.white};
+`;
+
 
 export const MenuButtonOption = styled.div`
 display:flex
@@ -132,23 +189,11 @@ flex-wrap : wrap;
 justify-content: space-evenly;
 align-items: center;
 padding: 0.5rem;
+margin-top:0;
+gap:1rem;
 
 `;
 
-export const DropdownOptions = styled.div`
-  position: absolute;
-  top: 1%;
-  left: 0;
-  background-color: red;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
-  padding: 0.5rem;
-  display: ${({ open }) => (open==true ? 'block' : 'none')};
-`;
-
-export const DropdownOption = styled.div`
-  margin: 0.5rem 0;
-`;
 
 
 
@@ -280,9 +325,49 @@ export const Button  = styled.button`
 `;
 
 
+export const School = styled.div`
+background-color:#f0ebea;
+height: 15vh;
+display:flex;
+align-items: center;
+border-bottom-left-radius: 20px;
+border-bottom-right-radius: 20px;
+padding: 10px;
+flex-direction: row;
+gap:0.5rem;
 
 
+`;
 
+export const SchoolDashboardLogo = styled.img`
+width: 50px;
+height: 50px;
 
+`;
 
+export const SchoolNameNMotto = styled.div`
+display: flex;
+flex-direction: column;
 
+`;
+
+export const SchoolName = styled.div`
+font-size: 1.5rem;
+
+`;
+
+export const MenuInfo = styled.div`
+
+background-color: ${colors.yellow};
+height:7vh;
+font-size: 1.5rem;
+color: ${colors.white};
+margin-bottom: 5px;
+align-items: center;
+display:flex;
+justify-content: center;
+`;
+
+export const HomePageBanner = styled.div`
+background-color: #ffffff
+`;

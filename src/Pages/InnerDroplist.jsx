@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { MenuButtonDiv,MenuButtonIcon,MenuButtonLink,MenuContainer,MenuButtonOptionLink, MenuButtonMain, MenuButtonOption, MenuButtonIconAgain } from '../Designs/Styles'
+import { MenuButtonDivInner,MenuButtonIcon,MenuButtonIconInner,MenuButtonLinkInner, MenuButtonMainInner, MenuButtonOption } from '../Designs/Styles'
 import AnimateHeight from 'react-animate-height';
-import { BsFillArrowRightCircleFill } from "react-icons/bs";
+import { BsFillArrowRightCircleFill,BsFillArrowUpRightCircleFill } from "react-icons/bs";
 
 
 const MenuButtons = ({logo, title, children}) => {
-  const navigate = useNavigate();
+
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -20,36 +20,32 @@ const MenuButtons = ({logo, title, children}) => {
 
   return (
 
-        <MenuButtonDiv > 
+        <MenuButtonDivInner>
 
-          <MenuButtonMain>
-            <div style={{display:"flex", flexDirection:"row", gap:"1rem"}}>
-          <MenuButtonIcon onClick={toggleDropdown}>{logo}</MenuButtonIcon>
-          <MenuButtonLink onClick={toggleDropdown}>{title} </MenuButtonLink>
-          </div>
-
+          <MenuButtonMainInner>
+          <div style={{display:"flex", flexDirection:"row", gap:"1rem"}}>
+          <MenuButtonLinkInner onClick={toggleDropdown}>{title} </MenuButtonLinkInner>
+                  </div>
 
           <div>
-          <MenuButtonIconAgain onClick={toggleDropdown}
+          <MenuButtonIconInner onClick={toggleDropdown}
            style={{
             transform: dropdownOpen ? "rotate(90deg)" : "rotate(0deg)",
           }}
-          ><BsFillArrowRightCircleFill />
+          ><BsFillArrowUpRightCircleFill />
           
-          </MenuButtonIconAgain>
+          </MenuButtonIconInner>
           </div>
-          
-          </MenuButtonMain>
+
+          </MenuButtonMainInner>
 
           <MenuButtonOption>
-         
           <AnimateHeight height={dropdownOpen ? "auto" : 0} duration={500}>    
           <div style={{ marginLeft: "10%" }}>{children}</div>
          </AnimateHeight>
-  
           </MenuButtonOption>
 
-        </MenuButtonDiv>
+        </MenuButtonDivInner>
 
 
 

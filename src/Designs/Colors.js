@@ -3,6 +3,9 @@ export const colors = {
     secondary: "#B19A19",
     accent: "#EDEDED",
     red: "#D0241A",
-    yellow: "#FEF217"
+    yellow: "#FDBE01",
+    white:"#fff3f3",
+    darkBlue:"#061e3f",
+    lightBlue: "#051b34",
   };
   

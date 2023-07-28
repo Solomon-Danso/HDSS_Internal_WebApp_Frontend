@@ -4,6 +4,8 @@ import Home from '../../Portals/Admin/Home';
 import Test from '../../Portals/Admin/Test'
 import { DashboardContainer } from '../../Designs/Styles';
 import { AES, enc } from 'crypto-js';
+import Pass from '../../Portals/Admin/Pass';
+import PermissionDenied from '../../Portals/Admin/PermissionDenied';
 
 const Dashboard = () => {
   const [specificRole, setspecificRole] = useState("");
@@ -23,7 +25,20 @@ const Dashboard = () => {
              </>
              ):(
              <>
-             
+              <Route path="*" element={<PermissionDenied />} />
+             </>
+             )
+          }
+
+{
+             specificRole==="SuperiorUser"? (
+             <>
+              <Route path="/" element={<Home />} />
+              <Route path="pass" element={<Pass />} />  
+             </>
+             ):(
+             <>
+             <Route path="*" element={<PermissionDenied />} />
              </>
              )
           }

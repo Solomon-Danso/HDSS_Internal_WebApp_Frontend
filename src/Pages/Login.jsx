@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { LoginPage,LoginWrap,LoginDiv,AppName, SchoolLogo, AppDesc, HDSS_Form, FormInput, HDSS_Label, Button } from '../Designs/Styles'
+import { LoginPage,LoginWrap,LoginDiv,AppName, SchoolLogo, AppDesc, HDSS_Form, FormInput, HDSS_Label, Button } from '../Designs/Styles/Styles'
 import student from "../Designs/Images/2.jpg" 
 import { colors } from '../Designs/Colors'
 import { useNavigate } from 'react-router-dom'
@@ -72,7 +72,7 @@ const handleSubmit = async (event) => {
         Show.hideLoading();
 
         Show.Success("Login Successfull ");
-        sessionStorage.setItem("userData", JSON.stringify(data));
+          sessionStorage.setItem("userDataEnc", AES.encrypt(JSON.stringify(data), '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK').toString()); 
         sessionStorage.setItem("SpecificRole", AES.encrypt(data.specificRole, '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK').toString()); 
        
         if(data.role === "Admin"){

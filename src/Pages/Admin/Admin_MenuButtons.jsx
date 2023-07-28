@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { MenuContainer,MenuButtonOptionLink, menuInfo, SchoolDashboardLogo, SchoolNameNMotto, SchoolName, MenuInfo, } from '../../Designs/Styles'
+import { MenuContainer,MenuButtonOptionLink, menuInfo, SchoolDashboardLogo, SchoolNameNMotto, SchoolName, MenuInfo, } from '../../Designs/Styles/Styles'
 import DropList from "../../Pages/DropList"
 import InnerDroplist from "../../Pages/InnerDroplist"
 import { AES, enc } from 'crypto-js';
@@ -17,12 +17,6 @@ import { FcDepartment,FcPlanner } from "react-icons/fc";
 import { LiaChalkboardSolid } from "react-icons/lia";
 
 
-
-
-
-
-
-import { colors } from '../../Designs/Colors'
 
 const MenuButtons = () => {
   const navigate = useNavigate();
@@ -46,7 +40,7 @@ const MenuButtons = () => {
 <MenuContainer>
 
 
-<MenuInfo>
+<MenuInfo onClick={() => { navigate("/admin") }}>
 HDSS
 </MenuInfo>
 

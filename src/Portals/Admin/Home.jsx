@@ -1,76 +1,184 @@
 import React, { useEffect, useState } from 'react'
-import { HomePage,  } from '../../Designs/Styles'
-import { FaUserGraduate } from "react-icons/fa";
-import { colors } from '../../Designs/Colors';
-import pic1 from "../../Designs/Images/download.png"
-import DropList from "../../Pages/DropList"
+import { ChartsCard, HomeBanner, HomeCard, HomeCardColumn, HomeCardNumber, HomeCardText, HomeIcon, HomeStudentForm, HomeStudentSelect, SelectStage, SelectStageButton, StudentCardText, StudentInfoCard, StudentListBanner } from '../../Designs/Styles/Profile'
+import { colors } from "../../Designs/Colors"
+import { HiOutlineUserGroup,HiIdentification } from "react-icons/hi";
 import { useNavigate } from 'react-router-dom'
-import { BsGraphUpArrow} from "react-icons/bs";
+import { AES, enc } from 'crypto-js';
+import { BiSolidGroup } from "react-icons/bi";
+import { BsPersonFillAdd,BsFillTelephoneOutboundFill,BsCameraFill } from "react-icons/bs";
+import { FaMoneyBillAlt,FaBirthdayCake,FaUserGraduate } from "react-icons/fa";
+import FeesBarChart from "./FeesBarCharts"
+import FeesLineChart from "./FeesLineChart"
+import { RiParentFill } from "react-icons/ri";
+
+
 
 
 const Home = () => {
-
+  
   const navigate = useNavigate();
-  function formatDate(date) {
-    const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  
-    const day = date.getDate();
-    const daySuffix = getDaySuffix(day);
-    const weekday = weekdays[date.getDay()];
-    const month = months[date.getMonth()];
-    const year = date.getFullYear();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const amOrPm = hours >= 12 ? 'pm' : 'am';
-  
-    // Convert 24-hour format to 12-hour format
-    const formattedHours = hours % 12 || 12;
-  
-    const formattedDate = `${weekday}, ${day}${daySuffix} ${month}, ${year} ${formattedHours}:${String(minutes).padStart(2, '0')}${amOrPm}`;
-  
-    return formattedDate;
-  }
-  
-  function getDaySuffix(day) {
-    if (day >= 11 && day <= 13) {
-      return 'th';
-    }
-    switch (day % 10) {
-      case 1:
-        return 'st';
-      case 2:
-        return 'nd';
-      case 3:
-        return 'rd';
-      default:
-        return 'th';
-    }
-  }
-  
-const [sysDate, setSysDate] = useState("")
+  const [specificRole, setspecificRole] = useState("");
+  const [role, setrole] = useState("");
 
-  
-  useEffect(()=>{
- const date = new Date();
- setSysDate(formatDate(date))
-  })
-  const Twinkle =()=>{
-    const date = new Date();
- setSysDate(formatDate(date))
+  useEffect(() => {
+    const spRole =  AES.decrypt(sessionStorage.getItem("SpecificRole"), '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK').toString(enc.Utf8);
+    setspecificRole(spRole);
+    
+  }, []);
+
+  const handleStudentDataSubmit = () =>{
+    alert("Student data submission form working ")
   }
-
-  setInterval(Twinkle,1000)
- 
-  
-
 
   return (
-    <HomePage>
+<>
+<HomeBanner>
+{
+   specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(
+    <>
+    <HomeCard onClick={() => { navigate("/admin/test") }}>
+    <HomeCardColumn>
+    <HomeIcon color={colors.green}> <HiOutlineUserGroup/> </HomeIcon>
+    <HomeCardText>Students</HomeCardText>
+    </HomeCardColumn>
 
-     
+    <hr/>
 
-    </HomePage>
+    <HomeCardNumber> 500</HomeCardNumber>
+    </HomeCard>
+
+    </>
+   ):(
+    <></>
+   )
+}
+
+{
+   specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(
+    <>
+    <HomeCard onClick={() => { navigate("/admin/test") }}>
+    <HomeCardColumn>
+    <HomeIcon color={colors.blue}> <BiSolidGroup/> </HomeIcon>
+    <HomeCardText>Teachers</HomeCardText>
+    </HomeCardColumn>
+
+    <hr/>
+
+    <HomeCardNumber> 73</HomeCardNumber>
+    </HomeCard>
+
+    </>
+   ):(
+    <></>
+   )
+}
+
+{
+   specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(
+    <>
+    <HomeCard onClick={() => { navigate("/admin/test") }}>
+    <HomeCardColumn>
+    <HomeIcon color={colors.deepyellow}> <BsPersonFillAdd/> </HomeIcon>
+    <HomeCardText>Parents</HomeCardText>
+    </HomeCardColumn>
+
+    <hr/>
+
+    <HomeCardNumber> 180</HomeCardNumber>
+    </HomeCard>
+
+    </>
+   ):(
+    <></>
+   )
+}
+
+{
+   specificRole==="SuperiorUser"||specificRole==="SchoolDirector"?(
+    <>
+    <HomeCard onClick={() => { navigate("/admin/test") }}>
+    <HomeCardColumn>
+    <HomeIcon color={colors.aqua}> <FaMoneyBillAlt/> </HomeIcon>
+    <HomeCardText>Total Earnings</HomeCardText>
+    </HomeCardColumn>
+
+    <hr/>
+
+    <HomeCardNumber> 99456</HomeCardNumber>
+    </HomeCard>
+
+    </>
+   ):(
+    <></>
+   )
+}
+
+</HomeBanner>
+
+{
+  specificRole==="SuperiorUser"||specificRole==="SchoolDirector"?(
+  <>
+ <HomeBanner>
+
+<ChartsCard><FeesBarChart/></ChartsCard>
+
+<ChartsCard><FeesLineChart/> </ChartsCard>
+  
+</HomeBanner> 
+  
+  </>
+  ):(
+  <>
+  </>)
+}
+
+
+<StudentInfoCard >
+
+<StudentListBanner
+onSubmit={handleStudentDataSubmit}
+>
+<StudentCardText><HiIdentification/></StudentCardText>
+<StudentCardText><BsCameraFill/></StudentCardText>
+<StudentCardText><BiSolidGroup/></StudentCardText>
+<StudentCardText><FaBirthdayCake/></StudentCardText>
+<StudentCardText><FaUserGraduate/></StudentCardText>
+<StudentCardText><RiParentFill/></StudentCardText>
+<StudentCardText><BsFillTelephoneOutboundFill/></StudentCardText>
+
+
+
+<SelectStage
+background={colors.darkBlue}
+color="white"
+border={colors.darkBlue}
+>
+  <option>Basic 4A</option>
+  <option>Basic 4B</option>
+  <option>Basic 5A</option>
+  <option>Basic 5B</option>
+  <option>Basic 6</option>
+</SelectStage>
+<SelectStageButton  
+background={colors.darkBlue}
+color="white"
+border={colors.darkBlue}
+type="submit">Load
+  
+  </SelectStageButton>
+
+
+</StudentListBanner>
+
+</StudentInfoCard>
+
+
+
+
+
+
+
+</>
   )
 }
 

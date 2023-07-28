@@ -4,4 +4,6 @@ body{
     color: #051b34;
     color:#061e3f;
     font-family: cursive;
+    flex-direction:row-reverse;
+
 }

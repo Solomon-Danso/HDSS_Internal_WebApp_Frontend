@@ -1,7 +1,7 @@
 import React from 'react'
 import Admin_MenuButtons from './Admin/Admin_MenuButtons'
 import Admin_Dashboard from './Admin/Admin_Dashboard'
-import { MainDashboardContainer } from '../Designs/Styles'
+import { MainDashboardContainer } from '../Designs/Styles/Styles'
 const AdminDashboard = () => {
   return (
     <MainDashboardContainer>

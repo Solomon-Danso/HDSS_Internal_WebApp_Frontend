@@ -73,17 +73,20 @@ padding:1rem;
 
 
 export const StudentInfoCard = styled.div`
-background: rgba(255, 255, 255, 1);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(19.7px);
--webkit-backdrop-filter: blur(19.7px);
-border: 1px solid rgba(255, 255, 255, 1);
-height:50vh;
-padding:1rem;
-overflow:hidden;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(19.7px);
+  -webkit-backdrop-filter: blur(19.7px);
+  border: 1px solid rgba(255, 255, 255, 1);
+  height: 50vh;
+  padding: 1rem;
+  overflow: hidden; /* Change to hidden */
 
+  /* Position relative for proper stacking context */
+  position: relative;
 `;
+
 
 export const AdmitStudentCard = styled.div`
 background: rgba(255, 255, 255, 1);
@@ -245,6 +248,8 @@ border: none;
 
 `;
 
+
+
 export const SendButton = styled.button`
  width: 20vw;
   padding: 15px 10px;
@@ -317,15 +322,23 @@ border: none;
 
 
 export const StudentListBanner = styled.form`
-display:flex;
-flex-direction: row;
-justify-content:space-between;
-padding-left:2rem;
-padding-right:2rem;
-height: 3rem;
-align-items:center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 6vw;
+  padding-right: 2rem;
+  height: 3rem;
+  align-items: center;
 
+  /* Fixed position with respect to the viewport */
+  position: fixed;
+  top: 4;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 1);
+  z-index: 1; /* Ensure it's above the scrolling content */
 `;
+
 
 export const EventBanner = styled.form`
 display:flex;
@@ -340,9 +353,11 @@ align-items:center;
 
 
 export const StudentCardText = styled.div`
-font-size: 1.8rem;
+font-size: 1.2rem;
 text-wrap: break-word;
 font-weight: 600;
+flex:1;
+
 color:${colors.darkBlue};
 `;
 
@@ -576,12 +591,78 @@ border: none;
 `;
 
 
+export const NewStudentListCard = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  height: 3rem;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 1);
+  position: relative;
+  z-index: 0;
+`;
+
+
+export const NewStudentListCard2 = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  height: 3rem;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 1);
+  position: relative;
+  z-index: 1;
+`;
 
 
 
+export const StudentListResult = styled.div`
+  overflow: auto; /* Use auto to allow scrolling when content overflows */
+
+  /* Adjust height to fill available space and leave room for the fixed header */
+  height: calc(100% - 3rem);
+  margin-top: 3rem; /* Space for the fixed header */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;
 
 
+export const CardText = styled.div`
+  font-size: 1rem;
+  color: ${colors.lightBlue};
+  text-align: center;
+  flex: 1; /* Allow each text element to take equal space */
+`;
 
+export const CardTextHeader = styled.div`
+  font-size: 1.2rem;
+  color: ${colors.lightBlue};
+  text-align: center;
+  flex: 1; /* Allow each text element to take equal space */
+  font-weight: 600;
+  `;
+
+
+export const CardImage = styled.img`
+width: 7vw;
+height: 7vh;
+border-radius: 0.5rem;
+
+
+`;
+
+export const FormLoaders = styled.form`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+
+
+`;
 
 
 

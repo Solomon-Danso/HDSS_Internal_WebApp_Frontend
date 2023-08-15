@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { CardText, CardTextHeader, ChartsCard, EventCard, FormLoaders, HomeBanner, HomeCard, HomeCardColumn, HomeCardNumber, HomeCardText, HomeIcon, HomeStudentForm, HomeStudentSelect, NewStudentListCard, NewStudentListCard2, SelectForStudent, SelectStage, SelectStageButton, StudentCardText, StudentInfoCard, StudentListBanner, StudentListResult } from '../../Designs/Styles/Profile'
+import { ChartsCard, EventCard, HomeBanner, HomeCard, HomeCardColumn, HomeCardNumber, HomeCardText, HomeIcon, HomeStudentForm, HomeStudentSelect, NewStudentListCard, SelectStage, SelectStageButton, StudentCardText, StudentInfoCard, StudentListBanner, StudentListResult } from '../../Designs/Styles/Profile'
 import { colors } from "../../Designs/Colors"
 import { HiOutlineUserGroup,HiIdentification } from "react-icons/hi";
 import { useNavigate } from 'react-router-dom'
@@ -187,11 +187,20 @@ const Home = () => {
 }
 
 
-
 <StudentInfoCard >
 
-<FormLoaders onSubmit={handleStudentDataSubmit}>
-<SelectForStudent
+<StudentListBanner onSubmit={handleStudentDataSubmit}>
+
+<StudentCardText>ID</StudentCardText>
+<StudentCardText>Photo</StudentCardText>
+<StudentCardText>Student Name</StudentCardText>
+<StudentCardText>Gender</StudentCardText>
+<StudentCardText>DateOfBirth</StudentCardText>
+<StudentCardText>Class</StudentCardText>
+<StudentCardText>Contact Name</StudentCardText>
+<StudentCardText>Contact Phone</StudentCardText>
+
+<SelectStage
 background={colors.darkBlue}
 color="white"
 border={colors.darkBlue}
@@ -202,7 +211,7 @@ onChange={(e)=>setSpecificClass(e.target.value)}
     theClass.map((data) => (
       <option key={data.id}>{data.className}</option>
     ))}
-</SelectForStudent>
+</SelectStage>
 <SelectStageButton  
 background={colors.darkBlue}
 color="white"
@@ -210,23 +219,7 @@ border={colors.darkBlue}
 type="submit">Load
 </SelectStageButton>
 
-
-</FormLoaders>
-
-<NewStudentListCard2 >
-
-<CardTextHeader>ID</CardTextHeader>
-<CardTextHeader>Photo</CardTextHeader>
-<CardTextHeader>Student Name</CardTextHeader>
-<CardTextHeader>Gender</CardTextHeader>
-<CardTextHeader>DateOfBirth</CardTextHeader>
-<CardTextHeader>Class</CardTextHeader>
-<CardTextHeader>Contact Name</CardTextHeader>
-<CardTextHeader>Contact Phone</CardTextHeader>
-<CardTextHeader>Action</CardTextHeader>
-
-
-</NewStudentListCard2>
+</StudentListBanner>
 
 
 <StudentListResult>

@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { apiServer,RegisterStudent } from '../../Constants /Endpoints'
+import React, { useEffect, useState } from 'react'
+import { apiServer,RegisterStudent, ViewClasses } from '../../Constants /Endpoints'
 import { AdmitStudentCard, AdmitStudentRole, FormLable, HeaderTitle, MainTitle,FormInputStudent, SelectStage, SelectForStudent, FormTextAreaStudent, SelectStageButton, AdmitButton, SelectForStudentRel} from '../../Designs/Styles/Profile'
 import { colors } from '../../Designs/Colors'
 import { Show } from '../../Constants /Alerts'
@@ -97,8 +97,15 @@ const Students = () => {
         }
       };
     
+const [theClass, setTheClass] = useState([])
 
-
+useEffect(() => {
+    fetch(apiServer + ViewClasses)
+      .then(response => response.json()) // Parse the response as JSON
+      .then(data => setTheClass(data))
+      .catch(error => console.error(error));
+  }, []);
+  
 
 
 
@@ -255,8 +262,12 @@ const Students = () => {
     onChange={(e) => setlevel(e.target.value)}
     >
     <option >Please select a class</option>
-    <option>Basic 4A</option>
-    <option>Basic 4B</option>
+    
+    {theClass.length > 0 &&
+    theClass.map((data) => (
+      <option key={data.id}>{data.className}</option>
+    ))}
+
     </SelectForStudent>
         
      </div>

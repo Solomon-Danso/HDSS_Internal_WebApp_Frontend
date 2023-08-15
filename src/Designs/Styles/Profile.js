@@ -37,7 +37,7 @@ height:15vh;
 export const HomeBanner = styled.div`
 display:flex;
 flex-direction: row;
-gap:2rem;
+gap:1rem;
 flex-wrap: wrap;
 padding:1rem;
 
@@ -55,6 +55,7 @@ display:flex;
 flex-direction:row;
 gap:1rem;
 padding:2rem;
+
 `;
 
 export const ChartsCard = styled.div`
@@ -513,8 +514,66 @@ transition: all 0.5s ease-in-out;
 
 `;
 
+export const SelectForStudentRel = styled.select`
+width: 16vw;
+padding: 15px 10px;
+border: 1px solid ${({ border }) => border};;
+background-color: ${({background})=>background};
+color: ${({color})=>color};
+border-radius: 5px;
+margin-top: 10px;
+font-size: 16px;
+outline: none;
+transition: all 0.5s ease-in-out;
+
+:hover {
+  border: 0.5px solid ${colors.primary};
+}
+
+:focus {
+  border: 0.5px solid ${colors.primary};
+}
+
+@media (max-width: 768px) {
+  font-size: 12px;
+}
+
+`;
 
 
+
+export const AdmitButton = styled.button`
+border: none;
+  width: 16vw;
+  height: 10vh;
+  border-radius: 20px;
+  border: 1px solid ${({ border }) => border};
+  background-color: ${({ background }) => background};
+  color: ${({ color }) => color};
+  text-align: center;
+  padding: 10px 30px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  font-size: 1.5rem;
+
+  :hover {
+    background-color: ${colors.ivory_dark};
+    color: ${colors.primary};
+    border: 1px solid ${colors.ivory_dark};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    padding: 4px 18px;
+    padding: 11px 25px;
+  }
+
+
+`;
 
 
 

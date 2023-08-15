@@ -6,4 +6,5 @@ export const Admin = "api/Auth/Admin"
 export const Events = "api/Admin/ViewEvents"
 export const AddEvents = "api/Admin/AddEvent"
 export const DeleteEvents = "api/Admin/DeleteEvents?Id="
+export const RegisterStudent = "api/students/registerStudent"
 

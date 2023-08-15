@@ -1,11 +1,112 @@
-import React from 'react'
-import { Student } from '../../Constants /Endpoints'
-import { AdmitStudentCard, AdmitStudentRole, FormLable, HeaderTitle, MainTitle,FormInputStudent, SelectStage, SelectForStudent, FormTextAreaStudent, SelectStageButton} from '../../Designs/Styles/Profile'
+import React, { useState } from 'react'
+import { apiServer,RegisterStudent } from '../../Constants /Endpoints'
+import { AdmitStudentCard, AdmitStudentRole, FormLable, HeaderTitle, MainTitle,FormInputStudent, SelectStage, SelectForStudent, FormTextAreaStudent, SelectStageButton, AdmitButton, SelectForStudentRel} from '../../Designs/Styles/Profile'
 import { colors } from '../../Designs/Colors'
+import { Show } from '../../Constants /Alerts'
 
 const Students = () => {
-  return (
-    <>
+
+    const [firstName, setFirstname] = useState("")
+    const [otherName, setOtherName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [dateOfBirth, setDateOfBirth] = useState("")
+    const [gender, setGender] = useState("")
+    const [hometown, setHometown] = useState("")
+    const [location,setLocation] = useState("")
+    const [country, setCountry] = useState("")
+    const [fatherName, setfatherName] = useState("")
+    const [fatherOccupation, setfatherOccupation] = useState("")
+    const [motherName, setmotherName] = useState("")
+    const [motherOccupation, setmotherOccupation] = useState("")
+    const [guardianName, setGuardianName] = useState("")
+    const [guardianOccupation, setguardianOccupation] = useState("")
+    const [medicalIInformation, setmedicalIInformation] = useState("")
+    const [religion, setreligion] = useState("")
+    const [email, setemail] = useState("")
+    const [phoneNumber, setphoneNumber] = useState("")
+    const [AltphoneNumber, setAltphoneNumber] = useState("")
+    const [level, setlevel] = useState("")
+    const [profilePic, setProfilePic] = useState("")
+    const [emgCntName, setEmgContName] = useState("")
+    const [emgPhone, setEmgPhone] = useState("")
+    const [emgAltPhone, setEmgAltPhone] = useState("")
+    const [RelWithChild, setRelWithChild] = useState("")
+    const [parentDigitalAddress, setParentDigitalAddress] = useState("")
+    const [parentEmail, setParentEmail] = useState("")
+    const [parentLocation, setParentLocation] = useState("")
+    const [parentreligion, setParentReligion] = useState("")
+
+  
+  
+    const handlesubmit = async (event) => {
+        event.preventDefault();
+      
+        if (!profilePic) {
+          Show.Attention("Please select a picture");
+          return;
+        }
+      
+        try {
+          const formData = new FormData();
+          formData.append("File", profilePic);
+          formData.append("FirstName", firstName);
+          formData.append("OtherName", otherName);
+          formData.append("LastName", lastName);
+          formData.append("DateOfBirth", dateOfBirth);
+          formData.append("Gender", gender);
+          formData.append("HomeTown", hometown);
+          formData.append("Location", location);
+          formData.append("Country", country);
+          formData.append("FathersName", fatherName);
+          formData.append("FatherOccupation", fatherOccupation);
+          formData.append("MothersName", motherName);
+          formData.append("MotherOccupation", motherOccupation);
+          formData.append("GuardianName", guardianName);
+          formData.append("GuardianOccupation", guardianOccupation);
+          formData.append("MedicalIInformation", medicalIInformation);
+          formData.append("Religion", religion);
+          formData.append("Email", email);
+          formData.append("PhoneNumber", phoneNumber);
+          formData.append("EmergencyContactName", emgCntName);
+          formData.append("EmergencyPhoneNumber", emgPhone);
+          formData.append("EmergencyAlternatePhoneNumber", emgAltPhone);
+          formData.append("RelationshipWithChild", RelWithChild);
+          formData.append("Level", level);
+          formData.append("ParentDigitalAddress", parentDigitalAddress);
+          formData.append("ParentEmail", parentEmail);
+          formData.append("ParentReligion", parentreligion);
+          formData.append("ParentLocation", parentLocation);
+          formData.append("AlternatePhoneNumber", AltphoneNumber);
+
+          
+      
+          const response = await fetch(apiServer + RegisterStudent, {
+            method: "POST",
+            body: formData,
+          });
+      
+          if (response.ok) {
+            Show.Success("Student Admitted Successfully");
+            //navigate("/dashboard/profile");
+            window.location.reload();
+          } else {
+            Show.Attention("Student Admission Failed");
+          }
+        } catch (error) {
+          Show.Attention("Student Admission Failed");
+        }
+      };
+    
+
+
+
+
+
+  
+    return (
+    <form
+    onSubmit={handlesubmit}
+    >
      < AdmitStudentCard>
      <MainTitle>Add Student Form</MainTitle>
      <hr/>
@@ -18,7 +119,7 @@ const Students = () => {
         type="text"
         required
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setFirstname(e.target.value)}
        
         />
      </div>
@@ -28,7 +129,7 @@ const Students = () => {
         type="text"
         
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setOtherName(e.target.value)}
        
         />
      </div>
@@ -38,7 +139,7 @@ const Students = () => {
         type="text"
         required
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setLastName(e.target.value)}
        
         />
      </div>
@@ -49,7 +150,7 @@ const Students = () => {
         type="date"
         required
         placeholder="Isaac"
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setDateOfBirth(e.target.value)}
        
         />
      </div>
@@ -64,8 +165,9 @@ const Students = () => {
     background={colors.darkBlue}
     color="white"
     border={colors.darkBlue}
+    onChange={(e) => setGender(e.target.value)}
     >
-    <option>Please select a gender</option>
+    <option >Please select a gender</option>
     <option>Male</option>
     <option>Female</option>
     </SelectForStudent>
@@ -78,7 +180,7 @@ const Students = () => {
         type="text"
         required
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setLocation(e.target.value)}
        
         />
      </div>
@@ -89,7 +191,7 @@ const Students = () => {
         type="text"
         required
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setHometown(e.target.value)}
        
         />
      </div>
@@ -100,7 +202,7 @@ const Students = () => {
         type="text"
         required
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setCountry(e.target.value)}
        
         />
      </div>
@@ -117,7 +219,7 @@ const Students = () => {
         type="text"
         
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setreligion(e.target.value)}
        
         />
      </div>
@@ -125,10 +227,10 @@ const Students = () => {
      <div>
         <FormLable>Email</FormLable>
         <FormInputStudent
-        type="text"
+        type="emal"
         
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setemail(e.target.value)}
        
         />
      </div>
@@ -139,7 +241,7 @@ const Students = () => {
         type="text"
         
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setphoneNumber(e.target.value)}
        
         />
      </div>
@@ -150,8 +252,9 @@ const Students = () => {
     background={colors.darkBlue}
     color="white"
     border={colors.darkBlue}
+    onChange={(e) => setlevel(e.target.value)}
     >
-    <option>Please select a class</option>
+    <option >Please select a class</option>
     <option>Basic 4A</option>
     <option>Basic 4B</option>
     </SelectForStudent>
@@ -172,7 +275,7 @@ const Students = () => {
         type="file"
         required
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setProfilePic(e.target.files[0])}
        
         />
      </div>
@@ -183,7 +286,7 @@ const Students = () => {
         type="text"
         required
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setmedicalIInformation(e.target.value)}
        
         />
      </div>
@@ -207,7 +310,7 @@ const Students = () => {
         type="text"
         required
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setfatherName(e.target.value)}
        
         />
      </div>
@@ -217,7 +320,7 @@ const Students = () => {
         type="text"
         
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setmotherName(e.target.value)}
        
         />
      </div>
@@ -227,7 +330,7 @@ const Students = () => {
         type="text"
         required
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setfatherOccupation(e.target.value)}
        
         />
      </div>
@@ -238,7 +341,7 @@ const Students = () => {
         type="text"
         required
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setmotherOccupation(e.target.value)}
        
         />
      </div>
@@ -253,7 +356,7 @@ const Students = () => {
         type="text"
       
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setGuardianName(e.target.value)}
        
         />
      </div>
@@ -262,7 +365,7 @@ const Students = () => {
         <FormInputStudent
         type="text"
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setguardianOccupation(e.target.value)}
        
         />
      </div>
@@ -272,7 +375,8 @@ const Students = () => {
         type="text"
         required
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+
+        onChange={(e) => setParentLocation(e.target.value)}
        
         />
      </div>
@@ -283,7 +387,7 @@ const Students = () => {
         type="text"
         required
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setParentDigitalAddress(e.target.value)}
        
         />
      </div>
@@ -299,7 +403,7 @@ const Students = () => {
         type="text"
         
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setParentReligion(e.target.value)}
        
         />
      </div>
@@ -310,7 +414,7 @@ const Students = () => {
         type="text"
         
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setParentEmail(e.target.value)}
        
         />
      </div>
@@ -321,7 +425,7 @@ const Students = () => {
         type="text"
         required
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setphoneNumber(e.target.value)}
        
         />
      </div>
@@ -332,34 +436,112 @@ const Students = () => {
         type="text"
         
         placeholder=""
-        //onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setAltphoneNumber(e.target.value)}
        
         />
      </div>
 
     </AdmitStudentRole>
-    
+ 
      
      </AdmitStudentCard>
 
+     < AdmitStudentCard>
+    
+
+    <HeaderTitle>Emergency Information</HeaderTitle>
+
+
+
+
+   <AdmitStudentRole>
+  
+    <div>
+       <FormLable>Emergency Contact Name</FormLable>
+       <FormInputStudent
+       type="text"
+       
+       placeholder=""
+       onChange={(e) => setEmgContName(e.target.value)}
+      
+       />
+    </div>
+
+    <div>
+       <FormLable>Phone Number</FormLable>
+       <FormInputStudent
+       type="text"
+       
+       placeholder=""
+       onChange={(e) => setEmgPhone(e.target.value)}
+      
+       />
+    </div>
+
+    <div>
+       <FormLable>Alternate Phone Number</FormLable>
+       <FormInputStudent
+       type="text"
+       required
+       placeholder=""
+       onChange={(e) => setEmgAltPhone(e.target.value)}
+      
+       />
+    </div>
+
+    <div>
+       <FormLable>Relationship With Child</FormLable>
+       <SelectForStudentRel
+    background={colors.darkBlue}
+    color="white"
+    border={colors.darkBlue}
+    onChange={(e) => setRelWithChild(e.target.value)}
+    >
+    <option >Please select </option>
+    <option>Son</option>
+    <option>Daughter</option>
+    <option>Nephew</option>
+    <option>Niece</option>
+    <option>Grand Son</option>
+    <option>Grand Daughter</option>
+    <option>Brother</option>
+    <option>Sister</option>
+    <option>Cousin</option>
+    <option>Care Taker</option>
+
+    </SelectForStudentRel>
+    </div>
+
+   </AdmitStudentRole>
+
+    
+    </AdmitStudentCard>
+
+
+
+
+
+
+
      <AdmitStudentRole>
-<SelectStageButton  
+<AdmitButton
         background={colors.darkBlue}
         color="white"
         border={colors.darkBlue}
+        
         type="submit">Admit Student
-</SelectStageButton>
+</AdmitButton>
 
-<SelectStageButton  
+<AdmitButton  
         background={colors.red}
         color="white"
         border={colors.darkBlue}
         onClick={(e)=>window.location.reload()}
         type="submit">Reset 
-        </SelectStageButton>
+</AdmitButton>
 
 </AdmitStudentRole>
-    </>
+    </form>
   )
 }
 

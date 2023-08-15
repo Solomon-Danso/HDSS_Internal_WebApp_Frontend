@@ -13,6 +13,7 @@ import { apiServer } from '../../Constants /Endpoints';
 import Home from '../../Portals/Admin/Home';
 import Test from '../../Portals/Admin/Test'
 import Profile from '../../Portals/Admin/Profile'
+import Students from '../../Portals/Admin/Students';
 
 
 
@@ -167,6 +168,19 @@ const [sysDate, setSysDate] = useState("")
              specificRole==="SuperiorUser"||specificRole==="HeadTeacher" ? (
              <>
               <Route path="test" element={<Test />} />  
+             </>
+             ):(
+             <>
+              <Route path="*" element={<PermissionDenied />} />
+             </>
+             )
+          }
+
+             
+{
+             specificRole==="SuperiorUser"||specificRole==="HeadTeacher" ? (
+             <>
+              <Route path="students" element={<Students />} />  
              </>
              ):(
              <>

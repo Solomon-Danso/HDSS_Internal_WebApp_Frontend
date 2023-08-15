@@ -267,6 +267,30 @@ export const FormInput = styled.input`
   }
 `;
 
+export const FormInputEvent = styled.input`
+  width: 20vw;
+  padding: 15px 10px;
+  border: 1px solid ${({ border }) => border};;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.5s ease-in-out;
+
+  :hover {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  :focus {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+`;
+
+
 export const HDSS_Form = styled.form`
 display: flex;
 width: 80%;

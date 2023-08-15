@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ChartsCard, HomeBanner, HomeCard, HomeCardColumn, HomeCardNumber, HomeCardText, HomeIcon, HomeStudentForm, HomeStudentSelect, SelectStage, SelectStageButton, StudentCardText, StudentInfoCard, StudentListBanner } from '../../Designs/Styles/Profile'
+import { ChartsCard, EventCard, HomeBanner, HomeCard, HomeCardColumn, HomeCardNumber, HomeCardText, HomeIcon, HomeStudentForm, HomeStudentSelect, SelectStage, SelectStageButton, StudentCardText, StudentInfoCard, StudentListBanner } from '../../Designs/Styles/Profile'
 import { colors } from "../../Designs/Colors"
 import { HiOutlineUserGroup,HiIdentification } from "react-icons/hi";
 import { useNavigate } from 'react-router-dom'
@@ -10,6 +10,7 @@ import { FaMoneyBillAlt,FaBirthdayCake,FaUserGraduate } from "react-icons/fa";
 import FeesBarChart from "./FeesBarCharts"
 import FeesLineChart from "./FeesLineChart"
 import { RiParentFill } from "react-icons/ri";
+import EventCalendar from './EventCalender';
 
 
 
@@ -164,14 +165,17 @@ background={colors.darkBlue}
 color="white"
 border={colors.darkBlue}
 type="submit">Load
-  
   </SelectStageButton>
-
 
 </StudentListBanner>
 
 </StudentInfoCard>
-
+<br/>
+<EventCard>
+  
+  <EventCalendar/>
+ 
+ </EventCard>
 
 
 

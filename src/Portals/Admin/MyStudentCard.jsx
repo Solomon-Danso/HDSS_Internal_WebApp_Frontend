@@ -8,15 +8,11 @@ import AnimateHeight from 'react-animate-height'
 import "../../Designs/Card/DuesTable.scss";
 import "../../Designs/Card/PendingRegistrations.scss";
 
-import { GlobalButton } from "../../Designs/Card/Global";
 import {
   PendingFullContainer,
   PendingFullDiv,
 } from "../../Designs/Card/PendingRegistrations";
 
-import {DashSearchContainer} from "../../Designs/Card/Dashboard"
-import { ClipLoader } from "react-spinners";
-import { Show } from "../../Constants /Alerts";
 
 const Eachrow = (rowdata) =>(
     <div
@@ -140,6 +136,16 @@ const [dropper, setDropper] = useState(false)
                         title = {"Country"}
                         content = {data?.country}
                     />
+
+                        <Eachrow
+                        title = {"Student Email"}
+                        content = {data?.email}
+                    />
+                    <Eachrow
+                        title = {"Student Phone Number"}
+                        content = {data?.phoneNumber}
+                    />
+
                     <Eachrow
                         title = {"Father Name"}
                         content = {data?.fathersName}
@@ -202,12 +208,12 @@ const [dropper, setDropper] = useState(false)
                         content = {data?.religion}
                     />
                     <Eachrow
-                        title = {"Parent email"}
+                        title = {"Parent Location"}
                         content = {data?.parentLocation}
                     />
                     <Eachrow
                         title = {"Parent Phone Number"}
-                        content = {data?.phoneNumber}
+                        content = {data?.parentPhoneNumber}
                     />
                      <Eachrow
                         title = {"Alternate Phone Number"}

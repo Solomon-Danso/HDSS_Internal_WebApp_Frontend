@@ -363,7 +363,7 @@ color:${colors.darkBlue};
 
 export const EventTitle = styled.div`
 text-align: center;
-font-size: 1.5rem;
+font-size: 1.1rem;
 color: ${colors.darkBlue};
 font-family:Helvetica
 

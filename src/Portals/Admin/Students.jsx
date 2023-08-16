@@ -22,9 +22,12 @@ const Students = () => {
     const [guardianOccupation, setguardianOccupation] = useState("")
     const [medicalIInformation, setmedicalIInformation] = useState("")
     const [religion, setreligion] = useState("")
-    const [email, setemail] = useState("")
-    const [phoneNumber, setphoneNumber] = useState("")
-    const [AltphoneNumber, setAltphoneNumber] = useState("")
+    
+    const [studentPhoneNumber, setStudentPhoneNumber] = useState("")
+    const [studentEmail, setStudentEmail] = useState("")
+
+    const [parentPhoneNumber, setparentPhoneNumber] = useState("")
+    const [parentAltphoneNumber, setParentAltphoneNumber] = useState("")
     const [level, setlevel] = useState("")
     const [profilePic, setProfilePic] = useState("")
     const [emgCntName, setEmgContName] = useState("")
@@ -65,8 +68,8 @@ const Students = () => {
           formData.append("GuardianOccupation", guardianOccupation);
           formData.append("MedicalIInformation", medicalIInformation);
           formData.append("Religion", religion);
-          formData.append("Email", email);
-          formData.append("PhoneNumber", phoneNumber);
+          formData.append("Email", studentEmail);
+          formData.append("PhoneNumber", studentPhoneNumber);
           formData.append("EmergencyContactName", emgCntName);
           formData.append("EmergencyPhoneNumber", emgPhone);
           formData.append("EmergencyAlternatePhoneNumber", emgAltPhone);
@@ -76,7 +79,10 @@ const Students = () => {
           formData.append("ParentEmail", parentEmail);
           formData.append("ParentReligion", parentreligion);
           formData.append("ParentLocation", parentLocation);
-          formData.append("AlternatePhoneNumber", AltphoneNumber);
+          formData.append("AlternatePhoneNumber",parentAltphoneNumber );
+          formData.append("ParentPhoneNumber", parentPhoneNumber);
+
+          
 
           
       
@@ -237,7 +243,7 @@ useEffect(() => {
         type="emal"
         
         placeholder=""
-        onChange={(e) => setemail(e.target.value)}
+        onChange={(e) => setStudentEmail(e.target.value)}
        
         />
      </div>
@@ -248,7 +254,7 @@ useEffect(() => {
         type="text"
         
         placeholder=""
-        onChange={(e) => setphoneNumber(e.target.value)}
+        onChange={(e) => setStudentPhoneNumber(e.target.value)}
        
         />
      </div>
@@ -436,7 +442,7 @@ useEffect(() => {
         type="text"
         required
         placeholder=""
-        onChange={(e) => setphoneNumber(e.target.value)}
+        onChange={(e) => setparentPhoneNumber(e.target.value)}
        
         />
      </div>
@@ -447,7 +453,7 @@ useEffect(() => {
         type="text"
         
         placeholder=""
-        onChange={(e) => setAltphoneNumber(e.target.value)}
+        onChange={(e) => setParentAltphoneNumber(e.target.value)}
        
         />
      </div>

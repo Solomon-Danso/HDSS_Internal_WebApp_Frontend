@@ -51,7 +51,7 @@ HDSS
   <>
   <DropList logo={<HiUserGroup/>} title="Students">
     <MenuButtonOptionLink onClick={() => { navigate("/admin/students") }}>Admit Student</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Student Info</MenuButtonOptionLink>
+    <MenuButtonOptionLink onClick={() => { navigate("/admin/studentsInfo") }}>Student Info</MenuButtonOptionLink>
     <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Update Students</MenuButtonOptionLink>
     <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Delete Students</MenuButtonOptionLink>
     <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Assessments</MenuButtonOptionLink>

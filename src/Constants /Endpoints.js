@@ -9,8 +9,14 @@ export const DeleteEvents = "api/Admin/DeleteEvents?Id="
 export const RegisterStudent = "api/students/registerStudent"
 export const ViewClasses = "api/LMS/viewAllClasses"
 export const TheClassStudent = "api/students/getStudents?stage="
+export const ViewStudents = "api/Admin/AllStudents"
+export const CountStudents = "api/Admin/AllStudentsCount"
+export const CountTeachers = "api/Admin/AllTeachersCount"
+export const CountParents = "api/Admin/AllParentsCount"
 
 
+export const SearchStudent = "api/Admin/Search?searchTerm="
+export const ViewOneStudent = "api/students/getSpecificUser?StudentId=";
 
 
 

@@ -39,7 +39,7 @@ flex: 0.15;
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none;
-  min-height: 100vh;
+  height: auto;
  
 
   @media (max-width: 768px) {

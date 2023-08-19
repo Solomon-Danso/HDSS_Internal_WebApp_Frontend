@@ -88,6 +88,23 @@ export const StudentInfoCard = styled.div`
 `;
 
 
+export const StudentInfoCard2 = styled.div`
+  background: rgba(255, 255, 255, 1);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(19.7px);
+  -webkit-backdrop-filter: blur(19.7px);
+  border: 1px solid rgba(255, 255, 255, 1);
+  min-height: 100vh;
+  padding: 1rem;
+  overflow: hidden; /* Change to hidden */
+
+  /* Position relative for proper stacking context */
+  position: relative;
+`;
+
+
+
 export const AdmitStudentCard = styled.div`
 background: rgba(255, 255, 255, 1);
 border-radius: 16px;
@@ -478,6 +495,45 @@ export const FormInputStudent = styled.input`
   }
 `;
 
+
+export const FormInputSearch = styled.input`
+  width: 100vw;
+ background: ${({ background }) => background};
+  padding: 15px 10px;
+  border: 0.1rem solid ${({ border }) => border};;
+  margin-top: 10px;
+  font-size: 1.5rem;
+  outline: none;
+  transition: all 0.5s ease-in-out;
+  text-align: center;
+  color:${colors.darkBlue};
+  /* From https://css.glass */
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+
+
+::placeholder {
+    color: white;
+  }
+
+  :hover {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  :focus {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+`;
+
+
+
+
 export const FormTextAreaStudent = styled.textarea`
   min-width: 50vw;
   padding: 15px 10px;
@@ -650,7 +706,7 @@ export const CardTextHeader = styled.div`
 
 export const CardImage = styled.img`
 width: 7vw;
-height: 7vh;
+height: 10vh;
 border-radius: 0.5rem;
 
 
@@ -665,5 +721,72 @@ justify-content: space-between;
 `;
 
 
+export const StudDetails = styled.div`
+display: flex;
+flex-direction: row;
+gap:1rem;
+max-width: 100px;
 
+`;
+
+export const StudLeft = styled.div`
+display: flex;
+flex-direction: column;
+`;
+
+export const StudRight = styled.div`
+display: flex;
+flex-direction: column;
+
+`;
+
+export const BiggerImage = styled.img`
+width: 40vw;
+height: auto;
+padding:2rem;
+
+@media (max-width: 768px) {
+    width: 20vw;
+    height: 30vh;
+
+  }
+`;
+
+export const StudDetailRow = styled.div`
+gap: 1rem;
+display: flex;
+flex-direction: row;
+margin: 1rem;
+width: 30vw;
+align-items:center;
+
+
+:hover{
+  font-size:1.6rem;
+ 
+}
+`;
+
+export const AboutHeader = styled.div`
+font-size: 1.4rem;
+font-weight: bold;
+color: #2B2B2B;
+text-decoration: underline;
+`;
+
+
+
+
+
+export const StudDetailField = styled.div`
+font-size: 1.2rem;
+color: #979797
+
+`;
+
+export const StudDetailData = styled.div`
+font-size: 1rem;
+color: #2f2f2f
+
+`;
 

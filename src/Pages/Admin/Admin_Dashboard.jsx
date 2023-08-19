@@ -8,13 +8,13 @@ import { DateNTime, HomeDetailsGrouper, HomeGrouper, HomeLogo, HomePage, HomePag
 import pic1 from "../../Designs/Images/download.png"
 import { useNavigate } from 'react-router-dom'
 import AnimateHeight from 'react-animate-height';
-
 import { apiServer } from '../../Constants /Endpoints';
 import Home from '../../Portals/Admin/Home';
 import Test from '../../Portals/Admin/Test'
 import Profile from '../../Portals/Admin/Profile'
 import Students from '../../Portals/Admin/Students';
-
+import StudentInfo from '../../Portals/Admin/StudentIInfo';
+import StudentDetails from '../../Portals/Admin/StudentDetails';
 
 
 
@@ -180,7 +180,9 @@ const [sysDate, setSysDate] = useState("")
 {
              specificRole==="SuperiorUser"||specificRole==="HeadTeacher" ? (
              <>
-              <Route path="students" element={<Students />} />  
+              <Route path="students" element={<Students />} /> 
+              <Route path="studentsInfo" element={<StudentInfo />} />
+              <Route path="studentsDetails/:studentId" element={<StudentDetails />} />  
              </>
              ):(
              <>

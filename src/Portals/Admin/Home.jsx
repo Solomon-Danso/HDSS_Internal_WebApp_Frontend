@@ -11,7 +11,7 @@ import FeesBarChart from "./FeesBarCharts"
 import FeesLineChart from "./FeesLineChart"
 import { RiParentFill } from "react-icons/ri";
 import EventCalendar from './EventCalender';
-import { TheClassStudent, ViewClasses, apiServer } from '../../Constants /Endpoints';
+import { CountParents, CountStudents, CountTeachers, TheClassStudent, ViewClasses, apiServer } from '../../Constants /Endpoints';
 import { Show } from '../../Constants /Alerts';
 import StudentListCard from "./StudentListCard"
 import { MyStudentCard } from './MyStudentCard';
@@ -81,6 +81,34 @@ const Home = () => {
     }, []);
   
 
+    const [StudentCount, setStudentCount] = useState([])
+
+    useEffect(() => {
+        fetch(apiServer + CountStudents)
+          .then(response => response.json()) // Parse the response as JSON
+          .then(data => setStudentCount(data))
+          .catch(error => console.error(error));
+      }, []);
+
+      const [TeacherCount, setTeacherCount] = useState([])
+
+      useEffect(() => {
+          fetch(apiServer + CountTeachers)
+            .then(response => response.json()) // Parse the response as JSON
+            .then(data => setTeacherCount(data))
+            .catch(error => console.error(error));
+        }, []);
+
+        const [ParentCount, setParentCount] = useState([])
+
+        useEffect(() => {
+            fetch(apiServer + CountParents)
+              .then(response => response.json()) // Parse the response as JSON
+              .then(data => setParentCount(data))
+              .catch(error => console.error(error));
+          }, []);
+  
+
 
 
 
@@ -98,7 +126,7 @@ const Home = () => {
 
     <hr/>
 
-    <HomeCardNumber> 500</HomeCardNumber>
+    <HomeCardNumber> {StudentCount}</HomeCardNumber>
     </HomeCard>
 
     </>
@@ -118,7 +146,7 @@ const Home = () => {
 
     <hr/>
 
-    <HomeCardNumber> 73</HomeCardNumber>
+    <HomeCardNumber> {TeacherCount}</HomeCardNumber>
     </HomeCard>
 
     </>
@@ -138,7 +166,7 @@ const Home = () => {
 
     <hr/>
 
-    <HomeCardNumber> 180</HomeCardNumber>
+    <HomeCardNumber> {ParentCount}</HomeCardNumber>
     </HomeCard>
 
     </>

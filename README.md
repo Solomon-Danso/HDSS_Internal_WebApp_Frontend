@@ -19,7 +19,7 @@
 2. Mark Lesson Notes [Done]
 3. Website Admin section, Software Administration Section, System administration
 4. Annoucement, News and Reports[Next]
-5. Contact Information and Live Video Calls 
+5. Contact Information and Live Video Calls [WIP]
 6. CCTV Camera Section
 7. All Id's for student,Admin and Teachers can be accessed using a QR Code
 
@@ -27,7 +27,7 @@
 [.] Class Management
 1. Full Sakai system[Wip] 
 2. Live online teaching 
-3. Full YouTube system to browse and upload videos 
+3. Full YouTube system to browse and upload videos [WIP]
 4. Full AI tools to enhance research and learniing 
 5. All teaching and learning materials 
 6. Class chatting platform [Fully Functional Telegram Chat System From Scratch]

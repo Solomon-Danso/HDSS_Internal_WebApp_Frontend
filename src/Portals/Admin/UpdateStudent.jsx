@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { apiServer,RegisterStudent, ViewClasses } from '../../Constants /Endpoints'
-import { AdmitStudentCard, AdmitStudentRole, FormLable, HeaderTitle, MainTitle,FormInputStudent, SelectStage, SelectForStudent, FormTextAreaStudent, SelectStageButton, AdmitButton, SelectForStudentRel} from '../../Designs/Styles/Profile'
+import { apiServer,RegisterStudent, UpdateStudent, ViewClasses, ViewOneStudent } from '../../Constants /Endpoints'
+import { AdmitStudentCard, AdmitStudentRole, FormLable, HeaderTitle, MainTitle,FormInputStudent, SelectStage, SelectForStudent, FormTextAreaStudent, SelectStageButton, AdmitButton, SelectForStudentRel, AdmitButton2, FormInputStudent2} from '../../Designs/Styles/Profile'
 import { colors } from '../../Designs/Colors'
 import { Show } from '../../Constants /Alerts'
-import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
-import { saveAs } from 'file-saver';
-import jsPDF from 'jspdf';
-
-
 
 const Students = () => {
-
-
 
     const [firstName, setFirstname] = useState("")
     const [otherName, setOtherName] = useState("")
@@ -46,21 +39,70 @@ const Students = () => {
     const [parentLocation, setParentLocation] = useState("")
     const [parentreligion, setParentReligion] = useState("")
 
-  
+    const [student, setStudent] = useState([])
+    const [studentId, setStudentId] = useState("")
+
+
+
+
+      const studentDetails = async (event) => {
+        event.preventDefault();
+        try {
+          const response = await fetch(apiServer + ViewOneStudent + studentId, {
+            method: "GET",
+          });
+          const data = await response.json();
+          if (response.ok) {
+            setStudent([data]);
+            setFirstname(data.firstName);
+            setLastName(data.lastName);
+            setOtherName(data.otherName);
+            setDateOfBirth(data.dateOfBirth);
+            setGender(data.gender);
+            setLocation(data.location);
+            setHometown(data.homeTown);
+            setCountry(data.country)
+            setreligion(data.religion)
+            setStudentEmail(data.email)
+            setStudentPhoneNumber(data.phoneNumber)
+            setlevel(data.level)
+            setmedicalIInformation(data.medicalIInformation)
+            setfatherName(data.fathersName)
+            setmotherName(data.mothersName)
+            setfatherOccupation(data.fatherOccupation)
+            setmotherOccupation(data.motherOccupation)
+            setGuardianName(data.guardianName)
+            setguardianOccupation(data.guardianOccupation)
+            setParentDigitalAddress(data.parentDigitalAddress)
+            setParentReligion(data.parentReligion)
+            setParentEmail(data.parentEmail)
+            setparentPhoneNumber(data.parentPhoneNumber)
+            setParentAltphoneNumber(data.alternatePhoneNumber)
+            setEmgPhone(data.emergencyPhoneNumber)
+            setEmgContName(data.emergencyContactName)
+            setEmgAltPhone(data.emergencyAlternatePhoneNumber)
+            setRelWithChild(data.relationshipWithChild)
+
+            
+            Show.Success("Student information loaded successfully");
+            
+          } else {
+            Show.Attention("Student not found");
+          }
+        } catch (err) {
+          Show.Attention("An error has occurred");
+        }
+      };
+      
+
+
   
     const handlesubmit = async (event) => {
         event.preventDefault();
       
-        if (!profilePic) {
-          Show.Attention("Please select a picture");
-          return;
-        }
-
-       
       
         try {
           const formData = new FormData();
-          formData.append("File", profilePic);
           formData.append("FirstName", firstName);
           formData.append("OtherName", otherName);
           formData.append("LastName", lastName);
@@ -91,27 +133,16 @@ const Students = () => {
           formData.append("AlternatePhoneNumber",parentAltphoneNumber );
           formData.append("ParentPhoneNumber", parentPhoneNumber);
 
-          const pdfDoc = new jsPDF();
-
-          // Add content to the PDF
-          pdfDoc.text("Admission Letter", 10, 10);
-          pdfDoc.text(`First Name: ${firstName}`, 10, 20);
-          pdfDoc.text(`Last Name: ${lastName}`, 10, 30);
-          // Add other fields as needed
-    
-          // Save the PDF
-          
           
 
           
       
-          const response = await fetch(apiServer + RegisterStudent, {
+          const response = await fetch(apiServer + UpdateStudent + studentId, {
             method: "POST",
             body: formData,
           });
       
           if (response.ok) {
-            pdfDoc.save(`${lastName}_${firstName}.pdf`);
             Show.Success("Student Admitted Successfully");
             //navigate("/dashboard/profile");
             window.location.reload();
@@ -137,11 +168,44 @@ useEffect(() => {
 
   
     return (
-    <form
+        <>
+         <form onSubmit={studentDetails}>
+    < AdmitStudentCard>
+    
+    <div>
+        <FormLable>Enter Student Id</FormLable>
+        <AdmitStudentRole>
+        <FormInputStudent2
+        type="text"
+        
+        placeholder="35678"
+        onChange={(e) => setStudentId(e.target.value)}
+       
+        />
+         <AdmitButton2
+        background={colors.lightgreen}
+        color="white"
+        border={colors.maingreen}
+        
+        type="submit">Search
+        </AdmitButton2>
+        </AdmitStudentRole>
+     </div>
+  
+    
+    </AdmitStudentCard>    
+    </form>
+
+
+{
+    student.map((data)=>(
+        <>
+        
+        <form
     onSubmit={handlesubmit}
     >
      < AdmitStudentCard>
-     <MainTitle>Add Student Form</MainTitle>
+     <MainTitle>Update Student Information</MainTitle>
      <hr/>
      <HeaderTitle>Student Information</HeaderTitle>
 
@@ -150,8 +214,9 @@ useEffect(() => {
         <FormLable>First Name</FormLable>
         <FormInputStudent
         type="text"
-        required
+        
         placeholder=""
+        value={firstName}
         onChange={(e) => setFirstname(e.target.value)}
        
         />
@@ -160,7 +225,7 @@ useEffect(() => {
         <FormLable>Other Name</FormLable>
         <FormInputStudent
         type="text"
-        
+        value={otherName}
         placeholder=""
         onChange={(e) => setOtherName(e.target.value)}
        
@@ -170,8 +235,9 @@ useEffect(() => {
         <FormLable>Last Name</FormLable>
         <FormInputStudent
         type="text"
-        required
+        
         placeholder=""
+        value={lastName}
         onChange={(e) => setLastName(e.target.value)}
        
         />
@@ -181,8 +247,9 @@ useEffect(() => {
         <FormLable>Date of Birth</FormLable>
         <FormInputStudent
         type="date"
-        required
+        
         placeholder="Isaac"
+        value={dateOfBirth}
         onChange={(e) => setDateOfBirth(e.target.value)}
        
         />
@@ -198,6 +265,7 @@ useEffect(() => {
     background={colors.darkBlue}
     color="white"
     border={colors.darkBlue}
+    value={gender}
     onChange={(e) => setGender(e.target.value)}
     >
     <option >Please select a gender</option>
@@ -211,8 +279,9 @@ useEffect(() => {
         <FormLable>Location</FormLable>
         <FormInputStudent
         type="text"
-        required
+        
         placeholder=""
+        value={location}
         onChange={(e) => setLocation(e.target.value)}
        
         />
@@ -222,8 +291,9 @@ useEffect(() => {
         <FormLable>HomeTown</FormLable>
         <FormInputStudent
         type="text"
-        required
+        
         placeholder=""
+        value={hometown}
         onChange={(e) => setHometown(e.target.value)}
        
         />
@@ -233,8 +303,9 @@ useEffect(() => {
         <FormLable>Country</FormLable>
         <FormInputStudent
         type="text"
-        required
+        
         placeholder=""
+        value={country}
         onChange={(e) => setCountry(e.target.value)}
        
         />
@@ -252,6 +323,7 @@ useEffect(() => {
         type="text"
         
         placeholder=""
+        value={religion}
         onChange={(e) => setreligion(e.target.value)}
        
         />
@@ -261,7 +333,7 @@ useEffect(() => {
         <FormLable>Email</FormLable>
         <FormInputStudent
         type="emal"
-        
+        value={studentEmail}
         placeholder=""
         onChange={(e) => setStudentEmail(e.target.value)}
        
@@ -272,7 +344,7 @@ useEffect(() => {
         <FormLable>Phone</FormLable>
         <FormInputStudent
         type="text"
-        
+        value={studentPhoneNumber}
         placeholder=""
         onChange={(e) => setStudentPhoneNumber(e.target.value)}
        
@@ -285,6 +357,7 @@ useEffect(() => {
     background={colors.darkBlue}
     color="white"
     border={colors.darkBlue}
+    value={level}
     onChange={(e) => setlevel(e.target.value)}
     >
     <option >Please select a class</option>
@@ -307,24 +380,14 @@ useEffect(() => {
 
 
      <div>
-        <FormLable>Upload Student Photo</FormLable>
-        <FormInputStudent
-        type="file"
-        required
-        placeholder=""
-        onChange={(e) => setProfilePic(e.target.files[0])}
-       
-        />
-     </div>
-
-     <div>
         <FormLable>Medical Information</FormLable>
         <FormTextAreaStudent
         type="text"
-        required
+        
         placeholder=""
         onChange={(e) => setmedicalIInformation(e.target.value)}
-       
+        value={medicalIInformation}
+        
         />
      </div>
 
@@ -345,8 +408,9 @@ useEffect(() => {
         <FormLable>Father Name</FormLable>
         <FormInputStudent
         type="text"
-        required
+        
         placeholder=""
+        value={fatherName}
         onChange={(e) => setfatherName(e.target.value)}
        
         />
@@ -355,7 +419,7 @@ useEffect(() => {
         <FormLable>Mother Name</FormLable>
         <FormInputStudent
         type="text"
-        
+        value={motherName}
         placeholder=""
         onChange={(e) => setmotherName(e.target.value)}
        
@@ -365,8 +429,9 @@ useEffect(() => {
         <FormLable>Father Occupation</FormLable>
         <FormInputStudent
         type="text"
-        required
+        
         placeholder=""
+        value={fatherOccupation }
         onChange={(e) => setfatherOccupation(e.target.value)}
        
         />
@@ -376,10 +441,10 @@ useEffect(() => {
         <FormLable>Mother Occupation</FormLable>
         <FormInputStudent
         type="text"
-        required
+        
         placeholder=""
         onChange={(e) => setmotherOccupation(e.target.value)}
-       
+        value={motherOccupation }
         />
      </div>
 
@@ -391,7 +456,8 @@ useEffect(() => {
         <FormLable>Guardian Name</FormLable>
         <FormInputStudent
         type="text"
-      
+       
+        value={guardianName}
         placeholder=""
         onChange={(e) => setGuardianName(e.target.value)}
        
@@ -401,7 +467,8 @@ useEffect(() => {
         <FormLable>Guardian Occupation</FormLable>
         <FormInputStudent
         type="text"
-        placeholder=""
+        placeholder="" 
+        value={guardianOccupation}
         onChange={(e) => setguardianOccupation(e.target.value)}
        
         />
@@ -410,9 +477,9 @@ useEffect(() => {
         <FormLable>Location</FormLable>
         <FormInputStudent
         type="text"
-        required
+        
         placeholder=""
-
+        value={parentLocation}
         onChange={(e) => setParentLocation(e.target.value)}
        
         />
@@ -422,8 +489,9 @@ useEffect(() => {
         <FormLable>Digital Address</FormLable>
         <FormInputStudent
         type="text"
-        required
+        
         placeholder=""
+        value={parentDigitalAddress  }
         onChange={(e) => setParentDigitalAddress(e.target.value)}
        
         />
@@ -438,7 +506,7 @@ useEffect(() => {
         <FormLable>Religion</FormLable>
         <FormInputStudent
         type="text"
-        
+        value={parentreligion  }
         placeholder=""
         onChange={(e) => setParentReligion(e.target.value)}
        
@@ -449,7 +517,7 @@ useEffect(() => {
         <FormLable>Email</FormLable>
         <FormInputStudent
         type="text"
-        
+        value={parentEmail  }
         placeholder=""
         onChange={(e) => setParentEmail(e.target.value)}
        
@@ -460,8 +528,9 @@ useEffect(() => {
         <FormLable>Phone</FormLable>
         <FormInputStudent
         type="text"
-        required
+        
         placeholder=""
+        value={parentPhoneNumber }
         onChange={(e) => setparentPhoneNumber(e.target.value)}
        
         />
@@ -471,7 +540,7 @@ useEffect(() => {
         <FormLable>Alternate Phone Number</FormLable>
         <FormInputStudent
         type="text"
-        
+        value={parentAltphoneNumber}
         placeholder=""
         onChange={(e) => setParentAltphoneNumber(e.target.value)}
        
@@ -497,7 +566,7 @@ useEffect(() => {
        <FormLable>Emergency Contact Name</FormLable>
        <FormInputStudent
        type="text"
-       
+       value={emgCntName}
        placeholder=""
        onChange={(e) => setEmgContName(e.target.value)}
       
@@ -508,7 +577,7 @@ useEffect(() => {
        <FormLable>Phone Number</FormLable>
        <FormInputStudent
        type="text"
-       
+       value={emgPhone}
        placeholder=""
        onChange={(e) => setEmgPhone(e.target.value)}
       
@@ -519,8 +588,9 @@ useEffect(() => {
        <FormLable>Alternate Phone Number</FormLable>
        <FormInputStudent
        type="text"
-       required
+       
        placeholder=""
+       value={emgAltPhone}
        onChange={(e) => setEmgAltPhone(e.target.value)}
       
        />
@@ -532,6 +602,7 @@ useEffect(() => {
     background={colors.darkBlue}
     color="white"
     border={colors.darkBlue}
+    value={RelWithChild}
     onChange={(e) => setRelWithChild(e.target.value)}
     >
     <option >Please select </option>
@@ -566,7 +637,7 @@ useEffect(() => {
         color="white"
         border={colors.maingreen}
         
-        type="submit">Admit Student
+        type="submit">Update Student
 </AdmitButton>
 
 <AdmitButton  
@@ -579,17 +650,15 @@ useEffect(() => {
 
 </AdmitStudentRole>
     </form>
-  )
+        
+        </>
+    ))
 }
 
-const styles = StyleSheet.create({
-   container: {
-     padding: 10,
-   },
-   header: {
-     fontSize: 18,
-     marginBottom: 10,
-   },
- });
+  
+
+    </>
+  )
+}
 
 export default Students

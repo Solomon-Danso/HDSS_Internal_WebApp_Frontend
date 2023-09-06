@@ -45,12 +45,13 @@ padding:1rem;
 
 export const HomeCard = styled.div`
 /* From https://css.glass */
-background: rgba(255, 255, 255, 1);
+background: ${colors.card};
 border-radius: 16px;
+border: 1px solid ${colors.card};
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(19.7px);
 -webkit-backdrop-filter: blur(19.7px);
-border: 1px solid rgba(255, 255, 255, 1);
+
 display:flex;
 flex-direction:row;
 gap:1rem;
@@ -59,12 +60,12 @@ padding:2rem;
 `;
 
 export const ChartsCard = styled.div`
-background: rgba(255, 255, 255, 1);
+background: ${colors.card};
 border-radius: 16px;
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(19.7px);
 -webkit-backdrop-filter: blur(19.7px);
-border: 1px solid rgba(255, 255, 255, 1);
+
 width:38vw;
 height:38vh;
 padding:1rem;
@@ -73,12 +74,12 @@ padding:1rem;
 
 
 export const StudentInfoCard = styled.div`
-  background: rgba(255, 255, 255, 1);
+  background: ${colors.card};
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(19.7px);
   -webkit-backdrop-filter: blur(19.7px);
-  border: 1px solid rgba(255, 255, 255, 1);
+  
   height: 50vh;
   padding: 1rem;
   overflow: hidden; /* Change to hidden */
@@ -89,12 +90,12 @@ export const StudentInfoCard = styled.div`
 
 
 export const StudentInfoCard2 = styled.div`
-  background: rgba(255, 255, 255, 1);
+  background: ${colors.card};
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(19.7px);
   -webkit-backdrop-filter: blur(19.7px);
-  border: 1px solid rgba(255, 255, 255, 1);
+  
   min-height: 100vh;
   padding: 1rem;
   overflow: hidden; /* Change to hidden */
@@ -106,12 +107,12 @@ export const StudentInfoCard2 = styled.div`
 
 
 export const AdmitStudentCard = styled.div`
-background: rgba(255, 255, 255, 1);
+background: ${colors.card};
 border-radius: 16px;
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(19.7px);
 -webkit-backdrop-filter: blur(19.7px);
-border: 1px solid rgba(255, 255, 255, 1);
+
 padding:2rem;
 overflow:hidden;
 margin: 2rem;
@@ -122,12 +123,12 @@ border: 1px solid ${({ border }) => border};;
 
 
 export const EventCard = styled.div`
-background: rgba(255, 255, 255, 1);
+background: ${colors.card};
 border-radius: 16px;
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(19.7px);
 -webkit-backdrop-filter: blur(19.7px);
-border: 1px solid rgba(255, 255, 255, 1);
+
 height:auto;
 padding:1rem;
 overflow:hidden;
@@ -135,12 +136,12 @@ overflow:hidden;
 `;
 
 export const EventCardSingle = styled.div`
-background: rgba(255, 255, 255, 1);
+background: ${colors.card};
 border-radius: 16px;
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(19.7px);
 -webkit-backdrop-filter: blur(19.7px);
-border: 1px solid rgba(255, 255, 255, 1);
+
 height:auto;
 padding:1rem;
 overflow:hidden;
@@ -154,12 +155,12 @@ display: flex;
 flex-direction: column;
 gap: 1rem;
 flex-wrap: wrap;
-background: rgba(255, 255, 255, 1);
+background: ${colors.card};
 border-radius: 16px;
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(19.7px);
 -webkit-backdrop-filter: blur(19.7px);
-border: 1px solid rgba(255, 255, 255, 1);
+border: 0.5px solid ${colors.white};
 height:auto;
 padding:0.5rem;
 overflow:hidden;
@@ -175,12 +176,12 @@ display: flex;
 flex-direction: column;
 gap: 1rem;
 flex-wrap: wrap;
-background: rgba(255, 255, 255, 1);
+background: ${colors.card};
 border-radius: 16px;
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(19.7px);
 -webkit-backdrop-filter: blur(19.7px);
-border: 1px solid rgba(255, 255, 255, 1);
+
 height:auto;
 padding:2rem;
 overflow:hidden;
@@ -352,7 +353,7 @@ export const StudentListBanner = styled.form`
   top: 4;
   left: 0;
   right: 0;
-  background-color: rgba(255, 255, 255, 1);
+  color: ${colors.white};
   z-index: 1; /* Ensure it's above the scrolling content */
 `;
 
@@ -381,7 +382,7 @@ color:${colors.darkBlue};
 export const EventTitle = styled.div`
 text-align: center;
 font-size: 1.1rem;
-color: ${colors.darkBlue};
+color: ${colors.lightBlue};
 font-family:Helvetica
 
 `;
@@ -438,7 +439,7 @@ font-family:Helvetica
 
 export const MainTitle = styled.div`
 font-size: 1.5rem;
-color: ${colors.darkBlue};
+color: ${colors.white};
 font-family:Helvetica;
 font-weight: 700;
 
@@ -446,7 +447,7 @@ font-weight: 700;
 
 export const HeaderTitle = styled.div`
 font-size: 1.3rem;
-color: ${colors.darkBlue};
+color: ${colors.white};
 font-family:Helvetica,
 font-weight: 600;
 
@@ -455,8 +456,8 @@ font-weight: 600;
 
 export const FormLable = styled.div`
 font-size: 1.1rem;
-color: ${colors.darkBlue};
-font-family:Helvetica
+color: ${colors.white};
+font-family:OpenSans
 
 `;
 
@@ -475,7 +476,7 @@ flex-wrap: wrap;
 export const FormInputStudent = styled.input`
   width: 16vw;
   padding: 15px 10px;
-  border: 0.01px solid ${({ border }) => border};;
+  border: 0.01px solid ${colors.aqua};
   border-radius: 5px;
   margin-top: 10px;
   font-size: 16px;
@@ -494,6 +495,30 @@ export const FormInputStudent = styled.input`
     font-size: 12px;
   }
 `;
+
+export const FormInputStudent2 = styled.input`
+  width: 60vw;
+  padding: 15px 10px;
+  border: 0.01px solid ${colors.aqua};
+  border-radius: 5px;
+  margin-top: 10px;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.5s ease-in-out;
+
+  :hover {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  :focus {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+`;
+
 
 
 export const FormInputSearch = styled.input`
@@ -647,6 +672,41 @@ border: none;
 `;
 
 
+export const AdmitButton2 = styled.button`
+border: none;
+  width: 10vw;
+  height: 6.5vh;
+  border-radius: 20px;
+  border: 1px solid ${({ border }) => border};
+  background-color: ${({ background }) => background};
+  color: ${({ color }) => color};
+  text-align: center;
+  padding: 10px 30px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-family: OpenSans;
+
+  :hover {
+    background-color: ${colors.ivory_dark};
+    color: ${colors.primary};
+    border: 1px solid ${colors.ivory_dark};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    padding: 4px 18px;
+    padding: 11px 25px;
+  }
+
+
+`;
+
+
 export const NewStudentListCard = styled.div`
   display: flex;
   flex-direction: row;
@@ -655,7 +715,7 @@ export const NewStudentListCard = styled.div`
   padding-right: 2rem;
   height: 3rem;
   align-items: center;
-  background-color: rgba(255, 255, 255, 1);
+  color: ${colors.white};
   position: relative;
   z-index: 0;
 `;
@@ -669,7 +729,8 @@ export const NewStudentListCard2 = styled.div`
   padding-right: 2rem;
   height: 3rem;
   align-items: center;
-  background-color: rgba(255, 255, 255, 1);
+ 
+  color: ${colors.white};
   position: relative;
   z-index: 1;
 `;
@@ -725,7 +786,7 @@ export const StudDetails = styled.div`
 display: flex;
 flex-direction: row;
 gap:1rem;
-max-width: 100px;
+height:auto;
 
 `;
 
@@ -744,6 +805,7 @@ export const BiggerImage = styled.img`
 width: 40vw;
 height: auto;
 padding:2rem;
+flex: 1;
 
 @media (max-width: 768px) {
     width: 20vw;
@@ -770,7 +832,7 @@ align-items:center;
 export const AboutHeader = styled.div`
 font-size: 1.4rem;
 font-weight: bold;
-color: #2B2B2B;
+color: ${colors.white};
 text-decoration: underline;
 `;
 
@@ -786,7 +848,7 @@ color: #979797
 
 export const StudDetailData = styled.div`
 font-size: 1rem;
-color: #2f2f2f
+color: ${colors.white}
 
 `;
 

@@ -17,8 +17,8 @@ export const CountParents = "api/Admin/AllParentsCount"
 
 export const SearchStudent = "api/Admin/Search?searchTerm="
 export const ViewOneStudent = "api/students/getSpecificUser?StudentId=";
-
-
+export const UpdateStudent = "api/students/updateStudent?Id="
+export const DeleteStudentApi = "api/students/deleteSpecificUser?StudentId="
 
 
 

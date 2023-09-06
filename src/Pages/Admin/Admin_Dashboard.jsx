@@ -15,7 +15,8 @@ import Profile from '../../Portals/Admin/Profile'
 import Students from '../../Portals/Admin/Students';
 import StudentInfo from '../../Portals/Admin/StudentIInfo';
 import StudentDetails from '../../Portals/Admin/StudentDetails';
-
+import UpdateStudent from "../../Portals/Admin/UpdateStudent";
+import DeleteStudent from "../../Portals/Admin/DeleteStudent"
 
 
 const Dashboard = () => {
@@ -182,7 +183,9 @@ const [sysDate, setSysDate] = useState("")
              <>
               <Route path="students" element={<Students />} /> 
               <Route path="studentsInfo" element={<StudentInfo />} />
-              <Route path="studentsDetails/:studentId" element={<StudentDetails />} />  
+              <Route path="studentsDetails/:studentId" element={<StudentDetails />} />
+              <Route path="updateStudent" element={<UpdateStudent />} /> 
+              <Route path="deleteStudent" element={<DeleteStudent />} />  
              </>
              ):(
              <>

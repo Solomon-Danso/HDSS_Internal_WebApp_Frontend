@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import LoginBackground from "../Images/1.jpg"
+import LoginBackground from "../Images/background.jpg"
 import { colors } from "../Colors";
 
 export const LoginPage = styled.div`
@@ -25,21 +25,19 @@ background-color: ${colors.ivory_dark};
 export const MainDashboardContainer = styled.div`
 display: flex;
 flex-direction: row;
-padding: 0.5%;
-border-radius: 2rem;
+gap:1.5rem;
 
 `;
 export const MenuContainer = styled.div`
 
 flex: 0.15;
-  background-color: ${colors.darkBlue};
+  background-color: ${colors.card};
   colors:${colors.white};
-  padding: 5px;
   overflow: hidden;
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none;
-  height: auto;
+  min-height: 100vh;
  
 
   @media (max-width: 768px) {
@@ -53,7 +51,6 @@ flex: 0.15;
     opacity: ${({ isOpen }) => (isOpen ? "1" : "0")};
     top: ${({ isOpen }) => (isOpen ? "0" : "-100%")};
     overflow-y: scroll;
-    padding-bottom: 20px;
     &::-webkit-scrollbar {
       --webkit-appearance: none;
     }
@@ -84,6 +81,11 @@ display: flex;
 flex-direction: column;
 gap: 1rem;
 
+`;
+
+export const SingleButtonDiv = styled.div`
+display: flex;
+flex-direction: column;
 
 `;
 
@@ -104,7 +106,7 @@ border-radius: 50%;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  color:${colors.yellow}
+  color:${colors.icon}
 
 `;
 export const MenuButtonIconAgain = styled.div`
@@ -116,7 +118,7 @@ export const MenuButtonIconAgain = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  color:${colors.white}
+  color:${colors.icon}
 
 `;
 
@@ -131,14 +133,14 @@ border-radius: 50%;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  color:${colors.yellow}
+  color:${colors.icon}
   
 
 `;
 
 export const MenuButtonLink = styled.div`
 color: ${colors.white};
-font-size:1.5rem;
+font-size:1.2rem;
 cursor: pointer;
 cursor: pointer;
 
@@ -154,7 +156,7 @@ color: ${colors.white};
 
 export const MenuButtonOptionLink = styled.div`
 color: #131313;
-font-size:1.2rem
+font-size:1.2rem;
 cursor: pointer;
 cursor: pointer;
 margin-bottom:0.5rem;
@@ -162,7 +164,7 @@ color: ${colors.white};
 
 &:hover {
   color: ${colors.yellow};
-  font-size:1.25rem;
+  font-size:1.3rem;
 }
 
 `;
@@ -174,10 +176,10 @@ font-size:1.2rem
 cursor: pointer;
 cursor: pointer;
 margin-bottom:1rem;
-color: ${colors.darkBlue};
+color: ${colors.card};
 
 &:hover {
-  color: ${colors.yellow};
+  color: ${colors.darkBlue};
   font-size:1.25rem;
 }
 
@@ -189,7 +191,7 @@ export const MenuButtonMain = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: space-between;
-background-color: ${colors.darkBlue}
+background-color: ${colors.card}
 
 `;
 export const MenuButtonMainInner = styled.div`
@@ -300,6 +302,7 @@ flex-direction: column;
 
 export const HDSS_Label = styled.label`
 font-size: 16px;
+color:${colors.htext}
 
 `
 
@@ -340,7 +343,7 @@ export const AppDesc = styled.p`
 export const Button  = styled.button`
   border: none;
   border: 30px;
-  border-radius: 20px;
+  border-radius: ${({radius})=>radius};
   border: 1px solid ${({ border }) => border};
   background-color: ${({ background }) => background};
   color: ${({ color }) => color};
@@ -400,14 +403,23 @@ font-size: 1.5rem;
 
 export const MenuInfo = styled.div`
 
-background-color: ${colors.yellow};
+background-color: ${colors.card};
 height:7vh;
-font-size: 1.5rem;
+font-size: 1.4rem;
 color: ${colors.white};
 margin-bottom: 5px;
 align-items: center;
 display:flex;
 justify-content: center;
+word-wrap: break-word;
+text-align: center;
+padding: 0.5rem;
+`;
+export const CompanyLogo = styled.img`
+width: 6vw;
+height:7vh;
+   
+
 `;
 
 
@@ -417,7 +429,7 @@ export const HomePageBanner = styled.div`
 display:flex;
 flex-direction: row;
 height: auto;
-background-color:${colors.darkBlue};
+background-color:${colors.card};
 align-items: center;
 justify-content: space-between;
 `;

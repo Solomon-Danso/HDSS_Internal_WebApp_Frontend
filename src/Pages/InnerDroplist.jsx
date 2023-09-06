@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { MenuButtonDivInner,MenuButtonIcon,MenuButtonIconInner,MenuButtonLinkInner, MenuButtonMainInner, MenuButtonOption } from '../Designs/Styles/Styles'
 import AnimateHeight from 'react-animate-height';
 import { BsFillArrowRightCircleFill,BsFillArrowUpRightCircleFill } from "react-icons/bs";
-
+import {MdKeyboardArrowRight} from "react-icons/md";
 
 const MenuButtons = ({logo, title, children}) => {
 
@@ -32,7 +32,7 @@ const MenuButtons = ({logo, title, children}) => {
            style={{
             transform: dropdownOpen ? "rotate(90deg)" : "rotate(0deg)",
           }}
-          ><BsFillArrowUpRightCircleFill />
+          ><MdKeyboardArrowRight />
           
           </MenuButtonIconInner>
           </div>

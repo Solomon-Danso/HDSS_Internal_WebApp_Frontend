@@ -55,10 +55,10 @@ const StudentDetails = () => {
 
   return (
 
-    <>
+
     <StudDetails>
         <StudLeft>
-    <h3>  {theStudent?.lastName}, {theStudent?.firstName} {theStudent?.otherName} Details </h3>
+    <h2>  {theStudent?.lastName}, {theStudent?.firstName} {theStudent?.otherName}  </h2>
             <BiggerImage src={thelink}/>
         </StudLeft>
 
@@ -134,9 +134,6 @@ const StudentDetails = () => {
         
     </StudDetails>
 
-
-
-    </>
   )
 }
 

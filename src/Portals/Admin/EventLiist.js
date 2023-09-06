@@ -63,14 +63,14 @@ const EventLiist = ({ event }) => {
        border={colors.darkBlue}
       >
        <EventDateTitleStart>Start At</EventDateTitleStart>
-      {formatDateTime(event.start)}
+     <h3> {formatDateTime(event.start)} </h3>
       </EventDate>
 
       <EventDate
        
       >
        <EventDateTitleEnd>End At</EventDateTitleEnd>
-       {formatDateTime(event.end)}
+       <h3>{formatDateTime(event.end)}</h3>
       </EventDate>
 
       </EventDateRow>

@@ -20,5 +20,6 @@ export const ViewOneStudent = "api/students/getSpecificUser?StudentId=";
 export const UpdateStudent = "api/students/updateStudent?Id="
 export const DeleteStudentApi = "api/students/deleteSpecificUser?StudentId="
 
+export const Admission = "api/Setup/AdmissionLetter?StudentId="
 
 

@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import { apiServer,RegisterStudent, ViewClasses } from '../../Constants /Endpoints'
-import { AdmitStudentCard, AdmitStudentRole, FormLable, HeaderTitle, MainTitle,FormInputStudent, SelectStage, SelectForStudent, FormTextAreaStudent, SelectStageButton, AdmitButton, SelectForStudentRel} from '../../Designs/Styles/Profile'
+import React, { useEffect, useRef, useState } from 'react'
+import { Admission, apiServer,RegisterStudent, ViewClasses } from '../../Constants /Endpoints'
+import { AdmitStudentCard, AdmitStudentRole, FormLable, HeaderTitle, MainTitle,FormInputStudent, SelectStage, SelectForStudent, FormTextAreaStudent, SelectStageButton, AdmitButton, SelectForStudentRel, CardImage} from '../../Designs/Styles/Profile'
 import { colors } from '../../Designs/Colors'
 import { Show } from '../../Constants /Alerts'
-import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
-import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
+import logo from '../../Designs/Images/1.jpg'
+
+import ReceiptTemplate from './ReceiptTemplate'
+import { ContentContainer, Paragraph } from '../../Designs/Styles/Letter'
 
 
 
@@ -47,7 +49,47 @@ const Students = () => {
     const [parentreligion, setParentReligion] = useState("")
 
   
-  
+    const receiptTemplateRef = useRef(null);
+
+    const handleGeneratePdf = () => {
+      let pdfDownloadComplete = false; // Flag to track PDF download
+    
+      // Function to reload the page after PDF download is complete
+      const reloadPage = () => {
+        if (pdfDownloadComplete) {
+          window.location.reload();
+        } else {
+          setTimeout(reloadPage, 100); // Check again after 100 milliseconds
+        }
+      };
+    
+      // Add a 5-second delay before generating PDF
+      setTimeout(() => {
+        const doc = new jsPDF({
+          format: "a4",
+          unit: "px"
+        });
+    
+        // Adding the fonts
+        // doc.setFont("Inter-Regular", "normal");
+    
+        doc.html(receiptTemplateRef.current, {
+          async callback(doc) {
+            doc.save(firstName+"-"+otherName+"-"+lastName+".pdf");
+            //pdfDownloadComplete = true; // Set the flag to true after download
+          }
+        });
+        Show.hideLoading();
+        Show.Success("Student Admitted Successfully");
+        
+        // Start the process of reloading the page after download
+        reloadPage();
+      }, 20000); // 5000 milliseconds (5 seconds)
+    };
+    
+  const [student, setStudent] = useState({})
+
+
     const handlesubmit = async (event) => {
         event.preventDefault();
       
@@ -91,30 +133,25 @@ const Students = () => {
           formData.append("AlternatePhoneNumber",parentAltphoneNumber );
           formData.append("ParentPhoneNumber", parentPhoneNumber);
 
-          const pdfDoc = new jsPDF();
 
-          // Add content to the PDF
-          pdfDoc.text("Admission Letter", 10, 10);
-          pdfDoc.text(`First Name: ${firstName}`, 10, 20);
-          pdfDoc.text(`Last Name: ${lastName}`, 10, 30);
-          // Add other fields as needed
-    
-          // Save the PDF
-          
-          
 
+         Show.showLoading("Processing Data")
           
       
           const response = await fetch(apiServer + RegisterStudent, {
             method: "POST",
             body: formData,
           });
+
+          const data = await response.json();
       
           if (response.ok) {
-            pdfDoc.save(`${lastName}_${firstName}.pdf`);
-            Show.Success("Student Admitted Successfully");
+           AdmissionLetter(data.studentId)
+           
+            
+           
             //navigate("/dashboard/profile");
-            window.location.reload();
+            //window.location.reload();
           } else {
             Show.Attention("Student Admission Failed");
           }
@@ -133,10 +170,74 @@ useEffect(() => {
   }, []);
   
 
+  const AdmissionLetter = async (studentId) => {
+  
+ 
+   try {
+     
+ 
+     const response = await fetch(apiServer + Admission+studentId, {
+       method: "POST",
+       
+     });
+
+     const data = await response.json();
+ 
+     if (response.ok) {
+       setStudent(data);
+       handleGeneratePdf()
+       //window.location.reload();
+       
+     } else {
+       Show.Attention("Error printing AdmissionLetter");
+     }
+   } catch (error) {
+     Show.Attention("Error printing AdmissionLetter");
+   }
+ };
+
+ const link = apiServer+student.logo
 
 
   
     return (
+      <>
+
+     
+          <div ref={receiptTemplateRef} style={{width:"1px",height:"1px"}}>
+          <ContentContainer >
+         
+          <CardImage src={logo} /> 
+    <Paragraph>{student.paragraph1}</Paragraph>
+    <Paragraph>{student.paragraph2}</Paragraph>
+    <Paragraph>{student.paragraph3}</Paragraph>
+    <Paragraph>{student.paragraph4}</Paragraph>
+    <Paragraph>{student.paragraph5}</Paragraph>
+    <Paragraph>{student.paragraph6}</Paragraph>
+  </ContentContainer>
+               
+      
+         </div>
+
+         <CardImage src={link} />
+        
+    <Paragraph>{student.paragraph1}</Paragraph>
+    <Paragraph>{student.paragraph2}</Paragraph>
+    <Paragraph>{student.paragraph3}</Paragraph>
+    <Paragraph>{student.paragraph4}</Paragraph>
+    <Paragraph>{student.paragraph5}</Paragraph>
+    <Paragraph>{student.paragraph6}</Paragraph>
+
+          
+        
+       
+        
+        
+
+     
+ 
+
+
     <form
     onSubmit={handlesubmit}
     >
@@ -579,17 +680,9 @@ useEffect(() => {
 
 </AdmitStudentRole>
     </form>
+    </>
   )
 }
 
-const styles = StyleSheet.create({
-   container: {
-     padding: 10,
-   },
-   header: {
-     fontSize: 18,
-     marginBottom: 10,
-   },
- });
 
 export default Students

@@ -17,6 +17,13 @@ import StudentInfo from '../../Portals/Admin/StudentIInfo';
 import StudentDetails from '../../Portals/Admin/StudentDetails';
 import UpdateStudent from "../../Portals/Admin/UpdateStudent";
 import DeleteStudent from "../../Portals/Admin/DeleteStudent"
+import MainFees from "../../Portals/Admin/MainFeesPage"
+import FeesDetail from "../../Portals/Admin/FeesDetails"
+
+
+
+
+
 
 
 const Dashboard = () => {
@@ -110,7 +117,7 @@ const [sysDate, setSysDate] = useState("")
 <HomePageBanner>
   <HomeLogo src={pic1}/>
 
-  <HomeSchoolName> Sacred Heart School Complex </HomeSchoolName>
+  <HomeSchoolName> Crosshill International School </HomeSchoolName>
 
   <HomeGrouper>
     <HomeUserPic src={profilePic} onClick={toggleDropdown}/>
@@ -184,8 +191,10 @@ const [sysDate, setSysDate] = useState("")
               <Route path="students" element={<Students />} /> 
               <Route path="studentsInfo" element={<StudentInfo />} />
               <Route path="studentsDetails/:studentId" element={<StudentDetails />} />
+              <Route path="feesDetails/:studentId" element={<FeesDetail />} />
               <Route path="updateStudent" element={<UpdateStudent />} /> 
               <Route path="deleteStudent" element={<DeleteStudent />} />  
+              <Route path="schoolfees" element={<MainFees />} /> 
              </>
              ):(
              <>

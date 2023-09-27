@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Admission, apiServer,RegisterStudent, ViewClasses } from '../../Constants /Endpoints'
+import { Admission, apiServer,RegisterStudent, ViewClasses,AcaTerm,AcaYear, TestPdf } from '../../Constants /Endpoints'
 import { AdmitStudentCard, AdmitStudentRole, FormLable, HeaderTitle, MainTitle,FormInputStudent, SelectStage, SelectForStudent, FormTextAreaStudent, SelectStageButton, AdmitButton, SelectForStudentRel, CardImage} from '../../Designs/Styles/Profile'
 import { colors } from '../../Designs/Colors'
 import { Show } from '../../Constants /Alerts'
+
 import jsPDF from 'jspdf';
-import logo from '../../Designs/Images/1.jpg'
+
 
 import ReceiptTemplate from './ReceiptTemplate'
-import { ContentContainer, Paragraph } from '../../Designs/Styles/Letter'
 
 
 
@@ -47,47 +47,53 @@ const Students = () => {
     const [parentEmail, setParentEmail] = useState("")
     const [parentLocation, setParentLocation] = useState("")
     const [parentreligion, setParentReligion] = useState("")
+   const [academicTerm, setAcademicTerm] = useState("")
+   const [academicYear, setAcademicYear] = useState("")
+  
+
 
   
-    const receiptTemplateRef = useRef(null);
+  const handleGeneratePDF = async (Id, fn,mn,ln) => {
+    try {
+   
+      // Send a request to the backend to generate the PDF
+      const response = await fetch(apiServer + TestPdf+Id, {
+        method: 'GET',
+      });
+  
+      if (response.ok) {
+        // Convert the response to a blob
+        const blob = await response.blob();
+  
+        // Create a URL for the blob
+        const url = window.URL.createObjectURL(blob);
+  
+        // Create an anchor element to trigger the download
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${fn}_${mn}_${ln}.pdf`
+        document.body.appendChild(a);
+        a.click();
+  
+        // Clean up the URL and remove the anchor element
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      } else {
+        // Handle HTTP error responses
+        console.error('HTTP Error:', response.status, response.statusText);
+      }
+    } catch (error) {
+      // Handle other errors (e.g., network issues)
+      console.error('Error generating PDF:', error);
+    } finally {
+      Show.hideLoading();
+      Show.Success("Student Admitted Successfully");
 
-    const handleGeneratePdf = () => {
-      let pdfDownloadComplete = false; // Flag to track PDF download
-    
-      // Function to reload the page after PDF download is complete
-      const reloadPage = () => {
-        if (pdfDownloadComplete) {
-          window.location.reload();
-        } else {
-          setTimeout(reloadPage, 100); // Check again after 100 milliseconds
-        }
-      };
-    
-      // Add a 5-second delay before generating PDF
-      setTimeout(() => {
-        const doc = new jsPDF({
-          format: "a4",
-          unit: "px"
-        });
-    
-        // Adding the fonts
-        // doc.setFont("Inter-Regular", "normal");
-    
-        doc.html(receiptTemplateRef.current, {
-          async callback(doc) {
-            doc.save(firstName+"-"+otherName+"-"+lastName+".pdf");
-            //pdfDownloadComplete = true; // Set the flag to true after download
-          }
-        });
-        Show.hideLoading();
-        Show.Success("Student Admitted Successfully");
-        
-        // Start the process of reloading the page after download
-        reloadPage();
-      }, 20000); // 5000 milliseconds (5 seconds)
-    };
-    
-  const [student, setStudent] = useState({})
+            window.location.reload();
+    }
+  };
+  
+
 
 
     const handlesubmit = async (event) => {
@@ -132,6 +138,8 @@ const Students = () => {
           formData.append("ParentLocation", parentLocation);
           formData.append("AlternatePhoneNumber",parentAltphoneNumber );
           formData.append("ParentPhoneNumber", parentPhoneNumber);
+          formData.append("theAcademicYear",academicYear );
+          formData.append("theAcademicTerm", academicTerm);
 
 
 
@@ -146,7 +154,7 @@ const Students = () => {
           const data = await response.json();
       
           if (response.ok) {
-           AdmissionLetter(data.studentId)
+          handleGeneratePDF(data.studentId, data.firstName, data.otherName, data.lastName)
            
             
            
@@ -161,6 +169,8 @@ const Students = () => {
       };
     
 const [theClass, setTheClass] = useState([])
+const [theYear, setTheYear] = useState([])
+const [theTerm, setTheTerm] = useState([])
 
 useEffect(() => {
     fetch(apiServer + ViewClasses)
@@ -168,35 +178,27 @@ useEffect(() => {
       .then(data => setTheClass(data))
       .catch(error => console.error(error));
   }, []);
+
+  useEffect(() => {
+   fetch(apiServer + AcaYear)
+     .then(response => response.json()) // Parse the response as JSON
+     .then(data => setTheYear(data))
+     .catch(error => console.error(error));
+ }, []);
+
+ useEffect(() => {
+   fetch(apiServer + AcaTerm)
+     .then(response => response.json()) // Parse the response as JSON
+     .then(data => setTheTerm(data))
+     .catch(error => console.error(error));
+ }, []);
   
+ console.log(theTerm)
 
-  const AdmissionLetter = async (studentId) => {
-  
- 
-   try {
-     
- 
-     const response = await fetch(apiServer + Admission+studentId, {
-       method: "POST",
-       
-     });
 
-     const data = await response.json();
- 
-     if (response.ok) {
-       setStudent(data);
-       handleGeneratePdf()
-       //window.location.reload();
-       
-     } else {
-       Show.Attention("Error printing AdmissionLetter");
-     }
-   } catch (error) {
-     Show.Attention("Error printing AdmissionLetter");
-   }
- };
 
- const link = apiServer+student.logo
+
+
 
 
   
@@ -204,37 +206,9 @@ useEffect(() => {
       <>
 
      
-          <div ref={receiptTemplateRef} style={{width:"1px",height:"1px"}}>
-          <ContentContainer >
-         
-          <CardImage src={logo} /> 
-    <Paragraph>{student.paragraph1}</Paragraph>
-    <Paragraph>{student.paragraph2}</Paragraph>
-    <Paragraph>{student.paragraph3}</Paragraph>
-    <Paragraph>{student.paragraph4}</Paragraph>
-    <Paragraph>{student.paragraph5}</Paragraph>
-    <Paragraph>{student.paragraph6}</Paragraph>
-  </ContentContainer>
-               
-      
-         </div>
 
-         <CardImage src={link} />
         
-    <Paragraph>{student.paragraph1}</Paragraph>
-    <Paragraph>{student.paragraph2}</Paragraph>
-    <Paragraph>{student.paragraph3}</Paragraph>
-    <Paragraph>{student.paragraph4}</Paragraph>
-    <Paragraph>{student.paragraph5}</Paragraph>
-    <Paragraph>{student.paragraph6}</Paragraph>
-
           
-        
-       
-        
-        
-
-     
  
 
 
@@ -309,6 +283,71 @@ useEffect(() => {
      </div>
 
      <div>
+    <FormLable>Class</FormLable>
+    <SelectForStudent
+    background={colors.darkBlue}
+    color="white"
+    border={colors.darkBlue}
+    onChange={(e) => setlevel(e.target.value)}
+    >
+    <option >Please select a class</option>
+    
+    {theClass.length > 0 &&
+    theClass.map((data) => (
+      <option key={data.id}>{data.className}</option>
+    ))}
+
+    </SelectForStudent>
+        
+     </div>
+
+
+     <div>
+    <FormLable>Academic Year</FormLable>
+    <SelectForStudent
+    background={colors.darkBlue}
+    color="white"
+    border={colors.darkBlue}
+    onChange={(e) => setAcademicYear(e.target.value)}
+    >
+    <option >Please select a year</option>
+    
+    {theYear.length > 0 &&
+    theYear.map((data) => (
+      <option key={data.id}>{data.academicYear}</option>
+    ))}
+
+    </SelectForStudent>
+        
+     </div>
+
+     <div>
+    <FormLable>Academic Term</FormLable>
+    <SelectForStudent
+    background={colors.darkBlue}
+    color="white"
+    border={colors.darkBlue}
+    onChange={(e) => setAcademicTerm(e.target.value)}
+    >
+    <option >Please select a Term</option>
+    
+    {theTerm.length > 0 &&
+    theTerm.map((data) => (
+      <option key={data.id}>{data.academicTerm}</option>
+
+    ))}
+
+    </SelectForStudent>
+        
+     </div>
+
+    
+ 
+
+    </AdmitStudentRole>
+
+    <AdmitStudentRole>
+    <div>
         <FormLable>Location</FormLable>
         <FormInputStudent
         type="text"
@@ -341,11 +380,6 @@ useEffect(() => {
         />
      </div>
 
- 
-
-    </AdmitStudentRole>
-
-    <AdmitStudentRole>
    
      <div>
         <FormLable>Religion</FormLable>
@@ -354,6 +388,24 @@ useEffect(() => {
         
         placeholder=""
         onChange={(e) => setreligion(e.target.value)}
+       
+        />
+     </div>
+
+    
+    
+    </AdmitStudentRole>
+
+    <AdmitStudentRole>
+
+
+     <div>
+        <FormLable>Upload Student Photo</FormLable>
+        <FormInputStudent
+        type="file"
+        required
+        placeholder=""
+        onChange={(e) => setProfilePic(e.target.files[0])}
        
         />
      </div>
@@ -380,43 +432,7 @@ useEffect(() => {
         />
      </div>
 
-     <div>
-    <FormLable>Class</FormLable>
-    <SelectForStudent
-    background={colors.darkBlue}
-    color="white"
-    border={colors.darkBlue}
-    onChange={(e) => setlevel(e.target.value)}
-    >
-    <option >Please select a class</option>
-    
-    {theClass.length > 0 &&
-    theClass.map((data) => (
-      <option key={data.id}>{data.className}</option>
-    ))}
 
-    </SelectForStudent>
-        
-     </div>
-
-
-
-
-    </AdmitStudentRole>
-
-    <AdmitStudentRole>
-
-
-     <div>
-        <FormLable>Upload Student Photo</FormLable>
-        <FormInputStudent
-        type="file"
-        required
-        placeholder=""
-        onChange={(e) => setProfilePic(e.target.files[0])}
-       
-        />
-     </div>
 
      <div>
         <FormLable>Medical Information</FormLable>

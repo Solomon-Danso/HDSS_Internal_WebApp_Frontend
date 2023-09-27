@@ -13,13 +13,34 @@ export const ViewStudents = "api/Admin/AllStudents"
 export const CountStudents = "api/Admin/AllStudentsCount"
 export const CountTeachers = "api/Admin/AllTeachersCount"
 export const CountParents = "api/Admin/AllParentsCount"
-
-
 export const SearchStudent = "api/Admin/Search?searchTerm="
 export const ViewOneStudent = "api/students/getSpecificUser?StudentId=";
 export const UpdateStudent = "api/students/updateStudent?Id="
 export const DeleteStudentApi = "api/students/deleteSpecificUser?StudentId="
-
 export const Admission = "api/Setup/AdmissionLetter?StudentId="
+export const PayFees = "api/Accounting/PayFees?StudentId="
+export const PaymentHis = "api/Accounting/PaymentHis?StudentId="
+export const AcaYear = "api/LMS/ViewAcademicYear"
+export const AcaTerm = "api/LMS/ViewAcademicTerm"
+export const TestPdf = "api/ThePDFS/generator?Id="
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

@@ -41,7 +41,7 @@ const MenuButtons = () => {
 
 
 <MenuInfo onClick={() => { navigate("/admin") }}>
-HDSS
+CIS
 </MenuInfo>
 
 
@@ -55,7 +55,7 @@ HDSS
     <MenuButtonOptionLink onClick={() => { navigate("/admin/updateStudent") }}>Update Students</MenuButtonOptionLink>
     <MenuButtonOptionLink onClick={() => { navigate("/admin/deleteStudent") }}>Delete Students</MenuButtonOptionLink>
     <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Assessments</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>School Fees</MenuButtonOptionLink>
+    <MenuButtonOptionLink onClick={() => { navigate("/admin/schoolfees") }}>School Fees</MenuButtonOptionLink>
     <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Transport</MenuButtonOptionLink>
     <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Feeding</MenuButtonOptionLink>
     <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Subscription</MenuButtonOptionLink>

@@ -121,6 +121,22 @@ border: 1px solid ${({ border }) => border};;
 
 `;
 
+export const AdmitStudentCard2 = styled.div`
+background: ${colors.card};
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(19.7px);
+-webkit-backdrop-filter: blur(19.7px);
+
+padding:2rem;
+overflow:hidden;
+margin: 2rem;
+border: 1px solid ${({ border }) => border};
+
+
+`;
+
+
 
 export const EventCard = styled.div`
 background: ${colors.card};
@@ -519,6 +535,83 @@ export const FormInputStudent2 = styled.input`
   }
 `;
 
+export const FeesRow = styled.div`
+display: flex;
+flex-direction: row;
+gap:1rem;
+align-items: center;
+margin-bottom:1.5rem;
+
+`;
+
+export const FeesIcons = styled.div`
+font-size: 3rem;
+height:100%
+flex:1;
+
+`;
+
+
+
+export const FormInputStudent3 = styled.input`
+  width: 27vw;
+  padding: 15px 10px;
+  border: 0.01px solid ${colors.aqua};
+  border-radius: 5px;
+  font-size: 1.4rem;
+  outline: none;
+  transition: all 0.5s ease-in-out;
+  color: ${colors.white};
+  text-align: left;
+
+  
+  :hover {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  :focus {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    width:100%;
+  }
+   @media (max-width: 1500px) {
+    font-size: 12px;
+    width:100%;
+  }
+`;
+
+export const FormInputStudent4 = styled.input`
+  width: 27vw;
+  padding: 15px 10px;
+  border: 0.01px solid ${colors.aqua};
+  border-radius: 5px;
+  font-size: 1.4rem;
+  outline: none;
+  transition: all 0.5s ease-in-out;
+  
+  text-align: left;
+
+  
+  :hover {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  :focus {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    width:100%;
+  }
+   @media (max-width: 1500px) {
+    font-size: 12px;
+    width:100%;
+  }
+`;
 
 
 export const FormInputSearch = styled.input`
@@ -585,7 +678,7 @@ export const FormTextAreaStudent = styled.textarea`
 
 
 export const SelectForStudent = styled.select`
-width: 18vw;
+width: 17vw;
 padding: 15px 10px;
 border: 1px solid ${({ border }) => border};;
 background-color: ${({background})=>background};
@@ -757,8 +850,48 @@ export const CardText = styled.div`
 `;
 
 export const CardTextHeader = styled.div`
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: ${colors.lightBlue};
+  text-align: center;
+  flex: 1; /* Allow each text element to take equal space */
+  font-weight: 600;
+  `;
+
+  export const CardTextDateHeader = styled.div`
+  font-size: 1.1rem;
+  color: ${colors.maingreen};
+  text-align: center;
+  flex: 1; /* Allow each text element to take equal space */
+  font-weight: 600;
+  `;
+
+  export const CardTextActionHeader = styled.div`
+  font-size: 1.0rem;
+  color: ${colors.maingreen};
+  text-align: center;
+  flex: 1; /* Allow each text element to take equal space */
+  font-weight: 600;
+  `;
+
+   export const CardTextCreditHeader = styled.div`
+  font-size: 1.3rem;
+  color: ${colors.mainsecondgreen};
+  text-align: center;
+  flex: 1; /* Allow each text element to take equal space */
+  font-weight: 600;
+  `;
+
+  export const CardTextPayHeader = styled.div`
+  font-size: 1.3rem;
+  color: ${colors.yellow};
+  text-align: center;
+  flex: 1; /* Allow each text element to take equal space */
+  font-weight: 600;
+  `;
+
+  export const CardTextBillHeader = styled.div`
+  font-size: 1.3rem;
+  color: ${colors.mainred};
   text-align: center;
   flex: 1; /* Allow each text element to take equal space */
   font-weight: 600;
@@ -788,6 +921,7 @@ flex-direction: row;
 gap:1rem;
 height:auto;
 
+
 `;
 
 export const StudLeft = styled.div`
@@ -803,9 +937,9 @@ flex-direction: column;
 
 export const BiggerImage = styled.img`
 width: 40vw;
-height: auto;
+height: 73vh;
 padding:2rem;
-flex: 1;
+
 
 @media (max-width: 768px) {
     width: 20vw;
@@ -813,6 +947,22 @@ flex: 1;
 
   }
 `;
+
+
+export const BiggerImage2 = styled.img`
+width: 35vw;
+height: 61vh;
+padding:2rem;
+
+
+@media (max-width: 768px) {
+    width: 20vw;
+    height: 30vh;
+
+  }
+`;
+
+
 
 export const StudDetailRow = styled.div`
 gap: 1rem;

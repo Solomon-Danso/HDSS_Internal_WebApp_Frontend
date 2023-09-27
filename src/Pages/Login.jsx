@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { LoginPage,LoginWrap,LoginDiv,AppName, SchoolLogo, AppDesc, HDSS_Form, FormInput, HDSS_Label, Button } from '../Designs/Styles/Styles'
-import student from "../Designs/Images/2.jpg" 
+import student from "../Designs/Images/login.jpg"
+import school from "../Designs/Images/download.png" 
 import { colors } from '../Designs/Colors'
 import { useNavigate } from 'react-router-dom'
 import { Show } from '../Constants /Alerts'
@@ -113,9 +114,9 @@ const handleSubmit = async (event) => {
         alt="Introduction"
       />
       <AppName style={{ textAlign: "center", color: "white"}}>
-        Hydot School System
+        CROSSHILL INT. SCH
         <br />
-        <span style={{ fontWeight: "bold" }}>(HDSS)</span><br/>
+        <span style={{ fontWeight: "bold" }}>(CIS)</span><br/>
       </AppName>
     </LoginDiv>
 
@@ -124,7 +125,7 @@ const handleSubmit = async (event) => {
         <LoginDiv background={"white"} flex={0.45} hide={false}>
       
         <SchoolLogo
-            src={student}
+            src={school}
             alt="icon"
             style={{ width: 65, height: 65 }}
           />

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import LoginBackground from "../Images/1.jpg"
+import LoginBackground from "../Images/background.jpg"
 import { colors } from "../Colors";
 
 export const LoginPage = styled.div`

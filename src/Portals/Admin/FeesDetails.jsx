@@ -1,17 +1,65 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { PayFees, PaymentHis, ViewOneStudent, apiServer } from '../../Constants /Endpoints';
-import { AboutHeader, AdmitButton2, AdmitStudentCard, AdmitStudentCard2, AdmitStudentRole, BiggerImage, BiggerImage2, CardTextActionHeader, CardTextBillHeader, CardTextCreditHeader, CardTextDateHeader, CardTextHeader, CardTextPayHeader, FeesIcons, FeesRow, FormInputStudent, FormInputStudent2, FormInputStudent3, FormInputStudent4, FormLable, HomeCardTextEvent, NewStudentListCard2, StudDetailData, StudDetailField, StudDetailRow, StudDetails, StudLeft, StudRight } from '../../Designs/Styles/Profile';
+import { AboutHeader, AdmitButton2, AdmitStudentCard, AdmitStudentCard2, AdmitStudentRole, BiggerImage, BiggerImage2, CardTextActionHeader, CardTextBillHeader, CardTextCreditHeader, CardTextDateHeader, CardTextHeader, CardTextPayHeader, FeesIcons, FeesRow, FormInputStudent, FormInputStudent2, FormInputStudent3, FormInputStudent4, FormLable, HomeCardTextEvent, NewStudentListCard2, PaySelector, SelectForStudentRel, StudDetailData, StudDetailField, StudDetailRow, StudDetails, StudLeft, StudRight } from '../../Designs/Styles/Profile';
 import { colors } from '../../Designs/Colors';
 import { Show } from '../../Constants /Alerts';
-import { MdAttachMoney,MdOutlineSportsSoccer,MdLocalLibrary,MdCastForEducation,MdPerson,MdOutlineHealthAndSafety } from "react-icons/md";
+import { MdPerson } from "react-icons/md";
 import {HiIdentification } from "react-icons/hi";
 import {BsMortarboard} from "react-icons/bs";
 import {GiMoneyStack,GiTakeMyMoney } from "react-icons/gi";
+import {RiSecurePaymentFill } from "react-icons/ri";
+import { AES, enc } from 'crypto-js';
+import {FaGooglePay } from "react-icons/fa";
 
 
 
 const StudentDetails = () => {
+
+
+  const handleGeneratePDF = async (PayId) => {
+    try {
+     
+      const URL = `api/ThePDFS/FeesPayment?Id=${theStudent.studentId}&PayId=${PayId}`
+      // Send a request to the backend to generate the PDF
+      const response = await fetch(apiServer + URL, {
+        method: 'GET',
+      });
+  
+      if (response.ok) {
+        // Convert the response to a blob
+        const blob = await response.blob();
+  
+        // Create a URL for the blob
+        const url = window.URL.createObjectURL(blob);
+  
+        // Create an anchor element to trigger the download
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${theStudent?.firstName}_${theStudent?.lastName}.pdf`
+        document.body.appendChild(a);
+        a.click();
+  
+        // Clean up the URL and remove the anchor element
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      } else {
+        // Handle HTTP error responses
+        console.error('HTTP Error:', response.status, response.statusText);
+      }
+    } catch (error) {
+      // Handle other errors (e.g., network issues)
+      console.error('Error generating PDF:', error);
+    } finally {
+      Show.hideLoading();
+      Show.Success("Payment made successfully");
+            window.location.reload();
+    }
+  };
+  
+
+
+
     const { studentId } = useParams();
     const [theStudent, setTheStudent] = useState([])
     const [His, setHis] = useState([])
@@ -30,26 +78,43 @@ const StudentDetails = () => {
           .catch(error => console.error(error));
       }, []);
 
+      const [userInfo, setUserInfo] = useState({});
 
+      useEffect(() => {
+        const encryptedData = sessionStorage.getItem("userDataEnc");
+        const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
+        const decryptedData = AES.decrypt(encryptedData, encryptionKey);
+        const decryptedString = decryptedData.toString(enc.Utf8);
+        const parsedData = JSON.parse(decryptedString);
+          setUserInfo(parsedData);
+      }, []);
+    
 const [amount,setAmount] = useState(0)
+const [paymentMethod,setPaymentMethod] = useState("")
+const [action,setAction] = useState("")
 
 
 const studentDetails = async (event) => {
     event.preventDefault();
+
+   Show.showLoading("Processing Data");
+
+    const URL = `api/Accounting/PayFees?StudentId=${studentId}&StaffId=${userInfo.staffID}`
     try {
-      const response = await fetch(apiServer + PayFees + studentId, {
+      const response = await fetch(apiServer + URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json", // Set the Content-Type header
         },
-        body: JSON.stringify({ amount }),
+        body: JSON.stringify({ amount,paymentMethod,action }),
       });
-  
+      const data = await response.json();
       if (response.ok) {
-        Show.Success("Payment made successfully");
-        window.location.reload();
+        handleGeneratePDF(data.transactionId)
+        
+        
       } else {
-        Show.Attention("Student not found");
+        Show.Attention("All fields are required");
       }
     } catch (err) {
       Show.Attention("An error has occurred");
@@ -59,41 +124,11 @@ const studentDetails = async (event) => {
 
       const thelink = apiServer+theStudent?.profilePic
 
-      const getOrdinalSuffix = (day) => {
-        if (day >= 11 && day <= 13) {
-          return "th";
-        }
-        switch (day % 10) {
-          case 1:
-            return "st";
-          case 2:
-            return "nd";
-          case 3:
-            return "rd";
-          default:
-            return "th";
-        }
-      };
+     
 
-      const formatMonthAbbreviation = (month) => {
-        const months = [
-          "Jan.", "Feb.", "Mar.", "Apr.",
-          "May", "Jun.", "Jul.", "Aug.",
-          "Sep.", "Oct.", "Nov.", "Dec."
-        ];
-        return months[month];
-      };
+     
       
-      const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const day = date.getDate();
-        const month = date.getMonth();
-        const year = date.getFullYear();
-      
-        const formattedDate = `${day}${getOrdinalSuffix(day)} ${formatMonthAbbreviation(month)} ${year}`;
-      
-        return formattedDate;
-      };
+     
     
 
   return (
@@ -186,6 +221,46 @@ const studentDetails = async (event) => {
 
 
     </FeesRow>
+
+
+<FeesRow>
+<FeesIcons>
+<FaGooglePay color={colors.icon}/>
+</FeesIcons>
+       <PaySelector
+    background={colors.darkBlue}
+    color="white"
+    border={colors.darkBlue}
+    onChange={(e) => setPaymentMethod(e.target.value)}
+    required
+    >
+    <option  >Payment Method </option>
+    <option>Mobile Money</option>
+    <option>Bank Transfer</option>
+    <option>Cash</option>
+    </PaySelector>
+</FeesRow>
+
+<FeesRow>
+<FeesIcons>
+<RiSecurePaymentFill color={colors.icon}/>
+</FeesIcons>
+       <PaySelector
+    background={colors.darkBlue}
+    color="white"
+    border={colors.darkBlue}
+    onChange={(e) => setAction(e.target.value)}
+    required
+    >
+    <option >Payment Type</option>
+    <option>Admission Fees</option>
+    <option>Tuition Fees</option>
+    <option>Other Fees</option>
+    </PaySelector>
+</FeesRow>
+
+
+
     <FeesRow>
 
 <FeesIcons>

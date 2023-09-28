@@ -18,12 +18,12 @@ export const ViewOneStudent = "api/students/getSpecificUser?StudentId=";
 export const UpdateStudent = "api/students/updateStudent?Id="
 export const DeleteStudentApi = "api/students/deleteSpecificUser?StudentId="
 export const Admission = "api/Setup/AdmissionLetter?StudentId="
-export const PayFees = "api/Accounting/PayFees?StudentId="
+export const PayFees = "api/Accounting/PayFees?StudentId=&StaffId="
 export const PaymentHis = "api/Accounting/PaymentHis?StudentId="
 export const AcaYear = "api/LMS/ViewAcademicYear"
 export const AcaTerm = "api/LMS/ViewAcademicTerm"
 export const TestPdf = "api/ThePDFS/generator?Id="
-
+export const Receipt = "api/ThePDFS/FeesPayment?Id=52056&PayId="
 
 
 

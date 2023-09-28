@@ -731,6 +731,36 @@ transition: all 0.5s ease-in-out;
 
 
 
+export const PaySelector = styled.select`
+width: 28vw;
+padding: 15px 10px;
+border: 1px solid ${({ border }) => border};;
+background-color: ${({background})=>background};
+color: ${({color})=>color};
+border-radius: 5px;
+margin-top: 10px;
+font-size: 16px;
+outline: none;
+transition: all 0.5s ease-in-out;
+
+:hover {
+  border: 0.5px solid ${colors.primary};
+}
+
+:focus {
+  border: 0.5px solid ${colors.primary};
+}
+
+@media (max-width: 768px) {
+  font-size: 12px;
+}
+
+`;
+
+
+
+
+
 export const AdmitButton = styled.button`
 border: none;
   width: 16vw;
@@ -951,7 +981,7 @@ padding:2rem;
 
 export const BiggerImage2 = styled.img`
 width: 35vw;
-height: 61vh;
+height: 80vh;
 padding:2rem;
 
 

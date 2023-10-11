@@ -2,17 +2,30 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { ViewOneStudent, apiServer } from '../../Constants /Endpoints';
 import { AboutHeader, BiggerImage, FormInputStudent, FormLable, HomeCardTextEvent, StudDetailData, StudDetailField, StudDetailRow, StudDetails, StudLeft, StudRight } from '../../Designs/Styles/Profile';
+import { AES,enc } from 'crypto-js';
 
 const StudentDetails = () => {
     const { studentId } = useParams();
     const [theStudent, setTheStudent] = useState([])
+    const [userInfo, setUserInfo] = useState({});
+
+    useEffect(() => {
+      const encryptedData = sessionStorage.getItem("userDataEnc");
+      const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
+      const decryptedData = AES.decrypt(encryptedData, encryptionKey);
+      const decryptedString = decryptedData.toString(enc.Utf8);
+      const parsedData = JSON.parse(decryptedString);
+        setUserInfo(parsedData);
+    }, []);
+
 
       useEffect(() => {
-        fetch(apiServer + ViewOneStudent+studentId)
+        fetch(apiServer + ViewOneStudent+studentId+"&ID="+userInfo.staffID)
           .then(response => response.json()) // Parse the response as JSON
           .then(data => setTheStudent(data))
           .catch(error => console.error(error));
-      }, []);
+      }, [studentId, userInfo.staffID]);
+           
 
       const thelink = apiServer+theStudent?.profilePic
 

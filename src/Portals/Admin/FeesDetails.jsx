@@ -43,6 +43,10 @@ const StudentDetails = () => {
         // Clean up the URL and remove the anchor element
         window.URL.revokeObjectURL(url);
         document.body.removeChild(a);
+
+        
+
+
       } else {
         // Handle HTTP error responses
         console.error('HTTP Error:', response.status, response.statusText);

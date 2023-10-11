@@ -4,10 +4,7 @@ import { AdmitStudentCard, AdmitStudentRole, FormLable, HeaderTitle, MainTitle,F
 import { colors } from '../../Designs/Colors'
 import { Show } from '../../Constants /Alerts'
 
-import jsPDF from 'jspdf';
-
-
-import ReceiptTemplate from './ReceiptTemplate'
+import { AES,enc } from 'crypto-js'
 
 
 
@@ -49,9 +46,18 @@ const Students = () => {
     const [parentreligion, setParentReligion] = useState("")
    const [academicTerm, setAcademicTerm] = useState("")
    const [academicYear, setAcademicYear] = useState("")
-  
+   const [userInfo, setUserInfo] = useState({});
 
+   useEffect(() => {
+     const encryptedData = sessionStorage.getItem("userDataEnc");
+     const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
+     const decryptedData = AES.decrypt(encryptedData, encryptionKey);
+     const decryptedString = decryptedData.toString(enc.Utf8);
+     const parsedData = JSON.parse(decryptedString);
+       setUserInfo(parsedData);
+   }, []);
 
+   
   
   const handleGeneratePDF = async (Id, fn,mn,ln) => {
     try {
@@ -88,8 +94,8 @@ const Students = () => {
     } finally {
       Show.hideLoading();
       Show.Success("Student Admitted Successfully");
-
-            window.location.reload();
+       window.location.reload();
+            
     }
   };
   
@@ -146,7 +152,7 @@ const Students = () => {
          Show.showLoading("Processing Data")
           
       
-          const response = await fetch(apiServer + RegisterStudent, {
+          const response = await fetch(apiServer + RegisterStudent+userInfo.staffID, {
             method: "POST",
             body: formData,
           });

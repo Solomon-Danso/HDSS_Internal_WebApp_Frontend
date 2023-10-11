@@ -76,8 +76,8 @@ CIS
   specificRole==="SuperiorUser"||specificRole==="HeadTeacher" ? (
   <>
   <DropList logo={<GiTeacher/>} title="Teacher">
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Register </MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Update </MenuButtonOptionLink>
+    <MenuButtonOptionLink onClick={() => { navigate("/admin/teachers") }}>Register </MenuButtonOptionLink>
+    <MenuButtonOptionLink onClick={() => { navigate("/admin/updateteacher") }}>Update </MenuButtonOptionLink>
     <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>View Details</MenuButtonOptionLink>
     <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Suspend</MenuButtonOptionLink>
     <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Delete</MenuButtonOptionLink>

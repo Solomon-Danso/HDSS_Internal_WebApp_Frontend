@@ -19,8 +19,8 @@ import UpdateStudent from "../../Portals/Admin/UpdateStudent";
 import DeleteStudent from "../../Portals/Admin/DeleteStudent"
 import MainFees from "../../Portals/Admin/MainFeesPage"
 import FeesDetail from "../../Portals/Admin/FeesDetails"
-
-
+import Teachers from "../../Portals/Admin/Teachers"
+import UpdateTeacher from "../../Portals/Admin/UpdateTeachers"
 
 
 
@@ -48,7 +48,7 @@ const Dashboard = () => {
       setUserInfo(parsedData);
   }, []);
   const profilePic = apiServer+userInfo.profilePicturePath
-
+console.log(profilePic);
   
   const toggleDropdown = () => {
     setDropdownOpen((prevState) => !prevState); // Toggle the value of dropdownOpen
@@ -195,6 +195,9 @@ const [sysDate, setSysDate] = useState("")
               <Route path="updateStudent" element={<UpdateStudent />} /> 
               <Route path="deleteStudent" element={<DeleteStudent />} />  
               <Route path="schoolfees" element={<MainFees />} /> 
+              <Route path="teachers" element={<Teachers />} /> 
+              <Route path="updateteacher" element={<UpdateTeacher />} /> 
+              
              </>
              ):(
              <>

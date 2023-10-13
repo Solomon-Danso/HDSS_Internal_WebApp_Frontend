@@ -21,6 +21,17 @@ import MainFees from "../../Portals/Admin/MainFeesPage"
 import FeesDetail from "../../Portals/Admin/FeesDetails"
 import Teachers from "../../Portals/Admin/Teachers"
 import UpdateTeacher from "../../Portals/Admin/UpdateTeachers"
+import TeacherInfo from "../../Portals/Admin/TeacherInfo"
+import TeacherDetails from "../../Portals/Admin/TeacherDetails"
+import DeleteTeacher from "../../Portals/Admin/DeleteTeacher"
+import Class from "../../Portals/Admin/LMS/Class"
+
+
+
+
+
+
+
 
 
 
@@ -191,13 +202,17 @@ const [sysDate, setSysDate] = useState("")
               <Route path="students" element={<Students />} /> 
               <Route path="studentsInfo" element={<StudentInfo />} />
               <Route path="studentsDetails/:studentId" element={<StudentDetails />} />
+              <Route path="teacherDetails/:teacherId" element={<TeacherDetails />} />
               <Route path="feesDetails/:studentId" element={<FeesDetail />} />
               <Route path="updateStudent" element={<UpdateStudent />} /> 
               <Route path="deleteStudent" element={<DeleteStudent />} />  
               <Route path="schoolfees" element={<MainFees />} /> 
               <Route path="teachers" element={<Teachers />} /> 
               <Route path="updateteacher" element={<UpdateTeacher />} /> 
-              
+              <Route path="teacherinfo" element={<TeacherInfo />} /> 
+              <Route path="deleteteacher" element={<DeleteTeacher />} /> 
+              <Route path="class" element={<Class />} /> 
+
              </>
              ):(
              <>

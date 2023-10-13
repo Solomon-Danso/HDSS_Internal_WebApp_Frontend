@@ -135,9 +135,6 @@ border: 1px solid ${({ border }) => border};
 
 
 `;
-
-
-
 export const EventCard = styled.div`
 background: ${colors.card};
 border-radius: 16px;
@@ -964,10 +961,43 @@ display: flex;
 flex-direction: column;
 
 `;
+export const StudCenter = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+
+`;
 
 export const BiggerImage = styled.img`
 width: 40vw;
 height: 73vh;
+padding:2rem;
+
+
+@media (max-width: 768px) {
+    width: 20vw;
+    height: 30vh;
+
+  }
+`;
+
+
+export const BiggerImage3 = styled.img`
+width: 50vw;
+height: 100vh;
+padding:2rem;
+
+
+@media (max-width: 768px) {
+    width: 20vw;
+    height: 30vh;
+
+  }
+`;
+
+export const BiggerImage4 = styled.img`
+width: 30vw;
+height: 35vh;
 padding:2rem;
 
 
@@ -1016,7 +1046,13 @@ color: ${colors.white};
 text-decoration: underline;
 `;
 
-
+export const AboutHeader2 = styled.div`
+font-size: 1.6rem;
+font-weight: bold;
+color: ${colors.white};
+text-decoration: underline;
+text-align: center;
+`;
 
 
 

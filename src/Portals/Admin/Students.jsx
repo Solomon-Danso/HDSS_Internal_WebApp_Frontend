@@ -179,6 +179,7 @@ const [theYear, setTheYear] = useState([])
 const [theTerm, setTheTerm] = useState([])
 
 useEffect(() => {
+   
     fetch(apiServer + ViewClasses)
       .then(response => response.json()) // Parse the response as JSON
       .then(data => setTheClass(data))

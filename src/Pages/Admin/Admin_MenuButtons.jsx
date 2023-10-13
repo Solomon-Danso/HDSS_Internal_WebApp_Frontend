@@ -78,9 +78,8 @@ CIS
   <DropList logo={<GiTeacher/>} title="Teacher">
     <MenuButtonOptionLink onClick={() => { navigate("/admin/teachers") }}>Register </MenuButtonOptionLink>
     <MenuButtonOptionLink onClick={() => { navigate("/admin/updateteacher") }}>Update </MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>View Details</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Suspend</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Delete</MenuButtonOptionLink>
+    <MenuButtonOptionLink onClick={() => { navigate("/admin/teacherinfo") }}>View Details</MenuButtonOptionLink>
+    <MenuButtonOptionLink onClick={() => { navigate("/admin/deleteteacher") }}>Delete</MenuButtonOptionLink>
     <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Lesson Notes </MenuButtonOptionLink>
     <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Assessments</MenuButtonOptionLink>
     <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Assign to Classroom</MenuButtonOptionLink>
@@ -151,7 +150,7 @@ CIS
   <DropList logo={<FaLayerGroup/>} title="LMS">
 
     <InnerDroplist title="Class">
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Add Class</MenuButtonOptionLink>
+    <MenuButtonOptionLink onClick={() => { navigate("/admin/class") }}>Add Class</MenuButtonOptionLink>
     <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>View All Class</MenuButtonOptionLink>
   </InnerDroplist>
 

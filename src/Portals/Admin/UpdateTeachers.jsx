@@ -42,12 +42,13 @@ const Students = () => {
       const studentDetails = async (event) => {
         event.preventDefault();
         
-        const url = `api/Admin/getTeacherInfo?StaffId=${studentId}&ID=${userInfo.staffID}` 
+        const url = `api/Teacher/viewTeacher?StaffId=${studentId}&ID=${userInfo.staffID}` 
 
         try {
           const response = await fetch(apiServer + url, {
             method: "GET",
           });
+          console.log(apiServer + url)
           const data = await response.json();
           if (response.ok) {
             setStudent([data]);
@@ -79,7 +80,7 @@ const Students = () => {
             Show.Attention("Teacher not found");
           }
         } catch (err) {
-          Show.Attention("An error has occurred");
+          Show.Attention(err);
         }
       };
       
@@ -132,7 +133,7 @@ const Students = () => {
   
           
 
-const url = `api/Admin/updateTeacher?StaffId=${studentId}&ID=${userInfo.staffID}`          
+const url = `api/Teacher/updateTeacher?StaffId=${studentId}&ID=${userInfo.staffID}`          
       
           const response = await fetch(apiServer + url, {
             method: "POST",

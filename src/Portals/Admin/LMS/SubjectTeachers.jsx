@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { AboutHeader, AboutHeader2, AdmitButton2, AdmitStudentCard2, AdmitStudentCard3, CardTextHeader2, FeesIcons, FeesRow, FormInputSearch, FormInputStudent3, FormInputStudent4, FormLoaders, NewStudentListCard2, PaySelector, SelectForStudent, SelectStageButton, StudCenter, StudRight, StudentInfoCard, StudentInfoCard2, StudentListResult } from '../../../Designs/Styles/Profile'
 import  {SubjectTeachersCard}  from './SubjectTeachersCard'
 
-import { SearchClass, SearchStudent, SubTeacher,ViewStudents, ViewTeachers, apiServer } from '../../../Constants /Endpoints'
+import { SearchClass, SearchStudent, SearchSubject, SubTeacher,ViewStudents, ViewTeachers, apiServer } from '../../../Constants /Endpoints'
 import { Show } from '../../../Constants /Alerts'
 import { colors } from '../../../Designs/Colors'
 
@@ -33,7 +33,7 @@ const StudentInfo = () => {
     
           //Show.showLoading('Processing Data');
           try {
-            const response = await fetch(apiServer + SearchClass + searchTerm, {
+            const response = await fetch(apiServer + SearchSubject + searchTerm, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

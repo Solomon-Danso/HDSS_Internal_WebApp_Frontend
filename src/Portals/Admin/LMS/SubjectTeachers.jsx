@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { AboutHeader, AboutHeader2, AdmitButton2, AdmitStudentCard2, AdmitStudentCard3, CardTextHeader2, FeesIcons, FeesRow, FormInputSearch, FormInputStudent3, FormInputStudent4, FormLoaders, NewStudentListCard2, PaySelector, SelectForStudent, SelectStageButton, StudCenter, StudRight, StudentInfoCard, StudentInfoCard2, StudentListResult } from '../../../Designs/Styles/Profile'
+import { AboutHeader, AboutHeader2, AdmitButton2, AdmitStudentCard2, AdmitStudentCard3, CardTextHeader, FeesIcons, FeesRow, FormInputSearch, FormInputStudent3, FormInputStudent4, FormLoaders, NewStudentListCard2, PaySelector, SelectForStudent, SelectStageButton, StudCenter, StudRight, StudentInfoCard, StudentInfoCard2, StudentListResult } from '../../../Designs/Styles/Profile'
 import  {SubjectTeachersCard}  from './SubjectTeachersCard'
 
-import { SearchClass, SearchStudent, SearchSubject, SubTeacher,ViewStudents, ViewTeachers, apiServer } from '../../../Constants /Endpoints'
+import { SearchClass, SearchStudent, SearchSubject, SubTeacher,ViewClasses,ViewStudents, ViewTeachers, apiServer } from '../../../Constants /Endpoints'
 import { Show } from '../../../Constants /Alerts'
 import { colors } from '../../../Designs/Colors'
 
@@ -11,6 +11,7 @@ import { AES, enc } from 'crypto-js';
 import {FaGooglePay } from "react-icons/fa";
 import AnimateHeight from 'react-animate-height'
 import {GiTeacher } from "react-icons/gi";
+import {LuSchool } from "react-icons/lu";
 
 const StudentInfo = () => {
 
@@ -19,6 +20,16 @@ const StudentInfo = () => {
       const [closeOther, setCloseOther] = useState(false)
     const [searchResult, setSearchResult] = useState(false)
     const [searchTerm, setSearchTerm] = useState()
+
+    const [theClass2, setTheClass2] = useState([])
+
+      useEffect(() => {
+   
+        fetch(apiServer + ViewClasses)
+          .then(response => response.json()) // Parse the response as JSON
+          .then(data => setTheClass2(data))
+          .catch(error => console.error(error));
+      }, []);
   
  
     useEffect(() => {
@@ -83,6 +94,7 @@ const StudentInfo = () => {
 
       const [subjectName,sa] = useState("")
       const [staffName,sb] = useState("")
+      const [className, sc] = useState("")
 
 
       useEffect(() => {
@@ -130,7 +142,7 @@ const StudentInfo = () => {
             headers: {
               "Content-Type": "application/json", // Set the Content-Type header
             },
-            body: JSON.stringify({subjectName,staffName }),
+            body: JSON.stringify({subjectName,staffName,className }),
           });
           if (response.ok) {
            Show.hideLoading();
@@ -174,7 +186,25 @@ const StudentInfo = () => {
     
     <div>
 
+    <FeesRow>
+<FeesIcons>
+<LuSchool color={colors.icon}/>
+</FeesIcons>
+       <PaySelector
+    background={colors.darkBlue}
+    color="white"
+    border={colors.darkBlue}
+    onChange={(e) => sc(e.target.value)}
+    required
+    >
+        <option>Select A Class</option>
+   {theClass2.length > 0 &&
+    theClass2.map((data) => (
+      <option key={data.id}>{data.className}</option>
+    ))}
 
+    </PaySelector>
+</FeesRow>
 
 
     <FeesRow>
@@ -212,7 +242,7 @@ const StudentInfo = () => {
         <option>Select A Teacher</option>
    {theStudents.length > 0 &&
     theStudents.map((data) => (
-      <option key={data.id} >{data.title}{" "}{data.firstName}{" "} {data.otherName}{" "}{data.lastName}</option>
+      <option key={data.id} value={data.staffID}>{data.title}{" "}{data.firstName}{" "} {data.otherName}{" "}{data.lastName}</option>
     ))}
 
     </PaySelector>
@@ -260,11 +290,13 @@ const StudentInfo = () => {
 
 <NewStudentListCard2 >
 
-<CardTextHeader2>S/N</CardTextHeader2>
-<CardTextHeader2>Subject Name</CardTextHeader2>
-<CardTextHeader2>Teacher Name</CardTextHeader2>
-<CardTextHeader2>Date Assigned</CardTextHeader2>
-<CardTextHeader2>Action</CardTextHeader2>
+<CardTextHeader>S/N</CardTextHeader>
+<CardTextHeader>Subject Name</CardTextHeader>
+<CardTextHeader>Class Name</CardTextHeader>
+<CardTextHeader>Staff ID</CardTextHeader>
+<CardTextHeader>Teacher Name</CardTextHeader>
+<CardTextHeader>Date Assigned</CardTextHeader>
+<CardTextHeader>Action</CardTextHeader>
 
 </NewStudentListCard2>
 

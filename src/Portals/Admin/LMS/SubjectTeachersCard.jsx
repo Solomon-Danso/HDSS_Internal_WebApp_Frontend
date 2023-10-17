@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { AdmitButton2, AdmitStudentCard2, CardImage, CardText2, FeesIcons, FeesRow, FormInputStudent4, NewStudentListCard, NewStudentListCard2, PaySelector, SelectForStudent, SelectForStudentRel, SelectStageButton, StudCenter } from '../../../Designs/Styles/Profile'
+import { AdmitButton2, AdmitStudentCard2, CardImage, CardText, FeesIcons, FeesRow, FormInputStudent4, NewStudentListCard, NewStudentListCard2, PaySelector, SelectForStudent, SelectForStudentRel, SelectStageButton, StudCenter } from '../../../Designs/Styles/Profile'
 import { ViewClasses, ViewTeachers, apiServer } from '../../../Constants /Endpoints'
 import { colors } from '../../../Designs/Colors'
 import AnimateHeight from 'react-animate-height'
@@ -71,10 +71,12 @@ export const SubjectTeachersCard = ({ data,index }) => {
   return (
     <>
     <NewStudentListCard2 >
-    <CardText2>{index+1}</CardText2>
-     <CardText2>{data?.subjectName}</CardText2>
-     <CardText2>{data?.staffName}</CardText2>
-     <CardText2>{data?.dateAssigned}</CardText2>
+    <CardText>{index+1}</CardText>
+     <CardText>{data?.subjectName}</CardText>
+     <CardText>{data?.className}</CardText>
+     <CardText>{data?.staffID}</CardText>
+     <CardText>{data?.staffName}</CardText>
+     <CardText>{data?.dateAssigned}</CardText>
     
      <SelectStageButton
      background={colors.darkBlue}

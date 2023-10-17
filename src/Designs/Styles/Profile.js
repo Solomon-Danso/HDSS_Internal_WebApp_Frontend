@@ -879,7 +879,8 @@ export const CardText = styled.div`
 export const CardText2 = styled.div`
   font-size: 1rem;
   color: ${colors.lightBlue};
-  text-align: right;
+  text-align: center;
+ 
  
    /* Allow each text element to take equal space */
 `;
@@ -896,7 +897,7 @@ export const CardTextHeader = styled.div`
   font-size: 1.1rem;
   color: ${colors.lightBlue};
   text-align: center;
-  /* Allow each text element to take equal space */
+   /* Allow each text element to take equal space */
   font-weight: 600;
   `;
 

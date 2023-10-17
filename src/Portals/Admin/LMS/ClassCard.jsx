@@ -123,7 +123,14 @@ useEffect(()=>{
   sd(data?.classTeacher)
 },[])
 
+const [specificRole, setspecificRole] = useState("");
 
+
+useEffect(() => {
+  const spRole =  AES.decrypt(sessionStorage.getItem("SpecificRole"), '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK').toString(enc.Utf8);
+  setspecificRole(spRole);
+  
+}, []);
 
   return (
     <>
@@ -136,9 +143,10 @@ useEffect(()=>{
      <CardText>{countStudent}</CardText>
 
 <CardText>{data?.classTeacher}</CardText>
-
-    
-     <SelectStageButton
+{
+   specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(<>
+   
+   <SelectStageButton
      background={colors.darkBlue}
      color="white"
      border={colors.darkBlue}
@@ -148,6 +156,10 @@ useEffect(()=>{
      >
        {dropper?"View Less":"View More"}
      </SelectStageButton>
+   </>):(<></>)
+}
+    
+    
 
 
     </NewStudentListCard>

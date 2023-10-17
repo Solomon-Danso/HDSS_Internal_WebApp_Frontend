@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CardImage, CardText, NewStudentListCard, SelectStageButton } from '../../Designs/Styles/Profile'
 import { apiServer } from '../../Constants /Endpoints'
 import { colors } from '../../Designs/Colors'
@@ -10,6 +10,7 @@ import {
   PendingFullContainer,
   PendingFullDiv,
 } from "../../Designs/Card/PendingRegistrations";
+import { AES,enc } from 'crypto-js'
 
 
 const Eachrow = (rowdata) =>(
@@ -70,7 +71,14 @@ export const MyStudentCard = ({ data }) => {
       
 const [dropper, setDropper] = useState(false)
 
+const [specificRole, setspecificRole] = useState("");
 
+
+useEffect(() => {
+  const spRole =  AES.decrypt(sessionStorage.getItem("SpecificRole"), '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK').toString(enc.Utf8);
+  setspecificRole(spRole);
+  
+}, []);
 
   return (
     <>
@@ -83,7 +91,12 @@ const [dropper, setDropper] = useState(false)
      <CardText> {data?.level}</CardText>
      <CardText> {data?.emergencyContactName}</CardText>
      <CardText> {data?.emergencyPhoneNumber}</CardText>
-     <SelectStageButton
+
+     {
+   specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(<>
+   
+       
+   <SelectStageButton
      background={colors.darkBlue}
      color="white"
      border={colors.darkBlue}
@@ -93,6 +106,9 @@ const [dropper, setDropper] = useState(false)
      >
        View Details
      </SelectStageButton>
+   </>):(<></>)
+}
+
 
 
     </NewStudentListCard>

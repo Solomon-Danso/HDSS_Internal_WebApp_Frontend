@@ -434,7 +434,7 @@ const [y,sy] = useState("")
         
      </div>
      <div>
-        <FormLable>Upload Certificate</FormLable>
+        <FormLable>Upload Certificate (.pdf format only)</FormLable>
         <FormInputStudent
         type="file"
         required

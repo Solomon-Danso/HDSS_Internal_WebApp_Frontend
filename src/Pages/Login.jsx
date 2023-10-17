@@ -79,8 +79,11 @@ const handleSubmit = async (event) => {
         if(data.role === "Admin"){
           navigate("/admin");
         }
+        else if(data.role === "Teacher"){
+          navigate("/teacher");
+        }
         else{
-          navigate("/")
+          navigate("/");
         }
         
       } else {

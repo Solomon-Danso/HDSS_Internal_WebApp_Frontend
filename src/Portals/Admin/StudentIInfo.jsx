@@ -4,6 +4,7 @@ import { MyStudentCard } from './MyStudentCard2'
 import { SearchStudent, TheClassStudent, ViewClasses, ViewStudents, apiServer } from '../../Constants /Endpoints'
 import { Show } from '../../Constants /Alerts'
 import { colors } from '../../Designs/Colors'
+import { AES,enc } from 'crypto-js'
 
 const StudentInfo = () => {
 
@@ -13,6 +14,15 @@ const StudentInfo = () => {
     const [closeOther, setCloseOther] = useState(false)
     const [searchResult, setSearchResult] = useState(false)
     const [searchTerm, setSearchTerm] = useState()
+
+    const [specificRole, setspecificRole] = useState("");
+
+
+  useEffect(() => {
+    const spRole =  AES.decrypt(sessionStorage.getItem("SpecificRole"), '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK').toString(enc.Utf8);
+    setspecificRole(spRole);
+    
+  }, []);
   
     useEffect(() => {
         // Function to fetch search results based on searchTerm
@@ -96,7 +106,13 @@ const StudentInfo = () => {
 <CardTextHeader>Class</CardTextHeader>
 <CardTextHeader>Contact Name</CardTextHeader>
 <CardTextHeader>Contact Phone</CardTextHeader>
-<CardTextHeader>Action</CardTextHeader>
+{
+   specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(<>
+   
+   <CardTextHeader>Action</CardTextHeader>
+   </>):(<></>)
+}
+
 
 
 </NewStudentListCard2>

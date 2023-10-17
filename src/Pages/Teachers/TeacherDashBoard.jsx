@@ -10,23 +10,13 @@ import { useNavigate } from 'react-router-dom'
 import AnimateHeight from 'react-animate-height';
 import { apiServer } from '../../Constants /Endpoints';
 import Home from '../../Portals/Admin/Home';
-import Test from '../../Portals/Admin/Test'
 import Profile from '../../Portals/Admin/Profile'
-import Students from '../../Portals/Admin/Students';
+
 import StudentInfo from '../../Portals/Admin/StudentIInfo';
 import StudentDetails from '../../Portals/Admin/StudentDetails';
-import UpdateStudent from "../../Portals/Admin/UpdateStudent";
-import DeleteStudent from "../../Portals/Admin/DeleteStudent"
-import MainFees from "../../Portals/Admin/MainFeesPage"
-import FeesDetail from "../../Portals/Admin/FeesDetails"
-import Teachers from "../../Portals/Admin/Teachers"
-import UpdateTeacher from "../../Portals/Admin/UpdateTeachers"
-import TeacherInfo from "../../Portals/Admin/TeacherInfo"
-import TeacherDetails from "../../Portals/Admin/TeacherDetails"
-import DeleteTeacher from "../../Portals/Admin/DeleteTeacher"
+
 import Class from "../../Portals/Admin/LMS/Class"
 import AddSubject  from "../../Portals/Admin/LMS/AddSubject"
-import SubjectTeacher from "../../Portals/Admin/LMS/SubjectTeachers"
 
 
 
@@ -59,7 +49,7 @@ const Dashboard = () => {
     const parsedData = JSON.parse(decryptedString);
       setUserInfo(parsedData);
   }, []);
-  const profilePic = apiServer+userInfo.profilePicturePath
+  const profilePic = apiServer+userInfo.filePath
 console.log(profilePic);
   
   const toggleDropdown = () => {
@@ -135,7 +125,7 @@ const [sysDate, setSysDate] = useState("")
     <HomeUserPic src={profilePic} onClick={toggleDropdown}/>
 
   <HomeDetailsGrouper >
-   <HomeUserName onClick={toggleDropdown}>{userInfo.name}</HomeUserName>
+   <HomeUserName onClick={toggleDropdown}>{userInfo.title} {userInfo.firstName} {userInfo.otherName} {userInfo.lastName}</HomeUserName>
    <HomeUserSpecificRole onClick={toggleDropdown}>{userInfo.specificRole}</HomeUserSpecificRole>
    
   </HomeDetailsGrouper>
@@ -154,10 +144,10 @@ const [sysDate, setSysDate] = useState("")
 <ProfileDetails>
 
 <AnimateHeight height={dropdownOpen?"auto":0} duration={500}>    
-<ProfileButtonOptionLink onClick={() => { navigate("/admin/viewProfile"); toggleDropdown() }}>View Profile </ProfileButtonOptionLink>
-<ProfileButtonOptionLink onClick={() => { navigate("/admin/test"); toggleDropdown() }}>Edit Profile </ProfileButtonOptionLink>
-<ProfileButtonOptionLink onClick={() => { navigate("/admin/test"); toggleDropdown() }}>Notifications </ProfileButtonOptionLink>
-<ProfileButtonOptionLink onClick={() => { navigate("/admin/test"); toggleDropdown() }}>Chats </ProfileButtonOptionLink>
+<ProfileButtonOptionLink onClick={() => { navigate("/teacher/viewProfile"); toggleDropdown() }}>View Profile </ProfileButtonOptionLink>
+<ProfileButtonOptionLink onClick={() => { navigate("/teacher/test"); toggleDropdown() }}>Edit Profile </ProfileButtonOptionLink>
+<ProfileButtonOptionLink onClick={() => { navigate("/teacher/test"); toggleDropdown() }}>Notifications </ProfileButtonOptionLink>
+<ProfileButtonOptionLink onClick={() => { navigate("/teacher/test"); toggleDropdown() }}>Chats </ProfileButtonOptionLink>
 
 </AnimateHeight>
 
@@ -184,55 +174,19 @@ const [sysDate, setSysDate] = useState("")
           
           
           
-          {
-             specificRole==="SuperiorUser"||specificRole==="HeadTeacher" ? (
-             <>
-              <Route path="test" element={<Test />} />  
-             </>
-             ):(
-             <>
-              <Route path="*" element={<PermissionDenied />} />
-             </>
-             )
-          }
 
              
-{
-             specificRole==="SuperiorUser"||specificRole==="HeadTeacher" ? (
-             <>
-              <Route path="students" element={<Students />} /> 
-              <Route path="studentsInfo" element={<StudentInfo />} />
-              <Route path="studentsDetails/:studentId" element={<StudentDetails />} />
-              <Route path="teacherDetails/:teacherId" element={<TeacherDetails />} />
-              <Route path="feesDetails/:studentId" element={<FeesDetail />} />
-              <Route path="updateStudent" element={<UpdateStudent />} /> 
-              <Route path="deleteStudent" element={<DeleteStudent />} />  
-              <Route path="schoolfees" element={<MainFees />} /> 
-              <Route path="teachers" element={<Teachers />} /> 
-              <Route path="updateteacher" element={<UpdateTeacher />} /> 
-              <Route path="teacherinfo" element={<TeacherInfo />} /> 
-              <Route path="deleteteacher" element={<DeleteTeacher />} /> 
-              <Route path="class" element={<Class />} /> 
 
-             </>
-             ):(
-             <>
-              <Route path="*" element={<PermissionDenied />} />
-             </>
-             )
-          }
 
           
           
 {
-             specificRole==="SuperiorUser"||specificRole==="HeadTeacher"||specificRole==="Teacher" ? (
+             specificRole==="Teacher" ? (
              <>
-              <Route path="students" element={<Students />} /> 
               <Route path="studentsInfo" element={<StudentInfo />} />
               <Route path="studentsDetails/:studentId" element={<StudentDetails />} />
               <Route path="class" element={<Class />} /> 
-              <Route path="subjects" element={<AddSubject />} />
-              <Route path="subjectteacher" element={<SubjectTeacher />} /> 
+              <Route path="subjects" element={<AddSubject />} /> 
               
 
              </>
@@ -245,20 +199,6 @@ const [sysDate, setSysDate] = useState("")
           
           
           
-          
-          
-          {
-             specificRole==="SuperiorUser"? (
-             <>
-              <Route path="pass" element={<Pass />} />  
-             </>
-             ):(
-             <>
-             <Route path="*" element={<PermissionDenied />} />
-             </>
-             )
-          }
-
    
 
     </Routes>

@@ -215,8 +215,9 @@ const Home = () => {
 }
 
 
-
-<StudentInfoCard >
+{
+   specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(<>
+   <StudentInfoCard >
 
 <FormLoaders onSubmit={handleStudentDataSubmit}>
 <SelectForStudent
@@ -278,12 +279,20 @@ type="submit">Load
 
 
 </StudentInfoCard>
+
 <br/>
 
 <EventCard>  
   <EventCalendar/>
  
  </EventCard>
+
+   
+   </>):(<></>)
+}
+
+
+
 
 
 

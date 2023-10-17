@@ -150,8 +150,7 @@ CIS
   <DropList logo={<FaLayerGroup/>} title="LMS">
 
     <InnerDroplist title="Class">
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/class") }}>Add Class</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>View All Class</MenuButtonOptionLink>
+    <MenuButtonOptionLink onClick={() => { navigate("/admin/class") }}>Class List</MenuButtonOptionLink>
   </InnerDroplist>
 
     <InnerDroplist title="Discussions">
@@ -162,13 +161,9 @@ CIS
 
 
     <InnerDroplist title="Subjects">
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Add Subject </MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>View All Subject </MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Assign Teacher To Subject</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Remove Teacher From Subject </MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>View Subject Teachers</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>View Teacher Assigned Subjects</MenuButtonOptionLink>
-
+    <MenuButtonOptionLink onClick={() => { navigate("/admin/subjects") }}>Subject List </MenuButtonOptionLink>
+    <MenuButtonOptionLink onClick={() => { navigate("/admin/subjectteacher") }}>Subject Teachers</MenuButtonOptionLink>
+    
       </InnerDroplist>
 
       <InnerDroplist title="Uploads">

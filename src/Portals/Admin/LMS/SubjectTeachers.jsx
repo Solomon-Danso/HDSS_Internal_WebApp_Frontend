@@ -1,36 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { AboutHeader, AboutHeader2, AdmitButton2, AdmitStudentCard2, AdmitStudentCard3, CardTextHeader, FeesIcons, FeesRow, FormInputSearch, FormInputStudent3, FormInputStudent4, FormLoaders, NewStudentListCard2, PaySelector, SelectForStudent, SelectStageButton, StudCenter, StudRight, StudentInfoCard, StudentInfoCard2, StudentListResult } from '../../../Designs/Styles/Profile'
-import  {ClassCard}  from './ClassCard'
+import { AboutHeader, AboutHeader2, AdmitButton2, AdmitStudentCard2, AdmitStudentCard3, CardTextHeader2, FeesIcons, FeesRow, FormInputSearch, FormInputStudent3, FormInputStudent4, FormLoaders, NewStudentListCard2, PaySelector, SelectForStudent, SelectStageButton, StudCenter, StudRight, StudentInfoCard, StudentInfoCard2, StudentListResult } from '../../../Designs/Styles/Profile'
+import  {SubjectTeachersCard}  from './SubjectTeachersCard'
 
-import { SearchClass, SearchStudent, TheClassStudent, ViewClasses, ViewStudents, ViewTeachers, apiServer } from '../../../Constants /Endpoints'
+import { SearchClass, SearchStudent, SubTeacher,ViewStudents, ViewTeachers, apiServer } from '../../../Constants /Endpoints'
 import { Show } from '../../../Constants /Alerts'
 import { colors } from '../../../Designs/Colors'
-import { MdPerson } from "react-icons/md";
-import {HiIdentification } from "react-icons/hi";
+
 import {BsMortarboard} from "react-icons/bs";
 import { AES, enc } from 'crypto-js';
 import {FaGooglePay } from "react-icons/fa";
 import AnimateHeight from 'react-animate-height'
 import {GiTeacher } from "react-icons/gi";
-import {CiLocationOn} from "react-icons/ci";
-import {BiCodeBlock} from "react-icons/bi";
+
 const StudentInfo = () => {
 
 
     const [studentList, setStudentList] = useState([])
-    const [specificClass, setSpecificClass] = useState("")
-    const [closeOther, setCloseOther] = useState(false)
+      const [closeOther, setCloseOther] = useState(false)
     const [searchResult, setSearchResult] = useState(false)
     const [searchTerm, setSearchTerm] = useState()
-
-    const [specificRole, setspecificRole] = useState("");
-
-
-  useEffect(() => {
-    const spRole =  AES.decrypt(sessionStorage.getItem("SpecificRole"), '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK').toString(enc.Utf8);
-    setspecificRole(spRole);
-    
-  }, []);
   
  
     useEffect(() => {
@@ -78,14 +66,9 @@ const StudentInfo = () => {
       const [theStudents, setTheStudents] = useState([])
       const [theClass, setTheClass] = useState([])
 
-      useEffect(() => {
-   
-        fetch(apiServer + ViewClasses)
-          .then(response => response.json()) // Parse the response as JSON
-          .then(data => setTheClass(data))
-          .catch(error => console.error(error));
-      }, []);
 
+
+   
 
       const [userInfo, setUserInfo] = useState({});
 
@@ -98,10 +81,9 @@ const StudentInfo = () => {
           setUserInfo(parsedData);
       }, []);
 
-      const [className,sa] = useState("")
-      const [classCode,sb] = useState("")
-      const [campus,sc] = useState("")
-      const [classTeacher,sd] = useState("")
+      const [subjectName,sa] = useState("")
+      const [staffName,sb] = useState("")
+
 
       useEffect(() => {
         fetch(apiServer + ViewTeachers+userInfo.staffID)
@@ -110,14 +92,37 @@ const StudentInfo = () => {
           .catch(error => console.error(error));
       }, [userInfo.staffID]);
 
-     
+      const [subj, setSubJ] = useState([])
+      useEffect(() => {
+        if(userInfo.staffID){
+            const URL=`api/LMS/AllSubjectTeachers`
+
+            fetch(apiServer + URL)
+              .then(response => response.json()) // Parse the response as JSON
+              .then(data => setSubJ(data))
+              .catch(error => console.error(error));
+        }
+      
+      }, [userInfo.staffID]);
+
+      useEffect(() => {
+        if(userInfo.staffID){
+            const URL=`api/LMS/viewAllSubject?ID=${userInfo.staffID}`
+
+            fetch(apiServer + URL)
+              .then(response => response.json()) // Parse the response as JSON
+              .then(data => setTheClass(data))
+              .catch(error => console.error(error));
+        }
+      
+      }, [userInfo.staffID]);
   
 
       const studentDetails = async (event) => {
         event.preventDefault();
     
        Show.showLoading("Processing Data");
-    const URL=`api/LMS/AddClass?ID=${userInfo.staffID}`
+    const URL=`api/LMS/AddTeacherToSubject?ID=${userInfo.staffID}`
 
         try {
           const response = await fetch(apiServer + URL, {
@@ -125,11 +130,11 @@ const StudentInfo = () => {
             headers: {
               "Content-Type": "application/json", // Set the Content-Type header
             },
-            body: JSON.stringify({className,classCode,campus,classTeacher }),
+            body: JSON.stringify({subjectName,staffName }),
           });
           if (response.ok) {
            Show.hideLoading();
-           Show.Success("Class Added Successfully")
+           Show.Success("Teacher Assigned Successfully")
             window.location.reload()
             
           } else {
@@ -148,10 +153,7 @@ const StudentInfo = () => {
         justifyContent: 'space-between',
     }}>
 
-{
-   specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(<>
-   
-   <AboutHeader2
+<AboutHeader2
      background={colors.red}
      color="white"
      border={colors.darkBlue}
@@ -160,7 +162,7 @@ const StudentInfo = () => {
         setDropper(!dropper)
      }}
      >
-       {dropper?"Minimize":"Add A Class"}
+       {dropper?"Minimize":"Add A Subject Teacher"}
      </AboutHeader2> <br/>
      <AnimateHeight height={dropper ? "auto" : 0}>
 
@@ -171,55 +173,29 @@ const StudentInfo = () => {
     < AdmitStudentCard2>
     
     <div>
-        <FeesRow>
-
-    <FeesIcons >
-    <HiIdentification  color={colors.icon}/>
-    </FeesIcons>
-      
-        <FormInputStudent4
-        type="text"
-        //value={theStudent?.studentId}
-        placeholder="Class"
-       
-        onChange={(e) => sa(e.target.value)}
-       
-        />
-
-        </FeesRow>
-
-        <FeesRow>
-
-<FeesIcons>
-<BiCodeBlock color={colors.icon}/>
-</FeesIcons>
-  
-<FormInputStudent4
-            type="text"
-         placeholder="Class Code"
-         onChange={(e) => sb(e.target.value)}
-        />
-
-    </FeesRow>
 
 
 
 
     <FeesRow>
-
 <FeesIcons>
-<CiLocationOn color={colors.icon}/>
+<BsMortarboard color={colors.icon}/>
 </FeesIcons>
-  
- 
-<FormInputStudent4
-        type="text"
-        //value={theStudent?.level}
-        placeholder="Campus"
-        onChange={(e) => sc(e.target.value)}
-        />
+       <PaySelector
+    background={colors.darkBlue}
+    color="white"
+    border={colors.darkBlue}
+    onChange={(e) => sa(e.target.value)}
+    required
+    >
+        <option>Select A Subject</option>
+   {theClass.length > 0 &&
+    theClass.map((data) => (
+      <option key={data.id}>{data.subjectName}</option>
+    ))}
 
-    </FeesRow>
+    </PaySelector>
+</FeesRow>
  
 
 <FeesRow>
@@ -230,13 +206,13 @@ const StudentInfo = () => {
     background={colors.darkBlue}
     color="white"
     border={colors.darkBlue}
-    onChange={(e) => sd(e.target.value)}
+    onChange={(e) => sb(e.target.value)}
     required
     >
         <option>Select A Teacher</option>
    {theStudents.length > 0 &&
     theStudents.map((data) => (
-      <option key={data.id}>{data.title}{" "}{data.firstName}{" "} {data.otherName}{" "}{data.lastName}</option>
+      <option key={data.id} >{data.title}{" "}{data.firstName}{" "} {data.otherName}{" "}{data.lastName}</option>
     ))}
 
     </PaySelector>
@@ -267,10 +243,6 @@ const StudentInfo = () => {
         </StudCenter>
 
      </AnimateHeight>
-   </>):(<></>)
-}
-
-
 
 <StudentInfoCard2 >
 
@@ -288,18 +260,11 @@ const StudentInfo = () => {
 
 <NewStudentListCard2 >
 
-<CardTextHeader>S/N</CardTextHeader>
-<CardTextHeader>Class</CardTextHeader>
-<CardTextHeader>Campus</CardTextHeader>
-<CardTextHeader>Class Code</CardTextHeader>
-<CardTextHeader>Student</CardTextHeader>
-<CardTextHeader>Class Teacher</CardTextHeader>
-{
-   specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(<>
-   
-   <CardTextHeader>Action</CardTextHeader>
-   </>):(<></>)
-}
+<CardTextHeader2>S/N</CardTextHeader2>
+<CardTextHeader2>Subject Name</CardTextHeader2>
+<CardTextHeader2>Teacher Name</CardTextHeader2>
+<CardTextHeader2>Date Assigned</CardTextHeader2>
+<CardTextHeader2>Action</CardTextHeader2>
 
 </NewStudentListCard2>
 
@@ -307,7 +272,7 @@ const StudentInfo = () => {
 {searchResult && (
           <StudentListResult>
             {studentList.length > 0 &&
-              studentList.map((data, index) => <ClassCard data={data} key={index} index={index}/>)}
+              studentList.map((data, index) => <SubjectTeachersCard data={data} key={index} index={index}/>)}
           </StudentListResult>
         )}
 
@@ -329,9 +294,9 @@ const StudentInfo = () => {
   <>
   
   <StudentListResult>
-{theClass.length > 0 &&
-    theClass.map((data,index) => (
-      <ClassCard data={data} key={index} index={index} />
+{subj.length > 0 &&
+    subj.map((data,index) => (
+      <SubjectTeachersCard data={data} key={index} index={index} />
     ))}
 
 </StudentListResult>

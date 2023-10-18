@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { AboutHeader, AboutHeader2, AdmitButton2, AdmitStudentCard2, AdmitStudentCard3, CardTextHeader, FeesIcons, FeesRow, FormInputSearch, FormInputStudent3, FormInputStudent4, FormLoaders, NewStudentListCard2, PaySelector, SelectForStudent, SelectStageButton, StudCenter, StudRight, StudentInfoCard, StudentInfoCard2, StudentListResult } from '../../../Designs/Styles/Profile'
-import  {SubjectTeachersCard}  from './SubjectTeachersCard'
+import { AboutHeader, AboutHeader2, AdmitButton2, AdmitStudentCard2, AdmitStudentCard3, CardTextHeader, FeesIcons, FeesRow, FormInputSearch, FormInputStudent3, FormInputStudent4, FormInputStudent6, FormLable, FormLoaders, NewStudentListCard2, PaySelector, SelectForStudent, SelectStageButton, StudCenter, StudRight, StudentInfoCard, StudentInfoCard2, StudentListResult } from '../../../Designs/Styles/Profile'
+import  {UploadCard}  from './UploadCard'
 
-import { SearchClass, SearchStudent, SearchSubject, SubTeacher,ViewClasses,ViewStudents, ViewTeachers, apiServer } from '../../../Constants /Endpoints'
+import {  SearchSlides, SearchSubject, SubTeacher,ViewClasses,ViewStudents, ViewTeachers, apiServer } from '../../../Constants /Endpoints'
 import { Show } from '../../../Constants /Alerts'
 import { colors } from '../../../Designs/Colors'
 
-import {BsMortarboard} from "react-icons/bs";
+import {BsBook, BsCalendar2Date, BsMortarboard} from "react-icons/bs";
 import { AES, enc } from 'crypto-js';
 import {FaGooglePay } from "react-icons/fa";
 import AnimateHeight from 'react-animate-height'
 import {GiTeacher } from "react-icons/gi";
 import {LuSchool } from "react-icons/lu";
+import {HiOutlineAcademicCap } from "react-icons/hi";
+import { MdTitle } from 'react-icons/md'
+import { BiBookReader } from 'react-icons/bi'
+
 
 const StudentInfo = () => {
 
@@ -33,15 +37,8 @@ const StudentInfo = () => {
     }, []);
     
 
-      useEffect(() => {
-   
-        fetch(apiServer + ViewClasses)
-          .then(response => response.json()) // Parse the response as JSON
-          .then(data => setTheClass2(data))
-          .catch(error => console.error(error));
-      }, []);
-  
- 
+     
+
     useEffect(() => {
         // Function to fetch search results based on searchTerm
         const fetchSearchResults = async () => {
@@ -53,8 +50,9 @@ const StudentInfo = () => {
           }
     
           //Show.showLoading('Processing Data');
+          const URL = `api/Admin/SearchSlides?searchTerm=${searchTerm}&StaffID=${userInfo.staffID}`
           try {
-            const response = await fetch(apiServer + SearchSubject + searchTerm, {
+            const response = await fetch(apiServer + URL, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -102,9 +100,10 @@ const StudentInfo = () => {
           setUserInfo(parsedData);
       }, []);
 
-      const [subjectName,sa] = useState("")
-      const [staffName,sb] = useState("")
-      const [className, sc] = useState("")
+     
+
+
+
 
 
       useEffect(() => {
@@ -117,7 +116,7 @@ const StudentInfo = () => {
       const [subj, setSubJ] = useState([])
       useEffect(() => {
         if(userInfo.staffID){
-            const URL=`api/LMS/AllSubjectTeachers`
+          const URL=`api/LMS/ViewAllSlidesTeachers?ID=${userInfo.staffID}`
 
             fetch(apiServer + URL)
               .then(response => response.json()) // Parse the response as JSON
@@ -129,8 +128,8 @@ const StudentInfo = () => {
 
       useEffect(() => {
         if(userInfo.staffID){
-            const URL=`api/LMS/viewAllSubject?ID=${userInfo.staffID}`
-
+         
+            const URL=`api/LMS/ViewTeacherSubject?ID=${userInfo.staffID}`
             fetch(apiServer + URL)
               .then(response => response.json()) // Parse the response as JSON
               .then(data => setTheClass(data))
@@ -138,25 +137,80 @@ const StudentInfo = () => {
         }
       
       }, [userInfo.staffID]);
+
+      useEffect(() => {
+        if(userInfo.staffID){
+         
+            const URL=`api/LMS/ViewTeacherClass?ID=${userInfo.staffID}`
+            fetch(apiServer + URL)
+              .then(response => response.json()) // Parse the response as JSON
+              .then(data => setTheClass2(data))
+              .catch(error => console.error(error));
+        }
+      
+      }, [userInfo.staffID]);
   
+const [AcaYear, setAcaYear] = useState([])
+const [AcaTerm, setAcaTerm] = useState([])
+
+useEffect(() => {
+   
+        const URL=`api/LMS/ViewAcademicYear`
+
+        fetch(apiServer + URL)
+          .then(response => response.json()) // Parse the response as JSON
+          .then(data => setAcaYear(data))
+          .catch(error => console.error(error));
+    
+  
+  }, []);
+
+  useEffect(() => {
+   
+    const URL=`api/LMS/ViewAcademicTerm`
+
+    fetch(apiServer + URL)
+      .then(response => response.json()) // Parse the response as JSON
+      .then(data => setAcaTerm(data))
+      .catch(error => console.error(error));
+
+
+}, []);
+
+ const [a,sa] = useState("")
+      const [b,sb] = useState("")
+      const [c, sc] = useState("")
+ const [d,sd] = useState("")
+      const [e,se] = useState("")
+      const [f, sf] = useState("")
+
 
       const studentDetails = async (event) => {
         event.preventDefault();
     
        Show.showLoading("Processing Data");
-    const URL=`api/LMS/AddTeacherToSubject?ID=${userInfo.staffID}`
+    const URL=`api/LMS/UploadSlide?ID=${userInfo.staffID}`
+   
 
         try {
+          const formData = new FormData();
+          formData.append("AcademicYear",a)
+           formData.append("AcademicTerm",b)
+      
+           formData.append("ClassName",c)
+           formData.append("SubjectName",d)
+      
+           formData.append("Title",e)
+           formData.append("Slide",f)
+      
           const response = await fetch(apiServer + URL, {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json", // Set the Content-Type header
-            },
-            body: JSON.stringify({subjectName,staffName,className }),
+           
+            body: formData,
           });
           if (response.ok) {
            Show.hideLoading();
-           Show.Success("Teacher Assigned Successfully")
+           Show.Success("Slides Uploaded Successfully")
             window.location.reload()
             
           } else {
@@ -176,7 +230,7 @@ const StudentInfo = () => {
     }}>
 
 {
-   specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(<>
+   specificRole==="SuperiorUser"||specificRole==="HeadTeacher"||specificRole==="Teacher"?(<>
    
    <AboutHeader2
      background={colors.red}
@@ -187,7 +241,7 @@ const StudentInfo = () => {
         setDropper(!dropper)
      }}
      >
-       {dropper?"Minimize":"Add A Subject Teacher"}
+       {dropper?"Minimize":"Upload A Slide"}
      </AboutHeader2> <br/>
      <AnimateHeight height={dropper ? "auto" : 0}>
 
@@ -201,7 +255,49 @@ const StudentInfo = () => {
 
     <FeesRow>
 <FeesIcons>
-<LuSchool color={colors.icon}/>
+<BsCalendar2Date color={colors.icon}/>
+</FeesIcons>
+       <PaySelector
+    background={colors.darkBlue}
+    color="white"
+    border={colors.darkBlue}
+    onChange={(e) => sa(e.target.value)}
+    required
+    >
+        <option>Academic Year</option>
+   {AcaYear.length > 0 &&
+    AcaYear.map((data) => (
+      <option key={data.id}>{data.academicYear}</option>
+    ))}
+
+    </PaySelector>
+</FeesRow>
+
+
+<FeesRow>
+<FeesIcons>
+<HiOutlineAcademicCap color={colors.icon}/>
+</FeesIcons>
+       <PaySelector
+    background={colors.darkBlue}
+    color="white"
+    border={colors.darkBlue}
+    onChange={(e) => sb(e.target.value)}
+    required
+    >
+        <option>Academic Term</option>
+   {AcaTerm.length > 0 &&
+    AcaTerm.map((data) => (
+      <option key={data.id}>{data.academicTerm}</option>
+    ))}
+
+    </PaySelector>
+</FeesRow>
+
+
+    <FeesRow>
+<FeesIcons>
+<BiBookReader color={colors.icon}/>
 </FeesIcons>
        <PaySelector
     background={colors.darkBlue}
@@ -222,13 +318,13 @@ const StudentInfo = () => {
 
     <FeesRow>
 <FeesIcons>
-<BsMortarboard color={colors.icon}/>
+<BsBook color={colors.icon}/>
 </FeesIcons>
        <PaySelector
     background={colors.darkBlue}
     color="white"
     border={colors.darkBlue}
-    onChange={(e) => sa(e.target.value)}
+    onChange={(e) => sd(e.target.value)}
     required
     >
         <option>Select A Subject</option>
@@ -240,26 +336,38 @@ const StudentInfo = () => {
     </PaySelector>
 </FeesRow>
  
+<FeesRow>
+
+<FeesIcons >
+<MdTitle  color={colors.icon}/>
+</FeesIcons>
+  
+    <FormInputStudent4
+    type="text"
+    //value={theStudent?.studentId}
+    placeholder="Title"
+    onChange={(e) => se(e.target.value)}
+   required
+    />
+
+    </FeesRow>
 
 <FeesRow>
 <FeesIcons>
 <GiTeacher color={colors.icon}/>
 </FeesIcons>
-       <PaySelector
-    background={colors.darkBlue}
-    color="white"
-    border={colors.darkBlue}
-    onChange={(e) => sb(e.target.value)}
-    required
-    >
-        <option>Select A Teacher</option>
-   {theStudents.length > 0 &&
-    theStudents.map((data) => (
-      <option key={data.id} value={data.staffID}>{data.title}{" "}{data.firstName}{" "} {data.otherName}{" "}{data.lastName}</option>
-    ))}
 
-    </PaySelector>
+<FormInputStudent6
+        type="file"
+        required
+        placeholder=""
+        onChange={(e) => sf(e.target.files[0])}
+       
+        />
+
+
 </FeesRow>
+
 
 
 
@@ -268,7 +376,7 @@ const StudentInfo = () => {
         color="white"
         border={colors.maingreen}
         
-        type="submit">ADD 
+        type="submit">Upload
         </AdmitButton2>
 
 
@@ -313,13 +421,15 @@ const StudentInfo = () => {
 <NewStudentListCard2 >
 
 <CardTextHeader>S/N</CardTextHeader>
-<CardTextHeader>Subject Name</CardTextHeader>
-<CardTextHeader>Class Name</CardTextHeader>
-<CardTextHeader>Staff ID</CardTextHeader>
-<CardTextHeader>Teacher Name</CardTextHeader>
-<CardTextHeader>Date Assigned</CardTextHeader>
+<CardTextHeader>Subject</CardTextHeader>
+<CardTextHeader>Slide</CardTextHeader>
+<CardTextHeader>Title</CardTextHeader>
+<CardTextHeader>Class</CardTextHeader>
+<CardTextHeader>Academic Year</CardTextHeader>
+<CardTextHeader>Academic Term</CardTextHeader>
+<CardTextHeader>Date Uploaded</CardTextHeader>
 {
-  specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(<>
+  specificRole==="SuperiorUser"||specificRole==="HeadTeacher"||specificRole==="Teacher"?(<>
   <CardTextHeader>Action</CardTextHeader>
   </>):(<></>)
 }
@@ -331,7 +441,7 @@ const StudentInfo = () => {
 {searchResult && (
           <StudentListResult>
             {studentList.length > 0 &&
-              studentList.map((data, index) => <SubjectTeachersCard data={data} key={index} index={index}/>)}
+              studentList.map((data, index) => <UploadCard data={data} key={index} index={index}/>)}
           </StudentListResult>
         )}
 
@@ -355,7 +465,7 @@ const StudentInfo = () => {
   <StudentListResult>
 {subj.length > 0 &&
     subj.map((data,index) => (
-      <SubjectTeachersCard data={data} key={index} index={index} />
+      <UploadCard data={data} key={index} index={index} />
     ))}
 
 </StudentListResult>

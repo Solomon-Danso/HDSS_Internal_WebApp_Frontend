@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import {  CardText,  NewStudentListCard2,  SelectStageButton,} from '../../../Designs/Styles/Profile'
+import {  CardImage, CardImage2, CardText,  NewStudentListCard,  NewStudentListCard2,  SelectStageButton,} from '../../../Designs/Styles/Profile'
 import { apiServer } from '../../../Constants /Endpoints'
 import { colors } from '../../../Designs/Colors'
-
+import pdf from '../../../Designs/Images/pdf.png'
 import { AES, enc } from 'crypto-js';
 
 import "../../../Designs/Card/DuesTable.scss";
@@ -15,7 +15,7 @@ import { Show } from '../../../Constants /Alerts'
 
 
 
-export const SubjectTeachersCard = ({ data,index }) => {
+export const UploadCard = ({ data,index }) => {
    
   const [specificRole, setspecificRole] = useState("");
 
@@ -40,8 +40,8 @@ export const SubjectTeachersCard = ({ data,index }) => {
 
 
       const deleteDetails = async (event) => {
-        Show.showLoading("Removing Teacher ")
-        const URL=`api/LMS/deleteTeacherFromClass?Id=${data.id}&SID=${userInfo.staffID}`
+        Show.showLoading("Removing Slide ")
+        const URL=`api/LMS/deleteSlides?Id=${data.id}&SID=${userInfo.staffID}`
       
         try {
           const response = await fetch(apiServer + URL, {
@@ -50,12 +50,12 @@ export const SubjectTeachersCard = ({ data,index }) => {
           if (response.ok) {
 
             Show.hideLoading()
-            Show.Success("Teacher removed successfully");
+            Show.Success("Slide removed successfully");
             window.location.reload();
 
             
           } else {
-            Show.Attention("Teacher not found");
+            Show.Attention("Slide not found");
           }
         } catch (err) {
           Show.Attention("An error has occurred");
@@ -70,17 +70,21 @@ export const SubjectTeachersCard = ({ data,index }) => {
 
   return (
     <>
-    <NewStudentListCard2 >
+    <NewStudentListCard >
     <CardText>{index+1}</CardText>
      <CardText>{data?.subjectName}</CardText>
+     <CardImage2 src={pdf} onClick={()=>{
+        window.open(apiServer+data.slidePath)
+     }}/>
+     <CardText>{data?.title}</CardText>
      <CardText>{data?.className}</CardText>
-     <CardText>{data?.staffID}</CardText>
-     <CardText>{data?.staffName}</CardText>
-     <CardText>{data?.dateAssigned}</CardText>
+     <CardText>{data?.academicYear}</CardText>
+     <CardText>{data?.academicTerm}</CardText>
+     <CardText>{data?.dateAdded}</CardText>
     
 
 {
-  specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(<>
+  specificRole==="SuperiorUser"||specificRole==="HeadTeacher"||specificRole==="Teacher"?(<>
   
   <SelectStageButton
      background={colors.darkBlue}
@@ -99,7 +103,9 @@ export const SubjectTeachersCard = ({ data,index }) => {
 
 
 
-     </NewStudentListCard2 >
+     </NewStudentListCard >
+
+
 
 
 

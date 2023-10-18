@@ -19,6 +19,9 @@ export const CountParents = "api/Admin/AllParentsCount"
 export const SearchStudent = "api/Admin/Search?searchTerm="
 export const SearchClass = "api/Admin/SearchClass?searchTerm="
 export const SearchSubject = "api/Admin/SearchSubject?searchTerm="
+export const SearchSlides = "api/Admin/SearchSlides?searchTerm="
+
+
 
 export const SearchTeacher = "api/Admin/SearchTeacher?searchTerm="
 export const ViewOneStudent = "api/students/getSpecificUser?StudentId=";

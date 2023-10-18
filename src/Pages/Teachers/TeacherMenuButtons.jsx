@@ -66,6 +66,12 @@ CIS
     <MenuButtonOptionLink onClick={() => { navigate("/teacher/class") }}>Class List</MenuButtonOptionLink>
   </InnerDroplist>
 
+  <InnerDroplist title="Subjects">
+    <MenuButtonOptionLink onClick={() => { navigate("/teacher/subjects") }}>Subject List </MenuButtonOptionLink>
+    <MenuButtonOptionLink onClick={() => { navigate("/teacher/subjectteacher") }}>Subject Teachers</MenuButtonOptionLink>
+    
+      </InnerDroplist>
+
     <InnerDroplist title="Discussions">
     <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>View Discussions</MenuButtonOptionLink>
     <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Teacher's Chat</MenuButtonOptionLink>
@@ -76,7 +82,7 @@ CIS
   
 
       <InnerDroplist title="Uploads">
-      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Slides</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadslides") }}>Slides</MenuButtonOptionLink>
       <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Audio</MenuButtonOptionLink>
       <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Video</MenuButtonOptionLink>
       <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Pictures</MenuButtonOptionLink>

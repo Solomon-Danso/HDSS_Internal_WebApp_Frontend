@@ -17,6 +17,29 @@ import StudentDetails from '../../Portals/Admin/StudentDetails';
 
 import Class from "../../Portals/Admin/LMS/Class"
 import AddSubject  from "../../Portals/Admin/LMS/AddSubject"
+import SubjectTeacher from "../../Portals/Admin/LMS/SubjectTeachers"
+import UploadSlides from "../../Portals/Admin/LMS/UploadSlides"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -187,6 +210,8 @@ const [sysDate, setSysDate] = useState("")
               <Route path="studentsDetails/:studentId" element={<StudentDetails />} />
               <Route path="class" element={<Class />} /> 
               <Route path="subjects" element={<AddSubject />} /> 
+              <Route path="subjectteacher" element={<SubjectTeacher />} />
+              <Route path="uploadslides" element={<UploadSlides />} />
               
 
              </>

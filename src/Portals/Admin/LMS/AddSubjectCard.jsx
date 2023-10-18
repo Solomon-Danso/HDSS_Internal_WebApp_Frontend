@@ -25,10 +25,14 @@ import { Show } from '../../../Constants /Alerts'
 export const AddSubjectCard = ({ data,index }) => {
    
 
-      const [className,sa] = useState("")
-      const [classCode,sb] = useState("")
-      const [campus,sc] = useState("")
-      const [classTeacher, sd] = useState("");
+  const [specificRole, setspecificRole] = useState("");
+
+
+  useEffect(() => {
+    const spRole =  AES.decrypt(sessionStorage.getItem("SpecificRole"), '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK').toString(enc.Utf8);
+    setspecificRole(spRole);
+    
+  }, []);
 
         const [userInfo, setUserInfo] = useState({});
 
@@ -78,7 +82,11 @@ export const AddSubjectCard = ({ data,index }) => {
      <CardText2>{data?.subjectName}</CardText2>
      <CardText2>{data?.dateAdded}</CardText2>
     
-     <SelectStageButton
+{
+specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(<>
+
+
+<SelectStageButton
      background={colors.darkBlue}
      color="white"
      border={colors.darkBlue}
@@ -88,6 +96,9 @@ export const AddSubjectCard = ({ data,index }) => {
      >
        {"Delete"}
      </SelectStageButton>
+</>):(<></>)
+}
+
 
 
      </NewStudentListCard2 >

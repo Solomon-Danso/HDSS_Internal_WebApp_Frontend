@@ -7,7 +7,7 @@ import { Show } from '../../../Constants /Alerts'
 import { colors } from '../../../Designs/Colors'
 
 import {HiIdentification } from "react-icons/hi";
-import {BsMortarboard} from "react-icons/bs";
+import {BsBook, BsMortarboard} from "react-icons/bs";
 import { AES, enc } from 'crypto-js';
 import {FaGooglePay } from "react-icons/fa";
 import AnimateHeight from 'react-animate-height'
@@ -37,7 +37,7 @@ const StudentInfo = () => {
      
       useEffect(() => {
         if(userInfo.staffID){
-            const URL=`api/LMS/viewAllSubject?ID=${userInfo.staffID}`
+            const URL=`api/LMS/viewAllSubject`
 
             fetch(apiServer + URL)
               .then(response => response.json()) // Parse the response as JSON
@@ -47,7 +47,14 @@ const StudentInfo = () => {
       
       }, [userInfo.staffID]);
      
-  
+      const [specificRole, setspecificRole] = useState("");
+
+
+    useEffect(() => {
+      const spRole =  AES.decrypt(sessionStorage.getItem("SpecificRole"), '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK').toString(enc.Utf8);
+      setspecificRole(spRole);
+      
+    }, []);
 
       const studentDetails = async (event) => {
         event.preventDefault();
@@ -84,7 +91,10 @@ const StudentInfo = () => {
         justifyContent: 'space-between',
     }}>
 
-<AboutHeader2
+{
+  specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(<>
+  
+  <AboutHeader2
      background={colors.red}
      color="white"
      border={colors.darkBlue}
@@ -107,7 +117,7 @@ const StudentInfo = () => {
         <FeesRow>
 
     <FeesIcons >
-    <HiIdentification  color={colors.icon}/>
+    <BsBook  color={colors.icon}/>
     </FeesIcons>
       
         <FormInputStudent4
@@ -146,6 +156,10 @@ const StudentInfo = () => {
         </StudCenter>
 
      </AnimateHeight>
+  </>):(<></>)
+}
+
+
 
 <StudentInfoCard2 >
 
@@ -155,7 +169,13 @@ const StudentInfo = () => {
 <CardTextHeader2>S/N</CardTextHeader2>
 <CardTextHeader2>Subject</CardTextHeader2>
 <CardTextHeader2>Date Added</CardTextHeader2>
-<CardTextHeader2>Action</CardTextHeader2>
+{
+  specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(<>
+  <CardTextHeader2>Action</CardTextHeader2>
+  </>):(<></>)
+}
+
+
 
 </NewStudentListCard2>
 

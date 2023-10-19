@@ -434,11 +434,12 @@ const [y,sy] = useState("")
         
      </div>
      <div>
-        <FormLable>Upload Certificate (.pdf format only)</FormLable>
+        <FormLable>Upload Certificate </FormLable>
         <FormInputStudent
         type="file"
         required
         placeholder=""
+        accept=".pdf"
         onChange={(e) => so(e.target.files[0])}
        
         />

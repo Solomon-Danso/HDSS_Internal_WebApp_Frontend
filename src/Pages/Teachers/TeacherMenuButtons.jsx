@@ -83,12 +83,11 @@ CIS
 
       <InnerDroplist title="Uploads">
       <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadslides") }}>Slides</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Audio</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Video</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Pictures</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Syllabus</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Calendar</MenuButtonOptionLink>
-
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadAudio") }}>Audio</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadVideo") }}>Video</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadPicture") }}>Pictures</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadBook") }}>Books</MenuButtonOptionLink>
+     
       </InnerDroplist>
 
 

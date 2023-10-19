@@ -19,10 +19,10 @@ import Class from "../../Portals/Admin/LMS/Class"
 import AddSubject  from "../../Portals/Admin/LMS/AddSubject"
 import SubjectTeacher from "../../Portals/Admin/LMS/SubjectTeachers"
 import UploadSlides from "../../Portals/Admin/LMS/UploadSlides"
-
-
-
-
+import UploadVideo from "../../Portals/Admin/LMS/UploadVideo"
+import UploadAudio from "../../Portals/Admin/LMS/UploadAudio"
+import UploadPicture from "../../Portals/Admin/LMS/UploadPicture"
+import UploadBook from "../../Portals/Admin/LMS/UploadBook"
 
 
 
@@ -212,6 +212,11 @@ const [sysDate, setSysDate] = useState("")
               <Route path="subjects" element={<AddSubject />} /> 
               <Route path="subjectteacher" element={<SubjectTeacher />} />
               <Route path="uploadslides" element={<UploadSlides />} />
+              <Route path="uploadVideo" element={<UploadVideo />} />
+              <Route path="uploadAudio" element={<UploadAudio />} /> 
+              <Route path="uploadPicture" element={<UploadPicture />} />
+              <Route path="uploadBook" element={<UploadBook />} />
+
               
 
              </>

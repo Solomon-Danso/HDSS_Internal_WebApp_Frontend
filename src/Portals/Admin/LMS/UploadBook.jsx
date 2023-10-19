@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { AboutHeader, AboutHeader2, AdmitButton2, AdmitStudentCard2, AdmitStudentCard3, CardTextHeader, FeesIcons, FeesRow, FormInputSearch, FormInputStudent3, FormInputStudent4, FormInputStudent6, FormLable, FormLoaders, NewStudentListCard2, PaySelector, SelectForStudent, SelectStageButton, StudCenter, StudRight, StudentInfoCard, StudentInfoCard2, StudentListResult } from '../../../Designs/Styles/Profile'
-import  {UploadCard}  from './UploadCard'
+import  {UploadBookCard}  from './UploadBookCard'
 
 import {  SearchSlides, SearchSubject, SubTeacher,ViewClasses,ViewStudents, ViewTeachers, apiServer } from '../../../Constants /Endpoints'
 import { Show } from '../../../Constants /Alerts'
@@ -15,7 +15,9 @@ import {LuSchool } from "react-icons/lu";
 import {HiOutlineAcademicCap } from "react-icons/hi";
 import { MdTitle } from 'react-icons/md'
 import { BiBookReader } from 'react-icons/bi'
-
+import { RiVideoUploadLine } from 'react-icons/ri'
+import { AiOutlineBook } from 'react-icons/ai'
+import { IoBookSharp } from 'react-icons/io5'
 
 const StudentInfo = () => {
 
@@ -50,7 +52,7 @@ const StudentInfo = () => {
           }
     
           //Show.showLoading('Processing Data');
-          const URL = `api/Admin/SearchSlides?searchTerm=${searchTerm}&StaffID=${userInfo.staffID}`
+          const URL = `api/Admin/SearchBook?searchTerm=${searchTerm}&StaffID=${userInfo.staffID}`
           try {
             const response = await fetch(apiServer + URL, {
               method: 'POST',
@@ -116,7 +118,7 @@ const StudentInfo = () => {
       const [subj, setSubJ] = useState([])
       useEffect(() => {
         if(userInfo.staffID){
-          const URL=`api/LMS/ViewAllSlidesTeachers?ID=${userInfo.staffID}`
+          const URL=`api/LMS/ViewAllBookTeachers?ID=${userInfo.staffID}`
 
             fetch(apiServer + URL)
               .then(response => response.json()) // Parse the response as JSON
@@ -189,7 +191,7 @@ useEffect(() => {
         event.preventDefault();
     
        Show.showLoading("Processing Data");
-    const URL=`api/LMS/UploadSlide?ID=${userInfo.staffID}`
+    const URL=`api/LMS/UploadBook?ID=${userInfo.staffID}`
    
 
         try {
@@ -210,7 +212,7 @@ useEffect(() => {
           });
           if (response.ok) {
            Show.hideLoading();
-           Show.Success("Slides Uploaded Successfully")
+           Show.Success("Book Uploaded Successfully")
             window.location.reload()
             
           } else {
@@ -241,7 +243,7 @@ useEffect(() => {
         setDropper(!dropper)
      }}
      >
-       {dropper?"Minimize":"Upload A Slide"}
+       {dropper?"Minimize":"Upload A Book"}
      </AboutHeader2> <br/>
      <AnimateHeight height={dropper ? "auto" : 0}>
 
@@ -354,14 +356,14 @@ useEffect(() => {
 
 <FeesRow>
 <FeesIcons>
-<GiTeacher color={colors.icon}/>
+<IoBookSharp color={colors.icon}/>
 </FeesIcons>
 
 <FormInputStudent6
         type="file"
         required
         placeholder="Select only PDF files"
-        accept=".pdf"
+        accept=".pdf, .docs, .txt, .md, .docx "
         onChange={(e) => sf(e.target.files[0])}
        
         />
@@ -412,7 +414,7 @@ useEffect(() => {
             //background={colors.darkBlue}
         
             border={colors.darkBlue}
-            placeholder="Live Search Using Class, Subject, Class Teacher, Staff ID, Date Assigned"
+            placeholder="Live Search Using Class, Subject, Title, Staff ID, Date, Year, Term.... "
             onChange={(e) => setSearchTerm(e.target.value)}
             style={{ '::placeholder': { color: 'white' } }}
           />
@@ -423,7 +425,7 @@ useEffect(() => {
 
 <CardTextHeader>S/N</CardTextHeader>
 <CardTextHeader>Subject</CardTextHeader>
-<CardTextHeader>Slide</CardTextHeader>
+<CardTextHeader>Book</CardTextHeader>
 <CardTextHeader>Title</CardTextHeader>
 <CardTextHeader>Class</CardTextHeader>
 <CardTextHeader>Academic Year</CardTextHeader>
@@ -442,7 +444,7 @@ useEffect(() => {
 {searchResult && (
           <StudentListResult>
             {studentList.length > 0 &&
-              studentList.map((data, index) => <UploadCard data={data} key={index} index={index}/>)}
+              studentList.map((data, index) => <UploadBookCard data={data} key={index} index={index}/>)}
           </StudentListResult>
         )}
 
@@ -466,7 +468,7 @@ useEffect(() => {
   <StudentListResult>
 {subj.length > 0 &&
     subj.map((data,index) => (
-      <UploadCard data={data} key={index} index={index} />
+      <UploadBookCard data={data} key={index} index={index} />
     ))}
 
 </StudentListResult>

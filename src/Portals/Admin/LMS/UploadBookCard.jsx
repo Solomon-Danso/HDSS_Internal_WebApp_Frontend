@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {  CardImage, CardImage2, CardText,  NewStudentListCard,  NewStudentListCard2,  SelectStageButton,} from '../../../Designs/Styles/Profile'
 import { apiServer } from '../../../Constants /Endpoints'
 import { colors } from '../../../Designs/Colors'
-import pdf from '../../../Designs/Images/pdf.png'
+import pdf from '../../../Designs/Images/book.png'
 import { AES, enc } from 'crypto-js';
 
 import "../../../Designs/Card/DuesTable.scss";
@@ -15,7 +15,7 @@ import { Show } from '../../../Constants /Alerts'
 
 
 
-export const UploadCard = ({ data,index }) => {
+export const UploadBookCard = ({ data,index }) => {
    
   const [specificRole, setspecificRole] = useState("");
 
@@ -40,8 +40,8 @@ export const UploadCard = ({ data,index }) => {
 
 
       const deleteDetails = async (event) => {
-        Show.showLoading("Removing Slide ")
-        const URL=`api/LMS/deleteSlides?Id=${data.id}&SID=${userInfo.staffID}`
+        Show.showLoading("Removing Book ")
+        const URL=`api/LMS/deleteBooks?Id=${data.id}&SID=${userInfo.staffID}`
       
         try {
           const response = await fetch(apiServer + URL, {
@@ -50,12 +50,12 @@ export const UploadCard = ({ data,index }) => {
           if (response.ok) {
 
             Show.hideLoading()
-            Show.Success("Slide removed successfully");
+            Show.Success("Book removed successfully");
             window.location.reload();
 
             
           } else {
-            Show.Attention("Slide not found");
+            Show.Attention("Book not found");
           }
         } catch (err) {
           Show.Attention("An error has occurred");
@@ -73,11 +73,10 @@ export const UploadCard = ({ data,index }) => {
     <NewStudentListCard >
     <CardText>{index+1}</CardText>
      <CardText>{data?.subjectName}</CardText>
-
      <a href={apiServer + data.slidePath} target="_blank">
-     <CardImage2 src={pdf} />
-     </a>
-   
+    <CardImage2 src={pdf} />
+    </a>
+
      <CardText>{data?.title}</CardText>
      <CardText>{data?.className}</CardText>
      <CardText>{data?.academicYear}</CardText>

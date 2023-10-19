@@ -27,10 +27,11 @@ import DeleteTeacher from "../../Portals/Admin/DeleteTeacher"
 import Class from "../../Portals/Admin/LMS/Class"
 import AddSubject  from "../../Portals/Admin/LMS/AddSubject"
 import SubjectTeacher from "../../Portals/Admin/LMS/SubjectTeachers"
-
-
-
-
+import ViewSlide from "../../Portals/Admin/LMS/AdminViewSlides"
+import ViewAudio from "../../Portals/Admin/LMS/AdminViewAudios"
+import ViewVideo from "../../Portals/Admin/LMS/AdminViewVideos"
+import ViewPicture from "../../Portals/Admin/LMS/AdminViewPicture"
+import ViewBooks from "../../Portals/Admin/LMS/AdminViewBooks"
 
 
 
@@ -225,7 +226,7 @@ const [sysDate, setSysDate] = useState("")
           
           
 {
-             specificRole==="SuperiorUser"||specificRole==="HeadTeacher"||specificRole==="Teacher" ? (
+             specificRole==="SuperiorUser"||specificRole==="HeadTeacher"? (
              <>
               <Route path="students" element={<Students />} /> 
               <Route path="studentsInfo" element={<StudentInfo />} />
@@ -233,6 +234,11 @@ const [sysDate, setSysDate] = useState("")
               <Route path="class" element={<Class />} /> 
               <Route path="subjects" element={<AddSubject />} />
               <Route path="subjectteacher" element={<SubjectTeacher />} /> 
+              <Route path="viewSlides" element={<ViewSlide />} />
+              <Route path="viewAudios" element={<ViewAudio />} />
+              <Route path="viewVideos" element={<ViewVideo />} />
+              <Route path="viewPictures" element={<ViewPicture />} />
+              <Route path="viewBooks" element={<ViewBooks />} />
               
 
              </>

@@ -166,35 +166,18 @@ CIS
     
       </InnerDroplist>
 
-      <InnerDroplist title="Uploads">
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Slides</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Audio</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Video</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Pictures</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Syllabus</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Calendar</MenuButtonOptionLink>
 
+
+      <InnerDroplist title="Resources">
+      <MenuButtonOptionLink onClick={() => { navigate("/admin/viewSlides") }}>Slides</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/admin/viewAudios") }}>Audio</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/admin/viewVideos") }}>Video</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/admin/viewPictures") }}>Pictures</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/admin/viewBooks") }}>Books</MenuButtonOptionLink>
+      
       </InnerDroplist>
 
-      <InnerDroplist title="View As Student">
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Slides</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Audio</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Video</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Pictures</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Syllabus</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Calendar</MenuButtonOptionLink>
-
-      </InnerDroplist>
-
-      <InnerDroplist title="View As Teacher">
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Slides</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Audio</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Video</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Pictures</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Syllabus</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Calendar</MenuButtonOptionLink>
-
-      </InnerDroplist>
+     
 
       <InnerDroplist title="Annoucements">
         

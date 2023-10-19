@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import { EventBanner, EventCardList, EventDate, EventDateRow, EventDateRow2, EventDateTitleEnd, EventDateTitleStart, EventTitle, SelectStageButton, SendButton } from '../../Designs/Styles/Profile'
 import { useNavigate } from 'react-router-dom'
 import { colors } from '../../Designs/Colors';
@@ -7,6 +7,7 @@ import { DeleteEvents, UpdateEvents, apiServer } from '../../Constants /Endpoint
 import AnimateHeight from 'react-animate-height';
 import EventForm from './EventForm';
 import { FormInputEvent } from '../../Designs/Styles/Styles';
+import { AES,enc } from 'crypto-js';
 
 
 const formatDateTime = (dateTime) => {
@@ -50,6 +51,14 @@ const EventLiist = ({ event }) => {
   
   }
 
+  const [specificRole, setspecificRole] = useState("");
+  useEffect(() => {
+    const spRole =  AES.decrypt(sessionStorage.getItem("SpecificRole"), '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK').toString(enc.Utf8);
+    setspecificRole(spRole);
+    
+  }, []);
+
+
 
   return (
     <EventCardList>
@@ -75,17 +84,23 @@ const EventLiist = ({ event }) => {
 
       </EventDateRow>
 
-      <EventDateRow2>
+{
+   specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(<>
+       <EventDateRow2>
 
-      <SelectStageButton
-      background={colors.darkBlue}
-      color="white"
-      border={colors.darkBlue}
-      type="submit"
-      onClick={() => handleDelete(event)} 
-      >Delete</SelectStageButton>
+<SelectStageButton
+background={colors.darkBlue}
+color="white"
+border={colors.darkBlue}
+type="submit"
+onClick={() => handleDelete(event)} 
+>Delete</SelectStageButton>
 
-      </EventDateRow2>
+</EventDateRow2>  
+   </>):(<></>)
+}
+
+
 
 
     </EventCardList>

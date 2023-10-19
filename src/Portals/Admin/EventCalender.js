@@ -7,6 +7,7 @@ import EventForm from './EventForm';
 import EventListItem from './EventLiist';
 import { AddEvents, Events, UpdateEvents, apiServer } from '../../Constants /Endpoints';
 import { EventCardList, EventCardListHome, HomeBanner, HomeCardText, HomeCardTextEvent } from '../../Designs/Styles/Profile';
+import { AES,enc } from 'crypto-js';
 
 
 const EventCalendar = () => {
@@ -42,24 +43,25 @@ const EventCalendar = () => {
   };
 
 
-  const handleDeleteEvent = (eventId) => {
-    axios.delete(`/api/events/${eventId}`)
-      .then(() => {
-        const updatedEvents = events.filter(event => event.id !== eventId);
-        setEvents(updatedEvents);
-      })
-      .catch(error => {
-        console.error('Error deleting event:', error);
-      });
-  };
+  const [specificRole, setspecificRole] = useState("");
+  useEffect(() => {
+    const spRole =  AES.decrypt(sessionStorage.getItem("SpecificRole"), '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK').toString(enc.Utf8);
+    setspecificRole(spRole);
+    
+  }, []);
 
   return (
     <div className="event-calendar">
       <h2>Event Calendar</h2>
-      <div className="event-form">
+      {
+        specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(<>
+         <div className="event-form">
         <h3>Create Event</h3>
         <EventForm event={selectedEvent} onSubmit={handleCreateEvent} />
       </div>
+        </>):(<></>)
+      }
+     
 
 <HomeBanner>
    

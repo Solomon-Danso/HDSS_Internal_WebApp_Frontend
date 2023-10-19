@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { AboutHeader, AboutHeader2, AdmitButton2, AdmitStudentCard2, AdmitStudentCard3, CardTextHeader, FeesIcons, FeesRow, FormInputSearch, FormInputStudent3, FormInputStudent4, FormInputStudent6, FormLable, FormLoaders, NewStudentListCard2, PaySelector, SelectForStudent, SelectStageButton, StudCenter, StudRight, StudentInfoCard, StudentInfoCard2, StudentListResult } from '../../../Designs/Styles/Profile'
-import  {UploadCard}  from './UploadCard'
+import  {UploadAssignmentCard}  from './UploadAssignmentCard'
 
 import {  SearchSlides, SearchSubject, SubTeacher,ViewClasses,ViewStudents, ViewTeachers, apiServer } from '../../../Constants /Endpoints'
 import { Show } from '../../../Constants /Alerts'
@@ -10,11 +10,12 @@ import {BsBook, BsCalendar2Date, BsMortarboard} from "react-icons/bs";
 import { AES, enc } from 'crypto-js';
 import {FaGooglePay } from "react-icons/fa";
 import AnimateHeight from 'react-animate-height'
-import {GiTeacher } from "react-icons/gi";
+import {GiTeacher, GiTimeBomb } from "react-icons/gi";
 import {LuSchool } from "react-icons/lu";
 import {HiOutlineAcademicCap } from "react-icons/hi";
 import { MdTitle } from 'react-icons/md'
 import { BiBookReader } from 'react-icons/bi'
+import { FormInputEvent, FormInputEvent2 } from '../../../Designs/Styles/Styles'
 
 
 const StudentInfo = () => {
@@ -50,7 +51,7 @@ const StudentInfo = () => {
           }
     
           //Show.showLoading('Processing Data');
-          const URL = `api/Admin/SearchSlides?searchTerm=${searchTerm}&StaffID=${userInfo.staffID}`
+          const URL = `api/Admin/SearchAssignments?searchTerm=${searchTerm}&StaffID=${userInfo.staffID}`
           try {
             const response = await fetch(apiServer + URL, {
               method: 'POST',
@@ -116,7 +117,7 @@ const StudentInfo = () => {
       const [subj, setSubJ] = useState([])
       useEffect(() => {
         if(userInfo.staffID){
-          const URL=`api/LMS/ViewAllSlidesTeachers?ID=${userInfo.staffID}`
+          const URL=`api/LMS/ViewAllAssignmentTeachers?ID=${userInfo.staffID}`
 
             fetch(apiServer + URL)
               .then(response => response.json()) // Parse the response as JSON
@@ -184,13 +185,13 @@ useEffect(() => {
  const [d,sd] = useState("")
       const [e,se] = useState("")
       const [f, sf] = useState("")
-
+      const [g, sg] = useState("")
 
       const studentDetails = async (event) => {
         event.preventDefault();
     
        Show.showLoading("Processing Data");
-    const URL=`api/LMS/UploadSlide?ID=${userInfo.staffID}`
+    const URL=`api/LMS/UploadAssignment?ID=${userInfo.staffID}`
    
 
         try {
@@ -203,22 +204,24 @@ useEffect(() => {
       
            formData.append("Title",e)
            formData.append("Slide",f)
+           formData.append("ExpireDate",g)
       
           const response = await fetch(apiServer + URL, {
             method: "POST",
            
             body: formData,
           });
+          const info = await response.text();
           if (response.ok) {
            Show.hideLoading();
-           Show.Success("Slides Uploaded Successfully")
+           Show.Success(info)
             window.location.reload()
             
           } else {
-            Show.Attention("All fields are required");
+            Show.Attention(info);
           }
         } catch (err) {
-          Show.Attention("An error has occurred");
+          Show.Attention(err);
         }
       };
       const [dropper, setDropper] = useState(false)
@@ -242,7 +245,7 @@ useEffect(() => {
         setDropper(!dropper)
      }}
      >
-       {dropper?"Minimize":"Upload A Slide"}
+       {dropper?"Minimize":"Upload An Assignment"}
      </AboutHeader2> <br/>
      <AnimateHeight height={dropper ? "auto" : 0}>
 
@@ -353,6 +356,25 @@ useEffect(() => {
 
     </FeesRow>
 
+
+    <FeesRow>
+
+<FeesIcons >
+<GiTimeBomb  color={colors.icon}/>
+</FeesIcons>
+  
+<FormInputEvent2
+        type="datetime-local"
+        required
+       
+        onChange={(e) => sg(e.target.value)}
+       
+        />
+
+    </FeesRow>
+
+  
+
 <FeesRow>
 <FeesIcons>
 <GiTeacher color={colors.icon}/>
@@ -429,6 +451,7 @@ useEffect(() => {
 <CardTextHeader>Class</CardTextHeader>
 <CardTextHeader>Academic Year</CardTextHeader>
 <CardTextHeader>Academic Term</CardTextHeader>
+<CardTextHeader>Deadline</CardTextHeader>
 <CardTextHeader>Date Uploaded</CardTextHeader>
 {
   specificRole==="SuperiorUser"||specificRole==="HeadTeacher"||specificRole==="Teacher"?(<>
@@ -443,7 +466,7 @@ useEffect(() => {
 {searchResult && (
           <StudentListResult>
             {studentList.length > 0 &&
-              studentList.map((data, index) => <UploadCard data={data} key={index} index={index}/>)}
+              studentList.map((data, index) => <UploadAssignmentCard data={data} key={index} index={index}/>)}
           </StudentListResult>
         )}
 
@@ -467,7 +490,7 @@ useEffect(() => {
   <StudentListResult>
 {subj.length > 0 &&
     subj.map((data,index) => (
-      <UploadCard data={data} key={index} index={index} />
+      <UploadAssignmentCard data={data} key={index} index={index} />
     ))}
 
 </StudentListResult>

@@ -92,13 +92,12 @@ CIS
 
 
       <InnerDroplist title="Resources">
-      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Slides</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Audio</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Video</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Pictures</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Syllabus</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Calendar</MenuButtonOptionLink>
-
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/viewSlides") }}>Slides</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/viewAudios") }}>Audio</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/viewVideos") }}>Video</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/viewPictures") }}>Pictures</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/viewBooks") }}>Books</MenuButtonOptionLink>
+     
       </InnerDroplist>
 
       <InnerDroplist title="Annoucements">
@@ -135,18 +134,10 @@ CIS
 
       <InnerDroplist title="Assignments">
 
-      <InnerDroplist title="Teacher" logo=">">
-      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Upload Assignment</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Edit Assignment</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>View Assigments</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>View Solutions</MenuButtonOptionLink>
-      </InnerDroplist>
 
-      <InnerDroplist title="Student" logo=">">
-      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>View Assignment</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Upload Solution</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>View Solutions</MenuButtonOptionLink>
-      </InnerDroplist>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadAssignment") }}>Upload Assignment</MenuButtonOptionLink>
+     
+
 
 
       </InnerDroplist>

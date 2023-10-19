@@ -91,7 +91,7 @@ const handleSubmit = async (event) => {
       }
     } catch (error) {
 
-      Show.Attention(error);
+      Show.Attention("An error has occurred");
     }
 
 }

@@ -280,19 +280,19 @@ type="submit">Load
 
 </StudentInfoCard>
 
-<br/>
 
-<EventCard>  
-  <EventCalendar/>
- 
- </EventCard>
 
    
    </>):(<></>)
 }
 
 
+<br/>
 
+<EventCard>  
+  <EventCalendar/>
+ 
+ </EventCard>
 
 
 

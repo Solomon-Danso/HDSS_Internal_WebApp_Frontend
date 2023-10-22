@@ -412,6 +412,7 @@ useEffect(() => {
         type="file"
         required
         placeholder=""
+        accept=".jpg, .png, .jpeg, .ico"
         onChange={(e) => setProfilePic(e.target.files[0])}
        
         />
@@ -420,7 +421,7 @@ useEffect(() => {
      <div>
         <FormLable>Email</FormLable>
         <FormInputStudent
-        type="emal"
+        type="email"
         
         placeholder=""
         onChange={(e) => setStudentEmail(e.target.value)}

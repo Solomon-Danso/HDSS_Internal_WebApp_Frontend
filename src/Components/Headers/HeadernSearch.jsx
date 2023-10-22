@@ -3,7 +3,7 @@ import { Breaker, HImage, HText, HeaderBanner, HeadernSearchBanner, Icon, Notifi
 import { AiOutlineSearch } from 'react-icons/ai'
 import { IoIosNotificationsOutline } from 'react-icons/io'
 import {BsGlobe} from 'react-icons/bs'
-import {CiSettings,CiGlobe} from 'react-icons/ci'
+import {DashBoardettings,CiGlobe} from 'react-icons/ci'
 import { FormInput } from '../../Designs/Styles/Styles'
 
 const HeadernSearch = ({pic, name, toggle, toggler}) => {
@@ -37,7 +37,7 @@ const HeadernSearch = ({pic, name, toggle, toggler}) => {
                 <Breaker>
                 
         <NotificationIcon>
-      <CiSettings  />
+      <DashBoardettings  />
        <NotificationBadge>15</NotificationBadge>
         </NotificationIcon>
 

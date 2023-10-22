@@ -118,7 +118,7 @@ const Home = () => {
 {
    specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(
     <>
-    <HomeCard onClick={() => { navigate("/admin/test") }}>
+    <HomeCard onClick={() => { navigate("/admin/studentsInfo") }}>
     <HomeCardColumn>
     <HomeIcon color={colors.green}> <HiOutlineUserGroup/> </HomeIcon>
     <HomeCardText>Students</HomeCardText>
@@ -138,7 +138,7 @@ const Home = () => {
 {
    specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(
     <>
-    <HomeCard onClick={() => { navigate("/admin/test") }}>
+    <HomeCard onClick={() => { navigate("/admin/teacherinfo") }}>
     <HomeCardColumn>
     <HomeIcon color={colors.blue}> <BiSolidGroup/> </HomeIcon>
     <HomeCardText>Teachers</HomeCardText>

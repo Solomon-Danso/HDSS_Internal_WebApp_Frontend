@@ -1,5 +1,5 @@
 body {
-  font-family:  "Open Sans", ;
+  font-family: "OpenSans, NotoSans, sans-serif";
   background-color: #26293C;
   color:#ffffff;
   font-size: 1.4rem;
@@ -14,4 +14,12 @@ h3{
 .receipt{
   color: red;
   font-size: 1rem;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "OpenSans, NotoSans, sans-serif";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

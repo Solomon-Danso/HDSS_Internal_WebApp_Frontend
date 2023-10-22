@@ -59,6 +59,15 @@ const Dashboard = () => {
     
   }, []);
 
+  const [SchoolData, SetSchoolData] = useState({})
+  useEffect(()=>{
+    fetch(apiServer+"api/Setup/GetSchoolData")
+    .then(res=>res.json())
+    .then(data=>SetSchoolData(data))
+    .catch(error=>console.error(error))
+    },[])
+    
+
 
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -140,9 +149,9 @@ const [sysDate, setSysDate] = useState("")
 
 <>
 <HomePageBanner>
-  <HomeLogo src={pic1}/>
+<HomeLogo src={apiServer+SchoolData.logo}/>
 
-  <HomeSchoolName> Crosshill International School </HomeSchoolName>
+<HomeSchoolName> {SchoolData.schoolName} </HomeSchoolName>
 
   <HomeGrouper>
     <HomeUserPic src={profilePic} onClick={toggleDropdown}/>

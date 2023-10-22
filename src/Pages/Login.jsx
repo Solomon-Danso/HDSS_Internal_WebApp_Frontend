@@ -49,7 +49,15 @@ const Login = () => {
       });
   }, []);
   
-  
+  const [SchoolData, SetSchoolData] = useState({})
+
+useEffect(()=>{
+fetch(apiServer+"api/Setup/GetSchoolData")
+.then(res=>res.json())
+.then(data=>SetSchoolData(data))
+.catch(error=>console.error(error))
+},[])
+
 
 const handleSubmit = async (event) => {
   event.preventDefault();
@@ -81,6 +89,9 @@ const handleSubmit = async (event) => {
         }
         else if(data.role === "Teacher"){
           navigate("/teacher");
+        }
+        else if(data.role === "Student"){
+          navigate("/student");
         }
         else{
           navigate("/");
@@ -117,9 +128,9 @@ const handleSubmit = async (event) => {
         alt="Introduction"
       />
       <AppName style={{ textAlign: "center", color: "white"}}>
-        CROSSHILL INT. SCH
+      {SchoolData.schoolName}
         <br />
-        <span style={{ fontWeight: "bold" }}>(CIS)</span><br/>
+        <span style={{ fontWeight: "bold" }}>(DashBoard)</span><br/>
       </AppName>
     </LoginDiv>
 
@@ -128,7 +139,7 @@ const handleSubmit = async (event) => {
         <LoginDiv background={"white"} flex={0.45} hide={false}>
       
         <SchoolLogo
-            src={school}
+            src={apiServer+SchoolData.logo}
             alt="icon"
             style={{ width: 65, height: 65 }}
           />

@@ -41,7 +41,7 @@ const MenuButtons = () => {
 
 
 <MenuInfo onClick={() => { navigate("/admin") }}>
-CIS
+DashBoard
 </MenuInfo>
 
 

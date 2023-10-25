@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { DashboardContainer } from '../../Designs/Styles/Styles';
+import { DashboardContainer, HomeLogoM, HomeSchoolNameM } from '../../Designs/Styles/Styles';
 import { AES, enc } from 'crypto-js';
 import Pass from '../../Portals/Admin/Pass';
 import PermissionDenied from '../../Portals/Admin/PermissionDenied';
@@ -29,11 +29,7 @@ import ViewVideo from "../../Portals/Admin/LMS/ViewVideos"
 import ViewPicture from "../../Portals/Admin/LMS/ViewPictures"
 import ViewBook from "../../Portals/Admin/LMS/ViewBooks"
 import UploadAssignment from "../../Portals/Admin/LMS//UploadAssignment"
-
-
-
-
-
+import HeadernSearch from '../HeadernSearch';
 
 
 
@@ -135,10 +131,29 @@ const [sysDate, setSysDate] = useState("")
 
 
 
+  const [isMobile, setIsMobile] = useState(false);
+  const [active, setActive] = useState(null);
+
+  useEffect(() => {
+    setActive(1);
+    window.addEventListener("resize", handleResize);
+  }, []);
+
+  //choose the screen size
+  const handleResize = () => {
+    if (window.innerWidth < 768) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  };
 
 
-
-
+  const [toggle, setToggle] = useState(true)
+  const [search, setSearch] = useState("")
+  const toggler = () => {
+      setToggle((prevState) => !prevState); 
+    };
 
 
 
@@ -149,9 +164,36 @@ const [sysDate, setSysDate] = useState("")
 
 <>
 <HomePageBanner>
-<HomeLogo src={apiServer+SchoolData.logo}/>
 
+{
+  isMobile?(<></>):(<>
+  
+
+  <>
+<HeadernSearch pic={profilePic} name={userInfo.fullName} toggle={toggle} toggler={toggler}/>
+<ProfileNDate  onClick={()=>toggler()}>
 <HomeSchoolName> {SchoolData.schoolName} </HomeSchoolName>
+
+<ProfileDetails>
+
+<AnimateHeight height={dropdownOpen?"auto":0} duration={500}>    
+<ProfileButtonOptionLink onClick={() => { navigate("/admin/viewProfile"); toggleDropdown() }}>View Profile </ProfileButtonOptionLink>
+<ProfileButtonOptionLink onClick={() => { navigate("/admin/test"); toggleDropdown() }}>Edit Profile </ProfileButtonOptionLink>
+<ProfileButtonOptionLink onClick={() => { navigate("/admin/test"); toggleDropdown() }}>Notifications </ProfileButtonOptionLink>
+<ProfileButtonOptionLink onClick={() => { navigate("/admin/test"); toggleDropdown() }}>Chats </ProfileButtonOptionLink>
+
+</AnimateHeight>
+
+ </ProfileDetails>
+
+</ProfileNDate>
+
+    </>
+
+  </>)
+}
+
+
 
   <HomeGrouper>
     <HomeUserPic src={profilePic} onClick={toggleDropdown}/>
@@ -167,6 +209,26 @@ const [sysDate, setSysDate] = useState("")
 
 
 </HomePageBanner>
+
+{
+  isMobile?(<div
+  style={{
+    display:"flex",
+    flexDirection:'row',
+    alignItems: 'center',
+    gap:"1rem"
+  }}
+  >
+  <br/><br/><br/>
+  <HomeLogoM src={apiServer+SchoolData.logo}/>
+  <HomeSchoolNameM> {SchoolData.schoolName} </HomeSchoolNameM>
+
+  </div>):(<>
+  
+  </>)
+}
+
+
 
 <ProfileNDate>
 <DateNTime>

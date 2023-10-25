@@ -21,7 +21,7 @@ export const DashboardContainer = styled.div`
 `;
 
 export const DashboardNav = styled.div`
-  background-color: white;
+  background-color: ${colors.card};
   border-right: 0.5px solid rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -64,7 +64,7 @@ export const DashIconSep = styled.span`
   border-radius: 30px;
 
   background-color: ${({ active }) =>
-    active ? "white" : colors.primary};
+    active ? "white" : colors.card};
   padding: 4px;
 `;
 

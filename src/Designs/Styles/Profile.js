@@ -37,7 +37,7 @@ height:15vh;
 export const HomeBanner = styled.div`
 display:flex;
 flex-direction: row;
-gap:1rem;
+gap:3rem;
 flex-wrap: wrap;
 padding:1rem;
 
@@ -177,9 +177,9 @@ border: 0.5px solid ${colors.white};
 height:auto;
 padding:0.5rem;
 overflow:hidden;
-width: 20vw;
+width: 90%;
 @media (max-width: 1500px){
-  width:80vw;
+ width: 90%;
 }
 
 `;
@@ -198,7 +198,7 @@ backdrop-filter: blur(19.7px);
 height:auto;
 padding:2rem;
 overflow:hidden;
-width: 20vw;
+width: 25vw;
 
 @media (max-width: 1500px){
   width:80vw;
@@ -396,14 +396,14 @@ export const EventTitle = styled.div`
 text-align: center;
 font-size: 1.1rem;
 color: ${colors.lightBlue};
-font-family:Helvetica
+font-family:OpenSans, NotoSans, sans-seri;
 
 `;
 
 export const EventDateRow = styled.div`
 display: flex;
 flex-direction: row;
-gap:1rem;
+justify-content: space-between;
 @media (max-width: 768px){
   width:80vw;
 }
@@ -424,6 +424,7 @@ box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(19.7px);
 -webkit-backdrop-filter: blur(19.7px);
 height:auto;
+width:35%;
 padding:0.5rem;
 overflow:hidden;
 border: 1px solid ${({ border }) => border};
@@ -438,7 +439,7 @@ export const EventDateTitleStart = styled.h3`
 text-align: center;
 font-size: 1rem;
 color: ${colors.green};
-font-family:Helvetica
+font-family:OpenSans, NotoSans, sans-serif;
 
 `;
 

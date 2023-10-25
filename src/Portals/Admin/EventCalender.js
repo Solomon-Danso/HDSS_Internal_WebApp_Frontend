@@ -81,7 +81,7 @@ const EventCalendar = () => {
         events={events}
         startAccessor="start"
         endAccessor="end"
-        style={{ height: "100vh", width: "55vw" }} // Adjust as needed
+        style={{ height: "100vh", width: "50vw" }} // Adjust as needed
       />
     
     </HomeBanner>      

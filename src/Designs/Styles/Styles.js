@@ -26,7 +26,7 @@ export const MainDashboardContainer = styled.div`
 display: flex;
 flex-direction: row;
 gap:1.5rem;
-
+margin-top: 0.5rem;
 `;
 export const MenuContainer = styled.div`
 
@@ -455,12 +455,17 @@ flex-direction: row;
 height: auto;
 background-color:${colors.card};
 align-items: center;
-justify-content: space-between;
+justify-content: space-evenly;
 `;
 export const HomeLogo = styled.img`
 height:7vh;
 width:7vh;
 `;
+export const HomeLogoM = styled.img`
+height:4vh;
+width:4vh;
+`;
+
 export const HomeSchoolName = styled.div`
 font-size: 30px;
 text-align: center;
@@ -469,6 +474,16 @@ color: ${colors.white};
   font-size: 1.5rem;
 }
 `;
+
+export const HomeSchoolNameM = styled.div`
+font-size: 1.2rem;
+text-align: center;
+color: ${colors.white};
+@media (max-width: 450px) {
+  font-size: 1.5rem;
+}
+`;
+
 export const HomeGrouper = styled.div`
 display: flex;
 flex-direction:row;

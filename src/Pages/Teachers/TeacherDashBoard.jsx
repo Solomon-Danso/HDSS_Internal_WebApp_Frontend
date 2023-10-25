@@ -136,7 +136,8 @@ const [sysDate, setSysDate] = useState("")
 
   useEffect(() => {
     setActive(1);
-    window.addEventListener("resize", handleResize);
+     window.addEventListener("resize", handleResize);
+    handleResize();
   }, []);
 
   //choose the screen size

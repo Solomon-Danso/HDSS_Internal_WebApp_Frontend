@@ -84,7 +84,7 @@ export const StudentInfoCard = styled.div`
   backdrop-filter: blur(19.7px);
   -webkit-backdrop-filter: blur(19.7px);
   
-  height: 50vh;
+  min-height: 50vh;
   padding: 1rem;
   overflow: hidden; /* Change to hidden */
 
@@ -347,9 +347,9 @@ border: none;
   }
 
   @media (max-width: 768px) {
-    font-size: 12px;
-    padding: 4px 18px;
-    padding: 11px 25px;
+    font-size: 0.7rem;
+    padding: 2px 10px;
+    padding: 5px 5px;
   }
 
 
@@ -907,6 +907,14 @@ export const CardText = styled.div`
   flex: 1; /* Allow each text element to take equal space */
 `;
 
+export const CardTextM = styled.div`
+  font-size: 0.8rem;
+  color: ${colors.lightBlue};
+  text-align: center;
+  flex: 1; /* Allow each text element to take equal space */
+`;
+
+
 export const CardText2 = styled.div`
   font-size: 1rem;
   color: ${colors.lightBlue};
@@ -918,6 +926,14 @@ export const CardText2 = styled.div`
 
 export const CardTextHeader = styled.div`
   font-size: 1.1rem;
+  color: ${colors.lightBlue};
+  text-align: center;
+  flex: 1; /* Allow each text element to take equal space */
+  font-weight: 600;
+  `;
+
+  export const CardTextHeaderM = styled.div`
+  font-size: 0.9rem;
   color: ${colors.lightBlue};
   text-align: center;
   flex: 1; /* Allow each text element to take equal space */
@@ -977,6 +993,14 @@ export const CardImage = styled.img`
 width: 7vw;
 height: 10vh;
 border-radius: 0.5rem;
+
+
+`;
+
+export const CardImageM = styled.img`
+width: 7vw;
+height: 7vh;
+border-radius: 0.3rem;
 
 
 `;

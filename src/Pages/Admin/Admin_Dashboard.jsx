@@ -62,7 +62,7 @@ const Dashboard = () => {
       setUserInfo(parsedData);
   }, []);
   const profilePic = apiServer+userInfo.profilePicturePath
-console.log(profilePic);
+
   
   const toggleDropdown = () => {
     setDropdownOpen((prevState) => !prevState); // Toggle the value of dropdownOpen
@@ -125,17 +125,19 @@ const [sysDate, setSysDate] = useState("")
 
 
 
-  const [isMobile, setIsMobile] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   const [active, setActive] = useState(null);
 
   useEffect(() => {
     setActive(1);
-    window.addEventListener("resize", handleResize);
+     window.addEventListener("resize", handleResize);
+    handleResize();
+
   }, []);
 
   //choose the screen size
   const handleResize = () => {
-    if (window.innerWidth < 800) {
+    if (window.innerWidth < 768) {
       setIsMobile(true);
     } else {
       setIsMobile(false);

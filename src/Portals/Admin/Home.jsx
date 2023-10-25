@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { CardText, CardTextHeader, ChartsCard, EventCard, FormLoaders, HomeBanner, HomeCard, HomeCardColumn, HomeCardNumber, HomeCardText, HomeIcon, HomeStudentForm, HomeStudentSelect, NewStudentListCard, NewStudentListCard2, SelectForStudent, SelectStage, SelectStageButton, StudentCardText, StudentInfoCard, StudentListBanner, StudentListResult } from '../../Designs/Styles/Profile'
+import { CardText, CardTextHeader, CardTextHeaderM, ChartsCard, EventCard, FormLoaders, HomeBanner, HomeCard, HomeCardColumn, HomeCardNumber, HomeCardText, HomeIcon, HomeStudentForm, HomeStudentSelect, NewStudentListCard, NewStudentListCard2, SelectForStudent, SelectStage, SelectStageButton, StudentCardText, StudentInfoCard, StudentListBanner, StudentListResult } from '../../Designs/Styles/Profile'
 import { colors } from "../../Designs/Colors"
 import { HiOutlineUserGroup,HiIdentification } from "react-icons/hi";
 import { useNavigate } from 'react-router-dom'
@@ -15,6 +15,7 @@ import { CountParents, CountStudents, CountTeachers, TheClassStudent, ViewClasse
 import { Show } from '../../Constants /Alerts';
 import StudentListCard from "./StudentListCard"
 import { MyStudentCard } from './MyStudentCard';
+import { MyStudentCardM } from './MyStudentCardM';
 
 
 
@@ -50,6 +51,37 @@ const Home = () => {
   };
 
 
+  const [isMobile, setIsMobile] = useState(true);
+  const [active, setActive] = useState(null);
+
+  useEffect(() => {
+    setActive(1);
+     window.addEventListener("resize", handleResize);
+    handleResize();
+  }, []);
+
+  //choose the screen size
+  const handleResize = () => {
+    if (window.innerWidth < 800) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  };
+
+  const [toggle, setToggle] = useState(true)
+  const [search, setSearch] = useState("")
+  const toggler = () => {
+      setToggle((prevState) => !prevState); 
+    };
+
+    useEffect(() =>{
+    fetch(apiServer + TheClassStudent+specificClass+"&ID="+userInfo.staffID)
+    .then(res=>res.json())
+    .then(data=>setStudentList(data) )
+    .catch(error=>console.error(error))
+    },[specificClass])
+
   const handleStudentDataSubmit = async (event) => {
     event.preventDefault();
       
@@ -57,7 +89,7 @@ const Home = () => {
       try {
   
     
-        const response = await fetch(apiServer + TheClassStudent+specificClass, {
+        const response = await fetch(apiServer + TheClassStudent+specificClass+"&ID="+userInfo.staffID, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -84,7 +116,16 @@ const Home = () => {
   }
   
 
+  const [userInfo, setUserInfo] = useState({});
 
+  useEffect(() => {
+    const encryptedData = sessionStorage.getItem("userDataEnc");
+    const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
+    const decryptedData = AES.decrypt(encryptedData, encryptionKey);
+    const decryptedString = decryptedData.toString(enc.Utf8);
+    const parsedData = JSON.parse(decryptedString);
+      setUserInfo(parsedData);
+  }, []);
 
   const [theClass, setTheClass] = useState([])
 
@@ -247,17 +288,36 @@ onChange={(e)=>setSpecificClass(e.target.value)}
       <option key={data.id}>{data.className}</option>
     ))}
 </SelectForStudent>
-<SelectStageButton  
-background={colors.darkBlue}
-color="white"
-border={colors.darkBlue}
-type="submit">Load
-</SelectStageButton>
 
 
 </FormLoaders>
 
-<NewStudentListCard2 >
+{
+  isMobile?(<>
+  
+  <NewStudentListCard2 >
+
+
+<CardTextHeaderM>Photo</CardTextHeaderM>
+<CardTextHeaderM>Student Name</CardTextHeaderM>
+<CardTextHeaderM>Action</CardTextHeaderM>
+
+
+</NewStudentListCard2>
+
+
+<StudentListResult>
+{studentList.length > 0 &&
+    studentList.map((data,index) => (
+      <MyStudentCardM data={data} key={index}  />
+    ))}
+
+</StudentListResult>
+ 
+  
+  </>):(<>
+  
+    <NewStudentListCard2 >
 
 <CardTextHeader>ID</CardTextHeader>
 <CardTextHeader>Photo</CardTextHeader>
@@ -281,7 +341,9 @@ type="submit">Load
 
 </StudentListResult>
 
-
+  
+  </>)
+}
 
 
 

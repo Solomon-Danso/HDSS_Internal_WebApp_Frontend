@@ -25,12 +25,7 @@ const AdminDashboard = () => {
     }
   }, [location]);
 
-  function onSelect({ key }) {
-    console.log(`${key} selected`);
-  //  if (key === "2") loginOutUser();
-  }
-
-
+  
 
 
 

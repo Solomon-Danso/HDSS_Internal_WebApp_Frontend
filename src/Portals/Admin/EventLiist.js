@@ -63,27 +63,10 @@ const EventLiist = ({ event }) => {
   return (
     <EventCardList>
       <EventTitle> {event.title}</EventTitle>
+      <div>Start: <span style={{fontSize:"1.1rem"}}>{formatDateTime(event.start)}</span> </div>
+      <div>End: <span style={{fontSize:"1.1rem"}}>{formatDateTime(event.end)}</span> </div>
       
-      <EventDateRow>
-      
-      <EventDate
-       background={colors.darkBlue}
-       color="white"
-       border={colors.darkBlue}
-      >
-       <EventDateTitleStart>Start At</EventDateTitleStart>
-     <h3> {formatDateTime(event.start)} </h3>
-      </EventDate>
-
-      <EventDate
-       
-      >
-       <EventDateTitleEnd>End At</EventDateTitleEnd>
-       <h3>{formatDateTime(event.end)}</h3>
-      </EventDate>
-
-      </EventDateRow>
-
+     
 {
    specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(<>
        <EventDateRow2>

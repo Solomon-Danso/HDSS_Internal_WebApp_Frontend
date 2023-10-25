@@ -1,12 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Admin_MenuButtons from './Admin/Admin_MenuButtons'
 import Admin_Dashboard from './Admin/Admin_Dashboard'
 import { MainDashboardContainer } from '../Designs/Styles/Styles'
+import { useLocation } from 'react-router-dom'
+import Navigation from './Navigator'
+
+
 const AdminDashboard = () => {
+
+  const [navOpen, setNavOpen] = useState(false);
+  const [page, setPage] = useState("");
+  const location = useLocation();
+ 
+  
+  useEffect(() => {
+    try {
+      const pages = location.pathname?.split("/");
+       console.log("Url: ", pages);
+      setPage(pages.length === 3 ? pages[2] : pages[1]);
+  
+    } catch (e) {
+      console.error(e);
+    }
+  }, [location]);
+
+  function onSelect({ key }) {
+    console.log(`${key} selected`);
+  //  if (key === "2") loginOutUser();
+  }
+
+
+
   return (
     <MainDashboardContainer>
 
-        
+<Navigation setNavOpen={setNavOpen} page={page} />
         <Admin_MenuButtons/>      
         <Admin_Dashboard/>
      

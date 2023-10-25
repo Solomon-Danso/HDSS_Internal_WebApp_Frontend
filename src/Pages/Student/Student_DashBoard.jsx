@@ -31,6 +31,7 @@ import ViewBook from "../../Portals/Admin/LMS/ViewBooks"
 import UploadAssignment from "../../Portals/Admin/LMS//UploadAssignment"
 import { IoNotificationsOutline } from 'react-icons/io5';
 import { AiOutlineMenuFold } from 'react-icons/ai';
+import HeadernSearch from '../HeadernSearch';
 
 
 
@@ -140,6 +141,32 @@ fetch(apiServer+"api/Setup/GetSchoolData")
 
 
 
+const [isMobile, setIsMobile] = useState(false);
+const [active, setActive] = useState(null);
+
+useEffect(() => {
+  setActive(1);
+  window.addEventListener("resize", handleResize);
+}, []);
+
+//choose the screen size
+const handleResize = () => {
+  if (window.innerWidth < 768) {
+    setIsMobile(true);
+  } else {
+    setIsMobile(false);
+  }
+};
+
+
+const [toggle, setToggle] = useState(true)
+const [search, setSearch] = useState("")
+const toggler = () => {
+    setToggle((prevState) => !prevState); 
+  };
+
+
+
 
 
 
@@ -149,10 +176,33 @@ fetch(apiServer+"api/Setup/GetSchoolData")
 
 <>
 <HomePageBanner>
-  <HomeLogo src={apiServer+SchoolData.logo}/>
+{
+  isMobile?(<></>):(<>
+  
 
-  <HomeSchoolName> {SchoolData.schoolName} </HomeSchoolName>
+  <>
+<HeadernSearch pic={profilePic} name={userInfo.fullName} toggle={toggle} toggler={toggler}/>
+<ProfileNDate  onClick={()=>toggler()}>
+<HomeSchoolName> {SchoolData.schoolName} </HomeSchoolName>
 
+<ProfileDetails>
+
+<AnimateHeight height={dropdownOpen?"auto":0} duration={500}>    
+<ProfileButtonOptionLink onClick={() => { navigate("/admin/viewProfile"); toggleDropdown() }}>View Profile </ProfileButtonOptionLink>
+<ProfileButtonOptionLink onClick={() => { navigate("/admin/test"); toggleDropdown() }}>Edit Profile </ProfileButtonOptionLink>
+<ProfileButtonOptionLink onClick={() => { navigate("/admin/test"); toggleDropdown() }}>Notifications </ProfileButtonOptionLink>
+<ProfileButtonOptionLink onClick={() => { navigate("/admin/test"); toggleDropdown() }}>Chats </ProfileButtonOptionLink>
+
+</AnimateHeight>
+
+ </ProfileDetails>
+
+</ProfileNDate>
+
+    </>
+
+  </>)
+}
 
     
   <HomeGrouper style={{

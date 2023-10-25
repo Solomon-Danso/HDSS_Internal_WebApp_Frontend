@@ -37,7 +37,7 @@ height:15vh;
 export const HomeBanner = styled.div`
 display:flex;
 flex-direction: row;
-gap:3rem;
+gap:1rem;
 flex-wrap: wrap;
 padding:1rem;
 
@@ -56,7 +56,9 @@ display:flex;
 flex-direction:row;
 gap:1rem;
 padding:2rem;
-
+@media (max-width: 768px){
+  width: 100%;
+ }
 `;
 
 export const ChartsCard = styled.div`
@@ -66,10 +68,12 @@ box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(19.7px);
 -webkit-backdrop-filter: blur(19.7px);
 
-width:38vw;
-height:38vh;
+width:36vw;
+height:40vh;
 padding:1rem;
-
+@media (max-width: 768px){
+  width: 100%;
+ }
 `;
 
 
@@ -221,7 +225,7 @@ align-items: center;
 `;
 
 export const HomeCardText = styled.div`
-font-size: 1.3rem;
+font-size: 1.1rem;
 text-wrap: break-word;
 font-weight: 600;
 `;
@@ -234,7 +238,7 @@ text-align: center;
 `;
 
 export const HomeCardNumber = styled.div`
-font-size: 3rem;
+font-size: 2rem;
 display:flex;
 justify-content: center;
 padding: 1rem;
@@ -394,7 +398,7 @@ color:${colors.darkBlue};
 
 export const EventTitle = styled.div`
 text-align: center;
-font-size: 1.1rem;
+font-size: 1.2rem;
 color: ${colors.lightBlue};
 font-family:OpenSans, NotoSans, sans-seri;
 

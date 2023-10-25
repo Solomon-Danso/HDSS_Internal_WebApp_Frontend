@@ -35,6 +35,21 @@ const Home = () => {
   const [specificClass, setSpecificClass] = useState("")
 
 
+  const formatNumber = (num) => {
+    if (num >= 1e12) {
+      return (num / 1e12).toFixed(1) + 'T';
+    } else if (num >= 1e9) {
+      return (num / 1e9).toFixed(1) + 'B';
+    } else if (num >= 1e6) {
+      return (num / 1e6).toFixed(1) + 'M';
+    } else if (num >= 1e3) {
+      return (num / 1e3).toFixed(1) + 'K';
+    } else {
+      return num.toString();
+    }
+  };
+
+
   const handleStudentDataSubmit = async (event) => {
     event.preventDefault();
       
@@ -181,12 +196,12 @@ const Home = () => {
     <HomeCard onClick={() => { navigate("/admin/test") }}>
     <HomeCardColumn>
     <HomeIcon color={colors.aqua}> <FaMoneyBillAlt/> </HomeIcon>
-    <HomeCardText>Total Earnings</HomeCardText>
+    <HomeCardText>Earnings</HomeCardText>
     </HomeCardColumn>
 
     <hr/>
 
-    <HomeCardNumber> 99456</HomeCardNumber>
+    <HomeCardNumber> {formatNumber(99465)}</HomeCardNumber>
     </HomeCard>
 
     </>

@@ -24,19 +24,19 @@ const AdminDashboard = () => {
     }
   }, [location]);
 
-  function onSelect({ key }) {
-    console.log(`${key} selected`);
-  //  if (key === "2") loginOutUser();
-  }
 
+const [openNav, setOpenNav] = useState(false)
 
+const openfunction = ()=>{
+  setOpenNav(!openNav)
+}
 
   return (
     <MainDashboardContainer>
 
-<Navigation setNavOpen={setNavOpen} page={page} />
-        <Admin_MenuButtons/>      
-        <Admin_Dashboard/>
+<Navigation page={page}  openfunction={openfunction}/>
+        <Admin_MenuButtons />      
+        <Admin_Dashboard openNav={openNav}/>
      
     </MainDashboardContainer>
   )

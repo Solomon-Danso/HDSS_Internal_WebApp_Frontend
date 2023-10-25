@@ -80,6 +80,15 @@ justify-content: center;
 
 `;
 
+export const BreakerM = styled.div`
+display: flex;
+flex-direction: row;
+gap: 1.0rem;
+align-items: center;
+justify-content: center;
+
+`;
+
 
 
 export const NotificationIcon = styled.div`
@@ -103,6 +112,27 @@ export const NotificationBadge = styled.div`
   font-size: 12px;
 `;
 
+
+export const NotificationIconM = styled.div`
+  position: relative;
+  display: inline-block;
+  color: ${colors.icon};
+align-items: center;
+justify-content: center;
+
+font-size: 1.5rem;
+`;
+
+export const NotificationBadgeM = styled.div`
+  position: absolute;
+  top: -5px;
+  left: 20px;
+  background-color: ${colors.red};
+  color: white; /* Customize the badge text color */
+  border-radius: 50%;
+  padding: 1px 3px;
+  font-size: 10px;
+`;
 
 
 

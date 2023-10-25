@@ -14,13 +14,12 @@ import {  DashboardNav,
    } from "../Designs/Card/Dashboard";
 import { apiServer } from "../Constants /Endpoints";
 
-const Navigation = ({ navOpen, setNavOpen, page }) => {
+const Navigation = ({  page, openfunction }) => {
   const [isMobile, setIsMobile] = useState(false);
   const navigate = useNavigate();
-  const [active, setActive] = useState(null);
 
   useEffect(() => {
-    setActive(1);
+   
      window.addEventListener("resize", handleResize);
     handleResize();
   }, []);
@@ -34,14 +33,7 @@ const Navigation = ({ navOpen, setNavOpen, page }) => {
     }
   };
 
-  const onNavigate = (page) => {
-    setActive(page);
-    if (page === 1) {
-      navigate("/dashboard");
-    }else{
-      navigate("/dashboard/dev")
-    }
-  };
+ 
 
   const [SchoolData, SetSchoolData] = useState({})
   useEffect(()=>{
@@ -58,7 +50,7 @@ const Navigation = ({ navOpen, setNavOpen, page }) => {
         alt="icon"
         onClick={() => navigate("/dashboard")}
       />
-      <DashIconMenu onClick={() => setNavOpen((open) => !open)} />
+       <DashIconMenu onClick={openfunction}/>
       <div
         style={{
           display: "flex",
@@ -80,7 +72,7 @@ const Navigation = ({ navOpen, setNavOpen, page }) => {
           <DashIconSep
             title="Dashboard"
             active={page === "dashboard" ? true : false}
-            onClick={() => onNavigate(1)}
+            onClick={() =>navigate("/dashboard")}
           >
             <IconDashHome
               onClick={() => navigate("/dashboard")}
@@ -90,7 +82,7 @@ const Navigation = ({ navOpen, setNavOpen, page }) => {
           <DashIconSep
             title="Shop"
             active={page === "shop" ? true : false}
-            onClick={() => onNavigate(2)}
+            onClick={() => navigate("/dashboard")}
           >
             <IconDashHome
               title="Shop"
@@ -101,7 +93,7 @@ const Navigation = ({ navOpen, setNavOpen, page }) => {
           <DashIconSep
             title="Events"
             active={page === "event" ? true: false}
-            onClick={() => onNavigate(3)}
+            onClick={() => navigate("/dashboard")}
           >
             <IconDashResources
               title="Events"
@@ -112,7 +104,7 @@ const Navigation = ({ navOpen, setNavOpen, page }) => {
           <DashIconSep
             title="Payments"
             active={page === "payment" ? true: false}
-            onClick={() => onNavigate(4)}
+            onClick={() => navigate("/dashboard")}
           >
             <IconDashPayment
               title="Payment"
@@ -123,7 +115,7 @@ const Navigation = ({ navOpen, setNavOpen, page }) => {
           <DashIconSep
             title="Settings"
             active={page === "settings" ? true : false}
-            onClick={() => onNavigate(5)}
+            onClick={() => navigate("/dashboard")}
           >
             <IconDashSettings
               title="Settings"

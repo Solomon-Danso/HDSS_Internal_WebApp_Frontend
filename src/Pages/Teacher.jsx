@@ -25,15 +25,19 @@ const AdminDashboard = () => {
     }
   }, [location]);
 
-  
+  const [openNav, setOpenNav] = useState(false)
+
+const openfunction = ()=>{
+  setOpenNav(!openNav)
+}
 
 
 
   return (
     <MainDashboardContainer>
-        <Navigation setNavOpen={setNavOpen} page={page} />
+        <Navigation openfunction={openfunction} page={page} />
         <TeacherMenuButtons/>
-        <TeacherDashBoard/>
+        <TeacherDashBoard openNav={openNav}/>
        
      
     </MainDashboardContainer>

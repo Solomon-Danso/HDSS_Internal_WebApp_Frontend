@@ -28,7 +28,7 @@ export const DashboardNav = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px 5px;
-
+height: 100vh;
   @media (max-width: 768px) {
     flex: 0.1;
   }

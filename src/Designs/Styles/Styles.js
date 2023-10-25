@@ -27,17 +27,21 @@ display: flex;
 flex-direction: row;
 gap:1.5rem;
 margin-top: 0.5rem;
+height:100vh;
+overflow: hidden;
 `;
+
+
 export const MenuContainer = styled.div`
 
 flex: 0.15;
   background-color: ${colors.card};
   colors:${colors.white};
   overflow: hidden;
-  overflow-y: scroll;
+   overflow-y: auto;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none;
-  min-height: 100vh;
+  height: 100vh;
  
 
   @media (max-width: 768px) {
@@ -59,12 +63,17 @@ flex: 0.15;
 `;
 
 
+
+
+
 export const DashboardContainer = styled.div`
 flex: 1;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow-y: scroll;
+  
+  overflow: auto;
+   overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+ min-height: 100vh;
   padding: 5px;
 
   @media (max-width: 768px) {

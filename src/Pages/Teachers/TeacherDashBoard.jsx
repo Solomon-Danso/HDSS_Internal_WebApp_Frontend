@@ -31,6 +31,17 @@ import ViewBook from "../../Portals/Admin/LMS/ViewBooks"
 import UploadAssignment from "../../Portals/Admin/LMS//UploadAssignment"
 import HeadernSearch from '../HeadernSearch';
 
+import DropList from "../../Pages/DropList"
+import InnerDroplist from "../../Pages/InnerDroplist"
+import { GiTeacher } from "react-icons/gi";
+import { RiAdminFill,RiBarChartGroupedFill,RiComputerFill } from "react-icons/ri";
+import { HiUserGroup } from "react-icons/hi";
+import { FaLayerGroup,FaCity } from "react-icons/fa";
+import { CgNotes } from "react-icons/cg";
+import { MenuCard } from '../../Designs/Styles/Profile';
+import { BreakerM, HeaderBanner, NotificationBadgeM, NotificationIconM } from '../../Designs/Styles/Dashboard';
+import { IoIosNotificationsOutline } from 'react-icons/io'
+import {CiSettings,CiGlobe} from 'react-icons/ci'
 
 
 
@@ -47,7 +58,8 @@ import HeadernSearch from '../HeadernSearch';
 
 
 
-const Dashboard = () => {
+
+const Dashboard = ({openNav}) => {
   const [specificRole, setspecificRole] = useState("");
   useEffect(() => {
     const spRole =  AES.decrypt(sessionStorage.getItem("SpecificRole"), '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK').toString(enc.Utf8);
@@ -162,12 +174,232 @@ const [sysDate, setSysDate] = useState("")
   return (
    <DashboardContainer>
 
+{
+  openNav?(<>
+  <MenuCard >
+
+
+
+{
+  specificRole==="Teacher" ? (
+  <>
+  <DropList logo={<HiUserGroup/>} title="Students">
+    <MenuButtonOptionLink onClick={() => { navigate("/teacher/studentsInfo") }}>Students</MenuButtonOptionLink>    
+   
+    </DropList>
+  </>
+  ):(
+  <></>
+  )
+}
+    
+
+
+
+{
+  specificRole==="SuperiorUser"||specificRole==="HeadTeacher"||specificRole==="Teacher" ? (
+  <>
+  <DropList logo={<FaLayerGroup/>} title="LMS">
+
+    <InnerDroplist title="Class">
+    <MenuButtonOptionLink onClick={() => { navigate("/teacher/class") }}>Class List</MenuButtonOptionLink>
+  </InnerDroplist>
+
+  <InnerDroplist title="Subjects">
+    <MenuButtonOptionLink onClick={() => { navigate("/teacher/subjects") }}>Subject List </MenuButtonOptionLink>
+    <MenuButtonOptionLink onClick={() => { navigate("/teacher/subjectteacher") }}>Subject Teachers</MenuButtonOptionLink>
+    
+      </InnerDroplist>
+
+    <InnerDroplist title="Discussions">
+    <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>View Discussions</MenuButtonOptionLink>
+    <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Teacher's Chat</MenuButtonOptionLink>
+    <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Student's Chat</MenuButtonOptionLink>    
+    </InnerDroplist>
+
+
+  
+
+      <InnerDroplist title="Uploads">
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadslides") }}>Slides</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadAudio") }}>Audio</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadVideo") }}>Video</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadPicture") }}>Pictures</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadBook") }}>Books</MenuButtonOptionLink>
+     
+      </InnerDroplist>
+
+
+      <InnerDroplist title="Resources">
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/viewSlides") }}>Slides</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/viewAudios") }}>Audio</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/viewVideos") }}>Video</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/viewPictures") }}>Pictures</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/viewBooks") }}>Books</MenuButtonOptionLink>
+     
+      </InnerDroplist>
+
+      <InnerDroplist title="Annoucements">
+        
+      <InnerDroplist title="Students" logo=">">
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Add</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>View</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Update</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Delete</MenuButtonOptionLink>
+      </InnerDroplist>
+
+      <InnerDroplist title="Teachers" logo=">">
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Add</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>View</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Update</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Delete</MenuButtonOptionLink>
+      </InnerDroplist>
+
+      <InnerDroplist title="PTA" logo=">">
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Add</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>View</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Update</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Delete</MenuButtonOptionLink>
+      </InnerDroplist>
+
+      <InnerDroplist title="HOD" logo=">">
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Add</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>View</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Update</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Delete</MenuButtonOptionLink>
+      </InnerDroplist>
+      
+      </InnerDroplist>
+
+      <InnerDroplist title="Assignments">
+
+
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadAssignment") }}>Upload Assignment</MenuButtonOptionLink>
+     
+
+
+
+      </InnerDroplist>
+
+
+      
+    
+
+    
+    
+    </DropList>
+  </>
+  ):(
+  <></>
+  )
+}
+
+
+
+
+
+
+
+
+{
+  specificRole==="SuperiorUser"||specificRole==="HeadTeacher"||specificRole==="Teacher" ? (
+  <>
+  <DropList logo={<CgNotes/>} title="Lesson Notes">
+
+    <InnerDroplist title="Create Notes">
+
+    <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Upload Notes</MenuButtonOptionLink>
+    
+    <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Type Notes</MenuButtonOptionLink>
+   
+
+    </InnerDroplist>
+
+    <InnerDroplist title="View Notes">
+
+    <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>View Notes File</MenuButtonOptionLink>
+    
+    <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>View Typed Notes</MenuButtonOptionLink>
+   
+    </InnerDroplist>
+
+    <InnerDroplist title="Update Notes">
+
+    <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Update Notes File</MenuButtonOptionLink>
+    
+    <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Update Typed Notes</MenuButtonOptionLink>
+   
+    </InnerDroplist>
+
+    <InnerDroplist title="Delete Notes">
+
+    <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Delete Notes File</MenuButtonOptionLink>
+
+    <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Delete Typed Notes</MenuButtonOptionLink>
+
+    </InnerDroplist>
+
+
+    
+    </DropList>
+  </>
+  ):(
+  <></>
+  )
+}
+
+
+
+
+
+
+
+
+    
+
+
+  </MenuCard>
+  </>):(<>
+
+  </>)
+}
+
+
 
 <>
 <HomePageBanner>
 
 {
-  isMobile?(<></>):(<>
+  isMobile?(<>
+  
+  <HeaderBanner>
+
+<BreakerM>
+
+<NotificationIconM onClick={() => { navigate("/student") }}>
+<CiSettings  />
+<NotificationBadgeM>15</NotificationBadgeM>
+</NotificationIconM>
+
+<NotificationIconM onClick={() => { navigate("/student") }}>
+<CiGlobe  />
+<NotificationBadgeM>507</NotificationBadgeM>
+</NotificationIconM>
+
+<NotificationIconM onClick={() => { navigate("/student") }}>
+<IoIosNotificationsOutline  />
+<NotificationBadgeM>5</NotificationBadgeM>
+</NotificationIconM>
+
+
+</BreakerM>
+
+
+
+
+</HeaderBanner>
+  
+  </>):(<>
   
 
   <>

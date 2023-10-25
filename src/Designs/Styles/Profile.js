@@ -90,7 +90,37 @@ export const StudentInfoCard = styled.div`
 
   /* Position relative for proper stacking context */
   position: relative;
+
+  
+
 `;
+
+export const MenuCard = styled.div`
+  background: ${colors.body};
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(19.7px);
+  -webkit-backdrop-filter: blur(19.7px);
+  
+  height: 50vh;
+  padding: 1rem;
+    /* Position absolute to place the card above other elements */
+  position: absolute;
+  top: 0;
+ 
+  right: 0;
+  z-index: 1; /* Set a positive z-index value */
+
+  /* You might need to adjust the width if needed */
+   width: 82%; 
+
+   overflow: hidden;
+   overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+
+`;
+
 
 
 export const StudentInfoCard2 = styled.div`

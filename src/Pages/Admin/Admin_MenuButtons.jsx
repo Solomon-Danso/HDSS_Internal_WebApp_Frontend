@@ -169,6 +169,8 @@ DashBoard
 
 
       <InnerDroplist title="Resources">
+      <MenuButtonOptionLink onClick={() => { navigate("/admin/viewTimeTable") }}>TimeTable</MenuButtonOptionLink>
+      
       <MenuButtonOptionLink onClick={() => { navigate("/admin/viewSlides") }}>Slides</MenuButtonOptionLink>
       <MenuButtonOptionLink onClick={() => { navigate("/admin/viewAudios") }}>Audio</MenuButtonOptionLink>
       <MenuButtonOptionLink onClick={() => { navigate("/admin/viewVideos") }}>Video</MenuButtonOptionLink>

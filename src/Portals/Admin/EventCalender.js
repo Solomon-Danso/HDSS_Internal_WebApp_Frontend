@@ -30,6 +30,25 @@ const EventCalendar = () => {
       });
   }, []);
 
+  const [isMobile, setIsMobile] = useState(false);
+const [active, setActive] = useState(null);
+
+useEffect(() => {
+  setActive(1);
+   window.addEventListener("resize", handleResize);
+    handleResize();
+}, []);
+
+//choose the screen size
+const handleResize = () => {
+  if (window.innerWidth < 768) {
+    setIsMobile(true);
+  } else {
+    setIsMobile(false);
+  }
+};
+
+
   const handleCreateEvent = (newEvent) => {
     axios.post(apiServer+AddEvents, newEvent)
       .then(response => {
@@ -76,13 +95,19 @@ const EventCalendar = () => {
         ))}
       </EventCardListHome>
 
-      <Calendar
+{
+  isMobile?(<></>):(<>
+        <Calendar
         localizer={localizer}
         events={events}
         startAccessor="start"
         endAccessor="end"
         style={{ height: "100vh", width: "50vw" }} // Adjust as needed
       />
+  </>)
+}
+
+
     
     </HomeBanner>      
     

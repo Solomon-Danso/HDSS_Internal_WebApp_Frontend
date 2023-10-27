@@ -82,6 +82,7 @@ DashBoard
   
 
       <InnerDroplist title="Uploads">
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadTimeTable") }}>TimeTable</MenuButtonOptionLink>
       <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadslides") }}>Slides</MenuButtonOptionLink>
       <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadAudio") }}>Audio</MenuButtonOptionLink>
       <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadVideo") }}>Video</MenuButtonOptionLink>
@@ -92,6 +93,8 @@ DashBoard
 
 
       <InnerDroplist title="Resources">
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/viewTimeTables") }}>TimeTables</MenuButtonOptionLink>
+      
       <MenuButtonOptionLink onClick={() => { navigate("/teacher/viewSlides") }}>Slides</MenuButtonOptionLink>
       <MenuButtonOptionLink onClick={() => { navigate("/teacher/viewAudios") }}>Audio</MenuButtonOptionLink>
       <MenuButtonOptionLink onClick={() => { navigate("/teacher/viewVideos") }}>Video</MenuButtonOptionLink>

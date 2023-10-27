@@ -23,12 +23,14 @@ import UploadVideo from "../../Portals/Admin/LMS/UploadVideo"
 import UploadAudio from "../../Portals/Admin/LMS/UploadAudio"
 import UploadPicture from "../../Portals/Admin/LMS/UploadPicture"
 import UploadBook from "../../Portals/Admin/LMS/UploadBook"
+import UploadTimeTable from "../../Portals/Admin/LMS/UploadTimeTable"
 import ViewSlide from "../../Portals/Admin/LMS/ViewSlides"
 import ViewAudio from "../../Portals/Admin/LMS/ViewAudios"
 import ViewVideo from "../../Portals/Admin/LMS/ViewVideos"
 import ViewPicture from "../../Portals/Admin/LMS/ViewPictures"
 import ViewBook from "../../Portals/Admin/LMS/ViewBooks"
-import UploadAssignment from "../../Portals/Admin/LMS//UploadAssignment"
+import ViewTimeTable from "../../Portals/Admin/LMS/ViewTimeTables"
+import UploadAssignment from "../../Portals/Admin/LMS/UploadAssignment"
 import HeadernSearch from '../HeadernSearch';
 
 import DropList from "../../Pages/DropList"
@@ -520,11 +522,13 @@ const [sysDate, setSysDate] = useState("")
               <Route path="uploadAudio" element={<UploadAudio />} /> 
               <Route path="uploadPicture" element={<UploadPicture />} />
               <Route path="uploadBook" element={<UploadBook />} />
+              <Route path="uploadTimeTable" element={<UploadTimeTable />} />
               <Route path="viewSlides" element={<ViewSlide />} />
               <Route path="viewAudios" element={<ViewAudio />} />
               <Route path="viewVideos" element={<ViewVideo />} />
               <Route path="viewPictures" element={<ViewPicture />} />
               <Route path="viewBooks" element={<ViewBook />} />
+              <Route path="viewTimeTables" element={<ViewTimeTable />} />
               <Route path="uploadAssignment" element={<UploadAssignment />} />
 
 

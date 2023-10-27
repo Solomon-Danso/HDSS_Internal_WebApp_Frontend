@@ -240,7 +240,7 @@ useEffect(() => {
         <option>Select A Teacher</option>
    {theStudents.length > 0 &&
     theStudents.map((data) => (
-      <option key={data.id}>{data.title}{" "}{data.firstName}{" "} {data.otherName}{" "}{data.lastName}</option>
+      <option key={data.id} value={data.staffID}>{data.title}{" "}{data.firstName}{" "} {data.otherName}{" "}{data.lastName}</option>
     ))}
 
     </PaySelector>

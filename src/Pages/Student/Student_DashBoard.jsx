@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { DashboardContainer } from '../../Designs/Styles/Styles';
+import { DashboardContainer, HomeLogoM, HomeSchoolNameM } from '../../Designs/Styles/Styles';
 import { AES, enc } from 'crypto-js';
 import Pass from '../../Portals/Admin/Pass';
 import PermissionDenied from '../../Portals/Admin/PermissionDenied';
@@ -12,39 +12,27 @@ import { apiServer } from '../../Constants /Endpoints';
 import Home from '../../Portals/Admin/Home';
 import Profile from '../../Portals/Admin/Profile'
 
-import StudentInfo from '../../Portals/Admin/StudentIInfo';
-import StudentDetails from '../../Portals/Admin/StudentDetails';
 
-import Class from "../../Portals/Admin/LMS/Class"
-import AddSubject  from "../../Portals/Admin/LMS/AddSubject"
-import SubjectTeacher from "../../Portals/Admin/LMS/SubjectTeachers"
-import UploadSlides from "../../Portals/Admin/LMS/UploadSlides"
-import UploadVideo from "../../Portals/Admin/LMS/UploadVideo"
-import UploadAudio from "../../Portals/Admin/LMS/UploadAudio"
-import UploadPicture from "../../Portals/Admin/LMS/UploadPicture"
-import UploadBook from "../../Portals/Admin/LMS/UploadBook"
-import ViewSlide from "../../Portals/Admin/LMS/ViewSlides"
-import ViewAudio from "../../Portals/Admin/LMS/ViewAudios"
-import ViewVideo from "../../Portals/Admin/LMS/ViewVideos"
-import ViewPicture from "../../Portals/Admin/LMS/ViewPictures"
 import ViewBook from "../../Portals/Admin/LMS/ViewBooks"
-import UploadAssignment from "../../Portals/Admin/LMS//UploadAssignment"
-import { IoNotificationsOutline } from 'react-icons/io5';
-import { AiOutlineMenuFold } from 'react-icons/ai';
+
 import HeadernSearch from '../HeadernSearch';
 
 import { IoIosNotificationsOutline } from 'react-icons/io'
 import {CiSettings,CiGlobe} from 'react-icons/ci'
 
+import StraightLink from "./StraightLink"
+import { BsChatDots, BsGlobeAsiaAustralia, BsPersonVideo3 } from 'react-icons/bs'
+import { AiOutlineCalendar, AiOutlineFileText, AiOutlineMenuUnfold, AiOutlineNotification } from 'react-icons/ai'
 
-import DropList from "../../Pages/DropList"
-import InnerDroplist from "../../Pages/InnerDroplist"
-import { FaLayerGroup,FaCity } from "react-icons/fa";
+import { MdOutlineAssignmentTurnedIn, MdReportProblem } from 'react-icons/md'
 
-import { MenuCard } from '../../Designs/Styles/Profile';
+import { MenuCard, MenuCard2 } from '../../Designs/Styles/Profile';
 import { Breaker, BreakerM, HeaderBanner, NotificationBadge, NotificationBadgeM, NotificationIcon, NotificationIconM } from '../../Designs/Styles/Dashboard';
+import { GiBookCover, GiBookmarklet, GiNotebook, GiSecretBook } from 'react-icons/gi';
+import { RiFileUploadLine } from 'react-icons/ri';
 
-
+import TimeTable from "../../Portals/Student/TimeTable"
+import Lessons from "../../Portals/Student/Lessons"
 
 
 
@@ -190,99 +178,24 @@ const toggler = () => {
 
 
 
-    
-
-
-
-<DropList logo={<FaLayerGroup/>} title="LMS">
-
-<InnerDroplist title="Class">
-<MenuButtonOptionLink onClick={() => { navigate("/teacher/class") }}>Class List</MenuButtonOptionLink>
-</InnerDroplist>
-
-<InnerDroplist title="Subjects">
-<MenuButtonOptionLink onClick={() => { navigate("/teacher/subjects") }}>Subject List </MenuButtonOptionLink>
-<MenuButtonOptionLink onClick={() => { navigate("/teacher/subjectteacher") }}>Subject Teachers</MenuButtonOptionLink>
-
-  </InnerDroplist>
-
-<InnerDroplist title="Discussions">
-<MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>View Discussions</MenuButtonOptionLink>
-<MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Teacher's Chat</MenuButtonOptionLink>
-<MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Student's Chat</MenuButtonOptionLink>    
-</InnerDroplist>
+  <StraightLink logo={<BsGlobeAsiaAustralia/>} title="TimeTable" path="/student/timetable"/>
+<StraightLink logo={<AiOutlineFileText/>} title="Lesson" path="/student/lesson"/>
+<StraightLink logo={<AiOutlineMenuUnfold/>} title="Overview" path="/student/overview"/>
+<StraightLink logo={<GiSecretBook/>} title="Syllabus" path="/student/Syllabus"/>
+<StraightLink logo={<AiOutlineCalendar/>} title="Events" path="/student"/>
+<StraightLink logo={<AiOutlineNotification/>} title="Announcements" path="/student/announcements"/>
+<StraightLink logo={<GiBookCover/>} title="Resources" path="/student/resources"/>
+<StraightLink logo={<BsChatDots/>} title="Discussions" path="/student/Discussions"/>
+<StraightLink logo={<RiFileUploadLine/>} title="Assignments" path="/student/assignments"/>
+<StraightLink logo={<MdOutlineAssignmentTurnedIn/>} title="Tests & Quizzes" path="/student/testnquizzes"/>
+<StraightLink logo={<GiBookmarklet/>} title="GradeBook" path="/student/gradebook"/>
+<StraightLink logo={<BsPersonVideo3/>} title="Classroom" path="/student/classroom"/>
+<StraightLink logo={<GiNotebook/>} title="My Notes" path="/student/MyNotes"/>
+<StraightLink logo={<MdReportProblem/>} title="Reports" path="/student/Reports"/>
 
 
 
 
-  <InnerDroplist title="Uploads">
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadslides") }}>Slides</MenuButtonOptionLink>
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadAudio") }}>Audio</MenuButtonOptionLink>
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadVideo") }}>Video</MenuButtonOptionLink>
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadPicture") }}>Pictures</MenuButtonOptionLink>
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadBook") }}>Books</MenuButtonOptionLink>
- 
-  </InnerDroplist>
-
-
-  <InnerDroplist title="Resources">
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/viewSlides") }}>Slides</MenuButtonOptionLink>
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/viewAudios") }}>Audio</MenuButtonOptionLink>
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/viewVideos") }}>Video</MenuButtonOptionLink>
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/viewPictures") }}>Pictures</MenuButtonOptionLink>
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/viewBooks") }}>Books</MenuButtonOptionLink>
- 
-  </InnerDroplist>
-
-  <InnerDroplist title="Annoucements">
-    
-  <InnerDroplist title="Students" logo=">">
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Add</MenuButtonOptionLink>
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>View</MenuButtonOptionLink>
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Update</MenuButtonOptionLink>
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Delete</MenuButtonOptionLink>
-  </InnerDroplist>
-
-  <InnerDroplist title="Teachers" logo=">">
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Add</MenuButtonOptionLink>
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>View</MenuButtonOptionLink>
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Update</MenuButtonOptionLink>
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Delete</MenuButtonOptionLink>
-  </InnerDroplist>
-
-  <InnerDroplist title="PTA" logo=">">
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Add</MenuButtonOptionLink>
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>View</MenuButtonOptionLink>
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Update</MenuButtonOptionLink>
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Delete</MenuButtonOptionLink>
-  </InnerDroplist>
-
-  <InnerDroplist title="HOD" logo=">">
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Add</MenuButtonOptionLink>
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>View</MenuButtonOptionLink>
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Update</MenuButtonOptionLink>
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/test") }}>Delete</MenuButtonOptionLink>
-  </InnerDroplist>
-  
-  </InnerDroplist>
-
-  <InnerDroplist title="Assignments">
-
-
-  <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadAssignment") }}>Upload Assignment</MenuButtonOptionLink>
- 
-
-
-
-  </InnerDroplist>
-
-
-  
-
-
-
-
-</DropList>
 
 
 
@@ -335,19 +248,11 @@ const toggler = () => {
   
 
   <>
-<HeadernSearch pic={profilePic} name={userInfo.fullName} toggle={toggle} toggler={toggler}/>
+<HeadernSearch pic={profilePic}  toggle={toggle} toggler={toggler}/>
 <ProfileNDate  onClick={()=>toggler()}>
 <HomeSchoolName> {SchoolData.schoolName} </HomeSchoolName>
 
 <ProfileDetails>
-
-<AnimateHeight height={dropdownOpen?"auto":0} duration={500}>    
-<ProfileButtonOptionLink onClick={() => { navigate("/admin/viewProfile"); toggleDropdown() }}>View Profile </ProfileButtonOptionLink>
-<ProfileButtonOptionLink onClick={() => { navigate("/admin/test"); toggleDropdown() }}>Edit Profile </ProfileButtonOptionLink>
-<ProfileButtonOptionLink onClick={() => { navigate("/admin/test"); toggleDropdown() }}>Notifications </ProfileButtonOptionLink>
-<ProfileButtonOptionLink onClick={() => { navigate("/admin/test"); toggleDropdown() }}>Chats </ProfileButtonOptionLink>
-
-</AnimateHeight>
 
  </ProfileDetails>
 
@@ -366,12 +271,20 @@ alignItems: 'center',
 
     
     <HomeUserPic src={profilePic} onClick={toggleDropdown}/>
-
-  <HomeDetailsGrouper >
+  {
+    isMobile?(
+    <>
+    
+    </>):(
+    <>
+   <HomeDetailsGrouper >
    <HomeUserName onClick={toggleDropdown}>{userInfo.title} {userInfo.firstName} {userInfo.otherName} {userInfo.lastName}</HomeUserName>
    <HomeUserSpecificRole onClick={toggleDropdown}>{userInfo.level}</HomeUserSpecificRole>
    
-  </HomeDetailsGrouper>
+  </HomeDetailsGrouper>   
+    </>)
+  }
+
 
 
   </HomeGrouper>
@@ -383,79 +296,59 @@ alignItems: 'center',
 <DateNTime>
   {sysDate}
 </DateNTime>
+{
+  dropdownOpen?(<><MenuCard2 >
 
-<ProfileDetails>
-
-<AnimateHeight height={dropdownOpen?"auto":0} duration={500}>    
-<ProfileButtonOptionLink onClick={() => { navigate("/teacher/viewProfile"); toggleDropdown() }}>View Profile </ProfileButtonOptionLink>
-<ProfileButtonOptionLink onClick={() => { navigate("/teacher/test"); toggleDropdown() }}>Edit Profile </ProfileButtonOptionLink>
-<ProfileButtonOptionLink onClick={() => { navigate("/teacher/test"); toggleDropdown() }}>Notifications </ProfileButtonOptionLink>
-<ProfileButtonOptionLink onClick={() => { navigate("/teacher/test"); toggleDropdown() }}>Chats </ProfileButtonOptionLink>
-
-</AnimateHeight>
-
- </ProfileDetails>
+    <StraightLink logo={<BsGlobeAsiaAustralia/>} title="View Profile" path="/student/timetable"/>
+    <StraightLink logo={<AiOutlineFileText/>} title="Notifications" path="/student/lesson"/>
+    <StraightLink logo={<AiOutlineMenuUnfold/>} title="Contacts" path="/student/overview"/>
+    <StraightLink logo={<AiOutlineCalendar/>} title="Events" path="/student"/>
+    <StraightLink logo={<AiOutlineNotification/>} title="Payments" path="/student/announcements"/>
+    
+    
+    
+      
+    </MenuCard2></>):(<></>)
+}
 
 </ProfileNDate>
 
     </>
 
+    {
+  isMobile?(<div
+  style={{
+    display:"flex",
+    flexDirection:'row',
+    alignItems: 'center',
+    gap:"1rem"
+  }}
+  >
+  <br/><br/><br/>
+  <HomeLogoM src={apiServer+SchoolData.logo}/>
+  <HomeSchoolNameM> {SchoolData.schoolName} </HomeSchoolNameM>
+
+  </div>):(<>
+  
+  </>)
+}
+
+   
+
+
+
     
 
         <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="viewProfile" element={<Profile/>} />
+        <Route path="viewProfile" element={<Profile/>} />             
           
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-
-             
+          <Route path="TimeTable" element={<TimeTable />} />
+          <Route path="lesson" element={<Lessons />} />
 
 
-          
-          
-{
-             specificRole==="Teacher" ? (
-             <>
-              <Route path="studentsInfo" element={<StudentInfo />} />
-              <Route path="studentsDetails/:studentId" element={<StudentDetails />} />
-              <Route path="class" element={<Class />} /> 
-              <Route path="subjects" element={<AddSubject />} /> 
-              <Route path="subjectteacher" element={<SubjectTeacher />} />
-              <Route path="uploadslides" element={<UploadSlides />} />
-              <Route path="uploadVideo" element={<UploadVideo />} />
-              <Route path="uploadAudio" element={<UploadAudio />} /> 
-              <Route path="uploadPicture" element={<UploadPicture />} />
-              <Route path="uploadBook" element={<UploadBook />} />
-              <Route path="viewSlides" element={<ViewSlide />} />
-              <Route path="viewAudios" element={<ViewAudio />} />
-              <Route path="viewVideos" element={<ViewVideo />} />
-              <Route path="viewPictures" element={<ViewPicture />} />
-              <Route path="viewBooks" element={<ViewBook />} />
-              <Route path="uploadAssignment" element={<UploadAssignment />} />
-
-
-
-              
-
-             </>
-             ):(
-             <>
-              <Route path="*" element={<PermissionDenied />} />
-             </>
-             )
-          }          
-          
-          
+          <Route path="*" element={<PermissionDenied />} />
+           
           
    
 

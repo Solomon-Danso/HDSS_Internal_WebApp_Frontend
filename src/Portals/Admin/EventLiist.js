@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import { EventBanner, EventCardList, EventDate, EventDateRow, EventDateRow2, EventDateTitleEnd, EventDateTitleStart, EventTitle, SelectStageButton, SendButton } from '../../Designs/Styles/Profile'
+import { EventBanner, EventCTitle, EventCardList, EventDate, EventDateRow, EventDateRow2, EventDateTitleEnd, EventDateTitleStart, EventTitle, SelectStageButton, SendButton } from '../../Designs/Styles/Profile'
 import { useNavigate } from 'react-router-dom'
 import { colors } from '../../Designs/Colors';
 import { Show } from '../../Constants /Alerts';
@@ -63,9 +63,18 @@ const EventLiist = ({ event }) => {
   return (
     <EventCardList>
       <EventTitle> {event.title}</EventTitle>
-      <div>Start: <span style={{fontSize:"1.1rem"}}>{formatDateTime(event.start)}</span> </div>
-      <div>End: <span style={{fontSize:"1.1rem"}}>{formatDateTime(event.end)}</span> </div>
-      
+      <div style={{
+        display:"flex",
+        flexDirection:"row",
+        gap:"1rem"
+      }}><EventCTitle>Start:</EventCTitle>  <span style={{fontSize:"1rem"}}>{formatDateTime(event.start)}</span> </div>
+      <div style={{
+        display:"flex",
+        flexDirection:"row",
+        gap:"1rem"
+      }}><EventCTitle>End:</EventCTitle> <span style={{fontSize:"1rem"}}>{formatDateTime(event.end)}</span> </div>
+
+
      
 {
    specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(<>

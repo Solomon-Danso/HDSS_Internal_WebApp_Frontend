@@ -127,13 +127,14 @@ const StudentInfo = () => {
             },
             body: JSON.stringify({className,classCode,campus,classTeacher }),
           });
+          const data = await response.text();
           if (response.ok) {
            Show.hideLoading();
            Show.Success("Class Added Successfully")
             window.location.reload()
             
           } else {
-            Show.Attention("All fields are required");
+            Show.Attention(data);
           }
         } catch (err) {
           Show.Attention("An error has occurred");
@@ -236,7 +237,7 @@ const StudentInfo = () => {
         <option>Select A Teacher</option>
    {theStudents.length > 0 &&
     theStudents.map((data) => (
-      <option key={data.id}>{data.title}{" "}{data.firstName}{" "} {data.otherName}{" "}{data.lastName}</option>
+      <option key={data.id} value={data.staffID}>{data.title}{" "}{data.firstName}{" "} {data.otherName}{" "}{data.lastName}</option>
     ))}
 
     </PaySelector>

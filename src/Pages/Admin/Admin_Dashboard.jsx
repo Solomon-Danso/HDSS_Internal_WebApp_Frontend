@@ -30,6 +30,8 @@ import SubjectTeacher from "../../Portals/Admin/LMS/SubjectTeachers"
 import ViewSlide from "../../Portals/Admin/LMS/AdminViewSlides"
 import ViewAudio from "../../Portals/Admin/LMS/AdminViewAudios"
 import ViewVideo from "../../Portals/Admin/LMS/AdminViewVideos"
+import ViewTimeTable from "../../Portals/Admin/LMS/AdminViewTimetable"
+
 import ViewPicture from "../../Portals/Admin/LMS/AdminViewPicture"
 import ViewBooks from "../../Portals/Admin/LMS/AdminViewBooks"
 import HeadernSearch from '../HeadernSearch';
@@ -855,6 +857,7 @@ const [sysDate, setSysDate] = useState("")
               <Route path="viewVideos" element={<ViewVideo />} />
               <Route path="viewPictures" element={<ViewPicture />} />
               <Route path="viewBooks" element={<ViewBooks />} />
+              <Route path="viewTimeTable" element={<ViewTimeTable />} />
               
 
              </>

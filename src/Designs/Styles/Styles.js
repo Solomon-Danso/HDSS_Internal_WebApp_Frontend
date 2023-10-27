@@ -25,7 +25,7 @@ background-color: ${colors.ivory_dark};
 export const MainDashboardContainer = styled.div`
 display: flex;
 flex-direction: row;
-gap:1.5rem;
+gap:1.0rem;
 margin-top: 0.5rem;
 height:100vh;
 overflow: hidden;
@@ -92,6 +92,26 @@ gap: 1rem;
 
 `;
 
+
+export const SMenuButtonDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: transparent;
+  transition: background-color 0.3s;
+  margin-bottom:1.4rem;
+
+  &:hover {
+    background-color: #B6965D; /* Change this to the desired hover background color */
+    border-radius: 3px;
+  }
+
+  &:active {
+    background-color: ${colors.body}; /* Change this to the desired background color when selected */
+  }
+`;
+
+
 export const SingleButtonDiv = styled.div`
 display: flex;
 flex-direction: column;
@@ -149,7 +169,7 @@ border-radius: 50%;
 
 export const MenuButtonLink = styled.div`
 color: ${colors.white};
-font-size:1.2rem;
+font-size:1.1rem;
 cursor: pointer;
 cursor: pointer;
 

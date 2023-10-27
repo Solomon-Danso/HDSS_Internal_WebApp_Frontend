@@ -121,6 +121,32 @@ export const MenuCard = styled.div`
 
 `;
 
+export const MenuCard2 = styled.div`
+  background: ${colors.body};
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(19.7px);
+  -webkit-backdrop-filter: blur(19.7px);
+  
+  height: 40vh;
+  padding: 1rem;
+    /* Position absolute to place the card above other elements */
+  position: absolute;
+ 
+  right: 0;
+  z-index: 1; /* Set a positive z-index value */
+
+  /* You might need to adjust the width if needed */
+   width: 20%; 
+@media (max-width: 768px){
+  width: 50%;
+}
+   overflow: hidden;
+   overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+
+`;
 
 
 export const StudentInfoCard2 = styled.div`
@@ -212,8 +238,10 @@ height:auto;
 padding:0.5rem;
 overflow:hidden;
 width: 90%;
-@media (max-width: 1500px){
- width: 90%;
+@media (max-width: 768px){
+  width: 100%;
+  padding:0.2rem;
+  border-radius: 10px;
 }
 
 `;
@@ -228,9 +256,9 @@ border-radius: 16px;
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(19.7px);
 -webkit-backdrop-filter: blur(19.7px);
-
+align-items: center;
 height:auto;
-padding:2rem;
+padding:1rem;
 overflow:hidden;
 width: 25vw;
 
@@ -428,9 +456,17 @@ color:${colors.darkBlue};
 
 export const EventTitle = styled.div`
 text-align: center;
-font-size: 1.2rem;
+font-size: 1.5rem;
 color: ${colors.lightBlue};
-font-family:OpenSans, NotoSans, sans-seri;
+font-family:cursive;
+font-weight: bold;
+`;
+
+export const EventCTitle = styled.div`
+text-align: left;
+font-size: 1.3rem;
+color: ${colors.lightBlue};
+font-family:cursive;
 
 `;
 
@@ -609,6 +645,12 @@ flex:1;
 
 `;
 
+export const FeesIconsS = styled.div`
+font-size: 1.5rem;
+height:100%
+flex:1;
+
+`;
 
 
 export const FormInputStudent3 = styled.input`
@@ -815,6 +857,31 @@ transition: all 0.5s ease-in-out;
 
 `;
 
+export const PaySelectorS = styled.select`
+width: 23vw;
+padding: 15px 10px;
+border: 1px solid ${({ border }) => border};;
+background-color: ${({background})=>background};
+color: ${({color})=>color};
+border-radius: 5px;
+margin-top: 10px;
+font-size: 16px;
+outline: none;
+transition: all 0.5s ease-in-out;
+
+:hover {
+  border: 0.5px solid ${colors.primary};
+}
+
+:focus {
+  border: 0.5px solid ${colors.primary};
+}
+
+@media (max-width: 768px) {
+  font-size: 12px;
+}
+
+`;
 
 
 
@@ -1038,6 +1105,14 @@ border-radius: 0.3rem;
 export const CardImage2 = styled.img`
 width: 7vw;
 height: 7vh;
+border-radius: 0.5rem;
+
+
+`;
+
+export const CardImage3 = styled.img`
+width: 95%;
+height: 40vh;
 border-radius: 0.5rem;
 
 

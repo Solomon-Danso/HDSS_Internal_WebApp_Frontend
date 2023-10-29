@@ -113,7 +113,7 @@ const [y,sy] = useState("")
        
       
         try {
-            console.log("Before fetch");
+            
           const formData = new FormData();
          
           formData.append("Title", a);
@@ -146,7 +146,7 @@ const [y,sy] = useState("")
           formData.append("ReportingTime", x);
           formData.append("StartDate", y);
 
-          console.log("After fetch");
+          
          Show.showLoading("Processing Data")
           
       

@@ -121,6 +121,7 @@ export const MenuCard = styled.div`
 
 `;
 
+
 export const MenuCard2 = styled.div`
   background: ${colors.body};
   border-radius: 16px;
@@ -145,6 +146,49 @@ export const MenuCard2 = styled.div`
    overflow-y: auto;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none;
+
+`;
+export const MovieCard = styled.div`
+  background: ${colors.body};
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(19.7px);
+  -webkit-backdrop-filter: blur(19.7px);
+  margin-top:1rem;
+ height: 100%;
+
+   width: 48%; 
+   @media (max-width: 800px){
+    width: 100%;
+
+  }
+
+`;
+
+export const MovieBText = styled.div`
+font-size: 1.3rem;
+font-weight: bold;
+text-wrap: break-word;
+padding-left: 0.5rem;
+font-family: OpenSans, NotoSans, sans-serif;
+
+
+`;
+
+export const MovieSText = styled.div`
+font-size: 1.1rem;
+padding-left: 0.5rem;
+padding-bottom: 0.5rem;
+text-wrap: break-word;
+font-family: cursive;
+
+
+`;
+
+
+export const TheVideo = styled.video`
+width:100%;
+height:80%;
 
 `;
 
@@ -775,6 +819,29 @@ export const FormTextAreaStudent = styled.textarea`
   }
 `;
 
+export const FormTextAreaNotes = styled.textarea`
+  width: 100%;
+  height:40vh;
+  padding: 15px 10px;
+  border: 1px solid ${({ border }) => border};;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.5s ease-in-out;
+
+  :hover {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  :focus {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+`;
 
 
 export const SelectForStudent = styled.select`
@@ -954,6 +1021,42 @@ border: none;
 
 `;
 
+export const AddNotes = styled.button`
+border: none;
+  width: 25vw;
+  height: 7vh;
+  border-radius: 20px;
+  border: 1px solid ${({ border }) => border};
+  background-color: ${({ background }) => background};
+  color: ${({ color }) => color};
+  text-align: center;
+  padding: 10px 30px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-family: OpenSans;
+
+  :hover {
+    background-color: ${colors.ivory_dark};
+    color: ${colors.primary};
+    border: 1px solid ${colors.ivory_dark};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    padding: 4px 18px;
+    padding: 11px 25px;
+  }
+
+
+`;
+
+
+
 
 export const NewStudentListCard = styled.div`
   display: flex;
@@ -961,7 +1064,7 @@ export const NewStudentListCard = styled.div`
   justify-content: space-between;
   padding-left: 2rem;
   padding-right: 2rem;
-  height: 3rem;
+  height: 5rem;
   align-items: center;
   color: ${colors.white};
   position: relative;

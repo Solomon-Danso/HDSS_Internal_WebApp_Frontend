@@ -33,7 +33,7 @@ import { RiFileUploadLine } from 'react-icons/ri';
 
 import TimeTable from "../../Portals/Student/TimeTable"
 import Lessons from "../../Portals/Student/Lessons"
-
+import VideoWithNotes from "../../Portals/Student/VideoWithNotes"
 
 
 
@@ -73,8 +73,7 @@ const Dashboard = ({openNav}) => {
       setUserInfo(parsedData);
   }, []);
   const profilePic = apiServer+userInfo.profilePic
-console.log(profilePic);
-console.log(userInfo)
+
   
   const toggleDropdown = () => {
     setDropdownOpen((prevState) => !prevState); // Toggle the value of dropdownOpen
@@ -345,6 +344,7 @@ alignItems: 'center',
           
           <Route path="TimeTable" element={<TimeTable />} />
           <Route path="lesson" element={<Lessons />} />
+          <Route path="lesson/video/:Id/:Title" element={<VideoWithNotes />} />
 
 
           <Route path="*" element={<PermissionDenied />} />

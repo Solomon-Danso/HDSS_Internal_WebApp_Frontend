@@ -4,7 +4,7 @@ import { apiServer } from '../../Constants /Endpoints';
 import school from "../../Designs/Images/download.png"
 
 const ReceiptTemplate = ({ data }) => {
-console.log(apiServer+data.logo)
+
 const link = apiServer+data.logo
   return (
     <ContentContainer >

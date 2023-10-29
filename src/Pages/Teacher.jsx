@@ -17,7 +17,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     try {
       const pages = location.pathname?.split("/");
-       console.log("Url: ", pages);
+   
       setPage(pages.length === 3 ? pages[2] : pages[1]);
   
     } catch (e) {

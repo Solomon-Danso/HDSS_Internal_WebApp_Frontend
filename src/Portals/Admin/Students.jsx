@@ -200,7 +200,7 @@ useEffect(() => {
      .catch(error => console.error(error));
  }, []);
   
- console.log(theTerm)
+
 
 
 

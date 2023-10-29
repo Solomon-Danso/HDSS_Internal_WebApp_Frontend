@@ -16,7 +16,7 @@ const MenuButtons = ({ navOpen, page, setNavOpen }) => {
   const { navigate } = useAuth();
 
   useEffect(() => {
-    // console.log("Url: ", page);
+  
     pages?.forEach((element) => {
       if (element?.path === page) setPagename(element?.name);
     });

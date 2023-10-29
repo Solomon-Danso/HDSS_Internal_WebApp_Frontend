@@ -24,7 +24,7 @@ const Home = () => {
       setUserInfo(parsedData);
   }, []);
   const profilePic = apiServer+userInfo.profilePicture
-  console.log(userInfo)
+
 
   function Greeting() {
     const currentTime = new Date();

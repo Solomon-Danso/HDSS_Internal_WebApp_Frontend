@@ -92,7 +92,7 @@ const Dashboard = ({openNav}) => {
       setUserInfo(parsedData);
   }, []);
   const profilePic = apiServer+userInfo.filePath
-console.log(profilePic);
+
   
   const toggleDropdown = () => {
     setDropdownOpen((prevState) => !prevState); // Toggle the value of dropdownOpen

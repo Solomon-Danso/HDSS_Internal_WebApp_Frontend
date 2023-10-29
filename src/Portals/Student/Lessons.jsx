@@ -472,13 +472,14 @@ useEffect(()=>{
  {
     isMobile?(
     <>
-    Mobile Video
+   <Video subject={d}/>
     </>
     ):(
     <>
-    <Video/>
+    <Video subject={d}/>
     </>)
  }
+    
     
     </>):(<></>)
 }

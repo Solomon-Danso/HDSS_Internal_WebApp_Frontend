@@ -48,7 +48,7 @@ const Students = () => {
           const response = await fetch(apiServer + url, {
             method: "GET",
           });
-          console.log(apiServer + url)
+         
           const data = await response.json();
           if (response.ok) {
             setStudent([data]);
@@ -162,7 +162,7 @@ useEffect(() => {
   }, []);
   
 
-console.log(u)
+
 
   
     return (

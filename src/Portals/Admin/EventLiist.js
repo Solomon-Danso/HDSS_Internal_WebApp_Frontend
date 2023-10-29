@@ -32,7 +32,7 @@ const EventLiist = ({ event }) => {
           method: "DELETE",
          
         });
-  console.log(apiServer+DeleteEvents+event.id)
+
     
         if (response.ok) {
           

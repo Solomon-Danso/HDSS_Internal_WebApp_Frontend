@@ -10,8 +10,17 @@ import { MenuButtonIcon } from '../../Designs/Styles/Styles';
 import { RiEyeLine, RiVideoUploadLine } from 'react-icons/ri';
 import { GoDownload } from 'react-icons/go';
 import { HiOutlineAcademicCap } from 'react-icons/hi';
+import { MdOutlineHeadset } from 'react-icons/md';
+import Beauty from '../../Designs/Images/beauty.jpg'
 
-const VideoWithNotes = (props) => {
+
+
+
+
+
+
+
+const AudioWithNotes = (props) => {
   const { Id } = useParams();
 
   const [singleVid, setSingleVid] = useState({});
@@ -27,7 +36,7 @@ const VideoWithNotes = (props) => {
   }, []);
 
   useEffect(() => {
-    const URL = `api/StudentApp/SingleVideo?SID=${userInfo.studentId}&Id=${Id}`;
+    const URL = `api/StudentApp/SingleAudio?SID=${userInfo.studentId}&Id=${Id}`;
     if (userInfo.studentId) {
       fetch(apiServer + URL)
         .then((response) => response.json())
@@ -69,7 +78,7 @@ const URL=`api/StudentApp/StudentNote?SID=${userInfo.studentId}`
         },
         body: JSON.stringify({
             resourceUrl:apiServer + singleVid.slidePath,
-            resourceType:"Video",
+            resourceType:"Audio",
             notes:a,
             subject:singleVid.subjectName,
             academicTerm:singleVid.academicTerm,
@@ -95,25 +104,7 @@ const URL=`api/StudentApp/StudentNote?SID=${userInfo.studentId}`
 
 const [a,sa] = useState("")
 
-const downloader = async (Url, title) => {
 
-
- 
-      
-
-      // Create an anchor element to trigger the download
-      const a = document.createElement('a');
-      a.href = Url;
-      a.download = `${title}.mp4`
-      document.body.appendChild(a);
-      a.click();
-
-      // Clean up the URL and remove the anchor element
-      //window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
-    
-  
-  }
   
 
 const formatNumber = (number) => {
@@ -131,6 +122,18 @@ const formatNumber = (number) => {
   return number.toString();
 };
 
+const playAudio = (audioSrc, audioElement) => {
+    if (audioElement.paused) {
+      audioElement.src = audioSrc;
+      audioElement.play();
+    } else {
+      audioElement.pause();
+    }
+  };
+  
+  // Initialize an audio element
+  const audioElement = new Audio();
+
 
   return (
     <>
@@ -139,10 +142,12 @@ const formatNumber = (number) => {
      {singleVid.slidePath != undefined && (
       
         <MovieCard>
-          <video controls width="100%" height="70%" top="0px">
-            <source src={apiServer + singleVid.slidePath} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+            <img src={Beauty} width="100%" height="70%" top="0px" alt={"Click Me"}
+          
+          onClick={()=>{
+             playAudio(apiServer + singleVid.slidePath, audioElement);
+          }}
+          />
           <MovieBText>{singleVid.subjectName}</MovieBText>
           <MovieSText>{singleVid.title}</MovieSText>
          
@@ -163,7 +168,7 @@ const formatNumber = (number) => {
   </div>
 
   <div style={{display:"flex", flexDirection:"row"}}>
-  <MenuButtonIcon> <RiVideoUploadLine/></MenuButtonIcon>
+  <MenuButtonIcon> <MdOutlineHeadset/></MenuButtonIcon>
   <MovieSText>{singleVid.dateAdded}</MovieSText>
 </div>
 
@@ -208,10 +213,14 @@ const formatNumber = (number) => {
     
         {singleVid.slidePath != undefined && (
         <>
-          <video controls width="100%" height="70%" top="0px">
-            <source src={apiServer + singleVid.slidePath} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          <img src={Beauty} width="100%" height="70%" top="0px" alt={"Click Me"}
+          
+          onClick={()=>{
+             playAudio(apiServer + singleVid.slidePath, audioElement);
+          }}
+          />
+  
+
 
 <div style={{display: 'flex',flexDirection:'row',width:"100%",height:"auto",justifyContent:"space-between"}}>
   <div>
@@ -228,7 +237,7 @@ const formatNumber = (number) => {
   </div>
 
   <div style={{display:"flex", flexDirection:"row"}}>
-  <MenuButtonIcon> <RiVideoUploadLine/></MenuButtonIcon>
+  <MenuButtonIcon> <MdOutlineHeadset/></MenuButtonIcon>
   <MovieSText>{singleVid.dateAdded}</MovieSText>
 </div>
 
@@ -286,5 +295,5 @@ const formatNumber = (number) => {
   );
 }
 
-export default VideoWithNotes;
+export default AudioWithNotes;
 

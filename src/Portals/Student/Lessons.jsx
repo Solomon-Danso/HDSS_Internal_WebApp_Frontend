@@ -4,6 +4,7 @@ import  Video  from './Video'
 import  Audio  from './Audio'
 import  Picture  from './Picture'
 import  Slide  from './Slide'
+import  Book  from './Book'
 
 import { apiServer } from '../../Constants /Endpoints'
 import { Show } from '../../Constants /Alerts'
@@ -159,6 +160,7 @@ const [video, setvideo] = useState(false);
 const [audio, setaudio] = useState(false);
 const [picture, setpicture] = useState(false);
 const [slide, setslide] = useState(false);
+const [book, setbook] = useState(false);
 
 const [videoList, setvideoList] = useState([]);
 const [audioList, setaudioList] = useState([]);
@@ -170,6 +172,7 @@ const TheFalser = () =>{
     setaudio(false)
     setpicture(false)
     setslide(false)
+    setbook(false)
 }
 
 const [isMobile, setIsMobile] = useState(false);
@@ -221,6 +224,36 @@ const VideoFunction =  async () => {
     }
 
 }
+
+const BookFunction =  async () => {
+  const URL=`api/StudentApp/Book?SID=${userInfo.studentId}&ClassName=${userInfo.level}&Subject=${d}`
+    Show.showLoading("Loading Books")
+
+  try {
+    const response = await fetch(apiServer + URL, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json(); // Parsing the JSON data
+
+    if (data && data.length > 0) {
+      Show.hideLoading();
+      setvideoList(data);
+      TheFalser();
+      setbook(true);
+    } else {
+      TheFalser();
+    }
+  } catch (err) {
+    Show.Attention("An error has occurred.");
+  }
+
+}
+
+
 
 const AudioFunction =  async () => {
     const URL=`api/StudentApp/Audio?SID=${userInfo.studentId}&ClassName=${userInfo.level}&Subject=${d}`
@@ -327,6 +360,9 @@ useEffect(()=>{
     else if(c==="Slide"){
         SlideFunction();
     }
+    else if(c==="Book"){
+      BookFunction();
+  }
     else if(c==="Select Resource"){
         Show.Attention("Please select a resource")
     }
@@ -401,6 +437,7 @@ useEffect(()=>{
         <option>Audio</option>
         <option>Picture</option>
         <option>Slide</option>
+        <option>Book</option>
         
     
 
@@ -444,6 +481,7 @@ useEffect(()=>{
         <option>Audio</option>
         <option>Picture</option>
         <option>Slide</option>
+        <option>Book</option>
         
     
 
@@ -491,11 +529,11 @@ useEffect(()=>{
  {
     isMobile?(
     <>
-    Mobile Audio
+    <Audio subject={d}/>
     </>
     ):(
     <>
-    <Audio/>
+    <Audio subject={d}/>
     </>)
  }
     
@@ -509,11 +547,11 @@ useEffect(()=>{
  {
     isMobile?(
     <>
-    Mobile Picture
+    <Picture subject={d}/>
     </>
     ):(
     <>
-    <Picture/>
+    <Picture subject={d}/>
     </>)
  }
     
@@ -527,17 +565,34 @@ useEffect(()=>{
  {
     isMobile?(
     <>
-    Mobile Slide
+   <Slide subject={d}/>
     </>
     ):(
     <>
-    <Slide/>
+    <Slide subject={d}/>
     </>)
  }
     
     </>):(<></>)
 }
 
+{
+    book?(
+    <>
+ 
+ {
+    isMobile?(
+    <>
+   <Book subject={d}/>
+    </>
+    ):(
+    <>
+    <Book subject={d}/>
+    </>)
+ }
+    
+    </>):(<></>)
+}
 
 
 

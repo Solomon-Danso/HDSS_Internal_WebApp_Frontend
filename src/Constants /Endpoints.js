@@ -1,6 +1,6 @@
 //export const apiServer = "http://10.42.0.1:5000/"
-export const apiServer = "http://192.168.43.18:5000/"
-//export const apiServer = "http://localhost:5000/"
+//export const apiServer = "http://192.168.43.18:5000/"
+export const apiServer = "http://localhost:5000/"
 export const LoginEndpoint = "api/Auth/Login"
 export const Teacher = "api/Auth/Teacher"
 export const Student = "api/Auth/Student"
@@ -21,6 +21,7 @@ export const SearchClass = "api/Admin/SearchClass?searchTerm="
 export const SearchSubject = "api/Admin/SearchSubject?searchTerm="
 export const SearchSlides = "api/Admin/SearchSlides?searchTerm="
 export const SearchVideo = "api/Admin/SearchVideo?searchTerm="
+export const StudentSearchVideo = "api/Admin/StudentSearchVideo?searchTerm="
 
 
 

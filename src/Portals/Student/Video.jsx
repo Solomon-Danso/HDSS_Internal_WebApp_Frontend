@@ -7,10 +7,11 @@ import { colors } from '../../Designs/Colors'
 import { MenuButtonIcon, MenuButtonLink } from '../../Designs/Styles/Styles';
 import { MdTitle } from 'react-icons/md';
 import { HiOutlineAcademicCap } from 'react-icons/hi';
-import { RiVideoUploadLine } from 'react-icons/ri';
+import { RiEyeLine, RiVideoUploadLine } from 'react-icons/ri';
 import { BsCalendar2Date } from 'react-icons/bs';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
+import { GoDownload } from 'react-icons/go';
 
 
 
@@ -61,6 +62,57 @@ const navigate = useNavigate()
   }, [subject, userInfo.studentId, userInfo.level]);
   
 
+  const [studentList, setStudentList] = useState([])
+  const [closeOther, setCloseOther] = useState(false)
+const [searchResult, setSearchResult] = useState(false)
+const [searchTerm, setSearchTerm] = useState()
+
+
+useEffect(() => {
+  // Function to fetch search results based on searchTerm
+  const fetchSearchResults = async () => {
+    if (searchTerm === '') {
+      setStudentList([]); // Clear the list if search term is empty
+      setSearchResult(false);
+      setCloseOther(false)
+      return;
+    }
+
+    //Show.showLoading('Processing Data');
+    const URL = `api/Admin/StudentSearchVideo?searchTerm=${searchTerm}&ClassName=${userInfo.level}`
+    try {
+      const response = await fetch(apiServer + URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+    
+      const data = await response.json();
+
+      if (response.ok) {
+        Show.hideLoading();
+        setSearchResult(true);
+        setStudentList(data);
+        setCloseOther(true)
+      } else {
+        //Show.Attention('No Result Found');
+        setSearchResult(false);
+        setCloseOther(false)
+        setStudentList([]);
+      }
+    } catch (error) {
+      //Show.Attention('No Result Found');
+      setSearchResult(false);
+      setStudentList([]);
+    }
+  };
+
+  fetchSearchResults(); // Call the function when searchTerm changes
+}, [searchTerm]);
+
+
 
   return (
     <div style={{
@@ -75,8 +127,8 @@ const navigate = useNavigate()
             //background={colors.darkBlue}
         
             border={colors.darkBlue}
-            placeholder="Live Search Using Class, Subject, Class Teacher, Staff ID, Date Assigned"
-            //onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search for anything..."
+            onChange={(e) => setSearchTerm(e.target.value)}
             style={{ '::placeholder': { color: 'white' } }}
           />
           
@@ -89,7 +141,61 @@ const navigate = useNavigate()
   gap:'1rem'
 }}>
 
-{videoList.length > 0 &&
+
+
+
+{searchResult && (
+          <>
+          {studentList.length > 0 &&
+    studentList.map((data) => (
+<MovieCard>
+  <video  width="100%" height="70%" top="0px" onClick={()=>{
+    navigate(`video/${data.id}/${data.title}`)
+  }}>
+    <source src={apiServer + data.slidePath} type="video/mp4" />
+
+    Your browser does not support the video tag.
+  </video>
+
+  
+  <div style={{display:"flex", flexDirection:"row"}}>
+          <MenuButtonIcon ><MdTitle/></MenuButtonIcon>
+          <MovieSText >{data.title} </MovieSText>
+  </div>
+
+  <div style={{display:"flex", flexDirection:"row"}}>
+          <MenuButtonIcon ><RiVideoUploadLine/></MenuButtonIcon>
+          <MovieSText >{data.dateAdded} </MovieSText>
+</div>
+
+<div style={{display:"flex", flexDirection:"row"}}>
+          <MenuButtonIcon ><HiOutlineAcademicCap/></MenuButtonIcon>
+          <MovieSText >{data.academicTerm} </MovieSText>
+</div>
+
+
+<div style={{display:"flex", flexDirection:"row"}}>
+          <MenuButtonIcon ><AiOutlineCalendar/></MenuButtonIcon>
+          <MovieSText >{data.academicYear} </MovieSText>
+</div>
+
+</MovieCard>
+
+    ))}
+          </>
+        )}
+
+
+{
+  closeOther? (
+  <>
+  
+  </>
+  ):(
+  
+  <>
+  
+  {videoList.length > 0 &&
     videoList.map((data) => (
 <MovieCard>
   <video width="100%" height="70%" top="0px" onClick={()=>{
@@ -126,7 +232,25 @@ const navigate = useNavigate()
 
     ))}
 
+  
+  </>)  
+}
+
+
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

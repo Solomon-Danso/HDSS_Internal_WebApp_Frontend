@@ -34,7 +34,8 @@ import { RiFileUploadLine } from 'react-icons/ri';
 import TimeTable from "../../Portals/Student/TimeTable"
 import Lessons from "../../Portals/Student/Lessons"
 import VideoWithNotes from "../../Portals/Student/VideoWithNotes"
-
+import AudioWithNotes from "../../Portals/Student/AudioWithNotes"
+import PictureWithNotes from "../../Portals/Student/PictureWithNotes"
 
 
 
@@ -345,6 +346,8 @@ alignItems: 'center',
           <Route path="TimeTable" element={<TimeTable />} />
           <Route path="lesson" element={<Lessons />} />
           <Route path="lesson/video/:Id/:Title" element={<VideoWithNotes />} />
+          <Route path="lesson/audio/:Id/:Title" element={<AudioWithNotes />} />
+          <Route path="lesson/picture/:Id/:Title" element={<PictureWithNotes />} />
 
 
           <Route path="*" element={<PermissionDenied />} />

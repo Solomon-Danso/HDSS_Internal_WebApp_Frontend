@@ -12,10 +12,10 @@ import { BsCalendar2Date } from 'react-icons/bs';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { GoDownload } from 'react-icons/go';
-import Beauty from '../../Designs/Images/beauty.jpg'
+import Beauty from '../../Designs/Images/boyRead.jpg'
 
 
-const Audio = ({subject}) => {
+const Slide = ({subject}) => {
 
   const [userInfo, setUserInfo] = useState({});
 
@@ -54,8 +54,8 @@ const [videoList, setVideoList] = useState([])
 const navigate = useNavigate()
 
   useEffect(() => {
-    const URL = `api/StudentApp/Audio?SID=${userInfo.studentId}&ClassName=${userInfo.level}&Subject=${subject}`;
-    fetch(apiServer + URL, { credentials: 'include' }) // Include credentials
+    const URL = `api/StudentApp/Book?SID=${userInfo.studentId}&ClassName=${userInfo.level}&Subject=${subject}`;
+    fetch(apiServer + URL) // Include credentials
       .then((response) => response.json())
       .then((data) => setVideoList(data))
       .catch((err) => console.error(err));
@@ -79,7 +79,7 @@ useEffect(() => {
     }
 
     //Show.showLoading('Processing Data');
-    const URL = `api/Admin/StudentSearchAudio?searchTerm=${searchTerm}&ClassName=${userInfo.level}`
+    const URL = `api/Admin/StudentSearchBook?searchTerm=${searchTerm}&ClassName=${userInfo.level}`
     try {
       const response = await fetch(apiServer + URL, {
         method: 'POST',
@@ -114,6 +114,46 @@ useEffect(() => {
 
 
 
+
+const Counter = async (server,id) => {
+    
+  const URL = `api/StudentApp/SingleBook?SID=${userInfo.studentId}&Id=${id}`;
+
+   try {
+     const response = await fetch(apiServer + URL, {
+       method: "GET",
+       headers: {
+         "Content-Type": "application/json", // Set the Content-Type header
+       },
+   
+     });
+     const data = await response.text();
+     if (response.ok) {
+      window.open(server)
+       
+     } else {
+       Show.Attention(data);
+     }
+   } catch (err) {
+     Show.Attention("An error has occurred");
+   }
+ };
+
+
+const formatNumber = (number) => {
+  if (number >= 1000000000000000) {
+    return (number / 1000000000000000).toFixed(3) + 'Q';
+  } else if (number >= 1000000000000) {
+    return (number / 1000000000000).toFixed(3) + 'T';
+  } else if (number >= 1000000000) {
+    return (number / 1000000000).toFixed(3) + 'B';
+  } else if (number >= 1000000) {
+    return (number / 1000000).toFixed(3) + 'M';
+  } else if (number >= 1000) {
+    return (number / 1000).toFixed(3) + 'K';
+  }
+  return number.toString();
+};
 
 
 
@@ -153,7 +193,7 @@ useEffect(() => {
           {studentList.length > 0 &&
     studentList.map((data) => (
 <MovieCard onClick={()=>{
-    navigate(`audio/${data.id}/${data.title}`)
+   Counter(apiServer+data.slidePath, data.id)
   }}>
 <img src={Beauty} width="100%" height="55%" top="0px" alt={"Click Me"}/>
   
@@ -199,13 +239,16 @@ useEffect(() => {
   {videoList.length > 0 &&
     videoList.map((data) => (
 <MovieCard onClick={()=>{
-    navigate(`audio/${data.id}/${data.title}`)
+   Counter(apiServer+data.slidePath, data.id)
   }}>
  
     <img src={Beauty} width="100%" height="55%" top="0px" alt={"Click Me"}/>
    
 
-
+    <div style={{display:"flex", flexDirection:"row"}}>
+          <MenuButtonIcon ><RiEyeLine/></MenuButtonIcon>
+          <MovieSText >{formatNumber(data.numberOfViews)} </MovieSText>
+  </div>
   
   <div style={{display:"flex", flexDirection:"row"}}>
           <MenuButtonIcon ><MdTitle/></MenuButtonIcon>
@@ -260,4 +303,4 @@ useEffect(() => {
   )
 }
 
-export default Audio
+export default Slide

@@ -184,32 +184,21 @@ DashBoard
       <InnerDroplist title="Annoucements">
         
       <InnerDroplist title="Students" logo=">">
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Add</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>View</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Update</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Delete</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/admin/annoucement") }}>ADD</MenuButtonOptionLink>
       </InnerDroplist>
 
       <InnerDroplist title="Teachers" logo=">">
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Add</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>View</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Update</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Delete</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/admin/annoucementt") }}>ADD</MenuButtonOptionLink>
+
       </InnerDroplist>
 
       <InnerDroplist title="PTA" logo=">">
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Add</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>View</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Update</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Delete</MenuButtonOptionLink>
-      </InnerDroplist>
+      <MenuButtonOptionLink onClick={() => { navigate("/admin/annoucementp") }}>ADD</MenuButtonOptionLink>
+       </InnerDroplist>
 
       <InnerDroplist title="HOD" logo=">">
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Add</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>View</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Update</MenuButtonOptionLink>
-      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Delete</MenuButtonOptionLink>
-      </InnerDroplist>
+      <MenuButtonOptionLink onClick={() => { navigate("/admin/annoucementh") }}>ADD</MenuButtonOptionLink>
+     </InnerDroplist>
       
       </InnerDroplist>
 

@@ -31,6 +31,16 @@ import ViewSlide from "../../Portals/Admin/LMS/AdminViewSlides"
 import ViewAudio from "../../Portals/Admin/LMS/AdminViewAudios"
 import ViewVideo from "../../Portals/Admin/LMS/AdminViewVideos"
 import ViewTimeTable from "../../Portals/Admin/LMS/AdminViewTimetable"
+import AddAnnoucementS from "../../Portals/Admin/LMS/AddAnnoucementS"
+import AddAnnoucementT from "../../Portals/Admin/LMS/AddAnnouncementT"
+import AddAnnoucementP from "../../Portals/Admin/LMS/AddAnnoucementP"
+import AddAnnoucementH from "../../Portals/Admin/LMS/AddAnnouncementH"
+
+
+
+
+
+
 
 import ViewPicture from "../../Portals/Admin/LMS/AdminViewPicture"
 import ViewBooks from "../../Portals/Admin/LMS/AdminViewBooks"
@@ -858,6 +868,11 @@ const [sysDate, setSysDate] = useState("")
               <Route path="viewPictures" element={<ViewPicture />} />
               <Route path="viewBooks" element={<ViewBooks />} />
               <Route path="viewTimeTable" element={<ViewTimeTable />} />
+              <Route path="annoucement" element={<AddAnnoucementS />} />
+              <Route path="annoucementt" element={<AddAnnoucementT />} />
+              <Route path="annoucementp" element={<AddAnnoucementP />} />
+              <Route path="annoucementh" element={<AddAnnoucementH />} />
+              
               
 
              </>

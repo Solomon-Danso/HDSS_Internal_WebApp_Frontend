@@ -36,6 +36,7 @@ import Lessons from "../../Portals/Student/Lessons"
 import VideoWithNotes from "../../Portals/Student/VideoWithNotes"
 import AudioWithNotes from "../../Portals/Student/AudioWithNotes"
 import PictureWithNotes from "../../Portals/Student/PictureWithNotes"
+import ViewAnnouncement from "../../Portals/Student/ViewAnnoucement"
 
 
 
@@ -179,12 +180,9 @@ const toggler = () => {
 
 
   <StraightLink logo={<BsGlobeAsiaAustralia/>} title="TimeTable" path="/student/timetable"/>
-<StraightLink logo={<AiOutlineFileText/>} title="Lesson" path="/student/lesson"/>
-<StraightLink logo={<AiOutlineMenuUnfold/>} title="Overview" path="/student/overview"/>
-<StraightLink logo={<GiSecretBook/>} title="Syllabus" path="/student/Syllabus"/>
+<StraightLink logo={<GiSecretBook/>} title="Lesson" path="/student/lesson"/>
 <StraightLink logo={<AiOutlineCalendar/>} title="Events" path="/student"/>
 <StraightLink logo={<AiOutlineNotification/>} title="Announcements" path="/student/announcements"/>
-<StraightLink logo={<GiBookCover/>} title="Resources" path="/student/resources"/>
 <StraightLink logo={<BsChatDots/>} title="Discussions" path="/student/Discussions"/>
 <StraightLink logo={<RiFileUploadLine/>} title="Assignments" path="/student/assignments"/>
 <StraightLink logo={<MdOutlineAssignmentTurnedIn/>} title="Tests & Quizzes" path="/student/testnquizzes"/>
@@ -192,7 +190,8 @@ const toggler = () => {
 <StraightLink logo={<BsPersonVideo3/>} title="Classroom" path="/student/classroom"/>
 <StraightLink logo={<GiNotebook/>} title="My Notes" path="/student/MyNotes"/>
 <StraightLink logo={<MdReportProblem/>} title="Reports" path="/student/Reports"/>
-
+<StraightLink logo={<AiOutlineNotification/>} title="Payments" path="/student/payments"/>
+    
 
 
 
@@ -348,7 +347,9 @@ alignItems: 'center',
           <Route path="lesson/video/:Id/:Title" element={<VideoWithNotes />} />
           <Route path="lesson/audio/:Id/:Title" element={<AudioWithNotes />} />
           <Route path="lesson/picture/:Id/:Title" element={<PictureWithNotes />} />
-
+          <Route path="announcements" element={<ViewAnnouncement />} />
+         
+      
 
           <Route path="*" element={<PermissionDenied />} />
            

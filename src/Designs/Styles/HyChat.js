@@ -31,7 +31,71 @@ justify-content:space-between;
 export const AppRow = styled.div`
 padding:1.5rem;
 font-size:1.5rem;
-gap: 1rem;
+gap:0.2rem;
 display:flex;
 flex-direction:row;
 `;
+
+export const HeaderRow = styled.div`
+display:flex;
+flex-direction:row;
+justify-content:space-between;
+width:90%;
+
+`;
+
+export const ChatImage = styled.img`
+width:10vw;
+height:15vh;
+@media (max-width: 768px){
+  width:20vw;
+height:12vh;
+border-radius:50%;
+}
+
+`;
+
+export const RowNameandMember2 = styled.div`
+display:flex;
+flex-direction:column;
+padding: 0.5rem;
+justify-content:space-between;
+
+`;
+
+export const RowNameandMember = styled.div`
+display:flex;
+flex-direction:row;
+justify-content:space-between;
+
+`;
+
+
+export const ChatName = styled.div`
+font-size: 1.1rem;
+font-weight:bold;
+
+`;
+
+export const LastMessage = styled.div`
+font-size: 1.3rem;
+
+@media (max-width: 768px){
+  font-size: 0.7rem;
+}
+
+`;
+
+export const Counter = styled.div`
+border-radius: 50%
+color: ${colors.maingreen}
+font-size: 0.7rem;
+`;
+
+
+
+
+
+
+
+

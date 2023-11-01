@@ -176,6 +176,31 @@ export const MenuCardHyChat = styled.div`
 
 `;
 
+export const ChatCard = styled.div`
+  background: ${colors.body};
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(19.7px);
+  -webkit-backdrop-filter: blur(19.7px);
+  
+  height: 15vh;
+  padding: 1rem;
+ 
+   width: 100%; 
+  display:flex;
+  flex-direction: row;
+  gap:2rem;
+
+@media (max-width: 768px){
+  width: 100%;
+  gap:0.5rem;
+ 
+}
+ 
+
+`;
+
+
 
 export const MovieCard = styled.div`
   background: ${colors.body};
@@ -193,6 +218,11 @@ export const MovieCard = styled.div`
   }
 
 `;
+
+
+
+
+
 
 export const MovieBText = styled.div`
 font-size: 1.3rem;

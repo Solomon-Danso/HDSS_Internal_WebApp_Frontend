@@ -72,10 +72,10 @@ const Navigation = ({  page, openfunction }) => {
           <DashIconSep
             title="Dashboard"
             active={page === "dashboard" ? true : false}
-            onClick={() =>navigate("/dashboard")}
+            
           >
-            <IconDashHome
-              onClick={() => navigate("/dashboard")}
+            <DashIconMenu
+              onClick={openfunction}
               color={page === "dashboard" ? colors.primary : "white"}
             />
           </DashIconSep>

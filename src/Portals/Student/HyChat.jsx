@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { AES,enc } from 'crypto-js';
-import { HeaderCard,AppName,RowSB, AppRow } from '../../Designs/Styles/HyChat';
+import { HeaderCard,AppName,RowSB, AppRow, HeaderRow } from '../../Designs/Styles/HyChat';
 import { MenuButtonDiv,MenuButtonIcon,MenuButtonLink,MenuContainer,MenuButtonOptionLink, MenuButtonMain, MenuButtonOption, MenuButtonIconAgain, SMenuButtonDiv } from '../../Designs/Styles/Styles'
 import { BsCamera, BsChatSquareDots, BsGlobeAsiaAustralia, BsTelephone } from 'react-icons/bs';
 import {MdContactPhone, MdOutlineAutoStories, MdOutlineGroups, MdPersonSearch, MdSettings} from 'react-icons/md';
@@ -12,6 +12,10 @@ import { colors } from '../../Designs/Colors';
 import { FaGlobe, FaLayerGroup } from 'react-icons/fa';
 import { GiThreeFriends } from 'react-icons/gi';
 import { FcSettings } from 'react-icons/fc';
+import MainChatPage from './MainChatPage';
+import MainCallPage from './MainCallPage';
+import MainGroupPage from './MainGroupPage';
+
 
 
 const HyChat = () => {
@@ -57,6 +61,15 @@ const closer = () =>{
   setOpenSearch(false);
 }
 const [searchTerm, setSearchTerm] = useState()
+const [openChatWindow, setOpenChatWindow] = useState(false)
+const [openGroupWindow, setOpenGroupWindow] = useState(false)
+const [openCallWindow, setOpenCallWindow] = useState(false)
+
+const WindowCloser = () =>{
+  setOpenChatWindow(false);
+  setOpenGroupWindow(false);
+  setOpenCallWindow(false);
+}
 
 
   return (
@@ -72,6 +85,49 @@ const [searchTerm, setSearchTerm] = useState()
 </AppRow>
 
 </RowSB>
+<HeaderRow>
+<div
+style={{
+  color: openChatWindow?`${colors.maingreen}`:`white`,
+  fontSize:'1.1rem',
+  padding:'0.5rem',
+ 
+}}
+onClick={()=>{
+  WindowCloser();
+  setOpenChatWindow(true)
+}}
+>Chats</div>
+
+
+
+<div
+style={{
+  color: openGroupWindow?`${colors.maingreen}`:`white`,
+  fontSize:'1.1rem',
+  padding:'0.5rem',
+}}
+onClick={()=>{
+  WindowCloser();
+  setOpenGroupWindow(true)
+}}
+>Groups</div>
+
+
+<div
+style={{
+  color: openCallWindow?`${colors.maingreen}`:`white`,
+  fontSize:'1.1rem',
+  padding:'0.5rem',
+}}
+onClick={()=>{
+  WindowCloser();
+  setOpenCallWindow(true)
+}}
+>Calls</div>
+
+</HeaderRow>
+
 
 
     </HeaderCard>
@@ -116,12 +172,46 @@ const [searchTerm, setSearchTerm] = useState()
     <StraightLink logo={<GiThreeFriends/>} title="Friends" path="/student"/>
     <StraightLink logo={<MdOutlineAutoStories/>} title="My Stories" path="/student/announcements"/>
     <StraightLink logo={<MdSettings/>} title="Settings" path="/student"/>
-   
-    
-    
-      
     </MenuCard2></>):(<></>)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+{
+  openChatWindow?(
+  <>
+  <MainChatPage/>
+  
+  </>):(<></>)
+}
+
+{
+  openGroupWindow?(
+  <>
+  <MainGroupPage/>
+  
+  </>):(<></>)
+}
+
+{
+  openCallWindow?(
+  <>
+  <MainCallPage/>
+  
+  </>):(<></>)
+}
+
+
+
 
 
 

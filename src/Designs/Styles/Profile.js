@@ -148,6 +148,35 @@ export const MenuCard2 = styled.div`
   scrollbar-width: none;
 
 `;
+
+export const MenuCardHyChat = styled.div`
+  background: ${colors.body};
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(19.7px);
+  -webkit-backdrop-filter: blur(19.7px);
+  
+  height: 15vh;
+  padding: 1rem;
+    /* Position absolute to place the card above other elements */
+  position: absolute;
+ 
+  right: 0;
+  z-index: 1; /* Set a positive z-index value */
+
+  /* You might need to adjust the width if needed */
+   width: 20%; 
+@media (max-width: 768px){
+  width: 50%;
+}
+   overflow: hidden;
+   overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+
+`;
+
+
 export const MovieCard = styled.div`
   background: ${colors.body};
   border-radius: 16px;
@@ -793,6 +822,41 @@ backdrop-filter: blur(20px);
   }
 `;
 
+
+export const FormInputSearchHyChat = styled.input`
+  width: 100%;
+ background: ${({ background }) => background};
+  padding: 15px 10px;
+  border: 0.1rem solid ${({ border }) => border};;
+  margin-top: 10px;
+  font-size: 1.5rem;
+  outline: none;
+  transition: all 0.5s ease-in-out;
+  text-align: center;
+  color:${colors.darkBlue};
+  /* From https://css.glass */
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+
+
+::placeholder {
+    color: white;
+  }
+
+  :hover {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  :focus {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+`;
 
 
 

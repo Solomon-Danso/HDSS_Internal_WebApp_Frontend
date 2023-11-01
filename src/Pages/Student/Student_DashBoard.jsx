@@ -37,6 +37,7 @@ import VideoWithNotes from "../../Portals/Student/VideoWithNotes"
 import AudioWithNotes from "../../Portals/Student/AudioWithNotes"
 import PictureWithNotes from "../../Portals/Student/PictureWithNotes"
 import ViewAnnouncement from "../../Portals/Student/ViewAnnoucement"
+import HyChat from "../../Portals/Student/HyChat"
 
 
 
@@ -348,6 +349,7 @@ alignItems: 'center',
           <Route path="lesson/audio/:Id/:Title" element={<AudioWithNotes />} />
           <Route path="lesson/picture/:Id/:Title" element={<PictureWithNotes />} />
           <Route path="announcements" element={<ViewAnnouncement />} />
+          <Route path="Discussions" element={<HyChat />} />
          
       
 

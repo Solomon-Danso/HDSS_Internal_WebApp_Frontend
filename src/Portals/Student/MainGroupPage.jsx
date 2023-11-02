@@ -78,12 +78,12 @@ const handleResize = () => {
 
         <div style={{display:'flex', flexDirection:"row", justifyContent:"space-between"}}>
         
-        <div style={{fontSize:'1.3rem', fontWeight:'bold' }}>
+        <div style={{fontSize:'1.3rem', fontFamily:'times new roman' }}>
           {data.groupName? data.groupName.length > 12
           ? data.groupName.substring(0, 12): data.groupName: ''}
         </div>
         
-        <div style={{right:0,position:"fixed",fontSize:'0.7rem', color:`${colors.mainsecondgreen}`,}}> 
+        <div style={{right:0,position:"fixed",fontSize:'1.1rem', color:`${colors.text2}`,}}> 
         {data.lastSenderDate}
         </div>
         
@@ -91,7 +91,7 @@ const handleResize = () => {
         
         <div style={{display:'flex', flexDirection:"row", justifyContent:"space-between"}}>
         
-        <div style={{fontSize:'0.8rem', }}>
+        <div style={{fontSize:'1rem', color:`${colors.text}`}}>
         
                 {data.lastSenderName
                         ? data.lastSenderName.length > 8
@@ -103,8 +103,8 @@ const handleResize = () => {
                     
                         <i>
                         {data.lastMessage
-                        ? data.lastMessage.length > 20
-                            ? data.lastMessage.substring(0, 20) + "..."
+                        ? data.lastMessage.length > 30
+                            ? data.lastMessage.substring(0, 30) + "..."
                             : data.lastMessage
                         : ''}
                         </i>
@@ -113,9 +113,9 @@ const handleResize = () => {
         <div style={{right:0,position:"fixed",}}> 
         {
                         data.totalUnreadMessage<1?(<></>):(<p style={{
-                           color:`${colors.lightsecondgreen}`,
+                           color:`${colors.lightgreen}`,
                            fontSize: '1.3rem',
-                           backgroundColor:`${colors.mainsecondgreen}`,
+                           backgroundColor:`${colors.maingreen}`,
                            borderRadius:"50%",
                            width:'1.5rem',
                            textAlign: 'center',

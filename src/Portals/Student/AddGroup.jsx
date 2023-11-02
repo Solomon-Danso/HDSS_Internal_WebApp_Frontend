@@ -76,7 +76,7 @@ const StudentInfo = () => {
           if (response.ok) {
            Show.hideLoading();
            Show.Success("Group Created Successfully")
-            navigate("/student/Discussions")
+            navigate("/HyChat")
             
           } else {
             Show.Attention("All fields are required");

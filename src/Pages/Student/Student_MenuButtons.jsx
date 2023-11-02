@@ -50,7 +50,7 @@ DashBoard
 <StraightLink logo={<GiSecretBook/>} title="Lesson" path="/student/lesson"/>
 <StraightLink logo={<AiOutlineCalendar/>} title="Events" path="/student"/>
 <StraightLink logo={<AiOutlineNotification/>} title="Announcements" path="/student/announcements"/>
-<StraightLink logo={<BsChatDots/>} title="Discussions" path="/student/Discussions"/>
+<StraightLink logo={<BsChatDots/>} title="Discussions" path="/HyChat"/>
 <StraightLink logo={<RiFileUploadLine/>} title="Assignments" path="/student/assignments"/>
 <StraightLink logo={<MdOutlineAssignmentTurnedIn/>} title="Tests & Quizzes" path="/student/testnquizzes"/>
 <StraightLink logo={<GiBookmarklet/>} title="GradeBook" path="/student/gradebook"/>

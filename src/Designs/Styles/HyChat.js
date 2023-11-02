@@ -3,7 +3,7 @@ import { colors } from "../Colors";
 
 
 export const HeaderCard = styled.div`
-  background: ${colors.card};
+  background: ${colors.body};
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(19.7px);
@@ -48,8 +48,8 @@ export const ChatImage = styled.img`
 width:10vw;
 height:15vh;
 @media (max-width: 768px){
-  width:20vw;
-height:12vh;
+  width:15vw;
+height:7.5vh;
 border-radius:50%;
 }
 

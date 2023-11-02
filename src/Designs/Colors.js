@@ -23,6 +23,8 @@ export  const colors = {
   mainred:"#EA5354",
   lightsecondgreen:"#2F4A4E",
   mainsecondgreen:"#29C76F",
+  text:"#9C9C9C",
+  text2:"#AAAAAA"
 
 
 };

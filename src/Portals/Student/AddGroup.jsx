@@ -1,19 +1,42 @@
-import React, { useEffect, useState } from 'react'
-import { AdmitButton2, AdmitStudentCard2, FeesIcons, FeesRow, FormInputStudent4, FormInputStudent6, FormLable, FormLoaders, NewStudentListCard2, PaySelector, SelectForStudent, SelectStageButton, StudCenter, StudRight, StudentInfoCard, StudentInfoCard2, StudentListResult } from '../../Designs/Styles/Profile'
+import React, { useEffect, useState, useRef } from 'react'
+import { AdmitButton2, AddGrpCard, AddGrpCard2, AddGrpRow, FeesIconM, FeesIconN, FeesIcons, FeesRow, FormInputGrpName, FormInputStudent6, FormInputStudentM, FormLable, FormLoaders, NewStudentListCard2, PaySelector, SelectForStudent, SelectStageButton, StudCenter, StudRight, StudentInfoCard, StudentInfoCard2, StudentListResult, AddGrpBtn } from '../../Designs/Styles/Profile'
 
 import {   ViewTeachers, apiServer } from '../../Constants /Endpoints'
 import { Show } from '../../Constants /Alerts'
-import { colors } from '../../Designs/Colors'
-
 
 import { AES, enc } from 'crypto-js';
-import { MdTitle } from 'react-icons/md'
-import { RiVideoUploadLine } from 'react-icons/ri'
+import { MdAddAPhoto, MdTitle } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
-import { AiOutlinePicture } from 'react-icons/ai'
+import { ChatImage, ChatImagePreview, ChatImageUpload, HeaderCard } from '../../Designs/Styles/HyChat'
+import { BsArrowLeft } from 'react-icons/bs'
+import { colors } from '../../Designs/Colors';
 
 const StudentInfo = () => {
+  
 
+  const [isMobile, setIsMobile] = useState(false);
+  const [active, setActive] = useState(null);
+  const fileInputRef = useRef();
+
+  const handleIconClick = () => {
+    fileInputRef.current.click();
+  };
+
+  useEffect(() => {
+    setActive(1);
+     window.addEventListener("resize", handleResize);
+      handleResize();
+  }, []);
+  
+  //choose the screen size
+  const handleResize = () => {
+    if (window.innerWidth < 768) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  };
+  
 
 
     const [theClass2, setTheClass2] = useState([])
@@ -50,13 +73,13 @@ const StudentInfo = () => {
       }, []);
 
 
-      const [e,se] = useState("")
+      const [e,se] = useState({})
       const [f, sf] = useState("")
 
       const navigate = useNavigate();
 
-      const studentDetails = async (event) => {
-        event.preventDefault();
+      const studentDetails = async () => {
+        //event.preventDefault();
     
        Show.showLoading("Processing Data");
     const URL=`api/HyChat/CreateGroup?ID=${userInfo.studentId}`
@@ -66,7 +89,7 @@ const StudentInfo = () => {
           const formData = new FormData();
           
            formData.append("Picture",f)
-           formData.append("GroupName",e)
+           formData.append("GroupName",inputValue)
       
           const response = await fetch(apiServer + URL, {
             method: "POST",
@@ -85,83 +108,176 @@ const StudentInfo = () => {
           Show.Attention("An error has occurred");
         }
       };
-      const [dropper, setDropper] = useState(false)
+    
+
+      const [inputValue, setInputValue] = useState('');
+
+      const handleInputChange = (e) => {
+        const newValue = e.target.value;
+        if (newValue.length <= 20) {
+          setInputValue(newValue);
+        }
+      };
+
+      const Preview = async () => {
+      
+    const URL=`api/HyChat/Previewer`
+   
+
+        try {
+          const formData = new FormData();
+          
+           formData.append("Picture",f)
+         
+      
+          const response = await fetch(apiServer + URL, {
+            method: "POST",
+           
+            body: formData,
+          });
+          const data = await response.json();
+          if (response.ok) {
+          se(data)
+            
+          } else {
+            Show.Attention("Couldnot preview the image");
+          }
+        } catch (err) {
+         
+        }
+      };
+
+
+    useEffect(()=>{
+      Preview()
+    },[f])
+
+   
 
   return (
-    <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
+    <div>
+      <HeaderCard  onClick = {()=>{navigate("/HyChat")}}>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'row',
+          gap: '1.5rem',
+          
+          
+        }}>
+          <FeesIconN>
+          <BsArrowLeft/>
+          </FeesIconN>
+
+          <div style={{
+            paddingTop:'0.7rem',
+          }}>Back</div>
+
+
+        </div>
+      </HeaderCard>
+
+
+
+      <AddGrpCard 
+      >
+
+<AddGrpRow>
+
+{
+  e.picture==null||e.picture===undefined?(
+
+
+<ChatImageUpload onClick={()=>{
+      handleIconClick()
     }}>
+    <FeesIconN>
+    <MdAddAPhoto/>
+    </FeesIconN>
+
+    <input
+    type="file"
+    required
+    ref={fileInputRef}
+    placeholder="Select only Image files"
+    accept="image/*"
+    onChange={(e) => sf(e.target.files[0])}
+    style={{ display: 'none' }}
+   
+    />
+     
+    </ChatImageUpload>
+
+  
+  
+  ):(
+  <div onClick={()=>{
+    handleIconClick()
+  }}>
+    
+  <ChatImagePreview src={apiServer + e.picture} />     
+  
+  <input
+  type="file"
+  required
+  ref={fileInputRef}
+  placeholder="Select only Image files"
+  accept="image/*"
+  onChange={(e) => sf(e.target.files[0])}
+  style={{ display: 'none' }}
+ 
+  />
+  
+  </div>
+  
+  )
+} 
 
 
+    <div>
+    <FormInputGrpName
+    type="text"
+    placeholder="Group Name"
+    value={inputValue}
+    onChange={handleInputChange}
+    required
+    maxLength="20"
+  />
+    </div>
+
+    <div style={{
+      fontSize:'1rem',
+    }}>
+    {inputValue.length}/20
+    </div>
+
+
+</AddGrpRow>
+
+
+
+
+
+
+      </AddGrpCard>
 
 <StudCenter>
-        
 
-        <form onSubmit={studentDetails}>
-    < AdmitStudentCard2>
-    
-    <div>
-
- 
-
-<FeesRow>
-<FeesIcons>
-<AiOutlinePicture color={colors.icon}/>
-</FeesIcons>
-
-<FormInputStudent6
-        type="file"
-        required
-        placeholder="Select only PDF files"
-        accept="image/*"
-        onChange={(e) => sf(e.target.files[0])}
-       
-        />
-
-
-</FeesRow>
-
-<FeesRow>
-
-<FeesIcons >
-<MdTitle  color={colors.icon}/>
-</FeesIcons>
-  
-    <FormInputStudent4
-    type="text"
-    //value={theStudent?.studentId}
-    placeholder="Group Name"
-    onChange={(e) => se(e.target.value)}
-   required
-    />
-
-    </FeesRow>
+<AddGrpBtn
+    background={colors.lightgreen}
+    color="white"
+    border={colors.maingreen}
+    onClick={()=>{
+      studentDetails()
+    }}
+    >Create 
+    </AddGrpBtn>
 
 
 
- <AdmitButton2
-        background={colors.lightgreen}
-        color="white"
-        border={colors.maingreen}
-        
-        type="submit">Create 
-        </AdmitButton2>
+</StudCenter>
 
 
-       
-       
-       
-        
-        
-        
-     </div>
-  
-    
-    </AdmitStudentCard2>    
-    </form>
-        </StudCenter>
+
 
 
 

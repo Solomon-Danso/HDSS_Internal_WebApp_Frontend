@@ -55,6 +55,18 @@ border-radius:50%;
 
 `;
 
+export const ChatImagePreview = styled.img`
+width:10vw;
+height:15vh;
+@media (max-width: 768px){
+  width:15vw;
+  height:auto;
+
+border-radius:50%;
+}
+
+`;
+
 export const RowNameandMember2 = styled.div`
 display:flex;
 flex-direction:column;
@@ -91,6 +103,26 @@ border-radius: 50%
 color: ${colors.maingreen}
 font-size: 0.7rem;
 `;
+
+export const ChatImageUpload = styled.div`
+
+width:5vw;
+height:8vh;
+background-color: ${colors.maingreen};
+
+padding:0.5rem;
+border-radius:50%;
+
+
+@media (max-width: 768px){
+  width:18vw;
+  height:auto;
+border-radius:50%;
+
+}
+
+`;
+
 
 
 

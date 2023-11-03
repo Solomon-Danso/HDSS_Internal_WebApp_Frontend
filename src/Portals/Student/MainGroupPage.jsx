@@ -54,7 +54,7 @@ const handleResize = () => {
        
     
     
-    }, [userInfo.studentId]);
+    },);
  
  
  
@@ -83,8 +83,8 @@ const handleResize = () => {
         <div style={{display:'flex', flexDirection:"row", justifyContent:"space-between"}}>
         
         <div style={{fontSize:'1.2rem', fontFamily:'times new roman' }}>
-          {data.groupName? data.groupName.length > 12
-          ? data.groupName.substring(0, 12): data.groupName: ''}
+          {data.groupName? data.groupName.length > 20
+          ? data.groupName.substring(0, 20): data.groupName: ''}
         </div>
         
         <div style={{right:0,position:"fixed",fontSize:'0.75rem', color:`${colors.text2}`,}}> 
@@ -95,7 +95,7 @@ const handleResize = () => {
         
         <div style={{display:'flex', flexDirection:"row", justifyContent:"space-between"}}>
         
-        <div style={{fontSize:'1rem', color:`${colors.text}`}}>
+        <div style={{fontSize:'0.9rem'}}>
         
                 {data.lastSenderName
                         ? data.lastSenderName.length > 8
@@ -103,15 +103,19 @@ const handleResize = () => {
                             : data.lastSenderName
                         : ''}
         
-               
+
+         <span style={{
+           color:`${colors.text}`
+        }}>
+       
                     
-                        <i>
+                       
                         {data.lastMessage
                         ? data.lastMessage.length > 30
                             ? data.lastMessage.substring(0, 30) + "..."
                             : data.lastMessage
                         : ''}
-                        </i>
+               </span>        
         </div>
         
         <div style={{right:0,position:"fixed",}}> 
@@ -144,8 +148,8 @@ const handleResize = () => {
         <div style={{display:'flex', flexDirection:"row", justifyContent:"space-between"}}>
         
         <div style={{fontSize:'2.2rem', fontFamily:'times new roman' }}>
-          {data.groupName? data.groupName.length > 12
-          ? data.groupName.substring(0, 12): data.groupName: ''}
+          {data.groupName? data.groupName.length > 20
+          ? data.groupName.substring(0, 20): data.groupName: ''}
         </div>
         
         <div style={{right:0,position:"fixed",fontSize:'1.75rem', color:`${colors.text2}`,}}> 
@@ -156,7 +160,11 @@ const handleResize = () => {
         
         <div style={{display:'flex', flexDirection:"row", justifyContent:"space-between"}}>
         
-        <div style={{fontSize:'2rem', color:`${colors.text}`}}>
+        <div style={{fontSize:'2rem'}}>
+       
+      
+
+
         
                 {data.lastSenderName
                         ? data.lastSenderName.length > 8
@@ -164,15 +172,19 @@ const handleResize = () => {
                             : data.lastSenderName
                         : ''}
         
-               
+     
+
+          <span style={{
+           color:`${colors.text}`
+        }}> 
                     
-                        <i>
+                        
                         {data.lastMessage
                         ? data.lastMessage.length > 30
                             ? data.lastMessage.substring(0, 30) + "..."
                             : data.lastMessage
                         : ''}
-                        </i>
+        </span>               
         </div>
         
         <div style={{right:0,position:"fixed",}}> 

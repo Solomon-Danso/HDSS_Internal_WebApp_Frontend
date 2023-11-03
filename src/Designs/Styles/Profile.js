@@ -286,6 +286,19 @@ border: 1px solid ${({ border }) => border};;
 
 `;
 
+export const AddGrpCard = styled.div`
+background: ${colors.body};
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(19.7px);
+-webkit-backdrop-filter: blur(19.7px);
+
+
+
+`;
+
+
+
 export const AdmitStudentCard2 = styled.div`
 background: ${colors.card};
 border-radius: 16px;
@@ -661,6 +674,15 @@ flex-wrap: wrap;
 
 `;
 
+export const AddGrpRow = styled.div`
+display: flex;
+flex-direction: row;
+gap:1rem;
+flex-wrap: wrap;
+
+
+`;
+
 
 export const FormInputStudent = styled.input`
   width: 16vw;
@@ -710,6 +732,29 @@ export const FormInputStudent6 = styled.input`
 `;
 
 
+export const FormInputStudentM = styled.input`
+  width: 100%;
+  padding: 15px 10px;
+  border: 0.01px solid ${colors.aqua};
+  border-radius: 5px;
+  margin-top: 10px;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.5s ease-in-out;
+
+  :hover {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  :focus {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+`;
+
 
 export const FormInputStudent2 = styled.input`
   width: 60vw;
@@ -745,6 +790,20 @@ margin-bottom:1.5rem;
 
 export const FeesIcons = styled.div`
 font-size: 3rem;
+height:100%
+flex:1;
+
+`;
+
+export const FeesIconN = styled.div`
+font-size: 2rem;
+padding:0.5rem;
+
+
+`;
+
+export const FeesIconM = styled.div`
+font-size: 1rem;
 height:100%
 flex:1;
 
@@ -816,6 +875,27 @@ export const FormInputStudent4 = styled.input`
     font-size: 12px;
     width:100%;
   }
+`;
+
+export const FormInputGrpName = styled.input`
+  width: 60vw;
+  padding: 15px 0; /* Adjust padding for the bottom border */
+  font-size: 1.2rem;
+  text-align: left;
+  background-color: ${colors.body}; /* Set the background color */
+  border: none; /* Remove all borders */
+   color: white; 
+
+  &::placeholder {
+    color: white; /* Set the placeholder text color to white */
+  }
+
+  &:focus {
+    outline: none; /* Remove the default focus outline */
+    border-bottom: 2px solid #000; /* Set the bottom border style and color on focus */
+  }
+
+  /* Additional CSS properties here */
 `;
 
 
@@ -1116,6 +1196,47 @@ border: none;
 
 
 `;
+
+
+
+
+export const AddGrpBtn = styled.button`
+border: none;
+  width: 20vw;
+  height: 6.5vh;
+  border-radius: 20px;
+  border: 1px solid ${({ border }) => border};
+  background-color: ${({ background }) => background};
+  color: ${({ color }) => color};
+  text-align: center;
+  padding: 10px 30px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-family: OpenSans;
+
+  :hover {
+    background-color: ${colors.ivory_dark};
+    color: ${colors.primary};
+    border: 1px solid ${colors.ivory_dark};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    padding: 4px 18px;
+    padding: 11px 25px;
+  }
+
+
+`;
+
+
+
+
 
 export const AddNotes = styled.button`
 border: none;

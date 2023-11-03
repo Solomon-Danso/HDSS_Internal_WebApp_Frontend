@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { AES,enc } from 'crypto-js';
 import { HeaderCard,AppName,RowSB, AppRow, HeaderRow } from '../../Designs/Styles/HyChat';
 import { MenuButtonDiv,MenuButtonIcon,MenuButtonLink,MenuContainer,MenuButtonOptionLink, MenuButtonMain, MenuButtonOption, MenuButtonIconAgain, SMenuButtonDiv } from '../../Designs/Styles/Styles'
-import { BsCamera, BsChatSquareDots, BsGlobeAsiaAustralia, BsTelephone } from 'react-icons/bs';
+import { BsArrowLeft, BsCamera, BsChatSquareDots, BsGlobeAsiaAustralia, BsTelephone } from 'react-icons/bs';
 import {MdContactPhone, MdOutlineAutoStories, MdOutlineGroups, MdPersonSearch, MdSettings} from 'react-icons/md';
-import { FormInputSearch, FormInputSearchHyChat, MenuCard2, MenuCardHyChat } from '../../Designs/Styles/Profile';
+import { FeesIconN, FeesIcons, FormInputSearch, FormInputSearchHyChat, MenuCard2, MenuCardHyChat } from '../../Designs/Styles/Profile';
 import StraightLink from "../../Pages/Student/StraightLink"
 import { AiOutlineCalendar, AiOutlineFileText, AiOutlineMenuUnfold, AiOutlineNotification } from 'react-icons/ai';
 import { RiFileSettingsFill, RiGroupFill } from 'react-icons/ri';
@@ -15,11 +15,13 @@ import { FcSettings } from 'react-icons/fc';
 import MainChatPage from './MainChatPage';
 import MainCallPage from './MainCallPage';
 import MainGroupPage from './MainGroupPage';
+import { useNavigate } from 'react-router-dom';
+
 
 
 
 const HyChat = () => {
-
+  const navigate = useNavigate()
   const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
@@ -74,6 +76,26 @@ const WindowCloser = () =>{
 
   return (
     <div>
+            
+      <HeaderCard  onClick = {()=>{navigate("/student")}}>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'row',
+          gap: '0.5rem',
+          
+          
+        }}>
+          <FeesIconN>
+          <BsArrowLeft/>
+          </FeesIconN>
+
+          <div style={{
+            padding:'0.6rem',
+          }}>Home</div>
+
+
+        </div>
+      </HeaderCard>
       {
         isMobile?( 
         <HeaderCard> 
@@ -194,7 +216,7 @@ onClick={()=>{
     {
   openChat?(<><MenuCardHyChat >
 
-    <StraightLink logo={<MdOutlineGroups/>} title="New Group" path="/student/group"/>
+    <StraightLink logo={<MdOutlineGroups/>} title="New Group" path="/HyChat/NewGroup"/>
     <StraightLink logo={<RiGroupFill/>} title="New Chat" path="/student/chat"/>
      
     

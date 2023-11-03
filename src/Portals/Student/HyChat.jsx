@@ -74,7 +74,65 @@ const WindowCloser = () =>{
 
   return (
     <div>
-    <HeaderCard> 
+      {
+        isMobile?( 
+        <HeaderCard> 
+          <RowSB>
+          <AppName>HyChat</AppName>
+          
+          <AppRow>
+          <MenuButtonIcon onClick={()=>{closer();setOpenMenu(!OpenMenu)}}> <FaLayerGroup/> </MenuButtonIcon>
+          <MenuButtonIcon onClick={()=>{closer();setOpenSearch(!openSearch)}}> <MdPersonSearch/> </MenuButtonIcon>
+          <MenuButtonIcon onClick={()=>{closer();setOpenChat(!openChat)}}> <BsChatSquareDots/> </MenuButtonIcon>
+          </AppRow>
+          
+          </RowSB>
+          <HeaderRow>
+          <div
+          style={{
+            color: openChatWindow?`${colors.maingreen}`:`white`,
+            fontSize:'1.1rem',
+            padding:'0.5rem',
+           
+          }}
+          onClick={()=>{
+            WindowCloser();
+            setOpenChatWindow(true)
+          }}
+          >Chats</div>
+          
+          
+          
+          <div
+          style={{
+            color: openGroupWindow?`${colors.maingreen}`:`white`,
+            fontSize:'1.1rem',
+            padding:'0.5rem',
+          }}
+          onClick={()=>{
+            WindowCloser();
+            setOpenGroupWindow(true)
+          }}
+          >Groups</div>
+          
+          
+          <div
+          style={{
+            color: openCallWindow?`${colors.maingreen}`:`white`,
+            fontSize:'1.1rem',
+            padding:'0.5rem',
+          }}
+          onClick={()=>{
+            WindowCloser();
+            setOpenCallWindow(true)
+          }}
+          >Calls</div>
+          
+          </HeaderRow>
+          
+          
+          
+        </HeaderCard>):( <HeaderCard> 
 <RowSB>
 <AppName>HyChat</AppName>
 
@@ -89,7 +147,7 @@ const WindowCloser = () =>{
 <div
 style={{
   color: openChatWindow?`${colors.maingreen}`:`white`,
-  fontSize:'1.1rem',
+  fontSize:'2.1rem',
   padding:'0.5rem',
  
 }}
@@ -104,7 +162,7 @@ onClick={()=>{
 <div
 style={{
   color: openGroupWindow?`${colors.maingreen}`:`white`,
-  fontSize:'1.1rem',
+  fontSize:'2.1rem',
   padding:'0.5rem',
 }}
 onClick={()=>{
@@ -117,7 +175,7 @@ onClick={()=>{
 <div
 style={{
   color: openCallWindow?`${colors.maingreen}`:`white`,
-  fontSize:'1.1rem',
+  fontSize:'2.1rem',
   padding:'0.5rem',
 }}
 onClick={()=>{
@@ -130,7 +188,9 @@ onClick={()=>{
 
 
 
-    </HeaderCard>
+    </HeaderCard>)
+      }
+   
     {
   openChat?(<><MenuCardHyChat >
 

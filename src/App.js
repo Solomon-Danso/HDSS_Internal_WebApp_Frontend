@@ -5,6 +5,7 @@ import Admin from './Pages/Admin';
 import Teacher from './Pages/Teacher';
 import Student from './Pages/Student';
 import HyChat from './Portals/Student/HyChat'
+import GroupChatWindow from './Portals/Student/GroupChatWindow';
 
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
       <Route path="/teacher/*" element={<Teacher />} />
       <Route path="/student/*" element={<Student />} />
       <Route path="/HyChat" element={<HyChat />} />
+      <Route path="/HyChat/:Id" element={<GroupChatWindow />} />
         <Route path="/" element={<Login />} /> 
         
 

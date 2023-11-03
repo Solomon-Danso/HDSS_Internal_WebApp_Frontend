@@ -5,9 +5,11 @@ import Beauty from '../../Designs/Images/beauty.jpg'
 import { apiServer } from '../../Constants /Endpoints'
 import { AES,enc } from 'crypto-js'
 import { colors } from '../../Designs/Colors'
+import { useNavigate } from 'react-router-dom'
+
 
 const MainChatPage = () => {
-
+  const navigate = useNavigate()
     const [userInfo, setUserInfo] = useState({});
     const [isMobile, setIsMobile] = useState(false);
 const [active, setActive] = useState(null);
@@ -73,7 +75,9 @@ const handleResize = () => {
     {
       isMobile?(
       
-        <div style={{display:'flex', flexDirection:"column",  gap:'0.5rem'}}>
+        <div style={{display:'flex', flexDirection:"column",  gap:'0.5rem'}} onClick={()=>{
+          navigate(`/HyChat/${data.groupId}`)
+        }}>
 
 
         <div style={{display:'flex', flexDirection:"row", justifyContent:"space-between"}}>
@@ -132,17 +136,19 @@ const handleResize = () => {
       
       ):(
       
-        <div style={{display:'flex', flexDirection:"column",  gap:'0.5rem'}}>
+        <div style={{display:'flex', flexDirection:"column",  gap:'1.5rem'}} onClick={()=>{
+          navigate(`/HyChat/${data.groupId}`)
+        }}>
 
 
         <div style={{display:'flex', flexDirection:"row", justifyContent:"space-between"}}>
         
-        <div style={{fontSize:'2rem', fontWeight:'bold' }}>
+        <div style={{fontSize:'2.2rem', fontFamily:'times new roman' }}>
           {data.groupName? data.groupName.length > 12
           ? data.groupName.substring(0, 12): data.groupName: ''}
         </div>
         
-        <div style={{right:0,position:"fixed",fontSize:'1.3rem', color:`${colors.mainsecondgreen}`,}}> 
+        <div style={{right:0,position:"fixed",fontSize:'1.75rem', color:`${colors.text2}`,}}> 
         {data.lastSenderDate}
         </div>
         
@@ -150,7 +156,7 @@ const handleResize = () => {
         
         <div style={{display:'flex', flexDirection:"row", justifyContent:"space-between"}}>
         
-        <div style={{fontSize:'1.5rem', }}>
+        <div style={{fontSize:'2rem', color:`${colors.text}`}}>
         
                 {data.lastSenderName
                         ? data.lastSenderName.length > 8
@@ -162,8 +168,8 @@ const handleResize = () => {
                     
                         <i>
                         {data.lastMessage
-                        ? data.lastMessage.length > 20
-                            ? data.lastMessage.substring(0, 20) + "..."
+                        ? data.lastMessage.length > 30
+                            ? data.lastMessage.substring(0, 30) + "..."
                             : data.lastMessage
                         : ''}
                         </i>
@@ -172,13 +178,13 @@ const handleResize = () => {
         <div style={{right:0,position:"fixed",}}> 
         {
                         data.totalUnreadMessage<1?(<></>):(<p style={{
-                           color:`${colors.lightsecondgreen}`,
-                           fontSize: '1.3rem',
-                           backgroundColor:`${colors.mainsecondgreen}`,
+                           color:`${colors.lightgreen}`,
+                           fontSize: '2rem',
+                           backgroundColor:`${colors.maingreen}`,
                            borderRadius:"50%",
-                           width:'1.5rem',
+                           width:'2.2rem',
                            textAlign: 'center',
-                           height:'1.5rem',
+                           height:'2.2rem',
                         }}>{data.totalUnreadMessage}</p>)
                     }
         </div>

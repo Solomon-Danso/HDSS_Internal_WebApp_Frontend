@@ -78,12 +78,12 @@ const handleResize = () => {
 
         <div style={{display:'flex', flexDirection:"row", justifyContent:"space-between"}}>
         
-        <div style={{fontSize:'1.3rem', fontFamily:'times new roman' }}>
+        <div style={{fontSize:'1.2rem', fontFamily:'times new roman' }}>
           {data.groupName? data.groupName.length > 12
           ? data.groupName.substring(0, 12): data.groupName: ''}
         </div>
         
-        <div style={{right:0,position:"fixed",fontSize:'1.1rem', color:`${colors.text2}`,}}> 
+        <div style={{right:0,position:"fixed",fontSize:'0.75rem', color:`${colors.text2}`,}}> 
         {data.lastSenderDate}
         </div>
         
@@ -114,12 +114,12 @@ const handleResize = () => {
         {
                         data.totalUnreadMessage<1?(<></>):(<p style={{
                            color:`${colors.lightgreen}`,
-                           fontSize: '1.3rem',
+                           fontSize: '1rem',
                            backgroundColor:`${colors.maingreen}`,
                            borderRadius:"50%",
-                           width:'1.5rem',
+                           width:'1.2rem',
                            textAlign: 'center',
-                           height:'1.5rem',
+                           height:'1.2rem',
                         }}>{data.totalUnreadMessage}</p>)
                     }
         </div>

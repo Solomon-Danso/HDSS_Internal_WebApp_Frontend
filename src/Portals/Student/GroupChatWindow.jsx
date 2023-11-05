@@ -9,7 +9,9 @@ import { BsArrowLeft, BsArrowReturnLeft, BsThreeDotsVertical } from 'react-icons
 
 const GroupChatWindow = () => {
     const {Id} = useParams()
+    
     const [grp, SetGrp] = useState({})
+
   
 
     const [userInfo, setUserInfo] = useState({});

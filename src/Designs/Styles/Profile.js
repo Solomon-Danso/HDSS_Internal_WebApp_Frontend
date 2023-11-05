@@ -182,7 +182,6 @@ export const ChatCard = styled.div`
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(19.7px);
   -webkit-backdrop-filter: blur(19.7px);
-  
   height: 15vh;
   padding: 1rem;
  
@@ -195,6 +194,32 @@ export const ChatCard = styled.div`
   width: 100%;
   gap:0.5rem;
   height: 10vh;
+  padding: 1rem;
+ 
+}
+ 
+
+`;
+
+
+
+export const ChatCardGroup = styled.div`
+  background: ${colors.body};
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(19.7px);
+  -webkit-backdrop-filter: blur(19.7px);
+  height: 15vh;
+  padding: 1rem;
+ 
+   width: 100%; 
+  display:flex;
+  flex-direction: row;
+  gap:2rem;
+
+@media (max-width: 768px){
+  width: 100%;
+  gap:0.5rem;
   padding: 1rem;
  
 }
@@ -801,6 +826,15 @@ padding:0.5rem;
 
 
 `;
+
+export const FeesIconN2 = styled.div`
+font-size: 1.5rem;
+padding:.0.7rem;
+padding-top: 0.9rem;
+
+
+`;
+
 
 export const FeesIconM = styled.div`
 font-size: 1rem;

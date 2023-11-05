@@ -55,6 +55,17 @@ border-radius:50%;
 
 `;
 
+export const ChatImageGroup = styled.img`
+width:10vw;
+height:15vh;
+@media (max-width: 768px){
+  width:8vw;
+height:4vh;
+border-radius:50%;
+}
+
+`;
+
 export const ChatImagePreview = styled.img`
 width:10vw;
 height:15vh;
@@ -122,6 +133,62 @@ border-radius:50%;
 }
 
 `;
+
+export const ChatContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* Additional styles here */
+`;
+
+export const MyMessage = styled.div`
+  align-self: flex-end; /* Align to the right */
+  width: 80vw;
+  margin-bottom: 0.5rem;
+  /* Additional styles for MyMessage */
+`;
+
+export const OtherMessage = styled.div`
+  width: 80vw;
+  margin-bottom: 0.5rem;
+  /* Additional styles for OtherMessage */
+`;
+
+export const ChatCardGroup = styled.div`
+  background: ${colors.body};
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(19.7px);
+  -webkit-backdrop-filter: blur(19.7px);
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  /* Additional styles here */
+
+  @media (max-width: 768px) {
+    width: 100%;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+};
+`;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

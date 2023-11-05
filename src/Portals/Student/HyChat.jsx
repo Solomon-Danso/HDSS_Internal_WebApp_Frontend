@@ -4,7 +4,7 @@ import { HeaderCard,AppName,RowSB, AppRow, HeaderRow } from '../../Designs/Style
 import { MenuButtonDiv,MenuButtonIcon,MenuButtonLink,MenuContainer,MenuButtonOptionLink, MenuButtonMain, MenuButtonOption, MenuButtonIconAgain, SMenuButtonDiv } from '../../Designs/Styles/Styles'
 import { BsArrowLeft, BsCamera, BsChatSquareDots, BsGlobeAsiaAustralia, BsTelephone } from 'react-icons/bs';
 import {MdContactPhone, MdOutlineAutoStories, MdOutlineGroups, MdPersonSearch, MdSettings} from 'react-icons/md';
-import { FeesIconN, FeesIcons, FormInputSearch, FormInputSearchHyChat, MenuCard2, MenuCardHyChat } from '../../Designs/Styles/Profile';
+import { FeesIconN, FeesIconN2, FeesIcons, FormInputSearch, FormInputSearchHyChat, MenuCard2, MenuCardHyChat } from '../../Designs/Styles/Profile';
 import StraightLink from "../../Pages/Student/StraightLink"
 import { AiOutlineCalendar, AiOutlineFileText, AiOutlineMenuUnfold, AiOutlineNotification } from 'react-icons/ai';
 import { RiFileSettingsFill, RiGroupFill } from 'react-icons/ri';
@@ -64,7 +64,7 @@ const closer = () =>{
 }
 const [searchTerm, setSearchTerm] = useState()
 const [openChatWindow, setOpenChatWindow] = useState(false)
-const [openGroupWindow, setOpenGroupWindow] = useState(false)
+const [openGroupWindow, setOpenGroupWindow] = useState(true)
 const [openCallWindow, setOpenCallWindow] = useState(false)
 
 const WindowCloser = () =>{
@@ -85,9 +85,9 @@ const WindowCloser = () =>{
           
           
         }}>
-          <FeesIconN>
+          <FeesIconN2>
           <BsArrowLeft/>
-          </FeesIconN>
+          </FeesIconN2>
 
           <div style={{
             padding:'0.6rem',

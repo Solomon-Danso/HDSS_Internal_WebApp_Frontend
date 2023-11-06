@@ -3,39 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@electron/remote": "electron/remote",
-    "@react-pdf-viewer/core": "3.12.0",
-    "@react-pdf/renderer": "^3.1.14",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^13.0.0",
-    "@testing-library/user-event": "^13.2.1",
-    "add": "^2.0.6",
-    "axios": "^1.4.0",
-    "chart.js": "^4.3.2",
-    "crypto-js": "^4.1.1",
-    "electron": "^27.0.2",
-    "electron-titlebar": "^0.0.3",
-    "emoji-mart": "^5.5.2",
-    "file-saver": "^2.0.5",
-    "html2canvas": "^1.4.1",
-    "jspdf": "^2.5.1",
-    "pdfjs-dist": "3.4.120",
-    "rc-menu": "^9.11.1",
+    "chart.js": "^4.4.0",
+    "crypto-js": "^4.2.0",
+    "rc-menu": "^9.12.2",
     "react": "^18.2.0",
     "react-animate-height": "^3.2.2",
-    "react-big-calendar": "^1.8.2",
+    "react-big-calendar": "^1.8.5",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.10.1",
-    "react-pdf": "^7.5.1",
+    "react-icons": "^4.11.0",
     "react-router-dom": "^6.14.2",
     "react-scripts": "5.0.1",
     "react-spinners": "^0.13.8",
-    "sass": "^1.65.1",
-    "styled-components": "^6.0.5",
+    "sass": "^1.69.5",
+    "styled-components": "^6.1.0",
     "sweetalert2": "^11.7.20",
-    "web-vitals": "^2.1.0",
-    "yarn": "^1.22.19"
+    "web-vitals": "^2.1.0"
   },
   "main": "public/main.js",
   "homepage": "./",
@@ -64,10 +47,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "concurrently": "^8.2.2",
-    "cross-env": "^7.0.3",
-    "wait-on": "^7.0.1"
   }
 }

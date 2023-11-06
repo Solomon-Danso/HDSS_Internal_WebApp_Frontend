@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { ViewOneStudent, apiServer } from '../../Constants /Endpoints';
 import { AboutHeader, BiggerImage, BiggerImage2, BiggerImage3, BiggerImage4, FormInputStudent, FormLable, HomeCardTextEvent, StudDetailData, StudDetailField, StudDetailRow, StudDetails, StudLeft, StudRight } from '../../Designs/Styles/Profile';
 import { AES,enc } from 'crypto-js';
-import { Document, Page } from 'react-pdf';
+
 
 const StudentDetails = () => {
     const { teacherId } = useParams();

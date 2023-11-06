@@ -1,6 +1,6 @@
 import { AES,enc } from 'crypto-js';
 import React, { useEffect, useState } from 'react';
-import { Document, Page } from 'react-pdf';
+
 import { apiServer } from '../../Constants /Endpoints';
 import { CardImage2, CardImage3 } from '../../Designs/Styles/Profile';
 import ttable from "../../Designs/Images/timetable.jpg"

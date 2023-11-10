@@ -139,6 +139,10 @@ export const ChatContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   /* Additional styles here */
+  overflow: hidden;
+   overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
 `;
 
 export const MyMessage = styled.div`
@@ -155,7 +159,7 @@ export const OtherMessage = styled.div`
 `;
 
 export const ChatCardGroup = styled.div`
-  background: ${colors.body};
+  background: ${colors.card};
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(19.7px);
@@ -166,11 +170,16 @@ export const ChatCardGroup = styled.div`
   flex-direction: row;
   gap: 2rem;
   /* Additional styles here */
+ 
 
   @media (max-width: 768px) {
     width: 100%;
-    gap: 0.5rem;
+    gap:0.5rem;
     padding: 1rem;
+    overflow: hidden;
+    overflow-y: auto;
+   -ms-overflow-style: none; /* IE and Edge */
+   scrollbar-width: none;
   }
 };
 `;

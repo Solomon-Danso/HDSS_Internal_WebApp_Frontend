@@ -46,33 +46,7 @@ const GroupChatWindow = () => {
 
   
 
-    const colorCodes = [
-      "#FF5733",
-      "#FFC300",
-      "#FF5733",
-      "#FF7F50",
-      "#FFA500",
-      "#FF6347",
-      "#FF4500",
-      "#FF8C00",
-      "#FFD700",
-      "#FFFF00",
-      "#ADFF2F",
-      "#32CD32",
-      "#228B22",
-      "#008000",
-      "#006400",
-      "#00FF7F",
-      "#20B2AA",
-      "#008B8B",
-      "#5F9EA0",
-      "#4682B4"
-    ];
-    
-    const randomColor = colorCodes[Math.floor(Math.random() * colorCodes.length)];
-    const randomColor2 = colorCodes[Math.floor(Math.random() * colorCodes.length)];
- 
-
+  
 
 
   
@@ -122,7 +96,67 @@ const GroupChatWindow = () => {
   
   const navigate = useNavigate()
 
- 
+  const [grpMessage, setGrpMessage] = useState([])
+
+  useEffect(()=>{
+    const URL = `api/HyChat/GroupMessage?ID=${userInfo.studentId}&GID=${Id}`;
+
+    if(userInfo.studentId&& Id){
+      fetch(apiServer+URL)
+      .then(res=>res.json())
+      .then(data=>setGrpMessage(data))
+      .catch(err=>console.error(err))
+      
+    }
+
+
+  },)
+
+  const [grpUnReadMessage, setGrpUnReadMessage] = useState([])
+
+  useEffect(()=>{
+    const URL = `api/HyChat/UnReadMessage?ID=${userInfo.studentId}&GID=${Id}`;
+
+    if(userInfo.studentId&& Id){
+      fetch(apiServer+URL)
+      .then(res=>res.json())
+      .then(data=>setGrpUnReadMessage(data))
+      .catch(err=>console.error(err))
+      
+    }
+
+
+  },[userInfo.studentId,Id])
+
+
+  
+
+  const [grpUnReadMessageCounter, setGrpUnReadMessageCounter] = useState(0)
+
+  useEffect(()=>{
+    const URL = `api/HyChat/UnReadCounter?ID=${userInfo.studentId}&GID=${Id}`;
+
+    if(userInfo.studentId&& Id){
+      fetch(apiServer+URL)
+      .then(res=>res.text())
+      .then(data=>setGrpUnReadMessageCounter(data))
+      .catch(err=>console.error(err))
+      
+    }
+
+
+  },)
+
+
+
+
+
+
+
+
+
+
+
     
   return (
     <div>
@@ -197,28 +231,28 @@ const GroupChatWindow = () => {
   
 <ChatContainer>
 
-
-<MyMessage>
+{
+  grpMessage.length>0&&
+  grpMessage.map((data)=>(
+    <>
+    {
+      data.messageType==="Text"?(
+      <>
+      
+      {
+      data.status===userInfo.studentId?(
+      <>
+      <MyMessage>
 <ChatCardGroup>
-    <ChatImageGroup src={apiServer + grp?.picture} />
-    <div style={{display:'flex', flexDirection:"column",  gap:'0.5rem'}} >
-
-
-           
-        <div style={{fontSize:'1.2rem', fontFamily:'times new roman',color:randomColor }} onClick={()=>{
-          navigate(`/HyChat/${grp.groupId}`)
-        }}>
-          {grp.groupName? grp.groupName.length > 20
-          ? grp.groupName.substring(0, 20): grp.groupName: ''}
-        </div>
+    
+    <div style={{display:'flex', flexDirection:"column",  gap:'0.5rem', width:"100%"}} >
         
         <div style={{fontSize:'1rem', fontFamily:'times new roman' }}>
-Another Message wJ,FGJKGF AFSDJGBSAGDFC DSFZVJCDZXDVCHM SDJCFHGDBSFGJKVMSD ADSFJCHDSVV ADFGJ,VGHDBFV DFSZFHGJDBFGXV DFGHVBSDZKVDF DSFGSBFD 
-        
+           {data?.message}        
         </div>
 
         <div style={{alignSelf:'flex-end',fontSize:'0.8rem'}}>
-        08:45 pm
+        {data?.dateAdded}
         </div>
         
         
@@ -228,28 +262,29 @@ Another Message wJ,FGJKGF AFSDJGBSAGDFC DSFZVJCDZXDVCHM SDJCFHGDBSFGJKVMSD ADSFJ
 
 </ChatCardGroup>
 </MyMessage>
+      </>):(
 
-<OtherMessage>
+      <>
+            <OtherMessage>
 <ChatCardGroup>
-    <ChatImageGroup src={apiServer + grp?.picture} />
-    <div style={{display:'flex', flexDirection:"column",  gap:'0.5rem'}} >
+    <ChatImageGroup src={apiServer + data?.picture} />
+    <div style={{display:'flex', flexDirection:"column",  gap:'0.5rem', width:"100%"}} >
 
 
            
-        <div style={{fontSize:'1.2rem', fontFamily:'times new roman',color:randomColor2 }} onClick={()=>{
+        <div style={{fontSize:'1.2rem', fontFamily:'times new roman',color:`${colors.maingreen}` }} onClick={()=>{
           navigate(`/HyChat/${grp.groupId}`)
         }}>
-          {grp.groupName? grp.groupName.length > 20
-          ? grp.groupName.substring(0, 20): grp.groupName: ''}
+          {data.userName? data.userName.length > 20
+          ? data.userName.substring(0, 20): data.userName: ''}
         </div>
         
         <div style={{fontSize:'1rem', fontFamily:'times new roman' }}>
-Another Message wJ,FGJKGF AFSDJGBSAGDFC DSFZVJCDZXDVCHM SDJCFHGDBSFGJKVMSD ADSFJCHDSVV ADFGJ,VGHDBFV DFSZFHGJDBFGXV DFGHVBSDZKVDF DSFGSBFD 
-        
+           {data?.message}        
         </div>
 
-        <div style={{alignSelf:'flex-end',fontSize:'0.8rem'}}>
-        08:45 pm
+        <div style={{alignSelf:'flex-end',fontSize:'0.8rem',}}>
+        {data?.dateAdded}
         </div>
         
         
@@ -259,18 +294,124 @@ Another Message wJ,FGJKGF AFSDJGBSAGDFC DSFZVJCDZXDVCHM SDJCFHGDBSFGJKVMSD ADSFJ
 
 </ChatCardGroup>
 </OtherMessage>
+      </>)
+    }
+    
+      </>):(<></>)
+    }
+    
+    
+    
+    </>
+  ))
+}
+
+
+
+
+
+
+
+</ChatContainer>
+
+{
+ grpUnReadMessageCounter<1?(<></>):(
+
+  <div style={{fontSize:'1.5rem', fontFamily:'times new roman',textAlign:"center", color:`${colors.mainred}` }}>
+{grpUnReadMessageCounter} unread {grpUnReadMessageCounter>1?(<>messages</>):(<>message</>)}
+</div>
+
+ ) 
+}
+
+
+<ChatContainer>
+
+{
+  grpUnReadMessage.length>0&&
+  grpUnReadMessage.map((data)=>(
+    <>
+    {
+      data.messageType==="Text"?(
+      <>
+      
+      {
+      data.status===userInfo.studentId?(
+      <>
+      <MyMessage>
+<ChatCardGroup>
+    
+    <div style={{display:'flex', flexDirection:"column",  gap:'0.5rem', width:"100%"}} >
+        
+        <div style={{fontSize:'1rem', fontFamily:'times new roman' }}>
+           {data?.message}        
+        </div>
+
+        <div style={{alignSelf:'flex-end',fontSize:'0.8rem'}}>
+        {data?.dateAdded}
+        </div>
+        
+        
+        
+        </div>
+
+
+</ChatCardGroup>
+</MyMessage>
+      </>):(
+
+      <>
+            <OtherMessage>
+<ChatCardGroup>
+    <ChatImageGroup src={apiServer + data?.picture} />
+    <div style={{display:'flex', flexDirection:"column",  gap:'0.5rem', width:"100%"}} >
+
+
+           
+        <div style={{fontSize:'1.2rem', fontFamily:'times new roman',color:`${colors.maingreen}` }} onClick={()=>{
+          navigate(`/HyChat/${grp.groupId}`)
+        }}>
+          {data.userName? data.userName.length > 20
+          ? data.userName.substring(0, 20): data.userName: ''}
+        </div>
+        
+        <div style={{fontSize:'1rem', fontFamily:'times new roman' }}>
+           {data?.message}        
+        </div>
+
+        <div style={{alignSelf:'flex-end',fontSize:'0.8rem',}}>
+        {data?.dateAdded}
+        </div>
+        
+        
+        
+        </div>
+
+
+</ChatCardGroup>
+</OtherMessage>
+      </>)
+    }
+    
+      </>):(<></>)
+    }
+    
+    
+    
+    </>
+  ))
+}
+
+
+
+
+
 
 
 </ChatContainer>
 
 
-
-
-
-<div id="UnReads">
-
-Hi
-</div>       
+     
 
        
 

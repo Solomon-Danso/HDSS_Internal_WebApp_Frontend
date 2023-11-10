@@ -1,11 +1,12 @@
 import { AES,enc } from 'crypto-js'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { apiServer } from '../../Constants /Endpoints'
 import { ChatContainer, ChatCardGroup, ChatImage, ChatImageGroup, HeaderCard, MyMessage, OtherMessage } from '../../Designs/Styles/HyChat'
 import { ChatCard } from '../../Designs/Styles/Profile'
 import { colors } from '../../Designs/Colors'
 import { BsArrowLeft, BsArrowReturnLeft, BsThreeDotsVertical } from 'react-icons/bs'
+import { Show } from '../../Constants /Alerts'
 
 const GroupChatWindow = () => {
     const {Id} = useParams()
@@ -150,7 +151,82 @@ const GroupChatWindow = () => {
 
 
 
+  const unreadMessageRef = useRef(null);
+  const [redirected, setRedirected] = useState(false);
 
+  useEffect(() => {
+    // Scroll to the unread message div when the component mounts or when the unread message count changes.
+    if (unreadMessageRef.current && !redirected) {
+      unreadMessageRef.current.scrollIntoView({ behavior: 'smooth' });
+      setRedirected(true); // Set redirected to true to avoid scrolling again after redirection.
+    }
+  }, [grpUnReadMessageCounter, redirected]);
+
+  useEffect(() => {
+    // Wait for 10 seconds before running the handleReader function after redirection.
+    if (redirected) {
+      const timer = setTimeout(() => {
+        handleReader();
+      }, 10000);
+
+      return () => {
+        // Clear the timer if the component unmounts or the dependency changes.
+        clearTimeout(timer);
+      };
+    }
+  }, [redirected]);
+
+
+  const handleReader = async () => {
+  
+    
+      try {
+  
+        const URL = `api/HyChat/ReadMessages?ID=${userInfo.studentId}&GID=${Id}`;
+
+        const response = await fetch(apiServer+URL, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+  
+      
+    
+        if (response.ok) {
+          
+          
+          
+        } else {
+        console.error("BDK.FHJ ,GSAJKADS JFA KJDSF SAKJDFV ASVF")
+        }
+      } catch (error) {
+  
+        console.error(error)
+ 
+      }
+  
+  }
+  
+
+  useEffect(() => {
+    // Trigger the offline function and show an alert when the user leaves the page.
+    const handleUnload = () => {
+      // Perform actions like making API requests or triggering the offline function.
+      //offline();
+
+      // Display an alert message to the user (may not be reliable).
+      alert("You left this page");
+      console.log("Offline Now")
+    };
+
+    window.addEventListener('beforeunload', handleUnload);
+
+    return () => {
+      // Remove the event listener when the component unmounts.
+      window.removeEventListener('beforeunload', handleUnload);
+    };
+  }, []);
 
 
 
@@ -316,11 +392,12 @@ const GroupChatWindow = () => {
 
 {
  grpUnReadMessageCounter<1?(<></>):(
-
+<div ref={unreadMessageRef}>
   <div style={{fontSize:'1.5rem', fontFamily:'times new roman',textAlign:"center", color:`${colors.mainred}` }}>
 {grpUnReadMessageCounter} unread {grpUnReadMessageCounter>1?(<>messages</>):(<>message</>)}
 </div>
 
+</div>
  ) 
 }
 

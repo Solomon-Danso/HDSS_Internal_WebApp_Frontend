@@ -5,7 +5,7 @@ import Beauty from '../../Designs/Images/beauty.jpg'
 import { apiServer } from '../../Constants /Endpoints'
 import { AES,enc } from 'crypto-js'
 import { colors } from '../../Designs/Colors'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 
 const MainChatPage = () => {
@@ -54,9 +54,59 @@ const handleResize = () => {
        
     
     
-    },[userInfo.studentId]);
+    });
 
+ 
+    const offline = async () => {
+  
+    
+      try {
+  
+        const URL = `api/HyChat/Offline?ID=${userInfo.studentId}`;
+  
+        const response = await fetch(apiServer+URL, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+  
+       
+      
+    
+        if (response.ok) {
+          
+          
+          
+        } else {
+        console.error("BDK.FHJ ,GSAJKADS JFA KJDSF SAKJDFV ASVF")
+        }
+      } catch (error) {
+  
+        console.error(error)
+  
+      }
+  
+  }
+  
+  
    
+  
+    const location = useLocation();
+  
+    useEffect(() => {
+      // Check if the path is "/HyChat"
+      if (location.pathname === '/HyChat') {
+        
+          offline();
+        
+      }       return () => {
+        // Additional cleanup logic if needed
+      };
+    });
+  
+
+
  
  
     return (

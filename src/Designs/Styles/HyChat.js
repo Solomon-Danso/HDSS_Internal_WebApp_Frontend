@@ -188,11 +188,57 @@ export const ChatCardGroup = styled.div`
 
 
 
+export const ChatMessageInput = styled.input`
+  width: 80%;
+  height: auto;
+  padding: 15px 10px;
+  border: 0.3px solid ${colors.maingreen};
+  border-radius: 5px;
+  margin-top: 10px;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.5s ease-in-out;
+
+  :hover {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  :focus {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+`;
 
 
 
 
+export const OptionCard = styled.div`
+  background: ${colors.body};
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(19.7px);
+  -webkit-backdrop-filter: blur(19.7px);
+  
+  height: 40vh;
+  padding: 1rem;
+ 
+ 
+  z-index: 1; /* Set a positive z-index value */
 
+  /* You might need to adjust the width if needed */
+   width: 20%; 
+@media (max-width: 768px){
+  width: 50%;
+}
+   overflow: hidden;
+   overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+
+`;
 
 
 

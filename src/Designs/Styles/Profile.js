@@ -191,7 +191,7 @@ export const ChatCard = styled.div`
   gap:2rem;
 
 @media (max-width: 768px){
-  width: 100%;
+  width: 90%;
   gap:0.5rem;
   height: 10vh;
   padding: 1rem;

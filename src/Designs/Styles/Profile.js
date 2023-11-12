@@ -189,6 +189,8 @@ export const ChatCard = styled.div`
   display:flex;
   flex-direction: row;
   gap:2rem;
+  
+  
 
 @media (max-width: 768px){
   width: 90%;
@@ -735,6 +737,29 @@ export const FormInputStudent = styled.input`
 
 export const FormInputStudent6 = styled.input`
   width: 26.5vw;
+  padding: 15px 10px;
+  border: 0.01px solid ${colors.aqua};
+  border-radius: 5px;
+  margin-top: 10px;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.5s ease-in-out;
+
+  :hover {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  :focus {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+`;
+
+export const ChatUploader = styled.input`
+  width: 80%;
   padding: 15px 10px;
   border: 0.01px solid ${colors.aqua};
   border-radius: 5px;

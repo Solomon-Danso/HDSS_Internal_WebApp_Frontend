@@ -44,7 +44,10 @@ const GroupChatWindow = () => {
     if (Id) {
       fetch(apiServer + URL)
         .then((response) => response.json())
-        .then((data) => SetGrp(data))
+        .then((data) => {
+          SetGrp(data)
+          handleNavigation();
+        })
         .catch((err) => console.error(err));
     }
     
@@ -87,7 +90,7 @@ const GroupChatWindow = () => {
          
   
           // Calculate the display text here after setting the members
-          const maxDisplayedMembers = 1;
+          const maxDisplayedMembers = 2;
           const remainingMembersCount = data.length - maxDisplayedMembers;
   
           const displayedMembers = data.slice(0, maxDisplayedMembers).map((member) => member.userName).join(', ');
@@ -135,17 +138,46 @@ const GroupChatWindow = () => {
     }
   };
   
+const [counter, setCounter] = useState(0)
 
 
+useEffect(()=>{
+  const URL= `api/HyChat/UnReadCounter?ID=${userInfo.studentId}&GID=${Id}`;
+ 
+  fetch(apiServer+URL)
+  .then(res => res.json())
+  .then(data=> setCounter(data))
+  .catch(err=> console.error(err))
+},[userInfo.studentId, Id])
 
   const unreadMessageRef = useRef(null);
-  const [redirected, setRedirected] = useState(false);
 
+  
+
+{
+  /*
+  
+  
   useEffect(() => {
+    // Scroll to the unread message div when the component mounts or when the unread message count changes.
     if (unreadMessageRef.current) {
       unreadMessageRef.current.scrollIntoView({ behavior: 'smooth' });
+      window.scrollTo(0, document.body.scrollHeight);
     }
-  }, []); // No dependencies
+    else {
+      // If the ref is null, scroll to the bottom of the page
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+  }, [counter]);
+  
+  */
+}
+  
+  
+  
+  
+  
+  
   
   
 
@@ -155,7 +187,7 @@ const GroupChatWindow = () => {
   
 
   const online = async () => {
-  
+   
     
     try {
 
@@ -192,10 +224,29 @@ const GroupChatWindow = () => {
       
         online();
         handleReader();
+       
+        
+
+       
       
       
     }
-  });
+  },);
+
+
+ 
+  const handleNavigation = () =>{
+    if (unreadMessageRef.current) {
+      unreadMessageRef.current.scrollIntoView({ behavior: 'smooth' });
+      
+     
+    }
+    else{
+      window.scrollTo(0, document.body.scrollHeight);
+      
+    }
+    
+  }
 
 
 const [dropper, setDropper] = useState(false) 
@@ -205,31 +256,34 @@ const [dropper, setDropper] = useState(false)
 
 const handleReader = async () => {
   
-    
  
-    try {
+  try {
 
-  const URL= `api/HyChat/ReadMessages?ID=${userInfo.studentId}&GID=${Id}`;
-      const response = await fetch(apiServer+URL, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        //body: JSON.stringify({userId, userPassword})
-      });
-
-     
-      if (response.ok) {
-        
-        
-        
-      } else {
-        
+    const URL= `api/HyChat/ReadMessages?ID=${userInfo.studentId}&GID=${Id}`;
+        const response = await fetch(apiServer+URL, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          //body: JSON.stringify({userId, userPassword})
+        });
+  
+       
+        if (response.ok) {
+          
+          
+          
+        } else {
+          
+        }
+      } catch (error) {
+  
+        console.error(error);
       }
-    } catch (error) {
+  
 
-      console.error(error);
-    }
+ 
+ 
 
 }
 
@@ -237,34 +291,49 @@ const [message, setMessage] = useState("")
 
 const handleMessage = async () => {
   
-    
- 
-  try {
-
-const URL= `api/HyChat/Message?ID=${userInfo.studentId}&GID=${Id}`;
-    const response = await fetch(apiServer+URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({message})
-    });
-
-   
-    if (response.ok) {
-      setMessage(" ")
-      
-      
-      
-    } else {
-      
+    if(message ===""){
+      setMessage("type a message...")
     }
-  } catch (error) {
+    else if(message ==="type a message..."){
+      setMessage("type a message...")
+    }
+    
+    else{
 
-    console.error(error);
-  }
+      try {
+
+        const URL= `api/HyChat/Message?ID=${userInfo.studentId}&GID=${Id}`;
+            const response = await fetch(apiServer+URL, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({message})
+            });
+        
+           
+            if (response.ok) {
+              setMessage(" ")
+              
+              
+              
+            } else {
+              
+            }
+          } catch (error) {
+        
+            console.error(error);
+          }
+
+
+
+    }
+ 
+ 
 
 }
+
+
 
 
 
@@ -273,23 +342,16 @@ const URL= `api/HyChat/Message?ID=${userInfo.studentId}&GID=${Id}`;
     
   return (
     <div style={{ paddingBottom: '90px' }}>
-      <div
-    style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap:"1rem",
-        marginTop:'1rem'
-    }}
-    >
-       
-       <>
+             <div style={{display:"flex", flexDirection:"row", gap:"0.5rem", width:"100%", position:"fixed", top:0, left:0, right:0, zIndex:1}}>
       <ChatCard>
         <div style={{
           paddingTop:"1rem",
+          marginBottom:"30%"
 
 
         }} onClick={()=>{
           navigate("/HyChat")
+         
         }}>
         <BsArrowLeft/>
         </div>
@@ -340,7 +402,19 @@ const URL= `api/HyChat/Message?ID=${userInfo.studentId}&GID=${Id}`;
 </ChatCard>
 
 
-       </>
+       </div>
+
+
+      <div
+    style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap:"1rem",
+        marginTop:'7rem'
+    }}
+    >
+       
+
   
       
 <ChatContainer>
@@ -367,6 +441,7 @@ const URL= `api/HyChat/Message?ID=${userInfo.studentId}&GID=${Id}`;
         <>
 
   <OtherMessage ref={unreadMessageRef}>
+
 <ChatCardGroup>
     <ChatImageGroup src={apiServer + data?.picture} />
     <div style={{display:'flex', flexDirection:"column",  gap:'0.5rem', width:"100%"}}  >
@@ -491,13 +566,13 @@ const URL= `api/HyChat/Message?ID=${userInfo.studentId}&GID=${Id}`;
 
 
 <AnimateHeight height={dropper ? "auto" : 0} duration={500}>
- 
-<StraightLink logo={<AiTwotoneFileWord/>} title="Document" path="/student/timetable"/>
-    <StraightLink logo={<MdOndemandVideo/>} title="Video" path="/student/lesson"/>
-    <StraightLink logo={<MdHeadset/>} title="Audio" path="/student/overview"/>
-    <StraightLink logo={<AiOutlinePicture/>} title="Picture" path="/student"/>
-    <StraightLink logo={<GiBookmarklet/>} title="Book" path="/student/announcements"/>
-   
+ <OptionCard>
+<StraightLink logo={<AiTwotoneFileWord/>} title="Document" path={`/HyChat/Document/${Id}`}/>
+    <StraightLink logo={<MdOndemandVideo/>} title="Video" path={`/HyChat/Video/${Id}`}/>
+    <StraightLink logo={<MdHeadset/>} title="Audio" path={`/HyChat/Audio/${Id}`}/>
+    <StraightLink logo={<AiOutlinePicture/>} title="Picture" path={`/HyChat/Picture/${Id}`}/>
+    <StraightLink logo={<GiBookmarklet/>} title="Book" path={`/HyChat/Book/${Id}`}/>
+</OptionCard>
 
 </AnimateHeight>
 

@@ -7,7 +7,11 @@ import Student from './Pages/Student';
 import HyChat from './Portals/Student/HyChat'
 import GroupChatWindow from './Portals/Student/GroupChatWindow';
 import AddGroup from './Portals/Student/AddGroup';
-
+import AddDocument from './Portals/Student/AddDocument';
+import AddAudio from './Portals/Student/AddAudio';
+import AddVideo from './Portals/Student/AddVideo';
+import AddPicture from './Portals/Student/AddPicture';
+import AddBook from './Portals/Student/AddBook';
 
 const App = () => {
   return (
@@ -19,6 +23,11 @@ const App = () => {
       <Route path="/HyChat" element={<HyChat />} />
       <Route path="/HyChat/:Id" element={<GroupChatWindow />} />
       <Route path="/HyChat/NewGroup" element={<AddGroup />} />
+      <Route path="/HyChat/Video/:Id" element={<AddVideo />} />
+      <Route path="/HyChat/Audio/:Id" element={<AddAudio />} />
+      <Route path="/HyChat/Picture/:Id" element={<AddPicture />} />
+      <Route path="/HyChat/Book/:Id" element={<AddBook />} />
+      <Route path="/HyChat/Document/:Id" element={<AddDocument />} />
         
         
         

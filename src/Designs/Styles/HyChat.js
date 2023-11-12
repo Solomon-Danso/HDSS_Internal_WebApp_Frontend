@@ -134,6 +134,27 @@ border-radius:50%;
 
 `;
 
+export const ChatUploads = styled.div`
+
+width:5vw;
+height:8vh;
+background-color: ${colors.maingreen};
+
+padding:0.5rem;
+border-radius:50%;
+
+
+@media (max-width: 768px){
+  width:30vw;
+  height:auto;
+border-radius:50%;
+
+}
+
+`;
+
+
+
 export const ChatContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -230,6 +251,12 @@ export const OptionCard = styled.div`
 
   /* You might need to adjust the width if needed */
    width: 20%; 
+
+   position:fixed;
+   bottom:0;
+   left:0;
+   margin-bottom:2.7rem;
+   margin-left: 1rem;
 @media (max-width: 768px){
   width: 50%;
 }

@@ -936,6 +936,40 @@ export const FormInputStudent4 = styled.input`
   }
 `;
 
+
+export const GradeInput = styled.input`
+  width: 100%;
+  padding: 15px 10px;
+  border: 0.01px solid ${colors.aqua};
+  border-radius: 5px;
+  font-size: 1.4rem;
+  outline: none;
+  transition: all 0.5s ease-in-out;
+  
+  text-align: left;
+
+  
+  :hover {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  :focus {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    width:100%;
+  }
+   @media (max-width: 1500px) {
+    font-size: 12px;
+    width:100%;
+  }
+`;
+
+
+
+
 export const FormInputGrpName = styled.input`
   width: 60vw;
   padding: 15px 0; /* Adjust padding for the bottom border */

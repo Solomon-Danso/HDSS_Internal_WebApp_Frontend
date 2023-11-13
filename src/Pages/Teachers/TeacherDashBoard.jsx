@@ -31,7 +31,19 @@ import ViewPicture from "../../Portals/Admin/LMS/ViewPictures"
 import ViewBook from "../../Portals/Admin/LMS/ViewBooks"
 import ViewTimeTable from "../../Portals/Admin/LMS/ViewTimeTables"
 import UploadAssignment from "../../Portals/Admin/LMS/UploadAssignment"
-import HeadernSearch from '../HeadernSearch';
+import HeadernSearch from '../HeadernSearch'
+import Grades from "../../Portals/Admin/LMS/StudyStudentMarks"
+
+
+
+
+
+
+
+
+
+
+;
 
 import DropList from "../../Pages/DropList"
 import InnerDroplist from "../../Pages/InnerDroplist"
@@ -530,6 +542,7 @@ const [sysDate, setSysDate] = useState("")
               <Route path="viewBooks" element={<ViewBook />} />
               <Route path="viewTimeTables" element={<ViewTimeTable />} />
               <Route path="uploadAssignment" element={<UploadAssignment />} />
+              <Route path="uploadGrades" element={<Grades />} />
 
 
 

@@ -139,11 +139,14 @@ DashBoard
 
 
       <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadAssignment") }}>Upload Assignment</MenuButtonOptionLink>
-     
-
-
 
       </InnerDroplist>
+
+      <InnerDroplist title="Grading">
+
+
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadGrades") }}>Upload Grades</MenuButtonOptionLink>
+</InnerDroplist>
 
 
       

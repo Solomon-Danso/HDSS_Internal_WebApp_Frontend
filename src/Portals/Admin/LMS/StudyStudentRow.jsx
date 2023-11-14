@@ -39,7 +39,7 @@ const StudentTableRow = ({ data, idx, handleChangeX }) => {
         </HeaderText>
       </Table.Cell>
 
-      <Table.Cell>
+      <Table.Cell width={"30vw"}>
         <HeaderText
           name="studentName"
           onChange={(value) => handleChangeX(value, idx, 'studentName')}
@@ -50,26 +50,28 @@ const StudentTableRow = ({ data, idx, handleChangeX }) => {
       </Table.Cell>
 
       <Table.Cell>
-        <GradeInput
-          type="number"
-          name="classScore"
-          onChange={(e) => handleChangeX(e, idx, 'classScore')}
-          required
-        />
+      <GradeInput
+  type="number"
+  step="0.01"
+  name="classScore"
+  onChange={(e) => handleChangeX(e, idx, 'classScore')}
+  max="100"  // Set the maximum value to 100
+  required
+/>
       </Table.Cell>
 
       <Table.Cell>
-        <GradeInput
-          type="number"
-          name="examScore"
-          onChange={(e) => handleChangeX(e, idx, 'examScore')}
-          required
-        />
+      <GradeInput
+  type="number"
+  step="0.01"
+  name="examScore"
+  onChange={(e) => handleChangeX(e, idx, 'examScore')}
+  max="100"  // Set the maximum value to 100
+  required
+/>
       </Table.Cell>
 
-      <Table.Cell>{/* Other cells go here */}</Table.Cell>
-
-      <Table.Cell>{/* Other cells go here */}</Table.Cell>
+      
     </Table.Row>
   );
 };

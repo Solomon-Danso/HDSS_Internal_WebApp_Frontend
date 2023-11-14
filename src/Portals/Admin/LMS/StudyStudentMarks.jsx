@@ -95,7 +95,8 @@ const [rowList, setRowValues] = useState([
       
         if (namex === 'classScore' || namex === 'examScore') {
           // Handle numeric fields
-          newFormValues[indx][namex] = parseInt(event.target.value, 10);
+          newFormValues[indx][namex] = parseFloat(event.target.value);
+          
         } else if (namex === 'studentId' || namex === 'studentName') {
           // Handle studentId and studentName
           newFormValues[indx][namex] = event.target.value;
@@ -288,15 +289,7 @@ const handleSubmit = async (event) => {
                    
                     </Table.Cell>
 
-                    <Table.Cell>
-                    <HeaderText>Position</HeaderText>
-                       
-                    </Table.Cell>
-
-                    <Table.Cell>
-                    <HeaderText> Comment</HeaderText>
-                    </Table.Cell>
-
+                   
 
 
                 </Table.Row>

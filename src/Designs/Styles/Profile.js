@@ -938,7 +938,7 @@ export const FormInputStudent4 = styled.input`
 
 
 export const GradeInput = styled.input`
-  width: 100%;
+  width: 20%;
   padding: 15px 10px;
   border: 0.01px solid ${colors.aqua};
   border-radius: 5px;

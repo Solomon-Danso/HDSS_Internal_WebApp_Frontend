@@ -269,8 +269,13 @@ const handleSubmit = async (event) => {
     }} >
             <Table.Header>
                 <Table.Row>
+                
                     <Table.Cell>
                         <HeaderText>ID</HeaderText>
+                        
+                    </Table.Cell>
+                    <Table.Cell>
+                        <HeaderText>Image</HeaderText>
                         
                     </Table.Cell>
 

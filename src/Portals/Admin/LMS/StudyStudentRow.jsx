@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'semantic-ui-react';
 import { GradeInput } from '../../../Designs/Styles/Profile';
-import { HeaderText } from '../../../Designs/Styles/HyChat';
+import { GradeImage, HeaderText } from '../../../Designs/Styles/HyChat';
+import { apiServer } from '../../../Constants /Endpoints';
 
 const StudentTableRow = ({ data, idx, handleChangeX }) => {
   const [Id, setId] = useState("");
@@ -29,15 +30,22 @@ const StudentTableRow = ({ data, idx, handleChangeX }) => {
 
   return (
     <Table.Row>
+        
       <Table.Cell>
         <HeaderText
           name="studentId"
-          //onChange={(e) => handleChangeX(e, idx, 'studentId')}
+          onChange={(e) => handleChangeX(e, idx, 'studentId')}
           value={Id}
         >
           {Id}
         </HeaderText>
       </Table.Cell>
+
+      <Table.Cell>
+            <GradeImage
+            src={apiServer+data.profilePic}
+            />
+        </Table.Cell>
 
       <Table.Cell width={"30vw"}>
         <HeaderText

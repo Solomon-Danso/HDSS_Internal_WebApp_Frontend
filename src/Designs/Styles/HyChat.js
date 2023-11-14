@@ -273,7 +273,12 @@ font-size: 1.1rem;
 
 `;
 
+export const GradeImage = styled.img`
+width: 7vw;
+height:10vh;
 
+
+`;
 
 
 

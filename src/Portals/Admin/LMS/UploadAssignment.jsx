@@ -22,7 +22,7 @@ const StudentInfo = () => {
 
 
     const [studentList, setStudentList] = useState([])
-      const [closeOther, setCloseOther] = useState(false)
+    const [closeOther, setCloseOther] = useState(false)
     const [searchResult, setSearchResult] = useState(false)
     const [searchTerm, setSearchTerm] = useState()
 

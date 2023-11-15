@@ -39,7 +39,8 @@ import PictureWithNotes from "../../Portals/Student/PictureWithNotes"
 import ViewAnnouncement from "../../Portals/Student/ViewAnnoucement"
 import HyChat from "../../Portals/Student/HyChat"
 import AddGroup from "../../Portals/Student/AddGroup"
-
+import Assignment from "../../Portals/Student/Assignment"
+import AssignmentSolution from "../../Portals/Student/AssignmentSolution"
 
 
 
@@ -351,6 +352,9 @@ alignItems: 'center',
           <Route path="announcements" element={<ViewAnnouncement />} />
           <Route path="Discussions" element={<HyChat />} />
           <Route path="group" element={<AddGroup />} />
+          <Route path="assignments" element={<Assignment />} />
+          <Route path="assignments/:Id" element={<AssignmentSolution />} />
+      
       
 
           <Route path="*" element={<PermissionDenied />} />

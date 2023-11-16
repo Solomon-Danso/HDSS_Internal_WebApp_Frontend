@@ -55,7 +55,7 @@ import AssignmentSolution from "../../Portals/Student/AssignmentSolution"
 
 
 
-const Dashboard = ({openNav}) => {
+const Dashboard = ({openNav,openfunction}) => {
   const [specificRole, setspecificRole] = useState("");
   useEffect(() => {
     const spRole =  AES.decrypt(sessionStorage.getItem("SpecificRole"), '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK').toString(enc.Utf8);
@@ -63,7 +63,7 @@ const Dashboard = ({openNav}) => {
     
   }, []);
 
-
+  
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [userInfo, setUserInfo] = useState({});
@@ -179,9 +179,9 @@ const toggler = () => {
   <MenuCard >
 
 
+<div onClick={openfunction}>
 
-
-  <StraightLink logo={<BsGlobeAsiaAustralia/>} title="TimeTable" path="/student/timetable"/>
+<StraightLink logo={<BsGlobeAsiaAustralia/>} title="TimeTable" path="/student/timetable"/>
 <StraightLink logo={<GiSecretBook/>} title="Lesson" path="/student/lesson"/>
 <StraightLink logo={<AiOutlineCalendar/>} title="Events" path="/student"/>
 <StraightLink logo={<AiOutlineNotification/>} title="Announcements" path="/student/announcements"/>
@@ -193,6 +193,10 @@ const toggler = () => {
 <StraightLink logo={<GiNotebook/>} title="My Notes" path="/student/MyNotes"/>
 <StraightLink logo={<MdReportProblem/>} title="Reports" path="/student/Reports"/>
 <StraightLink logo={<AiOutlineNotification/>} title="Payments" path="/student/payments"/>
+
+
+</div>
+
     
 
 

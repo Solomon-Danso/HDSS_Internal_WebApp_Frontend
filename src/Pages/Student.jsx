@@ -35,8 +35,8 @@ const AdminDashboard = () => {
   return (
     <MainDashboardContainer>
     <Navigation page={page}  openfunction={openfunction}/>
-    <Student_MenuButton/>
-        <Student_Dashboard openNav={openNav}/>
+    <Student_MenuButton />
+        <Student_Dashboard openNav={openNav}  openfunction={openfunction}/>
        
      
     </MainDashboardContainer>

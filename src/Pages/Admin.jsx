@@ -3,7 +3,7 @@ import Admin_MenuButtons from './Admin/Admin_MenuButtons'
 import Admin_Dashboard from './Admin/Admin_Dashboard'
 import { MainDashboardContainer } from '../Designs/Styles/Styles'
 import { useLocation } from 'react-router-dom'
-import Navigation from './Navigator'
+import Navigation from './AdminNavigator'
 
 
 const AdminDashboard = () => {
@@ -36,7 +36,7 @@ const openfunction = ()=>{
 
 <Navigation page={page}  openfunction={openfunction}/>
         <Admin_MenuButtons />      
-        <Admin_Dashboard openNav={openNav}/>
+        <Admin_Dashboard openNav={openNav} openfunction={openfunction}/>
      
     </MainDashboardContainer>
   )

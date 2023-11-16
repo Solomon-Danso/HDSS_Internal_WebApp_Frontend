@@ -190,6 +190,7 @@ const [sysDate, setSysDate] = useState("")
 
 {
   openNav?(<>
+  
   <MenuCard >
 
 
@@ -213,7 +214,8 @@ const [sysDate, setSysDate] = useState("")
 {
   specificRole==="SuperiorUser"||specificRole==="HeadTeacher"||specificRole==="Teacher" ? (
   <>
-  <DropList logo={<FaLayerGroup/>} title="LMS">
+  <DropList logo={<FaLayerGroup/>} title="LMS" >
+
 
     <InnerDroplist title="Class">
     <MenuButtonOptionLink onClick={() => { navigate("/teacher/class") }}>Class List</MenuButtonOptionLink>

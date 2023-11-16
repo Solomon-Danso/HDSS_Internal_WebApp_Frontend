@@ -70,7 +70,7 @@ import {CiSettings,CiGlobe} from 'react-icons/ci'
 
 
 
-const Dashboard = ({openNav}) => {
+const Dashboard = ({openNav,openfunction}) => {
   const [specificRole, setspecificRole] = useState("");
   useEffect(() => {
     const spRole =  AES.decrypt(sessionStorage.getItem("SpecificRole"), '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK').toString(enc.Utf8);
@@ -190,7 +190,9 @@ const [sysDate, setSysDate] = useState("")
    <DashboardContainer>
 
 {
-  openNav?(<>
+  openNav?(
+  
+ <>
   <MenuCard >
 
 
@@ -675,7 +677,10 @@ const [sysDate, setSysDate] = useState("")
 
 
   </MenuCard>
-  </>):(<>
+  </>
+
+
+ ):(<>
 
   </>)
 }

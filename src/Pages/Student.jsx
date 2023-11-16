@@ -4,7 +4,7 @@ import { MainDashboardContainer } from '../Designs/Styles/Styles'
 import Student_Dashboard from "../Pages/Student/Student_DashBoard"
 import Student_MenuButton from "../Pages/Student/Student_MenuButtons"
 import { useLocation } from 'react-router-dom'
-import Navigation from './Navigator'
+import Navigation from './StudentNavigator'
 const AdminDashboard = () => {
 
 

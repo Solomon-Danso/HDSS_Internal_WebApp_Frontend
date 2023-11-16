@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { MainDashboardContainer } from '../Designs/Styles/Styles'
 import TeacherDashBoard from "../Pages/Teachers/TeacherDashBoard"
 import TeacherMenuButtons from "../Pages/Teachers/TeacherMenuButtons"
-import Navigation from './Navigator'
+import Navigation from './TeacherNavigator'
 import { useLocation } from 'react-router-dom'
 
 
@@ -37,7 +37,7 @@ const openfunction = ()=>{
     <MainDashboardContainer>
         <Navigation openfunction={openfunction} page={page} />
         <TeacherMenuButtons/>
-        <TeacherDashBoard openNav={openNav}/>
+        <TeacherDashBoard openNav={openNav} openfunction={openfunction}/>
        
      
     </MainDashboardContainer>

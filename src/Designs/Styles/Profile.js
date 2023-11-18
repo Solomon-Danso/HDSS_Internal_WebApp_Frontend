@@ -1209,6 +1209,45 @@ transition: all 0.5s ease-in-out;
 
 `;
 
+export const QuestionInput = styled.textarea`
+  width: 60%;
+  padding: 10px;
+  border: 0.5px solid #cdcdcd;
+  border-radius: 5px;
+  margin-top: 5px;
+  font-size: 1.3rem;
+  outline: none;
+  transition: all 0.5s ease-in-out;
+  margin-bottom: 15px;
+  height: 100px;
+  resize: none;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+    width: 100%;
+  }
+`;
+
+
+export const OptionInput = styled.input`
+  width: 60%;
+  padding: 5px;
+  border: 0.5px solid #cdcdcd;
+  border-radius: 5px;
+  margin-top: 5px;
+  font-size: 1.3rem;
+  outline: none;
+  transition: all 0.5s ease-in-out;
+  margin-bottom: 15px;
+  height: 50px;
+  resize: none;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+    width: 100%;
+  }
+`;
+
 
 
 export const PaySelector = styled.select`
@@ -1333,6 +1372,45 @@ border: none;
 
 
 `;
+
+
+export const OptionButton = styled.button`
+border: none;
+  width: 5vw;
+  height: 6vh;
+  border-radius: 10px;
+  border: 1px solid ${({ border }) => border};
+  background-color: ${({ background }) => background};
+  color: ${({ color }) => color};
+  text-align: center;
+  padding: 10px 30px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-family: OpenSans;
+
+  :hover {
+    background-color: ${colors.ivory_dark};
+    color: ${colors.primary};
+    border: 1px solid ${colors.ivory_dark};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    padding: 4px 18px;
+    padding: 11px 25px;
+  }
+
+
+`;
+
+
+
+
 
 export const AssSolUpBut = styled.button`
 border: none;

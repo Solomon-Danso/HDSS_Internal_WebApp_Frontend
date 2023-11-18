@@ -33,7 +33,7 @@ import ViewTimeTable from "../../Portals/Admin/LMS/ViewTimeTables"
 import UploadAssignment from "../../Portals/Admin/LMS/UploadAssignment"
 import HeadernSearch from '../HeadernSearch'
 import Grades from "../../Portals/Admin/LMS/StudyStudentMarks"
-
+import TestnQuiz from "../../Portals/Admin/LMS/TestandQuiz"
 
 
 
@@ -288,15 +288,13 @@ const [sysDate, setSysDate] = useState("")
       </InnerDroplist>
 
       <InnerDroplist title="Assignments">
-
-
       <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadAssignment") }}>Upload Assignment</MenuButtonOptionLink>
-     
-
-
-
+      </InnerDroplist>
+      <InnerDroplist title="Test and Quizes">
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadTestnQuiz") }}>Upload Tests and Quizes</MenuButtonOptionLink>
       </InnerDroplist>
 
+     
 
       
     
@@ -545,6 +543,7 @@ const [sysDate, setSysDate] = useState("")
               <Route path="viewTimeTables" element={<ViewTimeTable />} />
               <Route path="uploadAssignment" element={<UploadAssignment />} />
               <Route path="uploadGrades" element={<Grades />} />
+              <Route path="uploadTestnQuiz" element={<TestnQuiz />} />
 
 
 

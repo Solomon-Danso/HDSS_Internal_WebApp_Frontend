@@ -137,14 +137,15 @@ DashBoard
 
       <InnerDroplist title="Assignments">
 
-
       <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadAssignment") }}>Upload Assignment</MenuButtonOptionLink>
-
       </InnerDroplist>
 
+      <InnerDroplist title="Test and Quizes">
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadTestnQuiz") }}>Upload Tests and Quizes</MenuButtonOptionLink>
+      </InnerDroplist>
+
+
       <InnerDroplist title="Grading">
-
-
       <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadGrades") }}>Upload Grades</MenuButtonOptionLink>
 </InnerDroplist>
 

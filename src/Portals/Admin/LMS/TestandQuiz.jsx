@@ -90,32 +90,13 @@ const [rowList, setRowValues] = useState([
       ]);
       
       
-      const handleChangeX = (event, indx, namex) => {
-        let newFormValues = [...rowList];
-      
-        // Ensure that the object structure matches the initial state
-        if (!newFormValues[indx]) {
-          newFormValues[indx] = { studentId: '', studentName: '', classScore: '', examScore: '' };
-        }
-      
-        if (namex === 'classScore' || namex === 'examScore') {
-          // Handle numeric fields
-          newFormValues[indx][namex] = parseFloat(event.target.value);
-          
-        } else if (namex === 'studentId' || namex === 'studentName') {
-          // Handle studentId and studentName
-          newFormValues[indx][namex] = event.target.value;
-        }
-      
-        setRowValues(newFormValues);
-      };
+
       
       
       
 const [level, setLevel] = useState("")
 const [subject, setsubject] = useState("")
-const [academicYear, setacademicYear] = useState("")
-const [academicTerm, setacademicTerm] = useState("")
+
 
 
 const [studentList, setStudentList] = useState([]);
@@ -228,12 +209,23 @@ else{
 }   
 
 
+};
 
 
+const handle = (e) => {
+  const inputValue = e.target.value.toUpperCase(); // Convert input to uppercase
+  const pattern = /^[A-E]$/; // Regular expression pattern for A to E
 
+  if (inputValue.trim() === '') {
+    // Notify the user if the input is empty
+   Show.Attention('Please input an answer.');
+  } else if (pattern.test(inputValue)) {
+    setAnswer(inputValue); // Set the answer state if input is valid
+  } else {
+    setAnswer(''); // Clear the answer state if input is invalid
+  }
+};
 
-
-  };
 
 
 
@@ -397,10 +389,12 @@ else{
               placeholder="Type correct option Alphabet eg. A or B "
               style={{ width: "100%", marginBottom: 0 }}
               required
-              onChange={(e)=>setAnswer(e.target.value)}
+              value={answer}
+              onChange={handle}
              
             />
     
+
         </div>
 
 <br/>

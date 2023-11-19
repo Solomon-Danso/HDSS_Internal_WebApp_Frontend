@@ -273,6 +273,24 @@ font-family: cursive;
 
 `;
 
+export const QuizSText = styled.div`
+font-size: 1.3rem;
+padding-left: 0.5rem;
+padding-bottom: 0.5rem;
+text-wrap: break-word;
+font-family: opensans;
+
+
+`;
+export const QuizSMark = styled.div`
+font-size: 0.8rem;
+font-family: opensans;
+padding-left: 0.5rem;
+padding-bottom: 0.5rem;
+
+`;
+
+
 
 export const TheVideo = styled.video`
 width:100%;
@@ -280,6 +298,10 @@ height:80%;
 
 `;
 
+export const RadioSelect = styled.input`
+width:3vw;
+height:4vh;
+`;
 
 export const StudentInfoCard2 = styled.div`
   background: ${colors.card};
@@ -1372,6 +1394,40 @@ border: none;
 
 
 `;
+
+export const QuizButton = styled.button`
+border: none;
+  width: 30%;
+  height: 5vh;
+  border-radius: 20px;
+  border: 1px solid ${({ border }) => border};
+  background-color: ${({ background }) => background};
+  color: ${({ color }) => color};
+  text-align: center;
+ 
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-family: OpenSans;
+
+  :hover {
+    background-color: ${colors.ivory_dark};
+    color: ${colors.primary};
+    border: 1px solid ${colors.ivory_dark};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+
+  }
+
+
+`;
+
 
 
 export const OptionButton = styled.button`

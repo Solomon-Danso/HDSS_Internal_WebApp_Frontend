@@ -41,6 +41,14 @@ import HyChat from "../../Portals/Student/HyChat"
 import AddGroup from "../../Portals/Student/AddGroup"
 import Assignment from "../../Portals/Student/Assignment"
 import AssignmentSolution from "../../Portals/Student/AssignmentSolution"
+import TextnQuiz from "../../Portals/Student/ViewTextnQuiz"
+import TextnQuizGrp from "../../Portals/Student/ViewAllTextnQuizInGroup"
+
+
+
+
+
+
 
 
 
@@ -358,6 +366,8 @@ alignItems: 'center',
           <Route path="group" element={<AddGroup />} />
           <Route path="assignments" element={<Assignment />} />
           <Route path="assignments/:Id" element={<AssignmentSolution />} />
+          <Route path="testnquizzes" element={<TextnQuiz />} />
+          <Route path="testnquizzes/:Id" element={<TextnQuizGrp />} />
       
       
 

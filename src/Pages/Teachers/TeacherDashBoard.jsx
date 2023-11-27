@@ -294,6 +294,10 @@ const [sysDate, setSysDate] = useState("")
       <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadTestnQuiz") }}>Upload Tests and Quizes</MenuButtonOptionLink>
       </InnerDroplist>
 
+      <InnerDroplist title="Classroom">
+      <MenuButtonOptionLink onClick={() => { navigate("/VideoCall") }}>Video Call</MenuButtonOptionLink>
+      </InnerDroplist>
+
      
 
       

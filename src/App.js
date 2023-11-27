@@ -12,6 +12,8 @@ import AddAudio from './Portals/Student/AddAudio';
 import AddVideo from './Portals/Student/AddVideo';
 import AddPicture from './Portals/Student/AddPicture';
 import AddBook from './Portals/Student/AddBook';
+import VideoHome from './VideoCall/Pages/VideoHome';
+import VideoRoom from './VideoCall/Pages/VideoRoom';
 
 const App = () => {
   return (
@@ -28,7 +30,9 @@ const App = () => {
       <Route path="/HyChat/Picture/:Id" element={<AddPicture />} />
       <Route path="/HyChat/Book/:Id" element={<AddBook />} />
       <Route path="/HyChat/Document/:Id" element={<AddDocument />} />
-        
+      <Route path="/HyChat/Document/:Id" element={<AddDocument />} />
+      <Route path="/VideoCall" element={<VideoHome />} />
+      <Route path="/VideoCall/:Id" element={<VideoRoom />} />
         
         
         

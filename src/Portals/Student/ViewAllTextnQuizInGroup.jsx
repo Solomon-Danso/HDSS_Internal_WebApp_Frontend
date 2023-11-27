@@ -126,7 +126,6 @@ const {Id} = useParams()
 const [answer, setAnswer] = useState("")
 
 const [theTimer, setTheTimer] = useState({})
-const [initialTime, setInitialTime] = useState(null);
 
 useEffect(() => {
     const fetchData = async () => {

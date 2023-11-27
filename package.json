@@ -5,6 +5,7 @@
   "dependencies": {
     "chart.js": "^4.4.0",
     "crypto-js": "^4.2.0",
+    "peerjs": "^1.5.1",
     "rc-menu": "^9.12.2",
     "react": "^18.2.0",
     "react-animate-height": "^3.2.2",
@@ -19,6 +20,7 @@
     "react-spinners": "^0.13.8",
     "sass": "^1.69.5",
     "semantic-ui-react": "^2.1.4",
+    "socket.io-client": "^4.7.2",
     "styled-components": "^6.1.0",
     "sweetalert2": "^11.7.20",
     "web-vitals": "^2.1.0"

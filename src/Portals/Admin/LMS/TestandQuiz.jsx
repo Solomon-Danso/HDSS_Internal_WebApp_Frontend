@@ -216,10 +216,7 @@ const handle = (e) => {
   const inputValue = e.target.value.toUpperCase(); // Convert input to uppercase
   const pattern = /^[A-E]$/; // Regular expression pattern for A to E
 
-  if (inputValue.trim() === '') {
-    // Notify the user if the input is empty
-   Show.Attention('Please input an answer.');
-  } else if (pattern.test(inputValue)) {
+  if (pattern.test(inputValue)) {
     setAnswer(inputValue); // Set the answer state if input is valid
   } else {
     setAnswer(''); // Clear the answer state if input is invalid

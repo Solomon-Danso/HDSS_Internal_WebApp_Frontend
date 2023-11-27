@@ -248,7 +248,22 @@ export const MovieCard = styled.div`
 
 `;
 
+export const LiveVideoCard = styled.div`
+  background: ${colors.body};
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(19.7px);
+  -webkit-backdrop-filter: blur(19.7px);
+  margin-top:1rem;
+ height: 100%;
 
+   width: 20vw; 
+   @media (max-width: 800px){
+    width: 100%;
+
+  }
+
+`;
 
 
 
@@ -1617,6 +1632,17 @@ export const StudentListResult = styled.div`
   margin-top: 3rem; /* Space for the fixed header */
   display: flex;
   flex-direction: column;
+  gap: 2rem;
+`;
+
+export const VideoListResult = styled.div`
+  overflow: auto; /* Use auto to allow scrolling when content overflows */
+
+  /* Adjust height to fill available space and leave room for the fixed header */
+  height: calc(100% - 3rem);
+  margin-top: 3rem; /* Space for the fixed header */
+  display: flex;
+  flex-direction: row;
   gap: 2rem;
 `;
 

@@ -43,7 +43,7 @@ import Assignment from "../../Portals/Student/Assignment"
 import AssignmentSolution from "../../Portals/Student/AssignmentSolution"
 import TextnQuiz from "../../Portals/Student/ViewTextnQuiz"
 import TextnQuizGrp from "../../Portals/Student/ViewAllTextnQuizInGroup"
-
+import GradeBook from '../../Portals/Student/GradeBook';
 
 
 
@@ -368,6 +368,7 @@ alignItems: 'center',
           <Route path="assignments/:Id" element={<AssignmentSolution />} />
           <Route path="testnquizzes" element={<TextnQuiz />} />
           <Route path="testnquizzes/:Id" element={<TextnQuizGrp />} />
+          <Route path="gradebook" element={<GradeBook />} />
       
       
 

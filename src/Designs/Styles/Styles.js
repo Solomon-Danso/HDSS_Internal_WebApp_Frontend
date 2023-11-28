@@ -370,6 +370,23 @@ export const SchoolLogo = styled.img`
   }
 `;
 
+
+export const RSchoolLogo = styled.img`
+  width: 10vw;
+  height: 15vh;
+  align-self: center;
+
+`;
+
+export const RSSchoolLogo = styled.img`
+  width: 8vw;
+  height: 15vh;
+ border-radius:50%;
+
+`;
+
+
+
 export const AppName = styled.h3`
   font-size: 20px;
   margin-top: 10%;

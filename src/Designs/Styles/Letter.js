@@ -3,52 +3,114 @@ import { colors } from "../Colors";
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-export const Paragraph = styled.div`
-  font-family: OpenSans serif;
-  color: ${colors.darkBlue};
-  font-size: 0.75rem;
-  width: 403.276px; /* 595.276px - 2 * 96px for margin */
-  margin-right: 1rem;
-  margin-left: 1rem;
-  margin-bottom: 0.5rem;
-`;
-
-export const ContentContainer = styled.div`
-  
-width: 595.276px; /* A4 width in pixels */
-height: 841.890px; /* A4 height in pixels */
-
+export const Container = styled.div`
+background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(19.7px);
+  -webkit-backdrop-filter: blur(19.7px);
+  margin:1rem;
+ height: 141vh;
+   width: 70vw; 
+   padding:2rem;
   
 `;
 
-export const SchoolLogo = styled.img`
-width:8vw;
-height:8vh;
+export const HomeContainer = styled.div`
+
+border: 0.5rem solid black;
+padding:1rem;
+ height: 135vh;
+   width: 66vw; 
+  
 `;
 
-export const Salutation = styled.div`
+export const GeneralInfoContainer = styled.div`
+
+border: 0.2rem solid black;
+ padding:1rem;
+ height: 12vh;
+   width: 100%; 
+   border-radius:1.5rem;
+  
+`;
+
+export const PerformanceInfoContainer = styled.div`
+
+border: 0.2rem solid black;
+ padding:1rem;
+ height: 25vh;
+   width: 100%; 
+   border-radius:1.5rem;
+   margin-top:2rem;
+   gap:2rem;
+  
+`;
+
+export const PerformanceText = styled.span`
+font-size:1.2rem;
+font-weight:500;
+`;
+
+export const PerformanceRow = styled.div`
 display:flex;
-flex-direction:column;
-font-family: OpenSans serif;
-color: ${colors.darkBlue};
+flex-direction:row;
+justify-content:space-evenly;
+font-size:1.2rem;
+color:${colors.rcolor}
+`;
 
-margin-left:50%;
+
+
+export const GInfoRow = styled.div`
+display:flex;
+flex-direction:row;
+justify-content:space-between;
+`;
+
+export const GInfoMiniRow = styled.div`
+display:flex;
+flex-direction:row;
+gap:0.5rem;
+color: ${colors.rcolor};
+font-size:1.2rem
+`;
+
+
+
+export const RSchoolName = styled.div`
+text-align: center;
+font-size: 3.5rem;
+font-family: Times New Roman,;
+color:${colors.rcolor};
+font-weight: bold;
 
 `;
+
+export const RSchoolNameS = styled.div`
+text-align: center;
+font-size: 2rem;
+font-family: Times New Roman,;
+font-weight: bold;
+color:${colors.rcolor}
+
+`;
+
+export const RStudCenter = styled.div`
+display: flex;
+flex-direction: row;
+
+
+`;
+
+
+
+
+
+
+
+
+
+
+
 

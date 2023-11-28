@@ -24,7 +24,9 @@ export  const colors = {
   lightsecondgreen:"#2F4A4E",
   mainsecondgreen:"#29C76F",
   text:"#9C9C9C",
-  text2:"#AAAAAA"
+  text2:"#AAAAAA",
+  rcolor:"#002060",
+  rblue:"#381BE9",
 
 
 };

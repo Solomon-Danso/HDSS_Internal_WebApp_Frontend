@@ -55,7 +55,7 @@ DashBoard
 <StraightLink logo={<MdOutlineAssignmentTurnedIn/>} title="Tests & Quizzes" path="/student/testnquizzes"/>
 <StraightLink logo={<GiBookmarklet/>} title="GradeBook" path="/student/gradebook"/>
 <StraightLink logo={<BsPersonVideo3/>} title="Classroom" path="/student/classroom"/>
-<StraightLink logo={<GiNotebook/>} title="My Notes" path="/student/MyNotes"/>
+<StraightLink logo={<GiNotebook/>} title="My Notes" path="/MyNotes"/>
 <StraightLink logo={<MdReportProblem/>} title="Reports" path="/student/Reports"/>
 <StraightLink logo={<AiOutlineNotification/>} title="Payments" path="/student/paymentHistory"/>
 

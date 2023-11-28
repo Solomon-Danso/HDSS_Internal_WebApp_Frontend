@@ -1,6 +1,24 @@
 import styled from "styled-components";
 import { colors } from "../Colors";
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const Paragraph = styled.div`
   font-family: OpenSans serif;
   color: ${colors.darkBlue};
@@ -33,3 +51,4 @@ color: ${colors.darkBlue};
 margin-left:50%;
 
 `;
+

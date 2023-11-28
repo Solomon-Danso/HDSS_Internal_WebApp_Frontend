@@ -45,8 +45,8 @@ import TextnQuiz from "../../Portals/Student/ViewTextnQuiz"
 import TextnQuizGrp from "../../Portals/Student/ViewAllTextnQuizInGroup"
 import GradeBook from '../../Portals/Student/GradeBook';
 import PaymentHis from '../../Portals/Student/PaymentHistory';
-
-
+import ViewNotes from '../../Portals/Student/ViewNotes';
+import ReportCard from '../../Portals/Student/ReportCard';
 
 
 
@@ -198,7 +198,7 @@ const toggler = () => {
 <StraightLink logo={<MdOutlineAssignmentTurnedIn/>} title="Tests & Quizzes" path="/student/testnquizzes"/>
 <StraightLink logo={<GiBookmarklet/>} title="GradeBook" path="/student/gradebook"/>
 <StraightLink logo={<BsPersonVideo3/>} title="Classroom" path="/student/classroom"/>
-<StraightLink logo={<GiNotebook/>} title="My Notes" path="/student/MyNotes"/>
+<StraightLink logo={<GiNotebook/>} title="My Notes" path="/MyNotes"/>
 <StraightLink logo={<MdReportProblem/>} title="Reports" path="/student/Reports"/>
 <StraightLink logo={<AiOutlineNotification/>} title="Payments" path="/student/paymentHistory"/>
 
@@ -370,6 +370,8 @@ alignItems: 'center',
           <Route path="testnquizzes/:Id" element={<TextnQuizGrp />} />
           <Route path="gradebook" element={<GradeBook />} />
           <Route path="paymentHistory" element={<PaymentHis />} />
+          <Route path="MyNotes" element={<ViewNotes />} />
+          <Route path="Reports" element={<ReportCard />} />
       
       
 

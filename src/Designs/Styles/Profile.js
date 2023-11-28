@@ -395,8 +395,27 @@ border: 1px solid ${({ border }) => border};
 
 }
 
+`;
+
+
+export const NotesInfoCard = styled.div`
+background: ${colors.card};
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(19.7px);
+-webkit-backdrop-filter: blur(19.7px);
+
+overflow:hidden;
+margin: 0.5rem;
+border: 1px solid ${({ border }) => border};
+  width: 90vw;
+@media (min-width: 800px){
+  width: 90vw;
+
+}
 
 `;
+
 
 
 export const EventCard = styled.div`
@@ -1022,6 +1041,39 @@ export const FormInputStudent4 = styled.input`
   }
 `;
 
+export const NoteSubject = styled.input`
+  width: 100%;
+  padding: 15px 10px;
+  border: 0.01px solid ${colors.aqua};
+  border-radius: 5px;
+  font-size: 1.4rem;
+  outline: none;
+  transition: all 0.5s ease-in-out;
+  
+  text-align: left;
+
+  
+  :hover {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  :focus {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    width:100%;
+  }
+   @media (max-width: 1500px) {
+    font-size: 12px;
+    width:100%;
+  }
+`;
+
+
+
+
 
 export const GradeInput = styled.input`
   width: 100%;
@@ -1318,6 +1370,33 @@ transition: all 0.5s ease-in-out;
 
 `;
 
+export const PaySelectorN = styled.select`
+width: 100%;
+padding: 15px 10px;
+border: 1px solid ${({ border }) => border};;
+background-color: ${({background})=>background};
+color: ${({color})=>color};
+border-radius: 5px;
+margin-top: 10px;
+font-size: 16px;
+outline: none;
+transition: all 0.5s ease-in-out;
+
+:hover {
+  border: 0.5px solid ${colors.primary};
+}
+
+:focus {
+  border: 0.5px solid ${colors.primary};
+}
+
+@media (max-width: 768px) {
+  font-size: 12px;
+}
+
+`;
+
+
 export const PaySelectorS = styled.select`
 width: 23vw;
 padding: 15px 10px;
@@ -1414,6 +1493,8 @@ border: none;
 
 
 `;
+
+
 
 export const QuizButton = styled.button`
 border: none;

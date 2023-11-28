@@ -70,6 +70,8 @@ useEffect(() => {
   
 }, [ userInfo.studentId, Id]);
 
+
+
 const navigate = useNavigate()
 
 const [f,sf] = useState("")
@@ -78,7 +80,7 @@ const studentSolutions = async (event) => {
     event.preventDefault();
 
    Show.showLoading("Processing Data");
-const URL=`api/LMS/AssignmentSolution?SID=${userInfo.studentId}&AssignmentID=${Id}`
+const URL=`api/LMS/AssignmentSolution?SID=${userInfo.studentId}&QuestionId=${Id}`
 
 
     try {
@@ -95,6 +97,7 @@ const URL=`api/LMS/AssignmentSolution?SID=${userInfo.studentId}&AssignmentID=${I
       if (response.ok) {
        Show.hideLoading();
        Show.Success(data)
+       navigate("/student/assignments")
         window.location.reload()
         
       } else {

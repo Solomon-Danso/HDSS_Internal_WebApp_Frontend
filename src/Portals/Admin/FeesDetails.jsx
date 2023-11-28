@@ -68,13 +68,7 @@ const StudentDetails = () => {
     const [theStudent, setTheStudent] = useState([])
     const [His, setHis] = useState([])
 
-      useEffect(() => {
-        fetch(apiServer + ViewOneStudent+studentId)
-          .then(response => response.json()) // Parse the response as JSON
-          .then(data => setTheStudent(data))
-          .catch(error => console.error(error));
-      }, []);
-
+     
       useEffect(() => {
         fetch(apiServer + PaymentHis+studentId)
           .then(response => response.json()) // Parse the response as JSON
@@ -92,10 +86,21 @@ const StudentDetails = () => {
         const parsedData = JSON.parse(decryptedString);
           setUserInfo(parsedData);
       }, []);
+
+
+      useEffect(() => {
+        fetch(apiServer + ViewOneStudent+studentId+"&ID="+userInfo.staffID)
+          .then(response => response.json()) // Parse the response as JSON
+          .then(data => setTheStudent(data))
+          .catch(error => console.error(error));
+      }, [userInfo.staffID,studentId]);
+
     
 const [amount,setAmount] = useState(0)
 const [paymentMethod,setPaymentMethod] = useState("")
 const [action,setAction] = useState("")
+
+//console.log(userInfo)
 
 
 const studentDetails = async (event) => {

@@ -216,7 +216,7 @@ const formatDateTime = (dateTime) => {
   {AssignList.length > 0 &&
     AssignList.map((data) => (
 <MovieCard onClick={()=>{
-   navigate(`/student/assignments/${data.id}`)
+   navigate(`/student/assignments/${data.questionId}`)
   }}>
  
     <img src={Beauty} width="100%" height="55%" top="0px" alt={"Click Me"}/>

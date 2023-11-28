@@ -1,5 +1,6 @@
 //export const apiServer = "http://10.42.0.1:5000/"
-//export const apiServer = "http://192.168.19.18:5000/"
+//export const apiServer = "http://192.168.173.18:5000/"
+
 export const apiServer = "http://localhost:5000/"
 export const FrontendServer = "http://localhost:3000/"
 export const LoginEndpoint = "api/Auth/Login"

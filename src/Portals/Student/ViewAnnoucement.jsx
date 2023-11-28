@@ -21,7 +21,24 @@ const StudentInfo = () => {
      
 
 
-
+      const [isMobile, setIsMobile] = useState(false);
+      const [active, setActive] = useState(null);
+    
+      useEffect(() => {
+        setActive(1);
+         window.addEventListener("resize", handleResize);
+        handleResize();
+    
+      }, []);
+    
+      //choose the screen size
+      const handleResize = () => {
+        if (window.innerWidth < 768) {
+          setIsMobile(true);
+        } else {
+          setIsMobile(false);
+        }
+      };
 
     
      
@@ -64,24 +81,6 @@ const StudentInfo = () => {
 <StudentInfoCard2 >
 
 
-<NewStudentListCard2 >
-
-<CardTextHeader>S/N</CardTextHeader>
-<CardTextHeader>Title</CardTextHeader>
-<CardTextHeader>Academic Year</CardTextHeader>
-<CardTextHeader>Academic Term</CardTextHeader>
-<CardTextHeader>Date Added</CardTextHeader>
-{
-   specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(<>
-   
-   <CardTextHeader>Action</CardTextHeader>
-   </>):(<></>)
-}
-
-</NewStudentListCard2>
-
-
-
 
 
 
@@ -90,10 +89,24 @@ const StudentInfo = () => {
 
 
 <StudentListResult>
-{theClass.length > 0 &&
+
+{
+  isMobile?(
+  <>
+  {theClass.length > 0 &&
     theClass.map((data,index) => (
       <ViewAnnoucementCard data={data} key={index} index={index} />
     ))}
+  </>):(<div style={{display:"flex",flexDirection:"row",flexWrap:"wrap", gap:"1rem"}}>
+  {theClass.length > 0 &&
+    theClass.map((data,index) => (
+      <ViewAnnoucementCard data={data} key={index} index={index} />
+    ))}
+  </div>)
+}
+
+
+
 
 </StudentListResult>
 

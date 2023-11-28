@@ -390,6 +390,11 @@ overflow:hidden;
 margin: 0.5rem;
 border: 1px solid ${({ border }) => border};
 
+@media (min-width: 800px){
+  width: 30%;
+
+}
+
 
 `;
 

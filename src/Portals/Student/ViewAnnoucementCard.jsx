@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { AdmitButton2, AdmitStudentCard2, CardImage, CardText, FeesIcons, FeesRow, FormInputStudent4, FormTextAreaNotes, NewStudentListCard, PaySelector, SelectForStudent, SelectForStudentRel, SelectStageButton, StudCenter } from '../../Designs/Styles/Profile'
+import { AdmitButton2, AdmitStudentCard2, AssignmentInfoCard, CardImage, CardText, CardTextBillHeader, CardTextCreditHeader, CardTextHeader, CardTextPayHeader, FeesIcons, FeesIconsS, FeesRow, FormInputStudent4, FormTextAreaNotes, NewStudentListCard, PaySelector, SelectForStudent, SelectForStudentRel, SelectStageButton, StudCenter } from '../../Designs/Styles/Profile'
 import { ViewClasses, ViewTeachers, apiServer } from '../../Constants /Endpoints'
 import { colors } from '../../Designs/Colors'
 import AnimateHeight from 'react-animate-height'
@@ -17,6 +17,7 @@ import "../../Designs/Card/PendingRegistrations.scss";
 
 import { Show } from '../../Constants /Alerts'
 import { AiOutlineNotification } from 'react-icons/ai'
+import { HeaderText } from '../../Designs/Styles/HyChat'
 
 
 
@@ -96,135 +97,65 @@ useEffect(() => {
 
   return (
     <>
-    <NewStudentListCard>
-    <CardText>{index+1}</CardText>
-     <CardText>{data?.subject}</CardText>
-     <CardText>{data?.academicYear}</CardText>
-     <CardText>{data?.academicTerm}</CardText>
 
-<CardText>{data?.dateAdded}</CardText>
-<SelectStageButton
-     background={colors.darkBlue}
-     color="white"
-     border={colors.darkBlue}
-     onClick={(e)=>{
-        setDropper(!dropper)
-     }}
-     >
-       {dropper?"View Less":"View More"}
-     </SelectStageButton>
+
+< AssignmentInfoCard>
+    
+<div>
+
+<FeesRow>
+<FeesIconsS>
+<CardTextHeader><BsCalendar2Date color={colors.icon}/></CardTextHeader>
+</FeesIconsS>
+   <HeaderText>{data.academicYear}
+</HeaderText>
+</FeesRow>
+
+
+
+
+<FeesRow>
+<FeesIconsS>
+<CardTextHeader><HiOutlineAcademicCap color={colors.icon}/></CardTextHeader>
+</FeesIconsS>
+
+
+   <HeaderText> {data.academicTerm}
+</HeaderText>
+</FeesRow>
+
+
+<FeesRow>
+<FeesIconsS>
+<MdTitle  color={colors.icon}/>
+</FeesIconsS>
+   <HeaderText>{data.subject}
+</HeaderText>
+</FeesRow>
+
+
+
+<FeesRow>
+<FeesIconsS>
+<AiOutlineNotification  color={colors.icon}/>
+</FeesIconsS>
+   <HeaderText>{data?.content}</HeaderText>
+</FeesRow>
+
+  
+<FeesRow>
+<FeesIconsS>
+<CardTextHeader><BsCalendar2Date color={colors.icon}/></CardTextHeader>
+</FeesIconsS>
+   <HeaderText>{data.dateAdded}
+</HeaderText>
+</FeesRow>
     
     
+ </div>
 
 
-    </NewStudentListCard>
-
-    <AnimateHeight height={dropper ? "auto" : 0}>
-
-    <StudCenter>
-   
-
-
-   < AdmitStudentCard2>
-   
-   <div>
-   
-   <FeesRow>
-   <FeesIcons>
-   <BsCalendar2Date color={colors.icon}/>
-   </FeesIcons>
-          <PaySelector
-       background={colors.darkBlue}
-       color="white"
-       border={colors.darkBlue}
-       onChange={(e) => sc(e.target.value)}
-       value={data.academicYear}
-       disabled
-       >
-           <option>Academic Year</option>
-      {AcaYear.length > 0 &&
-       AcaYear.map((data) => (
-         <option key={data.id}>{data.academicYear}</option>
-       ))}
-   
-       </PaySelector>
-   </FeesRow>
-   
-   <FeesRow>
-   <FeesIcons>
-   <HiOutlineAcademicCap color={colors.icon}/>
-   </FeesIcons>
-          <PaySelector
-       background={colors.darkBlue}
-       color="white"
-       border={colors.darkBlue}
-       onChange={(e) => sd(e.target.value)}
-       disabled
-       value={data.academicTerm}
-       >
-           <option>Academic Term</option>
-      {AcaTerm.length > 0 &&
-       AcaTerm.map((data) => (
-         <option key={data.id}>{data.academicTerm}</option>
-       ))}
-   
-       </PaySelector>
-   </FeesRow>
-   
-   
-   
-   
-   <FeesRow>
-   
-   <FeesIcons >
-   <MdTitle  color={colors.icon}/>
-   </FeesIcons>
-     
-       <FormInputStudent4
-       type="text"
-       value={data.subject}
-       placeholder="Title"
-       onChange={(e) => sa(e.target.value)}
-       
-       />
-   
-       </FeesRow>
-   
-   
-   
-       <FeesRow>
-   
-   <FeesIcons >
-   <AiOutlineNotification  color={colors.icon}/>
-   </FeesIcons>
-     
-       <FormTextAreaNotes
-       type="text"
-       value={data.content}
-       placeholder="content"
-       onChange={(e) => sb(e.target.value)}
-      
-       />
-   
-       </FeesRow>
-   
-   
-   
-   
-     
-     
-     
-      
-      
-      
-   </div>
-   
-   
-   </AdmitStudentCard2>    
-   
-      </StudCenter>
-
-</AnimateHeight>
+</AssignmentInfoCard>  
 
 
     </>

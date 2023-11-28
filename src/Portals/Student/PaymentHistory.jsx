@@ -69,7 +69,25 @@ const StudentDetails = () => {
     const [theStudent, setTheStudent] = useState([])
     const [His, setHis] = useState([])
 
-     
+    const [isMobile, setIsMobile] = useState(false);
+    const [active, setActive] = useState(null);
+  
+    useEffect(() => {
+      setActive(1);
+       window.addEventListener("resize", handleResize);
+      handleResize();
+  
+    }, []);
+  
+    //choose the screen size
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+  
 
       const [userInfo, setUserInfo] = useState({});
 
@@ -100,23 +118,30 @@ const StudentDetails = () => {
   return (
 <>
 
-
-
-
 {
+    isMobile?(
+    <>
+    {
     His.map((data)=>(
         
 
+       <>
 
 
 
         < AssignmentInfoCard>
+
+
     
     <div>
 
     <FeesRow>
 <FeesIconsS>
-<CardTextHeader>Opening Balance</CardTextHeader>
+<CardTextHeader>Opening Balance {
+   data?.openingBalance> 0
+      ? "(DR)"
+      : "(CR)"  
+  }</CardTextHeader>
 </FeesIconsS>
        <HeaderText> {
    data?.openingBalance > 0
@@ -146,7 +171,11 @@ const StudentDetails = () => {
 
 <FeesRow>
 <FeesIconsS>
-<CardTextHeader>Closing Balance</CardTextHeader>
+<CardTextHeader>Closing Balance {
+   data?.closingBalance > 0
+      ? "(DR)"
+      : "(CR)"  
+  }</CardTextHeader>
 </FeesIconsS>
        <HeaderText>{
    data?.closingBalance > 0
@@ -212,13 +241,149 @@ const StudentDetails = () => {
 
 
 
-      
+  </>    
       
 
 
 
     ))
 }
+    </>):(
+    <div style={{display:"flex",flexDirection:"row",flexWrap:"wrap", gap:"1rem"}}>
+
+{
+    His.map((data)=>(
+        
+
+       <>
+
+
+
+        < AssignmentInfoCard>
+
+
+    
+    <div>
+
+    <FeesRow>
+<FeesIconsS>
+<CardTextHeader>Opening Balance {
+   data?.openingBalance> 0
+      ? "(DR)"
+      : "(CR)"  
+  }</CardTextHeader>
+</FeesIconsS>
+       <HeaderText> {
+   data?.openingBalance > 0
+      ? <CardTextBillHeader>{data?.openingBalance}</CardTextBillHeader>
+      : <CardTextCreditHeader>{data?.openingBalance*-1}</CardTextCreditHeader>  
+  }
+  </HeaderText>
+</FeesRow>
+
+
+
+
+<FeesRow>
+<FeesIconsS>
+<CardTextHeader>Amount Paid</CardTextHeader>
+</FeesIconsS>
+
+
+       <HeaderText> {
+   data?.transaction > 0
+      ? <CardTextPayHeader>{data?.transaction}</CardTextPayHeader>
+      : <CardTextHeader>{data?.transaction}</CardTextHeader>  
+  }
+  </HeaderText>
+</FeesRow>
+
+
+<FeesRow>
+<FeesIconsS>
+<CardTextHeader>Closing Balance {
+   data?.closingBalance > 0
+      ? "(DR)"
+      : "(CR)"  
+  }</CardTextHeader>
+</FeesIconsS>
+       <HeaderText>{
+   data?.closingBalance > 0
+      ? <CardTextBillHeader>{data?.closingBalance}</CardTextBillHeader>
+      : <CardTextCreditHeader>{data?.closingBalance*-1}</CardTextCreditHeader>  
+  }
+  </HeaderText>
+</FeesRow>
+
+
+
+<FeesRow>
+<FeesIconsS>
+<CardTextHeader>Bills</CardTextHeader>
+</FeesIconsS>
+       <HeaderText>{data?.bills}</HeaderText>
+</FeesRow>
+
+
+<FeesRow>
+<FeesIconsS>
+<CardTextHeader>Action </CardTextHeader>
+</FeesIconsS>
+       <HeaderText>{data?.action}</HeaderText>
+</FeesRow>
+
+
+
+<FeesRow>
+<FeesIconsS>
+<CardTextHeader>Academic Year</CardTextHeader>
+</FeesIconsS>
+       <HeaderText>{data?.academicYear}</HeaderText>
+</FeesRow>
+
+<FeesRow>
+<FeesIconsS>
+<CardTextHeader>Academic Term</CardTextHeader>
+</FeesIconsS>
+       <HeaderText>{data?.academicTerm}</HeaderText>
+</FeesRow>
+
+<FeesRow>
+<FeesIconsS>
+<CardTextHeader>Level</CardTextHeader>
+</FeesIconsS>
+       <HeaderText>{data?.level}</HeaderText>
+</FeesRow>
+
+<FeesRow>
+<FeesIconsS>
+<CardTextHeader>Date</CardTextHeader>
+</FeesIconsS>
+       <HeaderText>{data?.transactionDate}</HeaderText>
+</FeesRow>   
+        
+        
+     </div>
+  
+    
+    </AssignmentInfoCard>  
+
+
+
+
+  </>    
+      
+
+
+
+    ))
+}
+
+    </div>)
+}
+
+
+
 
 
 

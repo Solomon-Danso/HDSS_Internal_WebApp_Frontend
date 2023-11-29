@@ -20,6 +20,19 @@ const Reportrblue = () => {
     .catch(error=>console.error(error))
     },[])
 
+    const [ReportData, SetReportData] = useState({})
+
+    useEffect(()=>{
+    fetch(apiServer+"api/Grade/GeneralInfo")
+    .then(res=>res.json())
+    .then(data=>SetReportData(data))
+    .catch(error=>console.error(error))
+    },[])
+
+    
+
+
+
     const handlePrint = () => {
         window.print(); // Initiates the browser's print functionality
       };
@@ -34,6 +47,33 @@ const Reportrblue = () => {
       const parsedData = JSON.parse(decryptedString);
         setUserInfo(parsedData);
     }, []);
+
+
+    const [StudentCounter, setStudentCounter] = useState(0)
+    useEffect(()=>{
+        fetch(apiServer+"api/Grade/StudentCounters?Level="+userInfo.level)
+        .then(res=>res.json())
+        .then(data=>setStudentCounter(data))
+        .catch(error=>console.error(error))
+        },[userInfo.level])
+
+
+    const [TermResult, setTermResult] = useState([])
+    
+    useEffect(()=>{
+        if(userInfo&&ReportData){
+        const URL = `api/Grade/ViewTermGrades?StudentId=${userInfo.studentId}&Year=${ReportData.academicYear}&Term=${ReportData.academicTerm}&Level=${userInfo.level}`
+            fetch(apiServer+URL)
+        .then(res=>res.json())
+        .then(data=>setTermResult(data))
+        .catch(error=>console.error(error))
+        }
+        
+        },[userInfo, ReportData])
+
+
+
+
 
 
 
@@ -81,13 +121,13 @@ const Reportrblue = () => {
 
 <GInfoMiniRow>
 <div>No. of Students: </div>
-<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>24</div>
+<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>{StudentCounter}</div>
 </GInfoMiniRow>
 
 
 <GInfoMiniRow>
 <div>Vacation Date: </div>
-<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>8th December, 2023</div>
+<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>{ReportData.vacationDate}</div>
 </GInfoMiniRow>
 
 
@@ -102,12 +142,12 @@ const Reportrblue = () => {
 
 <GInfoMiniRow>
 <div>Year: </div>
-<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>2023-2024</div>
+<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>{ReportData.academicYear}</div>
 </GInfoMiniRow>
 
 <GInfoMiniRow>
 <div>Reopening Date: </div>
-<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>10th January, 2023</div>
+<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>{ReportData.reOpeningDate}</div>
 </GInfoMiniRow>
 
 </GInfoRow>
@@ -121,12 +161,12 @@ const Reportrblue = () => {
 
 <GInfoMiniRow>
 <div>Term: </div>
-<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>3</div>
+<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>{ReportData.academicTerm}</div>
 </GInfoMiniRow>
 
 <GInfoMiniRow>
 <div>Position: </div>
-<div style={{color:`${colors.mainred}`, fontWeight:"bold"}}>1st out of 24 students</div>
+<div style={{color:`${colors.mainred}`, fontWeight:"bold"}}>1st out of {StudentCounter} students</div>
 </GInfoMiniRow>
 
 </GInfoRow>
@@ -155,110 +195,26 @@ const Reportrblue = () => {
       <th style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Meaning/Remarks</th>
     </tr>
   </thead>
+  
   <tbody>
-   
+   {
+    TermResult.length>0
+    &&TermResult.map((data) =>(
+<>
+<tr>
+      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>{data.subject}</td>
+      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>{data.classScore}</td>
+      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>{data.examScore}</td>
+      <td style={{ border: "1px solid black",color:`${colors.mainred}`,textAlign:"center", fontWeight:800 }}>{data.totalScore}</td>
+      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>{data.position}</td>
+      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>{data.grade}</td>
+      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>{data.comment}</td>
+    </tr>
+</>
+    ))
+   }
     
-    <tr>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Mathematics</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>85</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>90</td>
-      <td style={{ border: "1px solid black",color:`${colors.mainred}`,textAlign:"center", fontWeight:800 }}>175</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>1</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Level 1 A</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Advance</td>
-    </tr>
-
-    <tr>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Mathematics</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>85</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>90</td>
-      <td style={{ border: "1px solid black",color:`${colors.mainred}`,textAlign:"center", fontWeight:800 }}>175</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>1</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Level 1 A</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Advance</td>
-    </tr>
-
-    <tr>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Mathematics</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>85</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>90</td>
-      <td style={{ border: "1px solid black",color:`${colors.mainred}`,textAlign:"center", fontWeight:800 }}>175</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>1</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Level 1 A</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Advance</td>
-    </tr>
-
-    <tr>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Mathematics</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>85</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>90</td>
-      <td style={{ border: "1px solid black",color:`${colors.mainred}`,textAlign:"center", fontWeight:800 }}>175</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>1</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Level 1 A</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Advance</td>
-    </tr>
-
-    <tr>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Mathematics</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>85</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>90</td>
-      <td style={{ border: "1px solid black",color:`${colors.mainred}`,textAlign:"center", fontWeight:800 }}>175</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>1</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Level 1 A</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Advance</td>
-    </tr>
-
-    <tr>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Mathematics</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>85</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>90</td>
-      <td style={{ border: "1px solid black",color:`${colors.mainred}`,textAlign:"center", fontWeight:800 }}>175</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>1</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Level 1 A</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Advance</td>
-    </tr>
-
-    <tr>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Mathematics</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>85</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>90</td>
-      <td style={{ border: "1px solid black",color:`${colors.mainred}`,textAlign:"center", fontWeight:800 }}>175</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>1</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Level 1 A</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Advance</td>
-    </tr>
-
-    <tr>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Mathematics</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>85</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>90</td>
-      <td style={{ border: "1px solid black",color:`${colors.mainred}`,textAlign:"center", fontWeight:800 }}>175</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>1</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Level 1 A</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Advance</td>
-    </tr>
-
-    <tr>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Mathematics</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>85</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>90</td>
-      <td style={{ border: "1px solid black",color:`${colors.mainred}`,textAlign:"center", fontWeight:800 }}>175</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>1</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Level 1 A</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Advance</td>
-    </tr>
-
-    <tr>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Mathematics</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>85</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>90</td>
-      <td style={{ border: "1px solid black",color:`${colors.mainred}`,textAlign:"center", fontWeight:800 }}>175</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>1</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Level 1 A</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>Advance</td>
-    </tr>
-
-
+  
 
 
   </tbody>

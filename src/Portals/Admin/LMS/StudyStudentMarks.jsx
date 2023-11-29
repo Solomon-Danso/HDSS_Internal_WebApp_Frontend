@@ -117,7 +117,7 @@ const [studentList, setStudentList] = useState([]);
 const [stuId, setstuId] = useState("")
 
 useEffect(()=>{
-  if(level){
+  if(level&&subject&&academicYear&&academicTerm){
 
       const URL = `api/Grade/ClassList?Level=${level}`
       fetch(apiServer+URL)
@@ -131,7 +131,7 @@ useEffect(()=>{
 
   }
  
-},[level])
+},[level,subject,academicTerm,academicYear])
 
 
 const handleSubmit = async (event) => {
@@ -163,11 +163,11 @@ const handleSubmit = async (event) => {
           },
           body: JSON.stringify(requestData),
         });
-
+         const data = await response.text()
         if (response.ok) {
           return 'Result submitted successfully';
         } else {
-          throw new Error('Result submission failed');
+          throw new Error(data);
         }
       } catch (error) {
         throw error;
@@ -285,12 +285,12 @@ const handleSubmit = async (event) => {
                     </Table.Cell>
 
                     <Table.Cell>
-                    <HeaderText>Class Score(100%)</HeaderText>
+                    <HeaderText>Class Score(50%)</HeaderText>
                        
                     </Table.Cell>
 
                     <Table.Cell>
-                    <HeaderText>Exams Score (100%)</HeaderText>
+                    <HeaderText>Exams Score (50%)</HeaderText>
                    
                     </Table.Cell>
 

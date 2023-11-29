@@ -269,7 +269,7 @@ export const OptionCard = styled.div`
 
 export const HeaderText = styled.div`
 font-size: 1.1rem;
-color:${colors.rcolor};
+
 
 
 `;

@@ -63,7 +63,7 @@ const StudentTableRow = ({ data, idx, handleChangeX }) => {
   step="0.01"
   name="classScore"
   onChange={(e) => handleChangeX(e, idx, 'classScore')}
-  max="100"  // Set the maximum value to 100
+  max="50"  // Set the maximum value to 100
   required
 />
       </Table.Cell>
@@ -74,7 +74,7 @@ const StudentTableRow = ({ data, idx, handleChangeX }) => {
   step="0.01"
   name="examScore"
   onChange={(e) => handleChangeX(e, idx, 'examScore')}
-  max="100"  // Set the maximum value to 100
+  max="50"  // Set the maximum value to 100
   required
 />
       </Table.Cell>

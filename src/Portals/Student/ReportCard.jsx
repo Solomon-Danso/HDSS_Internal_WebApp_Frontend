@@ -20,7 +20,10 @@ const Reportrblue = () => {
     .catch(error=>console.error(error))
     },[])
 
-
+    const handlePrint = () => {
+        window.print(); // Initiates the browser's print functionality
+      };
+    
     const [userInfo, setUserInfo] = useState({});
 
     useEffect(() => {
@@ -36,7 +39,11 @@ const Reportrblue = () => {
 
   return (
     <Container>
-<HomeContainer>
+         <button onClick={handlePrint}>Print Report Card</button>
+        
+
+
+<HomeContainer >
 <RSchoolName> {SchoolData.schoolName}</RSchoolName>
 
 <StudCenter>

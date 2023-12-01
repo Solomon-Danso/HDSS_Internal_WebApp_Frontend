@@ -147,12 +147,15 @@ DashBoard
 
       <InnerDroplist title="Grading">
       <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadGrades") }}>Upload Grades</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/academicReports") }}>Academic Reports</MenuButtonOptionLink>
       </InnerDroplist>
 
 
       <InnerDroplist title="Classroom">
       <MenuButtonOptionLink onClick={() => { navigate("/VideoCall") }}>Video Call</MenuButtonOptionLink>
       </InnerDroplist>
+
+
 
 
       

@@ -34,7 +34,7 @@ import UploadAssignment from "../../Portals/Admin/LMS/UploadAssignment"
 import HeadernSearch from '../HeadernSearch'
 import Grades from "../../Portals/Admin/LMS/StudyStudentMarks"
 import TestnQuiz from "../../Portals/Admin/LMS/TestandQuiz"
-
+import AcademicReports from "../../Portals/Admin/LMS/AcademicReport"
 
 
 
@@ -294,6 +294,11 @@ const [sysDate, setSysDate] = useState("")
       <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadTestnQuiz") }}>Upload Tests and Quizes</MenuButtonOptionLink>
       </InnerDroplist>
 
+      <InnerDroplist title="Grading">
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/uploadGrades") }}>Upload Grades</MenuButtonOptionLink>
+      <MenuButtonOptionLink onClick={() => { navigate("/teacher/academicReports") }}>Academic Reports</MenuButtonOptionLink>
+      </InnerDroplist>
+
       <InnerDroplist title="Classroom">
       <MenuButtonOptionLink onClick={() => { navigate("/VideoCall") }}>Video Call</MenuButtonOptionLink>
       </InnerDroplist>
@@ -548,6 +553,7 @@ const [sysDate, setSysDate] = useState("")
               <Route path="uploadAssignment" element={<UploadAssignment />} />
               <Route path="uploadGrades" element={<Grades />} />
               <Route path="uploadTestnQuiz" element={<TestnQuiz />} />
+              <Route path="academicReports" element={<AcademicReports />} />
 
 
 

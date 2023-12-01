@@ -378,7 +378,7 @@ useEffect(() => {
         border={colors.maingreen}
         
         type="submit">Upload
-        </AdmitButton2>
+</AdmitButton2>
 
 
        

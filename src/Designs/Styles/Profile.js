@@ -1041,6 +1041,68 @@ export const FormInputStudent4 = styled.input`
   }
 `;
 
+export const RInputLong = styled.input`
+  width: 50vw;
+  padding: 15px 10px;
+  border: 1px solid ${colors.mainsecondgreen};
+  border-radius: 5px;
+  font-size: 1.4rem;
+  outline: none;
+  margin-top: 10px;
+  transition: all 0.5s ease-in-out;
+  
+  text-align: left;
+
+  
+  :hover {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  :focus {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    width:100%;
+  }
+   @media (max-width: 1500px) {
+    font-size: 12px;
+    width:100%;
+  }
+`;
+
+export const RInput = styled.input`
+  width: 5vw;
+ 
+  border: 1px solid ${colors.mainred};
+  border-radius: 5px;
+  font-size: 1.4rem;
+  outline: none;
+  transition: all 0.5s ease-in-out;
+  
+  text-align: left;
+
+  
+  :hover {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  :focus {
+    border: 0.5px solid ${colors.primary};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    width:100%;
+  }
+   @media (max-width: 1500px) {
+    font-size: 12px;
+    width:100%;
+  }
+`;
+
+
 export const NoteSubject = styled.input`
   width: 100%;
   padding: 15px 10px;

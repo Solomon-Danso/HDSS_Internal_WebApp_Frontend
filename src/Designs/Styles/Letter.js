@@ -16,6 +16,19 @@ background: white;
   
 `;
 
+export const ContainerT = styled.div`
+background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(19.7px);
+  -webkit-backdrop-filter: blur(19.7px);
+  margin:1rem;
+ height: auto;
+   width: 70vw; 
+   padding:2rem;
+  
+`;
+
 export const HomeContainer = styled.div`
 
 border: 0.5rem solid black;
@@ -40,6 +53,18 @@ export const PerformanceInfoContainer = styled.div`
 border: 0.2rem solid black;
  padding:1rem;
  height: 25vh;
+   width: 100%; 
+   border-radius:1.5rem;
+   margin-top:2rem;
+   gap:2rem;
+  
+`;
+
+export const PerformanceInfoContainerT = styled.div`
+
+border: 0.2rem solid black;
+ padding:1rem;
+ height: auto;
    width: 100%; 
    border-radius:1.5rem;
    margin-top:2rem;
@@ -73,7 +98,17 @@ display:flex;
 flex-direction:row;
 gap:0.5rem;
 color: ${colors.rcolor};
-font-size:1.2rem
+font-size:1.2rem;
+
+`;
+
+export const GInfoMiniRowT = styled.div`
+display:flex;
+flex-direction:row;
+gap:0.5rem;
+color: ${colors.rcolor};
+font-size:1.2rem;
+align-items:center;
 `;
 
 

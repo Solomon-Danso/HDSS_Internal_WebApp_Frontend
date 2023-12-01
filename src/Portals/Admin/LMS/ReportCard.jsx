@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Container, GInfoMiniRow, GInfoRow, GeneralInfoContainer, HomeContainer, PerformanceInfoContainer, PerformanceRow, PerformanceText, RSchoolName, RSchoolNameS, RStudCenter } from '../../Designs/Styles/Letter'
-import { apiServer } from '../../Constants /Endpoints'
-import { RSSchoolLogo, RSchoolLogo, SchoolLogo } from '../../Designs/Styles/Styles'
-import { StudCenter } from '../../Designs/Styles/Profile'
+import { Container, ContainerT, GInfoMiniRow, GInfoMiniRowT, GInfoRow, GeneralInfoContainer, HomeContainer, PerformanceInfoContainer, PerformanceInfoContainerT, PerformanceRow, PerformanceText, RSchoolName, RSchoolNameS, RStudCenter } from '../../../Designs/Styles/Letter'
+import { apiServer } from '../../../Constants /Endpoints'
+import { RSSchoolLogo, RSchoolLogo, SchoolLogo } from '../../../Designs/Styles/Styles'
+import { AdmitButton2, FormInputStudent4, PaySelector, RInput, RInputLong, StudCenter } from '../../../Designs/Styles/Profile'
 import { AES, enc } from 'crypto-js'
-import { colors } from '../../Designs/Colors'
-import { Table } from 'semantic-ui-react'
-import { HeaderText } from '../../Designs/Styles/HyChat'
+import { colors } from '../../../Designs/Colors'
 
-const Reportrblue = () => {
+const Reportrblue = ({ data, submitter, level, goToNextStudent, goToPreviousStudent, isLastStudent, handleSubmit }) => {
 
 
     const [SchoolData, SetSchoolData] = useState({})
@@ -31,45 +29,46 @@ const Reportrblue = () => {
 
     
 
+      const [conduct, setConduct] = useState([])
 
+      useEffect(() => {
+        fetch(apiServer + "api/Setup/ViewConducts")
+          .then(response => response.json()) // Parse the response as JSON
+          .then(data => setConduct(data))
+          .catch(error => console.error(error));
+      }, []);
 
-    const handlePrint = () => {
-        window.print(); // Initiates the browser's print functionality
-      };
-    
-    const [userInfo, setUserInfo] = useState({});
+      const [Attitude, setAttitude] = useState([])
 
-    useEffect(() => {
-      const encryptedData = sessionStorage.getItem("userDataEnc");
-      const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
-      const decryptedData = AES.decrypt(encryptedData, encryptionKey);
-      const decryptedString = decryptedData.toString(enc.Utf8);
-      const parsedData = JSON.parse(decryptedString);
-        setUserInfo(parsedData);
-    }, []);
+      useEffect(() => {
+        fetch(apiServer + "api/Setup/ViewAttitudes")
+          .then(response => response.json()) // Parse the response as JSON
+          .then(data => setAttitude(data))
+          .catch(error => console.error(error));
+      }, []);
 
 
     const [StudentCounter, setStudentCounter] = useState(0)
     useEffect(()=>{
-        fetch(apiServer+"api/Grade/StudentCounters?Level="+userInfo.level)
+        fetch(apiServer+"api/Grade/StudentCounters?Level="+data.level)
         .then(res=>res.json())
         .then(data=>setStudentCounter(data))
         .catch(error=>console.error(error))
-        },[userInfo.level])
+        },[data.level])
 
 
     const [TermResult, setTermResult] = useState([])
     
     useEffect(()=>{
-        if(userInfo&&ReportData){
-        const URL = `api/Grade/ViewTermGrades?StudentId=${userInfo.studentId}&Year=${ReportData.academicYear}&Term=${ReportData.academicTerm}&Level=${userInfo.level}`
+        if(data&&ReportData){
+        const URL = `api/Grade/ViewTermGrades?StudentId=${data.studentId}&Year=${ReportData.academicYear}&Term=${ReportData.academicTerm}&Level=${data.level}`
             fetch(apiServer+URL)
         .then(res=>res.json())
         .then(data=>setTermResult(data))
         .catch(error=>console.error(error))
         }
         
-        },[userInfo, ReportData])
+        },[data, ReportData])
 
 
         const [attn, setAttn] = useState(0);
@@ -78,10 +77,10 @@ const Reportrblue = () => {
         const [attit, setAttit] = useState("")
         const [interest, setInterest] = useState("")
         const [classTRemarks, setClassTRemarks] = useState("")
-        const [teacherName, setTeacherName] = useState("")
+        const [SId, setStudentId] = useState("")
         
         useEffect(()=>{
-          const URL =   `api/Grade/GetTermReportOnReload?Level=${userInfo.level}&SID=${userInfo.studentId}`
+          const URL =   `api/Grade/GetTermReportOnReload?Level=${level}&SID=${data.studentId}`
           fetch(apiServer+URL)
           .then(res=>res.json())
           .then(kofi=>{
@@ -91,28 +90,23 @@ const Reportrblue = () => {
             setAttit(kofi.attitude)
             setInterest(kofi.interest)
             setClassTRemarks(kofi.classTeacherRemarks)
-            setTeacherName(kofi.teacherName)
-
+            setStudentId(data.studentId)
           })
           .catch(error=>console.error(error))
 
 
 
-        },[userInfo])
+        },[level,data])
         
- 
+        
 
-
-
-
-
+       
 
 
   return (
-    <Container>
-         
-        
-
+    <>
+    
+    <ContainerT>
 
 <HomeContainer >
 <RSchoolName> {SchoolData.schoolName}</RSchoolName>
@@ -134,7 +128,7 @@ const Reportrblue = () => {
 
   <div style={{ alignSelf:"flex-end" }}>
     <RSSchoolLogo
-      src={apiServer + userInfo.profilePic}
+      src={apiServer + data.profilePic}
       alt="icon"
       style={{ marginTop:"-15rem", padding:'1rem' }}
     />
@@ -146,7 +140,7 @@ const Reportrblue = () => {
 
 <GInfoMiniRow>
 <div>StudentID: </div>
-<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>{userInfo.studentId}</div>
+<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>{data.studentId}</div>
 </GInfoMiniRow>
 
 
@@ -168,7 +162,7 @@ const Reportrblue = () => {
 
 <GInfoMiniRow>
 <div>Student Name: </div>
-<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>{userInfo.firstName}{" "}{userInfo.otherName}{" "}{userInfo.lastName}</div>
+<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>{data.firstName}{" "}{data.otherName}{" "}{data.lastName}</div>
 </GInfoMiniRow>
 
 <GInfoMiniRow>
@@ -187,7 +181,7 @@ const Reportrblue = () => {
 
 <GInfoMiniRow>
 <div>Stage: </div>
-<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>{userInfo.level}</div>
+<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>{data.level}</div>
 </GInfoMiniRow>
 
 <GInfoMiniRow>
@@ -252,19 +246,36 @@ const Reportrblue = () => {
 </table>
 
 
-<PerformanceInfoContainer>
+<form >
+
+<PerformanceInfoContainerT>
 
 
 <GInfoRow>
 
 <GInfoMiniRow>
 <div>Attendance: </div>
-<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>{attn}</div>
+<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>  
+        <RInput
+        type="number"
+        value={attn}
+       // placeholder="Title"
+       onChange={(e) => setAttn(e.target.value)}
+        required
+        />
+    </div>
 </GInfoMiniRow>
 
 <GInfoMiniRow>
 <div>Out of: </div>
-<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>{out}</div>
+<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>
+    <RInput
+        type="number"
+        value={out}
+       // placeholder="Title"
+        onChange={(e) => setOut(e.target.value)}
+        required
+        /></div>
 </GInfoMiniRow>
 
 <GInfoMiniRow>
@@ -276,56 +287,103 @@ const Reportrblue = () => {
 <br/>
 <GInfoRow>
 
-<GInfoMiniRow>
+<GInfoMiniRowT>
 <div>Conduct: </div>
-<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>{cond}</div>
-</GInfoMiniRow>
+<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>
+  <PaySelector
+    background={colors.darkBlue}
+    color="white"
+    border={colors.darkBlue}
+    value={cond}
+    onChange={(e) => setCond(e.target.value)}
+    required
+    >
+        <option>Select Conduct</option>
+   {conduct.length > 0 &&
+    conduct.map((data) => (
+      <option key={data.id}>{data.addConducts}</option>
+    ))}
+
+    </PaySelector>
+    
+    </div>
+</GInfoMiniRowT>
 
 
 </GInfoRow>
 
 <GInfoRow>
 
-<GInfoMiniRow>
+<GInfoMiniRowT>
 <div>Attitude: </div>
-<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>{attit}</div>
-</GInfoMiniRow>
+<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>
+
+<PaySelector
+    background={colors.darkBlue}
+    color="white"
+    border={colors.darkBlue}
+    value={attit}
+    onChange={(e) => setAttit(e.target.value)}
+    required
+    >
+        <option>Select Attitude</option>
+   {Attitude.length > 0 &&
+    Attitude.map((data) => (
+      <option key={data.id}>{data.addAttitudes}</option>
+    ))}
+
+    </PaySelector>
+
+</div>
+</GInfoMiniRowT>
 
 </GInfoRow>
 
 <GInfoRow>
 
-<GInfoMiniRow>
+<GInfoMiniRowT>
 <div>Interest: </div>
-<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>{interest}</div>
-</GInfoMiniRow>
+<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>
+
+<RInputLong
+        type="text"
+        value={interest}
+       // placeholder="Title"
+       onChange={(e) => setInterest(e.target.value)}
+        required
+        />
+
+</div>
+</GInfoMiniRowT>
 
 </GInfoRow>
 <GInfoRow>
 
-<GInfoMiniRow>
+<GInfoMiniRowT>
 <div>Class Teacher Remarks: </div>
-<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>{classTRemarks}</div>
-</GInfoMiniRow>
+<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>
+
+<RInputLong
+        type="text"
+        value={classTRemarks}
+       // placeholder="Title"
+       onChange={(e) => setClassTRemarks(e.target.value)}
+        required
+        />
+
+</div>
+</GInfoMiniRowT>
 
 </GInfoRow>
 <br/>
 
-<GInfoRow>
-
-<GInfoMiniRow>
-<div>Headteacher's Signature : </div>
-<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>..............................................................................................</div>
-</GInfoMiniRow>
-
-</GInfoRow>
-
-<GInfoMiniRow>
-<div style={{color:`${colors.rblue}`, fontWeight:"bold"}}>This report was prepared by {teacherName} (Class Teacher)</div>
-</GInfoMiniRow>
 
 
-</PerformanceInfoContainer>
+</PerformanceInfoContainerT>
+
+</form>
+
+
 
 
 
@@ -388,7 +446,36 @@ const Reportrblue = () => {
 
 </HomeContainer>
 
-    </Container>
+    </ContainerT>
+    <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+        <AdmitButton2
+          background={colors.lightgreen}
+          color="white"
+          border={colors.maingreen}
+          onClick={goToPreviousStudent}
+          
+          type="button"
+        >
+          Previous
+        </AdmitButton2>
+
+        <AdmitButton2
+          background={colors.lightgreen}
+          color="white"
+          border={colors.maingreen}
+          onClick={() => {
+            goToNextStudent(attn,out,cond,attit,interest,classTRemarks,SId);
+            handleSubmit();
+          }}
+          type="button"
+        >
+          {isLastStudent ? 'Submit' : 'Next'}
+        </AdmitButton2>
+      </div>
+
+    
+    </>
+
   )
 }
 

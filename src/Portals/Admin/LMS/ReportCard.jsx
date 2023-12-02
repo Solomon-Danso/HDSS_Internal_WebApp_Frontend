@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Container, ContainerT, GInfoMiniRow, GInfoMiniRowT, GInfoRow, GeneralInfoContainer, HomeContainer, PerformanceInfoContainer, PerformanceInfoContainerT, PerformanceRow, PerformanceText, RSchoolName, RSchoolNameS, RStudCenter } from '../../../Designs/Styles/Letter'
+import { Container, ContainerT, GInfoMiniRow, GInfoMiniRowT, GInfoRow, GeneralInfoContainer, HomeContainerT, PerformanceInfoContainer, PerformanceInfoContainerT, PerformanceRow, PerformanceText, RSchoolName, RSchoolNameS, RStudCenter } from '../../../Designs/Styles/Letter'
 import { apiServer } from '../../../Constants /Endpoints'
 import { RSSchoolLogo, RSchoolLogo, SchoolLogo } from '../../../Designs/Styles/Styles'
 import { AdmitButton2, FormInputStudent4, PaySelector, RInput, RInputLong, StudCenter } from '../../../Designs/Styles/Profile'
@@ -108,7 +108,7 @@ const Reportrblue = ({ data, submitter, level, goToNextStudent, goToPreviousStud
     
     <ContainerT>
 
-<HomeContainer >
+<HomeContainerT >
 <RSchoolName> {SchoolData.schoolName}</RSchoolName>
 
 <StudCenter>
@@ -444,7 +444,7 @@ const Reportrblue = ({ data, submitter, level, goToNextStudent, goToPreviousStud
 
 
 
-</HomeContainer>
+</HomeContainerT>
 
     </ContainerT>
     <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>

@@ -191,7 +191,7 @@ const handleSubmit = async (event) => {
   }
 };
 
-const [count,setCount] = useState(0)
+
 
 
 
@@ -294,39 +294,23 @@ const [count,setCount] = useState(0)
                    
                     </Table.Cell>
 
-                    <Table.Cell>
-                    <HeaderText>Average Score</HeaderText>
                    
-                    </Table.Cell>
-
-                    <Table.Cell>
-                    <HeaderText>Position</HeaderText>
-                   
-                    </Table.Cell>
-
-                    <Table.Cell>
-                    <HeaderText>Action</HeaderText>
-                   
-                    </Table.Cell>
 
 
                 </Table.Row>
 
             </Table.Header>
 
-  <Table.Body>
+           
 
+            <Table.Body>
   {studentList.length > 0 &&
-    studentList.map((data, index) => (
+    studentList.map((data, idx) => (
       <StudentTableRow
-        key={index}
+        key={idx}
         data={data}
-        level={level}
-        subject = {subject}
-        year = {academicYear}
-        term = {academicTerm}
-        count = {count}
-        setCount = {setCount}
+        idx={idx}
+        handleChangeX={handleChangeX}
       />
     ))}
 </Table.Body>
@@ -337,6 +321,14 @@ const [count,setCount] = useState(0)
 
 </Table>
 
+
+<AdmitButton2
+        background={colors.lightgreen}
+        color="white"
+        border={colors.maingreen}
+        onClick={handleSubmit}
+        >Submit
+        </AdmitButton2>
 
 
 

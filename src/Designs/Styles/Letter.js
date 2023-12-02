@@ -38,6 +38,16 @@ padding:1rem;
   
 `;
 
+export const HomeContainerT = styled.div`
+
+border: 0.5rem solid black;
+padding:1rem;
+ height: auto;
+   width: 66vw; 
+  
+`;
+
+
 export const GeneralInfoContainer = styled.div`
 
 border: 0.2rem solid black;

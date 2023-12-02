@@ -274,6 +274,14 @@ font-size: 1.1rem;
 
 `;
 
+export const HeaderTextG = styled.div`
+font-size: 1.1rem;
+text-align: center;
+
+
+`;
+
+
 export const GradeImage = styled.img`
 width: 7vw;
 height:10vh;

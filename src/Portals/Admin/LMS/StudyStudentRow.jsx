@@ -7,7 +7,7 @@ import { Show } from '../../../Constants /Alerts';
 import { AES, enc } from 'crypto-js';
 import { colors } from '../../../Designs/Colors';
 
-const StudentTableRow = ({ data, level, subject, year, term,count,setCount}) => {
+const StudentTableRow = ({ data, level, subject, year, term,count,setCount,sub,setsub}) => {
  
 
 
@@ -102,11 +102,6 @@ const handleSubmit = async () => {
   }, [data, year, level, subject, term,count]);
 
 
-
-
-
-
-  
 
 
 

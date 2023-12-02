@@ -237,7 +237,7 @@ const Reportrblue = () => {
       <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>{data.classScore}</td>
       <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>{data.examScore}</td>
       <td style={{ border: "1px solid black",color:`${colors.mainred}`,textAlign:"center", fontWeight:800 }}>{data.totalScore}</td>
-      <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>{data.position}</td>
+      <td style={{ border: "1px solid black",color:`${colors.rblue}`,textAlign:"center" }}>{data.position}</td>
       <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>{data.grade}</td>
       <td style={{ border: "1px solid black",color:`${colors.rcolor}`,textAlign:"center" }}>{data.comment}</td>
     </tr>

@@ -192,7 +192,7 @@ const handleSubmit = async (event) => {
 };
 
 const [count,setCount] = useState(0)
-
+const [sub, setsub] = useState(false);
 
 
 
@@ -327,6 +327,8 @@ const [count,setCount] = useState(0)
         term = {academicTerm}
         count = {count}
         setCount = {setCount}
+        sub={sub}
+        setsub={setsub}
       />
     ))}
 </Table.Body>

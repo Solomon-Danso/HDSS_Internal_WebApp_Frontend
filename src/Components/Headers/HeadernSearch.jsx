@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Breaker, HImage, HText, HeaderBanner, HeadernSearchBanner, Icon, NotificationBadge, NotificationIcon, SearchBanner, Searcher } from '../../Designs/Styles/Dashboard'
+import { Breaker, CText, HImage, HText, HeaderBanner, HeadernSearchBanner, Icon, NotificationBadge, NotificationIcon, SearchBanner, Searcher } from '../../Designs/Styles/Dashboard'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { IoIosNotificationsOutline } from 'react-icons/io'
 import {BsGlobe} from 'react-icons/bs'
@@ -56,6 +56,8 @@ const HeadernSearch = ({pic, name, toggle, toggler}) => {
 
          
             <HImage src={pic}/>
+            <CText>{name}</CText>
+            
 
             </HeaderBanner>
         </HeadernSearchBanner>

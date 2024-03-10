@@ -24,11 +24,6 @@ const MenuButtons = () => {
   const [specificRole, setspecificRole] = useState("");
   const [role, setrole] = useState("");
 
-  useEffect(() => {
-    const spRole =  AES.decrypt(sessionStorage.getItem("SpecificRole"), '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK').toString(enc.Utf8);
-    setspecificRole(spRole);
-    
-  }, []);
   
 
   

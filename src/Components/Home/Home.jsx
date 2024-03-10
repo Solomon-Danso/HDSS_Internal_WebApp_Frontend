@@ -16,12 +16,18 @@ const Home = () => {
     const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
-    const encryptedData = sessionStorage.getItem("userDataEnc");
-    const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
-    const decryptedData = AES.decrypt(encryptedData, encryptionKey);
-    const decryptedString = decryptedData.toString(enc.Utf8);
-    const parsedData = JSON.parse(decryptedString);
-      setUserInfo(parsedData);
+    try{
+      const encryptedData = sessionStorage.getItem("userDataEnc");
+      const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
+      const decryptedData = AES.decrypt(encryptedData, encryptionKey);
+      const decryptedString = decryptedData.toString(enc.Utf8);
+      const parsedData = JSON.parse(decryptedString);
+        setUserInfo(parsedData);
+        console.log(parsedData);
+    }catch(e){
+      navigate("/")
+    }
+   
   }, []);
   const profilePic = apiServer+userInfo.profilePicture
 
@@ -67,14 +73,14 @@ const Home = () => {
         <MediumCard>
             <CardTextDiv>
                 <div>
-                {Greeting()},<br/> {userInfo.fullName}
+                {Greeting()},<br/> {userInfo.FullName}
                 </div> <br/>
           
                 <div>
             <CText>
             Staff ID: 
             </CText>&nbsp;
-           {userInfo.staffId}
+           {userInfo.UserId}
            </div> 
 
            <div>

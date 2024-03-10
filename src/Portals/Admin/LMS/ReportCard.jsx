@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Container, ContainerT, GInfoMiniRow, GInfoMiniRowT, GInfoRow, GeneralInfoContainer, HomeContainerT, PerformanceInfoContainer, PerformanceInfoContainerT, PerformanceRow, PerformanceText, RSchoolName, RSchoolNameS, RStudCenter } from '../../../Designs/Styles/Letter'
-import { apiServer } from '../../../Constants /Endpoints'
+import { apiMedia, apiServer } from '../../../Constants /Endpoints'
 import { RSSchoolLogo, RSchoolLogo, SchoolLogo } from '../../../Designs/Styles/Styles'
 import { AdmitButton2, FormInputStudent4, PaySelector, RInput, RInputLong, StudCenter } from '../../../Designs/Styles/Profile'
 import { AES, enc } from 'crypto-js'
@@ -11,12 +11,12 @@ const Reportrblue = ({ data, submitter, level, goToNextStudent, goToPreviousStud
 
     const [SchoolData, SetSchoolData] = useState({})
 
-    useEffect(()=>{
-    fetch(apiServer+"api/Setup/GetSchoolData")
-    .then(res=>res.json())
-    .then(data=>SetSchoolData(data))
-    .catch(error=>console.error(error))
-    },[])
+       useEffect(()=>{
+      fetch(apiServer+"ViewSchoolData")
+      .then(res=>res.json())
+      .then(data=>SetSchoolData(data))
+      .catch(error=>console.error(error))
+      },[])
 
     const [ReportData, SetReportData] = useState({})
 
@@ -98,7 +98,21 @@ const Reportrblue = ({ data, submitter, level, goToNextStudent, goToPreviousStud
 
         },[level,data])
         
-        
+   
+        const [analysis, setAnalysis] = useState({})
+
+        useEffect(()=>{
+          fetch(apiServer+"api/Grade/GetReportAnalysis?StudentId="+data.studentId)
+          .then(res=>res.json())
+          .then(data=>setAnalysis(data))
+          .catch(error=>console.error(error))
+
+
+        },[data])
+
+
+
+
 
        
 
@@ -109,11 +123,11 @@ const Reportrblue = ({ data, submitter, level, goToNextStudent, goToPreviousStud
     <ContainerT>
 
 <HomeContainerT >
-<RSchoolName> {SchoolData.schoolName}</RSchoolName>
+<RSchoolName> {SchoolData.CompanyName}</RSchoolName>
 
 <StudCenter>
 <RSchoolLogo
-    src={apiServer+SchoolData.logo}
+    src={apiMedia+SchoolData.CompanyLogo}
     alt="icon"
 
  />
@@ -191,7 +205,7 @@ const Reportrblue = ({ data, submitter, level, goToNextStudent, goToPreviousStud
 
 <GInfoMiniRow>
 <div>Position: </div>
-<div style={{color:`${colors.mainred}`, fontWeight:"bold"}}>1st out of {StudentCounter} students</div>
+<div style={{color:`${colors.mainred}`, fontWeight:"bold"}}>{analysis.thisTermPosition} out of {StudentCounter} students</div>
 </GInfoMiniRow>
 
 </GInfoRow>
@@ -397,35 +411,25 @@ const Reportrblue = ({ data, submitter, level, goToNextStudent, goToPreviousStud
   <thead>
     <tr>
       <th style={{ border: "1px solid black", color: `${colors.rcolor}`, textAlign: "center" }}>This Term Performance</th>
-      <th style={{ border: "1px solid black", color: `${colors.rcolor}`, textAlign: "center" }}>Previous Term Performance</th>
       
     </tr>
   </thead>
   <tbody>
     <tr>
       <td style={{ border: "1px solid black", color: `${colors.rcolor}`, textAlign: "center" }}> 
-      <PerformanceRow> <PerformanceText>Total Raw Score: </PerformanceText> 791/1000  </PerformanceRow>
+      <PerformanceRow> <PerformanceText>Total Raw Score: </PerformanceText> {analysis.thisTermTotalScoreObtained}/{analysis.thisTermEntireTotalScore}  </PerformanceRow>
      
-      <PerformanceRow> <PerformanceText>Student Average(%): </PerformanceText> 79.1  </PerformanceRow>  
+      <PerformanceRow> <PerformanceText>Student Average(%): </PerformanceText> {analysis.thisTermAverageScore}  </PerformanceRow>  
       
-      <PerformanceRow> <PerformanceText>Total Pass: </PerformanceText> 8  </PerformanceRow>
+      <PerformanceRow> <PerformanceText>Total Pass: </PerformanceText> {analysis.thisTermTotalPass} </PerformanceRow>
       
-      <PerformanceRow> <PerformanceText>Total Failed: </PerformanceText> 2  </PerformanceRow> 
+      <PerformanceRow> <PerformanceText>Total Failed: </PerformanceText> {analysis.thisTermTotalFailed}  </PerformanceRow> 
         
         
         </td>
-      <td style={{  border: "1px solid black", color: `${colors.rcolor}`, textAlign: "center" }}>
-
-      <PerformanceRow> <PerformanceText>Total Raw Score: </PerformanceText> 791/1000  </PerformanceRow>
-     
-      <PerformanceRow> <PerformanceText>Student Average(%): </PerformanceText> 79.1  </PerformanceRow>  
-    
-      <PerformanceRow> <PerformanceText>Total Pass: </PerformanceText> 8  </PerformanceRow>
-     
-      <PerformanceRow> <PerformanceText>Total Failed: </PerformanceText> 2  </PerformanceRow> 
 
 
-      </td>
+      
      
     </tr>
 

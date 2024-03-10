@@ -62,7 +62,7 @@ export const PerformanceInfoContainer = styled.div`
 
 border: 0.2rem solid black;
  padding:1rem;
- height: 25vh;
+ height: auto;
    width: 100%; 
    border-radius:1.5rem;
    margin-top:2rem;

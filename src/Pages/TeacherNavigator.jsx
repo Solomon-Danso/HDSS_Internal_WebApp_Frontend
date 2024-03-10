@@ -12,7 +12,7 @@ import {  DashboardNav,
     IconDashResources,
     IconDashSettings,
    } from "../Designs/Card/Dashboard";
-import { apiServer } from "../Constants /Endpoints";
+import { apiMedia, apiServer } from "../Constants /Endpoints";
 
 const Navigation = ({  page, openfunction }) => {
   const [isMobile, setIsMobile] = useState(false);
@@ -36,17 +36,17 @@ const Navigation = ({  page, openfunction }) => {
  
 
   const [SchoolData, SetSchoolData] = useState({})
-  useEffect(()=>{
-    fetch(apiServer+"api/Setup/GetSchoolData")
-    .then(res=>res.json())
-    .then(data=>SetSchoolData(data))
-    .catch(error=>console.error(error))
-    },[])
+     useEffect(()=>{
+      fetch(apiServer+"ViewSchoolData")
+      .then(res=>res.json())
+      .then(data=>SetSchoolData(data))
+      .catch(error=>console.error(error))
+      },[])
 
   return (
     <DashboardNav>
       <DashIcon
-        src={apiServer+SchoolData.logo}
+        src={apiMedia+SchoolData.CompanyLogo}
         alt="icon"
         onClick={() => navigate("/dashboard")}
       />

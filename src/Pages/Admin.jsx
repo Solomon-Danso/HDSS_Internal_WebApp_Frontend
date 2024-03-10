@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Admin_MenuButtons from './Admin/Admin_MenuButtons'
 import Admin_Dashboard from './Admin/Admin_Dashboard'
-import { MainDashboardContainer } from '../Designs/Styles/Styles'
+import { MainDashboardContainer, MainDashboardMobileContainer } from '../Designs/Styles/Styles'
 import { useLocation } from 'react-router-dom'
 import Navigation from './AdminNavigator'
 
@@ -31,14 +31,53 @@ const openfunction = ()=>{
   setOpenNav(!openNav)
 }
 
-  return (
-    <MainDashboardContainer>
 
-<Navigation page={page}  openfunction={openfunction}/>
+const [isMobile, setIsMobile] = useState(false);
+  const [active, setActive] = useState(null);
+
+  useEffect(() => {
+    setActive(1);
+     window.addEventListener("resize", handleResize);
+    handleResize();
+
+  }, []);
+
+  //choose the screen size
+  const handleResize = () => {
+    if (window.innerWidth < 768) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  };
+
+
+
+
+
+  return (
+    <>
+
+      {
+        isMobile?(
+        
+        <MainDashboardMobileContainer>
+          <Admin_Dashboard openNav={openNav} openfunction={openfunction}/>
+
+          <Navigation page={page}  openfunction={openfunction}/>
+          </MainDashboardMobileContainer>
+        ):(
+          <MainDashboardContainer>
+
         <Admin_MenuButtons />      
         <Admin_Dashboard openNav={openNav} openfunction={openfunction}/>
-     
-    </MainDashboardContainer>
+ 
+        
+        </MainDashboardContainer>)
+      }
+
+    
+    </>
   )
 }
 

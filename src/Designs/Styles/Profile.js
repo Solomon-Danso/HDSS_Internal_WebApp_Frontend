@@ -346,7 +346,11 @@ padding:2rem;
 overflow:hidden;
 margin: 2rem;
 border: 1px solid ${({ border }) => border};;
-
+@media(max-width:768px){
+width:100%;
+padding:0.5rem;
+margin:0rem;
+}
 
 `;
 
@@ -749,7 +753,11 @@ font-size: 1.5rem;
 color: ${colors.white};
 font-family:Helvetica;
 font-weight: 700;
-
+@media(max-width:768px){
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom:1.2rem
+}
 `;
 
 export const HeaderTitle = styled.div`
@@ -757,6 +765,10 @@ font-size: 1.3rem;
 color: ${colors.white};
 font-family:Helvetica,
 font-weight: 600;
+@media(max-width:768px){
+  font-size: 1.1rem;
+
+}
 
 
 `;
@@ -809,6 +821,7 @@ export const FormInputStudent = styled.input`
 
   @media (max-width: 768px) {
     font-size: 12px;
+    width: 65vw;
   }
 `;
 

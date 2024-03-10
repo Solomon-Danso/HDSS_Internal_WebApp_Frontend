@@ -8,7 +8,7 @@ import { DateNTime, HomeDetailsGrouper, HomeGrouper, HomeLogo, HomePage, HomePag
 import pic1 from "../../Designs/Images/download.png"
 import { useNavigate } from 'react-router-dom'
 import AnimateHeight from 'react-animate-height';
-import { apiServer } from '../../Constants /Endpoints';
+import { apiMedia, apiServer } from '../../Constants /Endpoints';
 import Home from '../../Portals/Admin/Home';
 import Profile from '../../Portals/Admin/Profile'
 
@@ -65,11 +65,7 @@ import ReportCard from '../../Portals/Student/ReportCard';
 
 const Dashboard = ({openNav,openfunction}) => {
   const [specificRole, setspecificRole] = useState("");
-  useEffect(() => {
-    const spRole =  AES.decrypt(sessionStorage.getItem("SpecificRole"), '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK').toString(enc.Utf8);
-    setspecificRole(spRole);
-    
-  }, []);
+  
 
   
 
@@ -77,12 +73,17 @@ const Dashboard = ({openNav,openfunction}) => {
   const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
-    const encryptedData = sessionStorage.getItem("userDataEnc");
-    const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
-    const decryptedData = AES.decrypt(encryptedData, encryptionKey);
-    const decryptedString = decryptedData.toString(enc.Utf8);
-    const parsedData = JSON.parse(decryptedString);
-      setUserInfo(parsedData);
+    try{
+      const encryptedData = sessionStorage.getItem("userDataEnc");
+      const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
+      const decryptedData = AES.decrypt(encryptedData, encryptionKey);
+      const decryptedString = decryptedData.toString(enc.Utf8);
+      const parsedData = JSON.parse(decryptedString);
+        setUserInfo(parsedData);
+    }catch(e){
+navigate("/")
+    }
+    
   }, []);
   const profilePic = apiServer+userInfo.profilePic
 
@@ -263,7 +264,7 @@ const toggler = () => {
   <>
 <HeadernSearch pic={profilePic}  toggle={toggle} toggler={toggler}/>
 <ProfileNDate  onClick={()=>toggler()}>
-<HomeSchoolName> {SchoolData.schoolName} </HomeSchoolName>
+<HomeSchoolName> {SchoolData.CompanyName} </HomeSchoolName>
 
 <ProfileDetails>
 
@@ -338,8 +339,8 @@ alignItems: 'center',
   }}
   >
   <br/><br/><br/>
-  <HomeLogoM src={apiServer+SchoolData.logo}/>
-  <HomeSchoolNameM> {SchoolData.schoolName} </HomeSchoolNameM>
+  <HomeLogoM src={apiMedia+SchoolData.CompanyLogo}/>
+  <HomeSchoolNameM> {SchoolData.CompanyName} </HomeSchoolNameM>
 
   </div>):(<>
   

@@ -21,17 +21,21 @@ export const DashboardContainer = styled.div`
 `;
 
 export const DashboardNav = styled.div`
-  background-color: ${colors.card};
-  border-right: 0.5px solid rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 5px;
-height: 100vh;
-  @media (max-width: 768px) {
-    flex: 0.1;
-  }
+background-color: ${colors.card};
+border-right: 0.5px solid rgba(0, 0, 0, 0.1);
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 10px 5px;
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+height: auto;
+z-index: 1000; 
+
+ 
 `;
 
 export const DashIcon = styled.img`

@@ -105,14 +105,14 @@ const StudentInfo = () => {
       useEffect(() => {
         
          
-            const URL=`api/LMS/viewAllSubject`
+            const URL=`api/LMS/viewAllSubjectStudent?ClassName=${userInfo.level}&ID=${userInfo.studentId}`
             fetch(apiServer + URL)
               .then(response => response.json()) // Parse the response as JSON
               .then(data => setTheClass(data))
               .catch(error => console.error(error));
        
       
-      }, []);
+      }, [userInfo]);
      
       
 

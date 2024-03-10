@@ -8,7 +8,7 @@ import { DateNTime, HomeDetailsGrouper, HomeGrouper, HomeLogo, HomePage, HomePag
 import pic1 from "../../Designs/Images/download.png"
 import { useNavigate } from 'react-router-dom'
 import AnimateHeight from 'react-animate-height';
-import { apiServer } from '../../Constants /Endpoints';
+import { apiMedia, apiServer } from '../../Constants /Endpoints';
 import Home from '../../Portals/Admin/Home';
 import Test from '../../Portals/Admin/Test'
 import Profile from '../../Portals/Admin/Profile'
@@ -65,6 +65,7 @@ import { LiaChalkboardSolid } from "react-icons/lia";
 import { BreakerM, HeaderBanner, NotificationBadgeM, NotificationIconM } from '../../Designs/Styles/Dashboard';
 import { IoIosNotificationsOutline } from 'react-icons/io'
 import {CiSettings,CiGlobe} from 'react-icons/ci'
+import { colors } from '../../Designs/Colors';
 
 
 
@@ -72,11 +73,8 @@ import {CiSettings,CiGlobe} from 'react-icons/ci'
 
 const Dashboard = ({openNav,openfunction}) => {
   const [specificRole, setspecificRole] = useState("");
-  useEffect(() => {
-    const spRole =  AES.decrypt(sessionStorage.getItem("SpecificRole"), '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK').toString(enc.Utf8);
-    setspecificRole(spRole);
-    
-  }, []);
+  const [RoleList, setRoleList] = useState([])
+ 
 
 
 
@@ -84,14 +82,22 @@ const Dashboard = ({openNav,openfunction}) => {
   const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
-    const encryptedData = sessionStorage.getItem("userDataEnc");
-    const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
-    const decryptedData = AES.decrypt(encryptedData, encryptionKey);
-    const decryptedString = decryptedData.toString(enc.Utf8);
-    const parsedData = JSON.parse(decryptedString);
-      setUserInfo(parsedData);
+    try{
+
+      const encryptedData = sessionStorage.getItem("userDataEnc");
+      const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
+      const decryptedData = AES.decrypt(encryptedData, encryptionKey);
+      const decryptedString = decryptedData.toString(enc.Utf8);
+      const parsedData = JSON.parse(decryptedString);
+        setUserInfo(parsedData);
+        
+
+    }catch(e){
+      navigate("/")
+    }
+   
   }, []);
-  const profilePic = apiServer+userInfo.profilePicturePath
+  const profilePic = apiMedia+userInfo.ProfilePic
 
   
   const toggleDropdown = () => {
@@ -146,12 +152,38 @@ const [sysDate, setSysDate] = useState("")
   const [SchoolData, SetSchoolData] = useState({})
 
   useEffect(()=>{
-  fetch(apiServer+"api/Setup/GetSchoolData")
+  fetch(apiServer+"ViewSchoolData")
   .then(res=>res.json())
   .then(data=>SetSchoolData(data))
   .catch(error=>console.error(error))
   },[])
   
+useEffect(()=>{
+  const formData = new FormData();
+
+  const CompanyId = userInfo.CompanyId;
+  const UserId = userInfo.UserId;
+
+  formData.append("CompanyId",CompanyId)
+  formData.append("UserId",UserId)
+  
+  fetch(apiServer+"ViewUserDetailedRole",{
+    method:"POST", 
+    body:formData
+  })
+  .then(res=>res.json())
+  .then(data=>setRoleList(data))
+  .catch(err=>console.log(err))
+
+
+},[])
+
+console.log(RoleList)
+console.log(userInfo)
+
+
+
+
 
 
 
@@ -686,78 +718,46 @@ const [sysDate, setSysDate] = useState("")
 }
 
 <>
-<HomePageBanner>
+
 {
   isMobile?(<>
-  
-  <HeaderBanner>
 
-<BreakerM>
-
-<NotificationIconM onClick={() => { navigate("/student") }}>
-<CiSettings  />
-<NotificationBadgeM>15</NotificationBadgeM>
-</NotificationIconM>
-
-<NotificationIconM onClick={() => { navigate("/student") }}>
-<CiGlobe  />
-<NotificationBadgeM>507</NotificationBadgeM>
-</NotificationIconM>
-
-<NotificationIconM onClick={() => { navigate("/student") }}>
-<IoIosNotificationsOutline  />
-<NotificationBadgeM>5</NotificationBadgeM>
-</NotificationIconM>
-
-
-</BreakerM>
-
-
-
-
-</HeaderBanner>
   
   </>):(<>
   
 
-  <>
-<HeadernSearch pic={profilePic} name={userInfo.fullName} toggle={toggle} toggler={toggler}/>
-<ProfileNDate  onClick={()=>toggler()}>
-<HomeSchoolName> {SchoolData.schoolName} </HomeSchoolName>
+<div style={{display:"flex", flexDirection:"row", justifyContent:"space-between",height:"auto", backgroundColor:`${colors.card}`, alignItems: "center"}}>
 
-<ProfileDetails>
 
-<AnimateHeight height={dropdownOpen?"auto":0} duration={500}>    
-<ProfileButtonOptionLink onClick={() => { navigate("/admin/viewProfile"); toggleDropdown() }}>View Profile </ProfileButtonOptionLink>
-<ProfileButtonOptionLink onClick={() => { navigate("/admin/test"); toggleDropdown() }}>Edit Profile </ProfileButtonOptionLink>
-<ProfileButtonOptionLink onClick={() => { navigate("/admin/test"); toggleDropdown() }}>Notifications </ProfileButtonOptionLink>
-<ProfileButtonOptionLink onClick={() => { navigate("/admin/test"); toggleDropdown() }}>Chats </ProfileButtonOptionLink>
+<HeadernSearch pic={profilePic} name={userInfo.FullName} toggle={toggle} toggler={toggler}/>
 
-</AnimateHeight>
+<HomeSchoolName> {SchoolData.CompanyName} </HomeSchoolName>
 
- </ProfileDetails>
-
-</ProfileNDate>
-
-    </>
-
-  </>)
-}  
-  
-  <HomeGrouper>
+<HomeGrouper>
     <HomeUserPic src={profilePic} onClick={toggleDropdown}/>
 
   <HomeDetailsGrouper >
-   <HomeUserName onClick={toggleDropdown}>{userInfo.name}</HomeUserName>
-   <HomeUserSpecificRole onClick={toggleDropdown}>{userInfo.specificRole}</HomeUserSpecificRole>
+   <HomeUserName onClick={toggleDropdown}>{userInfo.FullName}</HomeUserName>
+   <HomeUserSpecificRole onClick={toggleDropdown}>{userInfo.PrimaryRole}</HomeUserSpecificRole>
    
   </HomeDetailsGrouper>
 
 
   </HomeGrouper>
 
+</div>
 
-</HomePageBanner>
+
+
+
+
+
+  
+
+  </>)
+}  
+  
+
 
 {
   isMobile?(<div
@@ -769,8 +769,8 @@ const [sysDate, setSysDate] = useState("")
   }}
   >
   <br/><br/><br/>
-  <HomeLogoM src={apiServer+SchoolData.logo}/>
-  <HomeSchoolNameM> {SchoolData.schoolName} </HomeSchoolNameM>
+  <HomeLogoM src={apiMedia+SchoolData.CompanyLogo}/>
+  <HomeSchoolNameM> {SchoolData.CompanyName} </HomeSchoolNameM>
 
   </div>):(<>
   
@@ -783,17 +783,6 @@ const [sysDate, setSysDate] = useState("")
   {sysDate}
 </DateNTime>
 
-<ProfileDetails>
-
-<AnimateHeight height={dropdownOpen?"auto":0} duration={500}>    
-<ProfileButtonOptionLink onClick={() => { navigate("/admin/viewProfile"); toggleDropdown() }}>View Profile </ProfileButtonOptionLink>
-<ProfileButtonOptionLink onClick={() => { navigate("/admin/test"); toggleDropdown() }}>Edit Profile </ProfileButtonOptionLink>
-<ProfileButtonOptionLink onClick={() => { navigate("/admin/test"); toggleDropdown() }}>Notifications </ProfileButtonOptionLink>
-<ProfileButtonOptionLink onClick={() => { navigate("/admin/test"); toggleDropdown() }}>Chats </ProfileButtonOptionLink>
-
-</AnimateHeight>
-
- </ProfileDetails>
 
 </ProfileNDate>
 

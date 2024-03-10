@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import LoginBackground from "../Images/background.jpg"
+import LoginBackground from "../Images/2.jpg"
 import { colors } from "../Colors";
 
 export const LoginPage = styled.div`
@@ -29,6 +29,15 @@ gap:1.0rem;
 margin-top: 0.5rem;
 height:100vh;
 overflow: hidden;
+`;
+
+export const MainDashboardMobileContainer = styled.div`
+display: flex;
+flex-direction: column;
+gap:1.0rem;
+margin-top: 0.5rem;
+height:100vh;
+
 `;
 
 
@@ -138,6 +147,20 @@ border-radius: 50%;
   color:${colors.icon}
 
 `;
+
+export const NavButtonIcon = styled.div`
+border-radius: 50%;
+  font-size: 3.5rem;
+  height: 2.5rem;
+  width: 2.5rem; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color:${colors.icon}
+
+`;
+
 export const MenuButtonIconAgain = styled.div`
 
   font-size: 1.5rem;
@@ -535,6 +558,7 @@ display: flex;
 flex-direction:row;
 gap:0.1rem;
 
+
 `;
 
 export const HomeUserPic = styled.img`
@@ -583,5 +607,7 @@ height:auto;
 display: flex;
 justify-content: center;
 margin-top: 0.5rem;
+background-color: ${colors.red};
+
 
 `;

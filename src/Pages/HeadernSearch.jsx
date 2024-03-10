@@ -64,8 +64,6 @@ const HeadernSearch = ({pic, name, toggle, toggler}) => {
                 </Breaker>
 
 
-         
-            <HImage src={pic}/>
 
             </HeaderBanner>
 

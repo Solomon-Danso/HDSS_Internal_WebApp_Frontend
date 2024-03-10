@@ -72,7 +72,7 @@ const handleSubmit = async () => {
       },
       body: JSON.stringify({
         studentId: studentData.studentId,
-        studentName: `${studentData.firstName} ${studentData.lastName} ${studentData.lastName}`,
+        studentName: `${studentData.firstName} ${studentData.otherName} ${studentData.lastName}`,
         classScore: classScore||0,
         examScore: examsScore||0,
         level: level,

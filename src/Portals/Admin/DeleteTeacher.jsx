@@ -4,19 +4,27 @@ import { AdmitStudentCard, AdmitStudentRole, FormLable, HeaderTitle, MainTitle,F
 import { colors } from '../../Designs/Colors'
 import { Show } from '../../Constants /Alerts'
 import {AES, enc} from 'crypto-js'
+import { useNavigate } from 'react-router-dom'
 
 const DeleteStudent = () => {
 
 const [studentId, setStudentId] = useState()
 const [userInfo, setUserInfo] = useState({});
+const navigate = useNavigate()
    
     useEffect(() => {
-      const encryptedData = sessionStorage.getItem("userDataEnc");
-      const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
-      const decryptedData = AES.decrypt(encryptedData, encryptionKey);
-      const decryptedString = decryptedData.toString(enc.Utf8);
-      const parsedData = JSON.parse(decryptedString);
-        setUserInfo(parsedData);
+      try{
+        const encryptedData = sessionStorage.getItem("userDataEnc");
+        const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
+        const decryptedData = AES.decrypt(encryptedData, encryptionKey);
+        const decryptedString = decryptedData.toString(enc.Utf8);
+        const parsedData = JSON.parse(decryptedString);
+          setUserInfo(parsedData);
+      }
+      catch(e){
+navigate("/")
+      }
+
     }, []);
 
     const studentDetails = async (event) => {

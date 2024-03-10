@@ -231,6 +231,12 @@ padding:2rem;
 
 `;
 
+export const CNavText = styled.span`
+color: ${colors.icon};
+font-size: 1rem;
+
+`;
+
 
 export const StatCard = styled.div`
   display: flex;

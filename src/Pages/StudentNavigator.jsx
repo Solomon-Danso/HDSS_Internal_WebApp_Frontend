@@ -2,17 +2,15 @@ import React, { useEffect, useState } from "react";
 
 import { useNavigate } from 'react-router-dom'
 import { colors } from "../Designs/Colors";
-import {  DashboardNav,
-    DashIcon,
-    DashIconMenu,
-    DashIconSep,
-    IconDashHome,
-    IconDashLogoutNav,
-    IconDashPayment,
-    IconDashResources,
-    IconDashSettings,
-   } from "../Designs/Card/Dashboard";
+import {  DashboardNav} from "../Designs/Card/Dashboard";
 import { apiMedia, apiServer } from "../Constants /Endpoints";
+import { CgMenuGridO } from "react-icons/cg";
+import { HomeUserPic, MenuButtonIcon, NavButtonIcon } from "../Designs/Styles/Styles";
+import { CNavText, CText } from "../Designs/Styles/Dashboard";
+import { GiTeacher } from "react-icons/gi";
+import { FaHome } from "react-icons/fa";
+import { BsChatDots } from "react-icons/bs";
+import { AES, enc } from "crypto-js";
 
 const Navigation = ({  page, openfunction }) => {
   const [isMobile, setIsMobile] = useState(false);
@@ -35,104 +33,115 @@ const Navigation = ({  page, openfunction }) => {
 
  
 
-  const [SchoolData, SetSchoolData] = useState({})
-     useEffect(()=>{
-      fetch(apiServer+"ViewSchoolData")
-      .then(res=>res.json())
-      .then(data=>SetSchoolData(data))
-      .catch(error=>console.error(error))
-      },[])
+  const [userInfo, setUserInfo] = useState({});
+
+  useEffect(() => {
+    try{
+
+      const encryptedData = sessionStorage.getItem("userDataEnc");
+      const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
+      const decryptedData = AES.decrypt(encryptedData, encryptionKey);
+      const decryptedString = decryptedData.toString(enc.Utf8);
+      const parsedData = JSON.parse(decryptedString);
+        setUserInfo(parsedData);
+        
+
+    }catch(e){
+      navigate("/")
+    }
+   
+  }, []);
+
+
+
+
+      const profilePic = apiMedia+userInfo.ProfilePic
+
+      const [selectedButton, setSelectedButton] = useState(null);
+      
+
+      const handleButtonClick = (buttonName) => {
+        setSelectedButton(buttonName);
+       
+    };
 
   return (
-    <DashboardNav>
-      <DashIcon
-        src={apiMedia+SchoolData.CompanyLogo}
-        alt="icon"
-        onClick={() => navigate("/dashboard")}
-      />
-       <DashIconMenu onClick={openfunction}/>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            backgroundColor: colors.body,
-            borderRadius: 15,
-            padding: 7,
-          }}
+   <DashboardNav>
+   
+    <div
+
+      className="navButton"
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                       
+            }}
+            onClick={() => handleButtonClick("Menu")}
         >
-          <DashIconSep
-            title="Dashboard"
-            active={page === "dashboard" ? true : false}
-            
-          >
-            <DashIconMenu
-              onClick={openfunction}
-              color={page === "dashboard" ? colors.primary : "white"}
-            />
-          </DashIconSep>
-          <DashIconSep
-            title="Shop"
-            active={page === "shop" ? true : false}
-            onClick={() => navigate("/dashboard")}
-          >
-            <IconDashHome
-              title="Shop"
-              onClick={() => navigate("/dashboard/shop")}
-              color={page === "shop" ? colors.primary : "white"}
-            />
-          </DashIconSep>
-          <DashIconSep
-            title="Events"
-            active={page === "event" ? true: false}
-            onClick={() => navigate("/dashboard")}
-          >
-            <IconDashResources
-              title="Events"
-              onClick={() => navigate("/dashboard/events")}
-              color={page === "event" ?  colors.primary : "white"}
-            />
-          </DashIconSep>
-          <DashIconSep
-            title="Payments"
-            active={page === "payment" ? true: false}
-            onClick={() => navigate("/dashboard")}
-          >
-            <IconDashPayment
-              title="Payment"
-              onClick={() => navigate("/dashboard/payment")}
-              color={page === "payment" ?  colors.primary : "white"}
-            />
-          </DashIconSep>
-          <DashIconSep
-            title="Settings"
-            active={page === "settings" ? true : false}
-            onClick={() => navigate("/dashboard")}
-          >
-            <IconDashSettings
-              title="Settings"
-              onClick={() => navigate("/dashboard/settings")}
-              color={page === "settings" ?  colors.primary : "white"}
-            />
-          </DashIconSep>
-        </div>
-      </div>
-      <IconDashLogoutNav 
-        onClick={() => {
-          sessionStorage.clear();
-          navigate("/");
-      }}
-            
-      title="Logout" />
-    </DashboardNav>
+            <NavButtonIcon onClick={openfunction} style={{color: selectedButton === "Menu" ? `${colors.maingreen}` : `${colors.icon}`,}}> <CgMenuGridO /></NavButtonIcon>
+            <CNavText style={{color: selectedButton === "Menu" ? `${colors.maingreen}` : `${colors.icon}`,}}>Menu</CNavText>
+    </div>
+
+
+    <div
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                            
+            }}
+            onClick={() => handleButtonClick("Class")}
+        >
+            <NavButtonIcon onClick={openfunction} style={{color: selectedButton === "Class" ? `${colors.maingreen}` : `${colors.icon}`,}}> <GiTeacher /> </NavButtonIcon>
+            <CNavText style={{color: selectedButton === "Class" ? `${colors.maingreen}` : `${colors.icon}`,}}>Class</CNavText>
+    </div>
+
+
+
+    <div
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                backgroundColor: selectedButton === "Profile" ? "goldenrod" : "transparent",
+                
+            }}
+           
+        >
+            <HomeUserPic src={profilePic}/>
+    </div>
+
+    <div
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                       
+            }}
+            onClick={() => handleButtonClick("Chat")}
+        >
+            <NavButtonIcon onClick={openfunction} style={{color: selectedButton === "Chat" ? `${colors.maingreen}` : `${colors.icon}`,}}> <BsChatDots /> </NavButtonIcon>
+            <CNavText style={{color: selectedButton === "Chat" ? `${colors.maingreen}` : `${colors.icon}`,}}>Chat</CNavText>
+    </div>
+
+
+    <div
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+               
+            }}
+            onClick={() => handleButtonClick("Home")}
+        >
+            <NavButtonIcon onClick={openfunction} style={{color: selectedButton === "Home" ? `${colors.maingreen}` : `${colors.icon}`,}}> <FaHome /></NavButtonIcon>
+            <CNavText style={{color: selectedButton === "Home" ? `${colors.maingreen}` : `${colors.icon}`,}}>Home</CNavText>
+    </div>
+
+
+   </DashboardNav>
+
   );
 };
 

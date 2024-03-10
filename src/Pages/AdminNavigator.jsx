@@ -2,16 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { useNavigate } from 'react-router-dom'
 import { colors } from "../Designs/Colors";
-import {  DashboardNav,
-    DashIcon,
-    DashIconMenu,
-    DashIconSep,
-    IconDashHome,
-    IconDashLogoutNav,
-    IconDashPayment,
-    IconDashResources,
-    IconDashSettings,
-   } from "../Designs/Card/Dashboard";
+import {  DashboardNav} from "../Designs/Card/Dashboard";
 import { apiMedia, apiServer } from "../Constants /Endpoints";
 import { CgMenuGridO } from "react-icons/cg";
 import { HomeUserPic, MenuButtonIcon, NavButtonIcon } from "../Designs/Styles/Styles";
@@ -84,14 +75,12 @@ const Navigation = ({  page, openfunction }) => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                backgroundColor: selectedButton === "Menu" ? "goldenrod" : "transparent",
-   
-                
+                       
             }}
             onClick={() => handleButtonClick("Menu")}
         >
-            <NavButtonIcon onClick={openfunction}> <CgMenuGridO /></NavButtonIcon>
-            <CNavText>Menu</CNavText>
+            <NavButtonIcon onClick={openfunction} style={{color: selectedButton === "Menu" ? `${colors.maingreen}` : `${colors.icon}`,}}> <CgMenuGridO /></NavButtonIcon>
+            <CNavText style={{color: selectedButton === "Menu" ? `${colors.maingreen}` : `${colors.icon}`,}}>Menu</CNavText>
     </div>
 
 
@@ -100,13 +89,12 @@ const Navigation = ({  page, openfunction }) => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                backgroundColor: selectedButton === "Class" ? "goldenrod" : "transparent",
-                   
+                            
             }}
             onClick={() => handleButtonClick("Class")}
         >
-            <NavButtonIcon onClick={openfunction}> <GiTeacher /> </NavButtonIcon>
-            <CNavText>Class</CNavText>
+            <NavButtonIcon onClick={openfunction} style={{color: selectedButton === "Class" ? `${colors.maingreen}` : `${colors.icon}`,}}> <GiTeacher /> </NavButtonIcon>
+            <CNavText style={{color: selectedButton === "Class" ? `${colors.maingreen}` : `${colors.icon}`,}}>Class</CNavText>
     </div>
 
 
@@ -129,13 +117,12 @@ const Navigation = ({  page, openfunction }) => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                backgroundColor: selectedButton === "Chat" ? "goldenrod" : "transparent",
-                
+                       
             }}
             onClick={() => handleButtonClick("Chat")}
         >
-            <NavButtonIcon onClick={openfunction}> <BsChatDots /> </NavButtonIcon>
-            <CNavText>Chat</CNavText>
+            <NavButtonIcon onClick={openfunction} style={{color: selectedButton === "Chat" ? `${colors.maingreen}` : `${colors.icon}`,}}> <BsChatDots /> </NavButtonIcon>
+            <CNavText style={{color: selectedButton === "Chat" ? `${colors.maingreen}` : `${colors.icon}`,}}>Chat</CNavText>
     </div>
 
 
@@ -144,13 +131,12 @@ const Navigation = ({  page, openfunction }) => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                backgroundColor: selectedButton === "Home" ? "goldenrod" : "transparent",
-              
+               
             }}
             onClick={() => handleButtonClick("Home")}
         >
-            <NavButtonIcon onClick={openfunction}> <FaHome /></NavButtonIcon>
-            <CNavText>Home</CNavText>
+            <NavButtonIcon onClick={openfunction} style={{color: selectedButton === "Home" ? `${colors.maingreen}` : `${colors.icon}`,}}> <FaHome /></NavButtonIcon>
+            <CNavText style={{color: selectedButton === "Home" ? `${colors.maingreen}` : `${colors.icon}`,}}>Home</CNavText>
     </div>
 
 

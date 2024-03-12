@@ -134,7 +134,7 @@ const Navigation = ({  page, openfunction }) => {
                 alignItems: "center",
                
             }}
-            onClick={() => handleButtonClick("Home")}
+            onClick={() => {handleButtonClick("Home"); navigate("/admin")}}
         >
             <NavButtonIcon onClick={openfunction} style={{color: selectedButton === "Home" ? `${colors.maingreen}` : `${colors.icon}`,}}> <FaHome /></NavButtonIcon>
             <CNavText style={{color: selectedButton === "Home" ? `${colors.maingreen}` : `${colors.icon}`,}}>Home</CNavText>

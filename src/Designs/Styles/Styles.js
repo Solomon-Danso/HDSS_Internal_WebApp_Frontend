@@ -534,8 +534,12 @@ export const HomeLogoM = styled.img`
 height:7vh;
 width:7vh;
 `;
+
+
+
+
 export const HomeLogoL = styled.img`
-height:30%;
+height:20%;
 width:100%;
 `;
 

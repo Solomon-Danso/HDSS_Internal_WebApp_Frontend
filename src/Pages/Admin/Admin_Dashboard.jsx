@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { DashboardContainer, FixedTop, HomeLogoL, HomeLogoM, HomeSchoolNameM } from '../../Designs/Styles/Styles';
+import { DashboardContainer, FixedTop, HomeLogoL, HomeLogoM, HomeSchoolNameM, MenuInfo } from '../../Designs/Styles/Styles';
 import { AES, enc } from 'crypto-js';
 import Pass from '../../Portals/Admin/Pass';
 import PermissionDenied from '../../Portals/Admin/PermissionDenied';
@@ -257,6 +257,9 @@ const handleRoles = async () => {
  <>
   <MenuCard >
   
+  <MenuInfo onClick={() => { navigate("/admin");openfunction() }}>
+DashBoard
+</MenuInfo>
  
 {/*Student 360 */}
   {checkRole("SuperAdmin")|| checkRole('Annoucements')|| checkRole('Attendance')|| checkRole('Feeding')|| checkRole('Transport')|| checkRole('ViewSchoolFees')|| checkRole('ViewAssessment') || checkRole('AddStudent')|| checkRole("DeleteStudent")|| checkRole("ViewStudent")|| checkRole("UpdateStudent") ? (   
@@ -313,7 +316,7 @@ const handleRoles = async () => {
 
 {/*Staff Member 360 */}
 {checkRole("SuperAdmin") || checkRole('PTAPlatform') || checkRole('StaffPlatform') || checkRole('PersonalChats') || checkRole('Clocking') || checkRole('Salary') || checkRole('AssignToActivities')  || checkRole('AssignToSubject')|| checkRole('AssignToClassroom')|| checkRole('Annoucements')|| checkRole('Assessments')|| checkRole( "RegisterStaffMembers")|| checkRole("UpdateStaffMembers")|| checkRole("ViewStaffMembers")|| checkRole("DeleteStaffMembers")|| checkRole("ViewStaffMembersInSchool")|| checkRole("AutoGenerateStaffMembers") || checkRole( "UploadAutoGenerateStaffMembers")|| checkRole('LessonNotes') ? (   
-  <DropList logo={<GiTeacher/>} title="Staff Members 360">
+  <DropList logo={<GiTeacher/>} title="Staff Management">
 
 {checkRole("SuperAdmin") || checkRole( "RegisterStaffMembers") ? (   
  <MenuButtonOptionLink onClick={() => { navigate("/admin/teachers"); openfunction()  }}>Register </MenuButtonOptionLink>
@@ -478,65 +481,6 @@ const handleRoles = async () => {
  
        </InnerDroplist> ) : (<></>)}
 
-{checkRole("SuperAdmin") || checkRole("BulkRegisterStaffMember") ? (   
- <MenuButtonOptionLink onClick={() => { navigate("/admin/schoolfees"); openfunction()  }}>Bulk Registration</MenuButtonOptionLink>
- ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole("BulkRegisterStaffMember") ? (   
- <MenuButtonOptionLink onClick={() => { navigate("/admin/schoolfees"); openfunction()  }}>Bulk Staff Upload</MenuButtonOptionLink>
- ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole("AutoGenerateStaffMembers") ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/students"); openfunction() }}>Generate Staff List</MenuButtonOptionLink>
-  ) : (<></>)}
-
-
-{checkRole("SuperAdmin") || checkRole('LessonNotes') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>Lesson Notes </MenuButtonOptionLink>
-  ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole('Assessments') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>Assessments</MenuButtonOptionLink>
-  ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole('Annoucements') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/students"); openfunction() }}>Annoucements</MenuButtonOptionLink>
-  ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole('AssignToClassroom') ? (   
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>Assign to Classroom</MenuButtonOptionLink>
-    ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole('AssignToSubject') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>Assign to Subject</MenuButtonOptionLink>
-  ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole('AssignToActivities') ? (   
-   <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>Assign to Activities</MenuButtonOptionLink>
-   ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole('Salary') ? (   
-     <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>Salary </MenuButtonOptionLink>
-  ) : (<></>)}
-
-
-
-{checkRole("SuperAdmin") || checkRole('Clocking') ? (   
-   <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>Clocking</MenuButtonOptionLink>    
-   ) : (<></>)}
-
-
-{checkRole("SuperAdmin") || checkRole('PersonalChats') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>Personal Chats </MenuButtonOptionLink>
-    ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole('StaffPlatform') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>Staff Platform</MenuButtonOptionLink>
-  ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole('PTAPlatform') ? (   
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>PTA Platform</MenuButtonOptionLink>
-    ) : (<></>)}
 
 
 
@@ -547,91 +491,55 @@ const handleRoles = async () => {
 
 
   {/*Lesson Notes */}
-{checkRole("SuperAdmin") || checkRole('PTAPlatform') || checkRole('StaffPlatform') || checkRole('PersonalChats') || checkRole('Clocking') || checkRole('Salary') || checkRole('AssignToActivities')  || checkRole('AssignToSubject')|| checkRole('AssignToClassroom')|| checkRole('Annoucements')|| checkRole('Assessments')|| checkRole( "RegisterStaffMembers")|| checkRole("UpdateStaffMembers")|| checkRole("ViewStaffMembers")|| checkRole("DeleteStaffMembers")|| checkRole("ViewStaffMembersInSchool")|| checkRole("AutoGenerateStaffMembers") || checkRole( "UploadAutoGenerateStaffMembers")|| checkRole('LessonNotes') ? (   
-  <DropList logo={<GiTeacher/>} title="Lesson Notes">
+{checkRole("SuperAdmin")|| checkRole("MarkNotes")|| checkRole("DeleteNotes")|| checkRole("UpdateNotes")|| checkRole("ViewNotes") || checkRole( "CreateNotes") ? (   
+  <DropList logo={<CgNotes/>} title="Lesson Notes">
 
-{checkRole("SuperAdmin") || checkRole( "RegisterStaffMembers") ? (   
- <MenuButtonOptionLink onClick={() => { navigate("/admin/teachers"); openfunction()  }}>Register </MenuButtonOptionLink>
- ) : (<></>)}
+{checkRole("SuperAdmin") || checkRole( "CreateNotes") ? (   
+    <InnerDroplist title="Create Notes">
 
-{checkRole("SuperAdmin") || checkRole("UpdateStaffMembers") ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/updateteacher"); openfunction()  }}>Update </MenuButtonOptionLink>
-  ) : (<></>)}
+    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Upload Notes</MenuButtonOptionLink>
+    
+    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Type Notes</MenuButtonOptionLink>
+   
 
-{checkRole("SuperAdmin") || checkRole("ViewStaffMembers") ? (   
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/teacherinfo"); openfunction() }}>View Details</MenuButtonOptionLink>
-    ) : (<></>)}
+    </InnerDroplist> ) : (<></>)}
 
-{checkRole("SuperAdmin") || checkRole("DeleteStaffMembers") ? (   
-   <MenuButtonOptionLink onClick={() => { navigate("/admin/deleteteacher"); openfunction() }}>Delete</MenuButtonOptionLink>
-   ) : (<></>)}
+{checkRole("SuperAdmin") || checkRole("ViewNotes") ? (   
+      <InnerDroplist title="View Notes">
 
-{checkRole("SuperAdmin") || checkRole("ViewStaffMembersInSchool") ? (   
- <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>Staff Members</MenuButtonOptionLink>
- ) : (<></>)}
+      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>View Notes File</MenuButtonOptionLink>
+      
+      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>View Typed Notes</MenuButtonOptionLink>
+     
+      </InnerDroplist>  ) : (<></>)}
 
-{checkRole("SuperAdmin") || checkRole("BulkRegisterStaffMember") ? (   
- <MenuButtonOptionLink onClick={() => { navigate("/admin/schoolfees"); openfunction()  }}>Bulk Registration</MenuButtonOptionLink>
- ) : (<></>)}
+{checkRole("SuperAdmin") || checkRole("UpdateNotes") ? (   
+      <InnerDroplist title="Update Notes">
 
-{checkRole("SuperAdmin") || checkRole("BulkRegisterStaffMember") ? (   
- <MenuButtonOptionLink onClick={() => { navigate("/admin/schoolfees"); openfunction()  }}>Bulk Staff Upload</MenuButtonOptionLink>
- ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole("AutoGenerateStaffMembers") ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/students"); openfunction() }}>Generate Staff List</MenuButtonOptionLink>
-  ) : (<></>)}
+      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Update Notes File</MenuButtonOptionLink>
+      
+      <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Update Typed Notes</MenuButtonOptionLink>
+     
+      </InnerDroplist>    ) : (<></>)}
 
 
-{checkRole("SuperAdmin") || checkRole('LessonNotes') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>Lesson Notes </MenuButtonOptionLink>
-  ) : (<></>)}
+{checkRole("SuperAdmin") || checkRole("DeleteNotes") ? (   
+ <InnerDroplist title="Delete Notes">
 
-{checkRole("SuperAdmin") || checkRole('Assessments') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>Assessments</MenuButtonOptionLink>
-  ) : (<></>)}
+ <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Delete Notes File</MenuButtonOptionLink>
 
-{checkRole("SuperAdmin") || checkRole('Annoucements') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/students"); openfunction() }}>Annoucements</MenuButtonOptionLink>
-  ) : (<></>)}
+ <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Delete Typed Notes</MenuButtonOptionLink>
 
-{checkRole("SuperAdmin") || checkRole('AssignToClassroom') ? (   
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>Assign to Classroom</MenuButtonOptionLink>
-    ) : (<></>)}
+ </InnerDroplist>   ) : (<></>)}
 
-{checkRole("SuperAdmin") || checkRole('AssignToSubject') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>Assign to Subject</MenuButtonOptionLink>
-  ) : (<></>)}
+{checkRole("SuperAdmin") || checkRole("MarkNotes") ? (   
+ <InnerDroplist title="Mark Notes">
 
-{checkRole("SuperAdmin") || checkRole('AssignToActivities') ? (   
-   <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>Assign to Activities</MenuButtonOptionLink>
-   ) : (<></>)}
+ <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Mark Notes File</MenuButtonOptionLink>
 
-{checkRole("SuperAdmin") || checkRole('Salary') ? (   
-     <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>Salary </MenuButtonOptionLink>
-  ) : (<></>)}
+ <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Mark Typed Notes</MenuButtonOptionLink>
 
-
-
-{checkRole("SuperAdmin") || checkRole('Clocking') ? (   
-   <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>Clocking</MenuButtonOptionLink>    
-   ) : (<></>)}
-
-
-{checkRole("SuperAdmin") || checkRole('PersonalChats') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>Personal Chats </MenuButtonOptionLink>
-    ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole('StaffPlatform') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>Staff Platform</MenuButtonOptionLink>
-  ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole('PTAPlatform') ? (   
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>PTA Platform</MenuButtonOptionLink>
-    ) : (<></>)}
-
-
-
+ </InnerDroplist> ) : (<></>)}
 
 
   </DropList>
@@ -1638,59 +1546,6 @@ const handleRoles = async () => {
 
 
 
-{
-  specificRole==="SuperiorUser"||specificRole==="HeadTeacher" ? (
-  <>
-  <DropList logo={<CgNotes/>} title="Lesson Notes">
-
-    <InnerDroplist title="Create Notes">
-
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Upload Notes</MenuButtonOptionLink>
-    
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Type Notes</MenuButtonOptionLink>
-   
-
-    </InnerDroplist>
-
-    <InnerDroplist title="View Notes">
-
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>View Notes File</MenuButtonOptionLink>
-    
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>View Typed Notes</MenuButtonOptionLink>
-   
-    </InnerDroplist>
-
-    <InnerDroplist title="Update Notes">
-
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Update Notes File</MenuButtonOptionLink>
-    
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Update Typed Notes</MenuButtonOptionLink>
-   
-    </InnerDroplist>
-
-    <InnerDroplist title="Delete Notes">
-
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Delete Notes File</MenuButtonOptionLink>
-
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Delete Typed Notes</MenuButtonOptionLink>
-
-    </InnerDroplist>
-
-    <InnerDroplist title="Mark Notes">
-
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Mark Notes File</MenuButtonOptionLink>
-
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Mark Typed Notes</MenuButtonOptionLink>
-
-    </InnerDroplist>
-
-    
-    </DropList>
-  </>
-  ):(
-  <></>
-  )
-}
 
 
 
@@ -1792,6 +1647,39 @@ const handleRoles = async () => {
         <Routes>
         <Route path="/" element={<Home />} />
         <Route path="viewProfile" element={<Profile/>} />
+        
+        <Route path="test" element={<Test />} />  
+        <Route path="*" element={<PermissionDenied />} />
+        <Route path="students" element={<Students />} /> 
+        <Route path="studentsInfo" element={<StudentInfo />} />
+        <Route path="studentsDetails/:studentId" element={<StudentDetails />} />
+        <Route path="teacherDetails/:teacherId" element={<TeacherDetails />} />
+        <Route path="feesDetails/:studentId" element={<FeesDetail />} />
+        <Route path="updateStudent" element={<UpdateStudent />} /> 
+        <Route path="deleteStudent" element={<DeleteStudent />} />  
+        <Route path="schoolfees" element={<MainFees />} /> 
+        <Route path="teachers" element={<Teachers />} /> 
+        <Route path="updateteacher" element={<UpdateTeacher />} /> 
+        <Route path="teacherinfo" element={<TeacherInfo />} /> 
+        <Route path="deleteteacher" element={<DeleteTeacher />} /> 
+        <Route path="class" element={<Class />} /> 
+        <Route path="students" element={<Students />} /> 
+        <Route path="studentsInfo" element={<StudentInfo />} />
+        <Route path="studentsDetails/:studentId" element={<StudentDetails />} />
+        <Route path="class" element={<Class />} /> 
+        <Route path="subjects" element={<AddSubject />} />
+        <Route path="subjectteacher" element={<SubjectTeacher />} /> 
+        <Route path="viewSlides" element={<ViewSlide />} />
+        <Route path="viewAudios" element={<ViewAudio />} />
+        <Route path="viewVideos" element={<ViewVideo />} />
+        <Route path="viewPictures" element={<ViewPicture />} />
+        <Route path="viewBooks" element={<ViewBooks />} />
+        <Route path="viewTimeTable" element={<ViewTimeTable />} />
+        <Route path="annoucement" element={<AddAnnoucementS />} />
+        <Route path="annoucementt" element={<AddAnnoucementT />} />
+        <Route path="annoucementp" element={<AddAnnoucementP />} />
+        <Route path="annoucementh" element={<AddAnnoucementH />} />
+        <Route path="pass" element={<Pass />} />  
           
           
           
@@ -1801,95 +1689,6 @@ const handleRoles = async () => {
           
           
           
-          
-          
-          
-          {
-             specificRole==="SuperiorUser"||specificRole==="HeadTeacher" ? (
-             <>
-              <Route path="test" element={<Test />} />  
-             </>
-             ):(
-             <>
-              <Route path="*" element={<PermissionDenied />} />
-             </>
-             )
-          }
-
-             
-{
-             specificRole==="SuperiorUser"||specificRole==="HeadTeacher" ? (
-             <>
-              <Route path="students" element={<Students />} /> 
-              <Route path="studentsInfo" element={<StudentInfo />} />
-              <Route path="studentsDetails/:studentId" element={<StudentDetails />} />
-              <Route path="teacherDetails/:teacherId" element={<TeacherDetails />} />
-              <Route path="feesDetails/:studentId" element={<FeesDetail />} />
-              <Route path="updateStudent" element={<UpdateStudent />} /> 
-              <Route path="deleteStudent" element={<DeleteStudent />} />  
-              <Route path="schoolfees" element={<MainFees />} /> 
-              <Route path="teachers" element={<Teachers />} /> 
-              <Route path="updateteacher" element={<UpdateTeacher />} /> 
-              <Route path="teacherinfo" element={<TeacherInfo />} /> 
-              <Route path="deleteteacher" element={<DeleteTeacher />} /> 
-              <Route path="class" element={<Class />} /> 
-
-             </>
-             ):(
-             <>
-              <Route path="*" element={<PermissionDenied />} />
-             </>
-             )
-          }
-
-          
-          
-{
-             specificRole==="SuperiorUser"||specificRole==="HeadTeacher"? (
-             <>
-              <Route path="students" element={<Students />} /> 
-              <Route path="studentsInfo" element={<StudentInfo />} />
-              <Route path="studentsDetails/:studentId" element={<StudentDetails />} />
-              <Route path="class" element={<Class />} /> 
-              <Route path="subjects" element={<AddSubject />} />
-              <Route path="subjectteacher" element={<SubjectTeacher />} /> 
-              <Route path="viewSlides" element={<ViewSlide />} />
-              <Route path="viewAudios" element={<ViewAudio />} />
-              <Route path="viewVideos" element={<ViewVideo />} />
-              <Route path="viewPictures" element={<ViewPicture />} />
-              <Route path="viewBooks" element={<ViewBooks />} />
-              <Route path="viewTimeTable" element={<ViewTimeTable />} />
-              <Route path="annoucement" element={<AddAnnoucementS />} />
-              <Route path="annoucementt" element={<AddAnnoucementT />} />
-              <Route path="annoucementp" element={<AddAnnoucementP />} />
-              <Route path="annoucementh" element={<AddAnnoucementH />} />
-              
-              
-
-             </>
-             ):(
-             <>
-              <Route path="*" element={<PermissionDenied />} />
-             </>
-             )
-          }          
-          
-          
-          
-          
-          
-          {
-             specificRole==="SuperiorUser"? (
-             <>
-              <Route path="pass" element={<Pass />} />  
-             </>
-             ):(
-             <>
-             <Route path="*" element={<PermissionDenied />} />
-             </>
-             )
-          }
-
    
 
     </Routes>

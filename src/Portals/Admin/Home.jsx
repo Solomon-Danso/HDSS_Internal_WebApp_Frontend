@@ -49,6 +49,7 @@ const Home = () => {
 
   const [isMobile, setIsMobile] = useState(true);
   const [active, setActive] = useState(null);
+  const [RoleList, setRoleList] = useState([])
 
   useEffect(() => {
     setActive(1);
@@ -161,34 +162,81 @@ const Home = () => {
           }, []);
   
 
+          useEffect(()=>{
+            handleRoles()
+          
+          },[userInfo])
+          
+          
+          
+          const handleRoles = async () => {
+           
+           
+              try {
+                const formData = new FormData();
+          
+                const CompanyId = userInfo.CompanyId;
+                const UserId = userInfo.UserId;
+              
+                formData.append("CompanyId",CompanyId)
+                formData.append("UserId",UserId)
+          
+            
+                const response = await fetch(apiServer+"ViewUserDetailedRole", {
+                  method: "POST",
+                  body: formData
+                });
+          
+                const data = await response.json();
+            
+                if (response.ok) {
+                  
+                 
+                  setRoleList(data)
+                  
+                } else {
+                
+                }
+              } catch (error) {
+          
+                Show.Attention("An error has occurred");
+                navigate("/")
+                window.location.reload()
+              }
+          
+          }
 
 
+          const checkRole = (role) => {
+            return RoleList.includes(role);
+          };
+      
+
+         
 
   return (
 <>
 <HomeBanner>
-{
-   specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(
-    <>
-    <HomeCard onClick={() => { navigate("/admin/studentsInfo") }}>
-    <HomeCardColumn>
-    <HomeIcon color={colors.green}> <HiOutlineUserGroup/> </HomeIcon>
-    <HomeCardText>Students</HomeCardText>
-    </HomeCardColumn>
 
-    <hr/>
 
-    <HomeCardNumber> {StudentCount}</HomeCardNumber>
-    </HomeCard>
+{checkRole("SuperAdmin") || checkRole( "HeadTeacher") ? (   
+ <>
+ <HomeCard onClick={() => { navigate("/admin/studentsInfo") }}>
+ <HomeCardColumn>
+ <HomeIcon color={colors.green}> <HiOutlineUserGroup/> </HomeIcon>
+ <HomeCardText>Students</HomeCardText>
+ </HomeCardColumn>
 
-    </>
-   ):(
-    <></>
-   )
-}
+ <hr/>
 
-{
-   specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(
+ <HomeCardNumber> {StudentCount}</HomeCardNumber>
+ </HomeCard>
+
+ </>           
+ 
+ ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole( "HeadTeacher") ? (   
     <>
     <HomeCard onClick={() => { navigate("/admin/teacherinfo") }}>
     <HomeCardColumn>
@@ -201,14 +249,12 @@ const Home = () => {
     <HomeCardNumber> {TeacherCount}</HomeCardNumber>
     </HomeCard>
 
-    </>
-   ):(
-    <></>
-   )
-}
+    </>           
+ 
+ ) : (<></>)}
 
-{
-   specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(
+
+{checkRole("SuperAdmin") || checkRole( "HeadTeacher") ? (   
     <>
     <HomeCard onClick={() => { navigate("/admin/test") }}>
     <HomeCardColumn>
@@ -221,14 +267,12 @@ const Home = () => {
     <HomeCardNumber> {ParentCount}</HomeCardNumber>
     </HomeCard>
 
-    </>
-   ):(
-    <></>
-   )
-}
+    </>    
+ 
+ ) : (<></>)}
 
-{
-   specificRole==="SuperiorUser"||specificRole==="SchoolDirector"?(
+
+{checkRole("SuperAdmin") || checkRole( "HeadTeacher") ? (   
     <>
     <HomeCard onClick={() => { navigate("/admin/test") }}>
     <HomeCardColumn>
@@ -241,123 +285,130 @@ const Home = () => {
     <HomeCardNumber> {formatNumber(99465)}</HomeCardNumber>
     </HomeCard>
 
-    </>
-   ):(
-    <></>
-   )
-}
+    </>          
+ 
+ ) : (<></>)}
+
+
+
+
 
 </HomeBanner>
 
-{
-  specificRole==="SuperiorUser"||specificRole==="SchoolDirector"?(
-  <>
- <HomeBanner>
 
-<ChartsCard><FeesBarChart/></ChartsCard>
-
-<ChartsCard><FeesLineChart/> </ChartsCard>
+{checkRole("SuperAdmin") || checkRole( "HeadTeacher") || checkRole( "SchoolDirector") ? (   
+   <>
+   <HomeBanner>
   
-</HomeBanner> 
+  <ChartsCard><FeesBarChart/></ChartsCard>
   
-  </>
-  ):(
-  <>
-  </>)
-}
-
-
-{
-   specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(<>
-   <StudentInfoCard >
-
-<FormLoaders onSubmit={handleStudentDataSubmit}>
-<SelectForStudent
-background={colors.darkBlue}
-color="white"
-border={colors.darkBlue}
-onChange={(e)=>setSpecificClass(e.target.value)}
->
-<option >Please select a class</option>
-{theClass.length > 0 &&
-    theClass.map((data) => (
-      <option key={data.id}>{data.className}</option>
-    ))}
-</SelectForStudent>
-
-
-</FormLoaders>
-
-{
-  isMobile?(<>
-  
-  <NewStudentListCard2 >
-
-
-<CardTextHeaderM>Photo</CardTextHeaderM>
-<CardTextHeaderM>Student Name</CardTextHeaderM>
-<CardTextHeaderM>Action</CardTextHeaderM>
-
-
-</NewStudentListCard2>
-
-
-<StudentListResult>
-{studentList.length > 0 &&
-    studentList.map((data,index) => (
-      <MyStudentCardM data={data} key={index}  />
-    ))}
-
-</StudentListResult>
+  <ChartsCard><FeesLineChart/> </ChartsCard>
+    
+  </HomeBanner> 
+    
+    </>       
  
-  
-  </>):(<>
-  
-    <NewStudentListCard2 >
-
-<CardTextHeader>ID</CardTextHeader>
-<CardTextHeader>Photo</CardTextHeader>
-<CardTextHeader>Student Name</CardTextHeader>
-<CardTextHeader>Gender</CardTextHeader>
-<CardTextHeader>DateOfBirth</CardTextHeader>
-<CardTextHeader>Class</CardTextHeader>
-<CardTextHeader>Contact Name</CardTextHeader>
-<CardTextHeader>Contact Phone</CardTextHeader>
-<CardTextHeader>Action</CardTextHeader>
+ ) : (<></>)}
 
 
-</NewStudentListCard2>
-
-
-<StudentListResult>
-{studentList.length > 0 &&
-    studentList.map((data,index) => (
-      <MyStudentCard data={data} key={index}  />
-    ))}
-
-</StudentListResult>
-
-  
-  </>)
-}
-
-
-
-
-
-
-
-
-
-
-
-</StudentInfoCard>
-
-
-
+{checkRole("SuperAdmin") || checkRole( "HeadTeacher") || checkRole( "SchoolDirector") ? (   
+      <>
+      <StudentInfoCard >
    
-   </>):(<></>)
-}
+   <FormLoaders onSubmit={handleStudentDataSubmit}>
+   <SelectForStudent
+   background={colors.darkBlue}
+   color="white"
+   border={colors.darkBlue}
+   onChange={(e)=>setSpecificClass(e.target.value)}
+   >
+   <option >Please select a class</option>
+   {theClass.length > 0 &&
+       theClass.map((data) => (
+         <option key={data.id}>{data.className}</option>
+       ))}
+   </SelectForStudent>
+   
+   
+   </FormLoaders>
+   
+   {
+     isMobile?(<>
+     
+     <NewStudentListCard2 >
+   
+   
+   <CardTextHeaderM>Photo</CardTextHeaderM>
+   <CardTextHeaderM>Student Name</CardTextHeaderM>
+   <CardTextHeaderM>Action</CardTextHeaderM>
+   
+   
+   </NewStudentListCard2>
+   
+   
+   <StudentListResult>
+   {studentList.length > 0 &&
+       studentList.map((data,index) => (
+         <MyStudentCardM data={data} key={index}  />
+       ))}
+   
+   </StudentListResult>
+    
+     
+     </>):(<>
+     
+       <NewStudentListCard2 >
+   
+   <CardTextHeader>ID</CardTextHeader>
+   <CardTextHeader>Photo</CardTextHeader>
+   <CardTextHeader>Student Name</CardTextHeader>
+   <CardTextHeader>Gender</CardTextHeader>
+   <CardTextHeader>DateOfBirth</CardTextHeader>
+   <CardTextHeader>Class</CardTextHeader>
+   <CardTextHeader>Contact Name</CardTextHeader>
+   <CardTextHeader>Contact Phone</CardTextHeader>
+   <CardTextHeader>Action</CardTextHeader>
+   
+   
+   </NewStudentListCard2>
+   
+   
+   <StudentListResult>
+   {studentList.length > 0 &&
+       studentList.map((data,index) => (
+         <MyStudentCard data={data} key={index}  />
+       ))}
+   
+   </StudentListResult>
+   
+     
+     </>)
+   }
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   </StudentInfoCard>
+   
+   
+   
+      
+      </>      
+ 
+ ) : (<></>)}
+
+
+
+
+
+
 
 
 <br/>

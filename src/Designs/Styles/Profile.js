@@ -105,6 +105,7 @@ export const MenuCard = styled.div`
   height: 100%;
   position: absolute;
  padding-top:17%;
+ padding-bottom:17%;
  
   right: 0;
   

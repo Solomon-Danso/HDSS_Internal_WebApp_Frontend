@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { DashboardContainer, HomeLogoM, HomeSchoolNameM } from '../../Designs/Styles/Styles';
+import { DashboardContainer, FixedTop, HomeLogoL, HomeLogoM, HomeSchoolNameM } from '../../Designs/Styles/Styles';
 import { AES, enc } from 'crypto-js';
 import Pass from '../../Portals/Admin/Pass';
 import PermissionDenied from '../../Portals/Admin/PermissionDenied';
@@ -66,6 +66,7 @@ import { BreakerM, HeaderBanner, NotificationBadgeM, NotificationIconM } from '.
 import { IoIosNotificationsOutline } from 'react-icons/io'
 import {CiSettings,CiGlobe} from 'react-icons/ci'
 import { colors } from '../../Designs/Colors';
+import { Show } from '../../Constants /Alerts';
 
 
 
@@ -90,10 +91,12 @@ const Dashboard = ({openNav,openfunction}) => {
       const decryptedString = decryptedData.toString(enc.Utf8);
       const parsedData = JSON.parse(decryptedString);
         setUserInfo(parsedData);
+
         
 
     }catch(e){
       navigate("/")
+      window.location.reload()
     }
    
   }, []);
@@ -159,27 +162,49 @@ const [sysDate, setSysDate] = useState("")
   },[])
   
 useEffect(()=>{
-  const formData = new FormData();
+  handleRoles()
 
-  const CompanyId = userInfo.CompanyId;
-  const UserId = userInfo.UserId;
+},[userInfo])
 
-  formData.append("CompanyId",CompanyId)
-  formData.append("UserId",UserId)
+
+
+const handleRoles = async () => {
+ 
+ 
+    try {
+      const formData = new FormData();
+
+      const CompanyId = userInfo.CompanyId;
+      const UserId = userInfo.UserId;
+    
+      formData.append("CompanyId",CompanyId)
+      formData.append("UserId",UserId)
+
   
-  fetch(apiServer+"ViewUserDetailedRole",{
-    method:"POST", 
-    body:formData
-  })
-  .then(res=>res.json())
-  .then(data=>setRoleList(data))
-  .catch(err=>console.log(err))
+      const response = await fetch(apiServer+"ViewUserDetailedRole", {
+        method: "POST",
+        body: formData
+      });
 
+      const data = await response.json();
+  
+      if (response.ok) {
+        
+       
+        setRoleList(data)
+        
+      } else {
+      
+      }
+    } catch (error) {
 
-},[])
+      Show.Attention("An error has occurred");
+      navigate("/")
+      window.location.reload()
+    }
 
-console.log(RoleList)
-console.log(userInfo)
+}
+
 
 
 
@@ -213,6 +238,9 @@ console.log(userInfo)
     };
 
 
+    const checkRole = (role) => {
+      return RoleList.includes(role);
+    };
 
 
 
@@ -220,47 +248,75 @@ console.log(userInfo)
 
   return (
    <DashboardContainer>
-
+<br/>
 {
   openNav?(
   
  <>
   <MenuCard >
+  
+ 
+
+  {checkRole("SuperAdmin")|| checkRole('Annoucements')|| checkRole('Attendance')|| checkRole('Feeding')|| checkRole('Transport')|| checkRole('ViewSchoolFees')|| checkRole('ViewAssessment') || checkRole('AddStudent')|| checkRole("DeleteStudent")|| checkRole("ViewStudent")|| checkRole("UpdateStudent") ? (   
+  <DropList logo={<HiUserGroup />} title="Students">
+
+{checkRole("SuperAdmin") || checkRole('AddStudent') ? (   
+  <MenuButtonOptionLink onClick={() => { navigate("/admin/students"); openfunction() }}>Admit Student</MenuButtonOptionLink>
+  ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole("ViewStudent") ? (   
+ <MenuButtonOptionLink onClick={() => { navigate("/admin/studentsInfo"); openfunction() }}>Student Info</MenuButtonOptionLink>
+ ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole("UpdateStudent") ? (   
+ <MenuButtonOptionLink onClick={() => { navigate("/admin/updateStudent"); openfunction() }}>Update Students</MenuButtonOptionLink>
+ ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole("DeleteStudent") ? (   
+   <MenuButtonOptionLink onClick={() => { navigate("/admin/deleteStudent"); openfunction() }}>Delete Students</MenuButtonOptionLink>
+   ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole('ViewAssessment') ? (   
+ <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>Assessments</MenuButtonOptionLink>
+ ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole('ViewSchoolFees') ? (   
+ <MenuButtonOptionLink onClick={() => { navigate("/admin/schoolfees"); openfunction()  }}>School Fees</MenuButtonOptionLink>
+ ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole('Transport') ? (   
+  <MenuButtonOptionLink onClick={() => { navigate("/admin/students"); openfunction() }}>Transport</MenuButtonOptionLink>
+  ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole('Feeding') ? (   
+  <MenuButtonOptionLink onClick={() => { navigate("/admin/students"); openfunction() }}>Feeding</MenuButtonOptionLink>
+  ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole('Attendance') ? (   
+  <MenuButtonOptionLink onClick={() => { navigate("/admin/students"); openfunction() }}>Attendance</MenuButtonOptionLink>
+  ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole('Annoucements') ? (   
+  <MenuButtonOptionLink onClick={() => { navigate("/admin/students"); openfunction() }}>Annoucements</MenuButtonOptionLink>
+  ) : (<></>)}
 
 
 
 
 
+  </DropList>
+  ) : (<></>)}
 
-{
-  specificRole==="SuperiorUser"||specificRole==="HeadTeacher" ? (
-  <>
-  <DropList logo={<HiUserGroup/>} title="Students">
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/students") }}>Admit Student</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/studentsInfo") }}>Student Info</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/updateStudent") }}>Update Students</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/deleteStudent") }}>Delete Students</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Assessments</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/schoolfees") }}>School Fees</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Transport</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Feeding</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Subscription</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Notification</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Attendance</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Personal Chats</MenuButtonOptionLink>
-    
-   
-    </DropList>
-  </>
-  ):(
-  <></>
-  )
-}
-    
+
+
+
          
 {
   specificRole==="SuperiorUser"||specificRole==="HeadTeacher" ? (
   <>
+  
+
+
   <DropList logo={<GiTeacher/>} title="Teacher">
     <MenuButtonOptionLink onClick={() => { navigate("/admin/teachers") }}>Register </MenuButtonOptionLink>
     <MenuButtonOptionLink onClick={() => { navigate("/admin/updateteacher") }}>Update </MenuButtonOptionLink>
@@ -769,9 +825,12 @@ console.log(userInfo)
   }}
   >
   <br/><br/><br/>
+  <FixedTop>
   <HomeLogoM src={apiMedia+SchoolData.CompanyLogo}/>
   <HomeSchoolNameM> {SchoolData.CompanyName} </HomeSchoolNameM>
 
+  </FixedTop>
+  
   </div>):(<>
   
   </>)

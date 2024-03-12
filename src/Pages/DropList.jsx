@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { MenuButtonDiv,MenuButtonIcon,MenuButtonLink,MenuContainer,MenuButtonOptionLink, MenuButtonMain, MenuButtonOption, MenuButtonIconAgain } from '../Designs/Styles/Styles'
 import AnimateHeight from 'react-animate-height';
 import {MdKeyboardArrowRight} from "react-icons/md";
+import { IoIosArrowDropright } from 'react-icons/io';
 
 const MenuButtons = ({logo, title, children}) => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const MenuButtons = ({logo, title, children}) => {
         <MenuButtonDiv > 
 
           <MenuButtonMain>
-            <div style={{display:"flex", flexDirection:"row", gap:"1rem"}}>
+            <div style={{display:"flex", flexDirection:"row", gap:"0.5rem"}}>
           <MenuButtonIcon onClick={toggleDropdown}>{logo}</MenuButtonIcon>
           <MenuButtonLink onClick={toggleDropdown}>{title} </MenuButtonLink>
           </div>
@@ -33,7 +34,7 @@ const MenuButtons = ({logo, title, children}) => {
            style={{
             transform: dropdownOpen ? "rotate(90deg)" : "rotate(0deg)",
           }}
-          ><MdKeyboardArrowRight />
+          ><IoIosArrowDropright />
           
           </MenuButtonIconAgain>
           </div>

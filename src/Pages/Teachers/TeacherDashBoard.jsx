@@ -102,6 +102,7 @@ const Dashboard = ({openNav}) => {
     }
     catch(e){
       navigate("/")
+      window.location.reload()
     }
    
   }, []);

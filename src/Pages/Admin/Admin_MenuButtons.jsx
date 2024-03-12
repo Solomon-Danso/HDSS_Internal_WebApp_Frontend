@@ -15,6 +15,8 @@ import { MdAttachMoney,MdOutlineSportsSoccer,MdLocalLibrary,MdCastForEducation,M
 import { TiGroup } from "react-icons/ti";
 import { FcDepartment,FcPlanner } from "react-icons/fc";
 import { LiaChalkboardSolid } from "react-icons/lia";
+import { apiServer } from '../../Constants /Endpoints'
+import { Show } from '../../Constants /Alerts'
 
 
 
@@ -25,9 +27,77 @@ const MenuButtons = () => {
   const [specificRole, setspecificRole] = useState("");
   const [role, setrole] = useState("");
 
- 
+  const [userInfo, setUserInfo] = useState({});
 
+  useEffect(() => {
+    try{
+
+      const encryptedData = sessionStorage.getItem("userDataEnc");
+      const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
+      const decryptedData = AES.decrypt(encryptedData, encryptionKey);
+      const decryptedString = decryptedData.toString(enc.Utf8);
+      const parsedData = JSON.parse(decryptedString);
+        setUserInfo(parsedData);
+
+        
+
+    }catch(e){
+      navigate("/")
+      window.location.reload()
+    }
+   
+  }, []);
+
+  const [RoleList, setRoleList] = useState([])
+ 
+  useEffect(()=>{
+    handleRoles()
   
+  },[userInfo])
+  
+  
+  
+  const handleRoles = async () => {
+   
+   
+      try {
+        const formData = new FormData();
+  
+        const CompanyId = userInfo.CompanyId;
+        const UserId = userInfo.UserId;
+      
+        formData.append("CompanyId",CompanyId)
+        formData.append("UserId",UserId)
+  
+    
+        const response = await fetch(apiServer+"ViewUserDetailedRole", {
+          method: "POST",
+          body: formData
+        });
+  
+        const data = await response.json();
+    
+        if (response.ok) {
+          
+         
+          setRoleList(data)
+          
+        } else {
+        
+        }
+      } catch (error) {
+  
+        Show.Attention("An error has occurred");
+        navigate("/")
+        window.location.reload()
+      }
+  
+  }
+
+  const checkRole = (role) => {
+    return RoleList.includes(role);
+  };
+
 
 
 
@@ -41,30 +111,55 @@ DashBoard
 
 
 
-{
-  specificRole==="SuperiorUser"||specificRole==="HeadTeacher" ? (
-  <>
-  <DropList logo={<HiUserGroup/>} title="Students">
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/students") }}>Admit Student</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/studentsInfo") }}>Student Info</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/updateStudent") }}>Update Students</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/deleteStudent") }}>Delete Students</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Assessments</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/schoolfees") }}>School Fees</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Transport</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Feeding</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Subscription</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Notification</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Attendance</MenuButtonOptionLink>
-    <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Personal Chats</MenuButtonOptionLink>
-    
-   
-    </DropList>
-  </>
-  ):(
-  <></>
-  )
-}
+{checkRole("SuperAdmin")|| checkRole('Annoucements')|| checkRole('Attendance')|| checkRole('Feeding')|| checkRole('Transport')|| checkRole('ViewSchoolFees')|| checkRole('ViewAssessment') || checkRole('AddStudent')|| checkRole("DeleteStudent")|| checkRole("ViewStudent")|| checkRole("UpdateStudent") ? (   
+  <DropList logo={<HiUserGroup />} title="Students">
+
+{checkRole("SuperAdmin") || checkRole('AddStudent') ? (   
+  <MenuButtonOptionLink onClick={() => { navigate("/admin/students") }}>Admit Student</MenuButtonOptionLink>
+  ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole("ViewStudent") ? (   
+ <MenuButtonOptionLink onClick={() => { navigate("/admin/studentsInfo") }}>Student Info</MenuButtonOptionLink>
+ ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole("UpdateStudent") ? (   
+ <MenuButtonOptionLink onClick={() => { navigate("/admin/updateStudent") }}>Update Students</MenuButtonOptionLink>
+ ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole("DeleteStudent") ? (   
+   <MenuButtonOptionLink onClick={() => { navigate("/admin/deleteStudent") }}>Delete Students</MenuButtonOptionLink>
+   ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole('ViewAssessment') ? (   
+ <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Assessments</MenuButtonOptionLink>
+ ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole('ViewSchoolFees') ? (   
+ <MenuButtonOptionLink onClick={() => { navigate("/admin/schoolfees")  }}>School Fees</MenuButtonOptionLink>
+ ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole('Transport') ? (   
+  <MenuButtonOptionLink onClick={() => { navigate("/admin/students") }}>Transport</MenuButtonOptionLink>
+  ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole('Feeding') ? (   
+  <MenuButtonOptionLink onClick={() => { navigate("/admin/students") }}>Feeding</MenuButtonOptionLink>
+  ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole('Attendance') ? (   
+  <MenuButtonOptionLink onClick={() => { navigate("/admin/students") }}>Attendance</MenuButtonOptionLink>
+  ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole('Annoucements') ? (   
+  <MenuButtonOptionLink onClick={() => { navigate("/admin/students") }}>Annoucements</MenuButtonOptionLink>
+  ) : (<></>)}
+
+
+
+
+
+  </DropList>
+  ) : (<></>)}
     
          
 {

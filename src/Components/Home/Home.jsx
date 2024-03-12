@@ -26,6 +26,8 @@ const Home = () => {
         console.log(parsedData);
     }catch(e){
       navigate("/")
+      window.location.reload()
+      window.location.reload()
     }
    
   }, []);

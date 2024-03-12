@@ -96,23 +96,23 @@ export const StudentInfoCard = styled.div`
 `;
 
 export const MenuCard = styled.div`
-  background: ${colors.body};
+  background: ${colors.card};
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(19.7px);
   -webkit-backdrop-filter: blur(19.7px);
   
-  height: 50vh;
-  padding: 1rem;
-    /* Position absolute to place the card above other elements */
+  height: 100%;
   position: absolute;
-  top: 0;
+ padding-top:17%;
  
   right: 0;
+  
+  
   z-index: 1; /* Set a positive z-index value */
 
   /* You might need to adjust the width if needed */
-   width: 82%; 
+   width: 70%; 
 
    overflow: hidden;
    overflow-y: auto;

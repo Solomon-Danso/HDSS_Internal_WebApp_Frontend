@@ -48,6 +48,7 @@ const Navigation = ({  page, openfunction }) => {
 
     }catch(e){
       navigate("/")
+      window.location.reload()
     }
    
   }, []);

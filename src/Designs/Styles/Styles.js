@@ -150,9 +150,9 @@ border-radius: 50%;
 
 export const NavButtonIcon = styled.div`
 border-radius: 50%;
-  font-size: 3.5rem;
-  height: 2.5rem;
-  width: 2.5rem; 
+
+  height: 2rem;
+  width: 2rem; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -192,9 +192,10 @@ border-radius: 50%;
 
 export const MenuButtonLink = styled.div`
 color: ${colors.white};
-font-size:1.1rem;
+font-size:1.3rem;
 cursor: pointer;
-cursor: pointer;
+padding-top:0.3rem;
+
 
 `;
 export const MenuButtonLinkInner = styled.div`
@@ -207,16 +208,14 @@ color: ${colors.white};
 `;
 
 export const MenuButtonOptionLink = styled.div`
-color: #131313;
-font-size:1.2rem;
+font-size:1rem;
 cursor: pointer;
 cursor: pointer;
 margin-bottom:0.5rem;
-color: ${colors.white};
 
 &:hover {
   color: ${colors.yellow};
-  font-size:1.3rem;
+  font-size:1.1rem;
 }
 
 `;
@@ -243,7 +242,8 @@ export const MenuButtonMain = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: space-between;
-background-color: ${colors.card}
+background-color: ${colors.card};
+
 
 `;
 export const MenuButtonMainInner = styled.div`
@@ -531,8 +531,12 @@ height:7vh;
 width:7vh;
 `;
 export const HomeLogoM = styled.img`
-height:4vh;
-width:4vh;
+height:7vh;
+width:7vh;
+`;
+export const HomeLogoL = styled.img`
+height:30%;
+width:100%;
 `;
 
 export const HomeSchoolName = styled.div`
@@ -551,6 +555,24 @@ color: ${colors.white};
 @media (max-width: 450px) {
   font-size: 1.5rem;
 }
+`;
+
+export const FixedTop = styled.div`
+background-color: ${colors.card};
+border-right: 0.5px solid rgba(0, 0, 0, 0.1);
+display: flex;
+flex-direction: row;
+gap:1rem;
+align-items: center;
+padding: 10px 5px;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: auto;
+z-index: 1000; 
+
+ 
 `;
 
 export const HomeGrouper = styled.div`

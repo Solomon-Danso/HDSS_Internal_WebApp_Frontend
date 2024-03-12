@@ -233,7 +233,7 @@ padding:2rem;
 
 export const CNavText = styled.span`
 color: ${colors.icon};
-font-size: 1rem;
+font-size: 0.8rem;
 
 `;
 

@@ -64,7 +64,7 @@ import ReportCard from '../../Portals/Student/ReportCard';
 
 
 const Dashboard = ({openNav,openfunction}) => {
-  const [specificRole, setspecificRole] = useState("");
+   const specificRole="SuperiorUser"
   
 
   

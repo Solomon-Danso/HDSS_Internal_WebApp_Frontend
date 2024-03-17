@@ -3,16 +3,39 @@ import { apiServer,DeleteStudentApi,RegisterStudent, UpdateStudent, ViewClasses,
 import { AdmitStudentCard, AdmitStudentRole, FormLable, HeaderTitle, MainTitle,FormInputStudent, SelectStage, SelectForStudent, FormTextAreaStudent, SelectStageButton, AdmitButton, SelectForStudentRel, AdmitButton2, FormInputStudent2} from '../../Designs/Styles/Profile'
 import { colors } from '../../Designs/Colors'
 import { Show } from '../../Constants /Alerts'
+import { useNavigate } from 'react-router-dom'
+import { AES, enc } from 'crypto-js'
 
 
 const DeleteStudent = () => {
 
+  const [userInfo, setUserInfo] = useState({});
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    try{
+      const encryptedData = sessionStorage.getItem("userDataEnc");
+      const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
+      const decryptedData = AES.decrypt(encryptedData, encryptionKey);
+      const decryptedString = decryptedData.toString(enc.Utf8);
+      const parsedData = JSON.parse(decryptedString);
+        setUserInfo(parsedData);
+    }catch(e){
+      navigate("/")
+      window.location.reload();
+    }
+  
+  }, []);
+
 const [studentId, setStudentId] = useState()
+const CompanyId = userInfo.CompanyId;
+const SenderId = userInfo.UserId;
 
     const studentDetails = async (event) => {
         event.preventDefault();
+        const url = `DeleteStudent/${studentId}/${CompanyId}/${SenderId}`
         try {
-          const response = await fetch(apiServer + DeleteStudentApi + studentId, {
+          const response = await fetch(apiServer + url, {
             method: "DELETE",
           });
           if (response.ok) {

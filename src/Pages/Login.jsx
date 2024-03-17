@@ -53,18 +53,20 @@ const handleSubmit = async (event) => {
 
         Show.Success("Login Successfull ");
           sessionStorage.setItem("userDataEnc", AES.encrypt(JSON.stringify(data.message), '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK').toString()); 
-          sessionStorage.setItem("userDataRaw", data.message)
           if(data.message.PasswordReset=0){
             alert("Reset your password")
 
           }
           else{
 
-            if(data.message.PrimaryRole === "student"){
+            if(data.message.AccountType === "Student"){
+             
+
               navigate("/student");
             }
+           
             else{
-             
+              
               navigate("/admin");
             }
 

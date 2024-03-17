@@ -25,7 +25,7 @@ import { Show } from '../../../Constants /Alerts'
 export const AddSubjectCard = ({ data,index }) => {
    
 
-  const [specificRole, setspecificRole] = useState("");
+   const specificRole="SuperiorUser"
 
 
  

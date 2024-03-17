@@ -40,6 +40,7 @@ flex-direction: row;
 gap:1rem;
 flex-wrap: wrap;
 padding:1rem;
+width:100%
 
 `;
 
@@ -51,7 +52,7 @@ border: 1px solid ${colors.card};
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(19.7px);
 -webkit-backdrop-filter: blur(19.7px);
-
+width:24%;
 display:flex;
 flex-direction:row;
 gap:1rem;
@@ -68,7 +69,7 @@ box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(19.7px);
 -webkit-backdrop-filter: blur(19.7px);
 
-width:36vw;
+width:49%;
 height:40vh;
 padding:1rem;
 @media (max-width: 768px){
@@ -625,12 +626,6 @@ border: none;
   align-items: center;
   align-content: center;
   justify-content: center;
-
-  :hover {
-    background-color: ${colors.ivory_dark};
-    color: ${colors.primary};
-    border: 1px solid ${colors.ivory_dark};
-  }
 
   @media (max-width: 768px) {
     font-size: 0.7rem;
@@ -1570,7 +1565,38 @@ border: none;
 
 `;
 
+export const AdmitButton3 = styled.button`
+border: none;
+  width: 16vw;
+  height: auto;
+  border-radius: 20px;
+  border: 1px solid ${({ border }) => border};
+  background-color: ${({ background }) => background};
+  color: ${({ color }) => color};
+  text-align: center;
+  padding: 10px 30px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  font-size: 1.2rem;
 
+  :hover {
+    background-color: ${colors.ivory_dark};
+    color: ${colors.primary};
+    border: 1px solid ${colors.ivory_dark};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    padding: 4px 18px;
+    padding: 11px 25px;
+  }
+
+
+`;
 
 export const QuizButton = styled.button`
 border: none;
@@ -1901,6 +1927,14 @@ export const CardTextHeader = styled.div`
 export const CardImage = styled.img`
 width: 7vw;
 height: 10vh;
+border-radius: 0.5rem;
+
+
+`;
+
+export const UpdateProfileImage = styled.img`
+width: 100%;
+height: 100%;
 border-radius: 0.5rem;
 
 

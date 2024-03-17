@@ -5,12 +5,13 @@ import { colors } from '../../Designs/Colors'
 import { Show } from '../../Constants /Alerts'
 
 import { AES,enc } from 'crypto-js'
+import { useNavigate } from 'react-router-dom'
 
 
 
 const Students = () => {
 
-
+const navigate = useNavigate()
 
     const [firstName, setFirstname] = useState("")
     const [otherName, setOtherName] = useState("")
@@ -48,57 +49,29 @@ const Students = () => {
    const [academicYear, setAcademicYear] = useState("")
    const [userInfo, setUserInfo] = useState({});
 
-   useEffect(() => {
-     const encryptedData = sessionStorage.getItem("userDataEnc");
-     const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
-     const decryptedData = AES.decrypt(encryptedData, encryptionKey);
-     const decryptedString = decryptedData.toString(enc.Utf8);
-     const parsedData = JSON.parse(decryptedString);
-       setUserInfo(parsedData);
-   }, []);
+      useEffect(() => {
+      try{
+  
+        const encryptedData = sessionStorage.getItem("userDataEnc");
+        const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
+        const decryptedData = AES.decrypt(encryptedData, encryptionKey);
+        const decryptedString = decryptedData.toString(enc.Utf8);
+        const parsedData = JSON.parse(decryptedString);
+          setUserInfo(parsedData);
+  
+          
+  
+      }catch(e){
+        navigate("/")
+        window.location.reload()
+      }
+     
+    }, []);
+
 
    
   
-  const handleGeneratePDF = async (Id, fn,mn,ln) => {
-    try {
-   
-      // Send a request to the backend to generate the PDF
-      const response = await fetch(apiServer + TestPdf+Id, {
-        method: 'GET',
-      });
-  
-      if (response.ok) {
-        // Convert the response to a blob
-        const blob = await response.blob();
-  
-        // Create a URL for the blob
-        const url = window.URL.createObjectURL(blob);
-  
-        // Create an anchor element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `${fn}_${mn}_${ln}.pdf`
-        document.body.appendChild(a);
-        a.click();
-  
-        // Clean up the URL and remove the anchor element
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(a);
-      } else {
-        // Handle HTTP error responses
-        console.error('HTTP Error:', response.status, response.statusText);
-      }
-    } catch (error) {
-      // Handle other errors (e.g., network issues)
-      console.error('Error generating PDF:', error);
-    } finally {
-      Show.hideLoading();
-      Show.Success("Student Admitted Successfully");
-       window.location.reload();
-            
-    }
-  };
-  
+
 
 
 
@@ -110,11 +83,14 @@ const Students = () => {
           return;
         }
 
-       
+       const companyId = userInfo.CompanyId;
+       const senderId  = userInfo.UserId;
       
         try {
           const formData = new FormData();
-          formData.append("File", profilePic);
+          formData.append("CompanyId", companyId);
+          formData.append("SenderId", senderId);
+          formData.append("ProfilePic", profilePic);
           formData.append("FirstName", firstName);
           formData.append("OtherName", otherName);
           formData.append("LastName", lastName);
@@ -152,25 +128,33 @@ const Students = () => {
          Show.showLoading("Processing Data")
           
       
-          const response = await fetch(apiServer + RegisterStudent+userInfo.staffID, {
+          const response = await fetch(apiServer + "RegisterStudent", {
             method: "POST",
             body: formData,
           });
-
-          const data = await response.json();
+        
       
           if (response.ok) {
-          handleGeneratePDF(data.studentId, data.firstName, data.otherName, data.lastName)
+            // Convert the response to a blob
+            const blob = await response.blob();
            
-            
+            const url = window.URL.createObjectURL(blob);
+    
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${firstName}_${otherName}_${lastName}.pdf`
+            document.body.appendChild(a);
+            a.click();
+      
            
-            //navigate("/dashboard/profile");
-            //window.location.reload();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+            Show.Success("Student Admitted Successfully")
           } else {
             Show.Attention("Student Admission Failed");
           }
         } catch (error) {
-          Show.Attention("Student Admission Failed");
+          Show.Attention(error.message);
         }
       };
     

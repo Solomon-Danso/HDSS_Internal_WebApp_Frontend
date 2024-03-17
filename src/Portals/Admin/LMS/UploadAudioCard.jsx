@@ -17,7 +17,7 @@ import { Show } from '../../../Constants /Alerts'
 
 export const UploadAudioCard = ({ data,index }) => {
    
-  const [specificRole, setspecificRole] = useState("");
+   const specificRole="SuperiorUser"
 
 
  

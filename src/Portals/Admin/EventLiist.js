@@ -51,7 +51,7 @@ const EventLiist = ({ event }) => {
   
   }
 
-  const [specificRole, setspecificRole] = useState("");
+   const specificRole="SuperiorUser"
  
 
 

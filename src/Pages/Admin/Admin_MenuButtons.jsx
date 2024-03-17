@@ -148,7 +148,7 @@ DashBoard
  ) : (<></>)}
 
 {checkRole("SuperAdmin") || checkRole('Transport') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/students") }}>Transport</MenuButtonOptionLink>
+  <MenuButtonOptionLink onClick={() => { navigate("/admin/transport") }}>Transport</MenuButtonOptionLink>
   ) : (<></>)}
 
 {checkRole("SuperAdmin") || checkRole('Feeding') ? (   
@@ -174,7 +174,7 @@ DashBoard
 
 {/*Staff Member 360 */}
 {checkRole("SuperAdmin") || checkRole('PTAPlatform') || checkRole('StaffPlatform') || checkRole('PersonalChats') || checkRole('Clocking') || checkRole('Salary') || checkRole('AssignToActivities')  || checkRole('AssignToSubject')|| checkRole('AssignToClassroom')|| checkRole('Annoucements')|| checkRole('Assessments')|| checkRole( "RegisterStaffMembers")|| checkRole("UpdateStaffMembers")|| checkRole("ViewStaffMembers")|| checkRole("DeleteStaffMembers")|| checkRole("ViewStaffMembersInSchool")|| checkRole("AutoGenerateStaffMembers") || checkRole( "UploadAutoGenerateStaffMembers")|| checkRole('LessonNotes') ? (   
-  <DropList logo={<GiTeacher/>} title="Staff Members 360">
+  <DropList logo={<GiTeacher/>} title="Staff Members ">
 
 {checkRole("SuperAdmin") || checkRole( "RegisterStaffMembers") ? (   
  <MenuButtonOptionLink onClick={() => { navigate("/admin/teachers")  }}>Register </MenuButtonOptionLink>
@@ -402,6 +402,32 @@ DashBoard
 
   </DropList>
   ) : (<></>)}
+
+
+{/*Transport */}
+{checkRole("SuperAdmin")|| checkRole("DestinationArrival")|| checkRole("Departure")|| checkRole("Pickup")|| checkRole('TransportAdmin') ? (   
+  <DropList logo={<BiBusSchool />} title="Transport">
+
+{checkRole("SuperAdmin") || checkRole('TransportAdmin') ? (   
+  <MenuButtonOptionLink onClick={() => { navigate("/admin/transport") }}>Administration</MenuButtonOptionLink>
+  ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole("Pickup") ? (   
+ <MenuButtonOptionLink onClick={() => { navigate("/admin/pickup") }}>Pickup</MenuButtonOptionLink>
+ ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole("Departure") ? (   
+ <MenuButtonOptionLink onClick={() => { navigate("/admin/departure") }}>Departure</MenuButtonOptionLink>
+ ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole("DestinationArrival") ? (   
+   <MenuButtonOptionLink onClick={() => { navigate("/admin/arrivals") }}>Arrivals</MenuButtonOptionLink>
+   ) : (<></>)}
+
+
+  </DropList>
+  ) : (<></>)}
+
 
 {/*Accounting */}
 {checkRole("SuperAdmin")|| checkRole('Annoucements') ? (   
@@ -1135,48 +1161,21 @@ DashBoard
 {checkRole("SuperAdmin")|| checkRole('Annoucements') ? (   
   <DropList logo={<BiBusSchool />} title="Transport">
 
-{checkRole("SuperAdmin") || checkRole('FeesConfig') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/students") }}>Fees Configuration</MenuButtonOptionLink>
+{checkRole("SuperAdmin") || checkRole('TransportAdmin') ? (   
+  <MenuButtonOptionLink onClick={() => { navigate("/admin/transport") }}>Administration</MenuButtonOptionLink>
   ) : (<></>)}
 
-{checkRole("SuperAdmin") || checkRole("ViewStudent") ? (   
- <MenuButtonOptionLink onClick={() => { navigate("/admin/studentsInfo") }}>Student Info</MenuButtonOptionLink>
+{checkRole("SuperAdmin") || checkRole("Pickup") ? (   
+ <MenuButtonOptionLink onClick={() => { navigate("/admin/pickup") }}>Pickup</MenuButtonOptionLink>
  ) : (<></>)}
 
-{checkRole("SuperAdmin") || checkRole("UpdateStudent") ? (   
- <MenuButtonOptionLink onClick={() => { navigate("/admin/updateStudent") }}>Update Students</MenuButtonOptionLink>
+{checkRole("SuperAdmin") || checkRole("Departure") ? (   
+ <MenuButtonOptionLink onClick={() => { navigate("/admin/departure") }}>Departure</MenuButtonOptionLink>
  ) : (<></>)}
 
-{checkRole("SuperAdmin") || checkRole("DeleteStudent") ? (   
-   <MenuButtonOptionLink onClick={() => { navigate("/admin/deleteStudent") }}>Delete Students</MenuButtonOptionLink>
+{checkRole("SuperAdmin") || checkRole("DestinationArrival") ? (   
+   <MenuButtonOptionLink onClick={() => { navigate("/admin/arrivals") }}>Arrivals</MenuButtonOptionLink>
    ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole('ViewAssessment') ? (   
- <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Assessments</MenuButtonOptionLink>
- ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole('ViewSchoolFees') ? (   
- <MenuButtonOptionLink onClick={() => { navigate("/admin/schoolfees")  }}>School Fees</MenuButtonOptionLink>
- ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole('Transport') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/students") }}>Transport</MenuButtonOptionLink>
-  ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole('Feeding') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/students") }}>Feeding</MenuButtonOptionLink>
-  ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole('Attendance') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/students") }}>Attendance</MenuButtonOptionLink>
-  ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole('Annoucements') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/students") }}>Annoucements</MenuButtonOptionLink>
-  ) : (<></>)}
-
-
-
 
 
   </DropList>

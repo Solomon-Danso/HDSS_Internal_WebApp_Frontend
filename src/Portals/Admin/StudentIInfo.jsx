@@ -5,17 +5,42 @@ import { SearchStudent, TheClassStudent, ViewClasses, ViewStudents, apiServer } 
 import { Show } from '../../Constants /Alerts'
 import { colors } from '../../Designs/Colors'
 import { AES,enc } from 'crypto-js'
+import { useNavigate } from 'react-router-dom'
 
 const StudentInfo = () => {
 
+  const navigate = useNavigate()
 
     const [studentList, setStudentList] = useState([])
-    const [specificClass, setSpecificClass] = useState("")
+    const [specificClass, setficClass] = useState("")
     const [closeOther, setCloseOther] = useState(false)
     const [searchResult, setSearchResult] = useState(false)
     const [searchTerm, setSearchTerm] = useState()
 
-    const [specificRole, setspecificRole] = useState("");
+    const [userInfo, setUserInfo] = useState({});
+
+
+    useEffect(() => {
+      try{
+  
+        const encryptedData = sessionStorage.getItem("userDataEnc");
+        const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
+        const decryptedData = AES.decrypt(encryptedData, encryptionKey);
+        const decryptedString = decryptedData.toString(enc.Utf8);
+        const parsedData = JSON.parse(decryptedString);
+          setUserInfo(parsedData);
+  
+          
+  
+      }catch(e){
+        navigate("/")
+        window.location.reload()
+      }
+     
+    }, []);
+
+  
+    
 
 
  
@@ -61,17 +86,121 @@ const StudentInfo = () => {
     
         fetchSearchResults(); // Call the function when searchTerm changes
       }, [searchTerm]);
-      
+     
       const [theStudents, setTheStudents] = useState([])
 
-      useEffect(() => {
-        fetch(apiServer + ViewStudents)
-          .then(response => response.json()) // Parse the response as JSON
-          .then(data => setTheStudents(data))
-          .catch(error => console.error(error));
-      }, []);
-  
 
+      const CompanyId = userInfo.CompanyId;
+      const UserId = userInfo.UserId;
+       
+
+    useEffect(()=>{
+      if(CompanyId!==undefined && UserId!==undefined){
+        LoadStudent()
+      }
+
+    },[CompanyId,UserId ])
+    
+  
+      const LoadStudent = async () => {
+     
+          
+        Show.showLoading("Loading Students....");
+
+        if(CompanyId!==undefined && UserId!==undefined){
+
+
+          try {
+            const formData = new FormData();
+      
+            formData.append("CompanyId", userInfo.CompanyId);
+        formData.append("SenderId", userInfo.UserId);
+      
+      
+        
+            const response = await fetch(apiServer+"GetStudentInASchool", {
+              method: "POST",
+              body: formData
+            });
+      
+            const data = await response.json();
+        
+            if (response.ok) {
+              
+              Show.hideLoading();
+      
+              setTheStudents(data)
+      
+      
+              
+            } else {
+              Show.Attention(data.message);
+            }
+          } catch (error) {
+      
+            Show.Attention(error.message);
+          }
+          
+        } else{
+          alert("CompanyId is undefined")
+        }
+        
+
+      
+      }
+
+
+
+      const [RoleList, setRoleList] = useState([])
+      useEffect(()=>{
+        handleRoles()
+      
+      },[userInfo])
+      
+      
+      
+      const handleRoles = async () => {
+       
+       
+          try {
+            const formData = new FormData();
+      
+            const CompanyId = userInfo.CompanyId;
+            const UserId = userInfo.UserId;
+          
+            formData.append("CompanyId",CompanyId)
+            formData.append("UserId",UserId)
+      
+        
+            const response = await fetch(apiServer+"ViewUserDetailedRole", {
+              method: "POST",
+              body: formData
+            });
+      
+            const data = await response.json();
+        
+            if (response.ok) {
+              
+             
+              setRoleList(data)
+              
+            } else {
+            
+            }
+          } catch (error) {
+      
+            Show.Attention("An error has occurred");
+            navigate("/")
+            window.location.reload()
+          }
+      
+      }
+
+
+    const checkRole = (role) => {
+      return RoleList.includes(role);
+    };
+      
 
 
 
@@ -79,7 +208,7 @@ const StudentInfo = () => {
     <div>
 
 <StudentInfoCard2 >
-
+ 
 <FormLoaders onSubmit={(e) => e.preventDefault()}>
           <FormInputSearch
             //background={colors.darkBlue}
@@ -102,13 +231,13 @@ const StudentInfo = () => {
 <CardTextHeader>Class</CardTextHeader>
 <CardTextHeader>Contact Name</CardTextHeader>
 <CardTextHeader>Contact Phone</CardTextHeader>
-{
-   specificRole==="SuperiorUser"||specificRole==="HeadTeacher"?(<>
-   
-   <CardTextHeader>Action</CardTextHeader>
-   </>):(<></>)
-}
+  
+  {
+    checkRole("SuperAdmin")||checkRole("HeadTeacher")?( <CardTextHeader>Action</CardTextHeader>):(<></>)
+  }
 
+  
+  
 
 
 </NewStudentListCard2>

@@ -1,33 +1,35 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
-import { ViewOneStudent, apiServer } from '../../Constants /Endpoints';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ViewOneStudent, apiMedia, apiServer } from '../../Constants /Endpoints';
 import { AboutHeader, BiggerImage, FormInputStudent, FormLable, HomeCardTextEvent, StudDetailData, StudDetailField, StudDetailRow, StudDetails, StudLeft, StudRight } from '../../Designs/Styles/Profile';
 import { AES,enc } from 'crypto-js';
+import { Show } from '../../Constants /Alerts';
 
 const StudentDetails = () => {
     const { studentId } = useParams();
     const [theStudent, setTheStudent] = useState([])
     const [userInfo, setUserInfo] = useState({});
+    const navigate = useNavigate()
 
     useEffect(() => {
-      const encryptedData = sessionStorage.getItem("userDataEnc");
-      const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
-      const decryptedData = AES.decrypt(encryptedData, encryptionKey);
-      const decryptedString = decryptedData.toString(enc.Utf8);
-      const parsedData = JSON.parse(decryptedString);
-        setUserInfo(parsedData);
+      try{
+        const encryptedData = sessionStorage.getItem("userDataEnc");
+        const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
+        const decryptedData = AES.decrypt(encryptedData, encryptionKey);
+        const decryptedString = decryptedData.toString(enc.Utf8);
+        const parsedData = JSON.parse(decryptedString);
+          setUserInfo(parsedData);
+      }catch(e){
+        navigate("/")
+        window.location.reload();
+      }
+    
     }, []);
 
 
-      useEffect(() => {
-        fetch(apiServer + ViewOneStudent+studentId+"&ID="+userInfo.staffID)
-          .then(response => response.json()) // Parse the response as JSON
-          .then(data => setTheStudent(data))
-          .catch(error => console.error(error));
-      }, [studentId, userInfo.staffID]);
            
 
-      const thelink = apiServer+theStudent?.profilePic
+      const thelink = apiMedia+theStudent?.ProfilePic
 
       const getOrdinalSuffix = (day) => {
         if (day >= 11 && day <= 13) {
@@ -64,6 +66,67 @@ const StudentDetails = () => {
       
         return formattedDate;
       };
+
+
+      const CompanyId = userInfo.CompanyId;
+      const UserId = userInfo.UserId;
+       
+
+    useEffect(()=>{
+      if(CompanyId!==undefined && UserId!==undefined){
+        LoadStudent()
+      }
+
+    },[CompanyId,UserId ])
+    
+  
+      const LoadStudent = async () => {
+     
+          
+        Show.showLoading("Loading Students....");
+
+        if(CompanyId!==undefined && UserId!==undefined){
+
+
+          try {
+            const formData = new FormData();
+      
+            formData.append("CompanyId", userInfo.CompanyId);
+        formData.append("SenderId", userInfo.UserId);
+      
+      const url = `GetStudent/${studentId}/${CompanyId}/${UserId}`
+        
+            const response = await fetch(apiServer+url, {
+              method: "GET",
+            
+            });
+      
+            const data = await response.json();
+        
+            if (response.ok) {
+              
+              Show.hideLoading();
+      
+              setTheStudent(data)
+      
+      
+              
+            } else {
+              Show.Attention(data.message);
+            }
+          } catch (error) {
+      
+            Show.Attention(error.message);
+          }
+          
+        } else{
+          alert("CompanyId is undefined")
+        }
+        
+
+      
+      }
+
     
 
   return (
@@ -71,7 +134,7 @@ const StudentDetails = () => {
 
     <StudDetails>
         <StudLeft>
-    <h2>  {theStudent?.lastName}, {theStudent?.firstName} {theStudent?.otherName}  </h2>
+    <h2>  {theStudent?.LastName}, {theStudent?.FirstName} {theStudent?.OtherName}  </h2>
             <BiggerImage src={thelink}/>
         </StudLeft>
 
@@ -80,67 +143,67 @@ const StudentDetails = () => {
 
         <StudDetailRow>
         <StudDetailField>Student Id:</StudDetailField>
-        <StudDetailData>{theStudent?.studentId}</StudDetailData>
+        <StudDetailData>{theStudent?.StudentId}</StudDetailData>
         </StudDetailRow>
         
         <StudDetailRow>
         <StudDetailField>Name:</StudDetailField>
-        <StudDetailData>{theStudent?.lastName}, {theStudent?.firstName} {theStudent?.otherName}</StudDetailData>
+        <StudDetailData>{theStudent?.LastName}, {theStudent?.FirstName} {theStudent?.OtherName}</StudDetailData>
         </StudDetailRow>
 
         <StudDetailRow>
         <StudDetailField>Gender:</StudDetailField>
-        <StudDetailData>{theStudent?.gender}</StudDetailData>
+        <StudDetailData>{theStudent?.Gender}</StudDetailData>
         </StudDetailRow>
 
         <StudDetailRow>
         <StudDetailField>Father Name:</StudDetailField>
-        <StudDetailData>{theStudent?.fathersName}</StudDetailData>
+        <StudDetailData>{theStudent?.FathersName}</StudDetailData>
         </StudDetailRow>
         <StudDetailRow>
         <StudDetailField>Mother Name:</StudDetailField>
-        <StudDetailData>{theStudent?.mothersName}</StudDetailData>
+        <StudDetailData>{theStudent?.MothersName}</StudDetailData>
         </StudDetailRow>
 
         <StudDetailRow>
         <StudDetailField>Date Of Birth:</StudDetailField>
-        <StudDetailData>{formatDate(theStudent?.dateOfBirth)}</StudDetailData>
+        <StudDetailData>{formatDate(theStudent?.DateOfBirth)}</StudDetailData>
         </StudDetailRow>
 
         <StudDetailRow>
         <StudDetailField>Religion:</StudDetailField>
-        <StudDetailData>{theStudent?.religion}</StudDetailData>
+        <StudDetailData>{theStudent?.Religion}</StudDetailData>
         </StudDetailRow>
 
         <StudDetailRow>
         <StudDetailField>Father Occupation:</StudDetailField>
-        <StudDetailData>{theStudent?.fatherOccupation}</StudDetailData>
+        <StudDetailData>{theStudent?.FatherOccupation}</StudDetailData>
         </StudDetailRow>
 
         <StudDetailRow>
         <StudDetailField>Location:</StudDetailField>
-        <StudDetailData>{theStudent?.location}, {theStudent?.parentDigitalAddress}</StudDetailData>
+        <StudDetailData>{theStudent?.Location}, {theStudent?.ParentDigitalAddress}</StudDetailData>
         </StudDetailRow>
 
 
         <StudDetailRow>
         <StudDetailField>Class:</StudDetailField>
-        <StudDetailData>{theStudent?.level}</StudDetailData>
+        <StudDetailData>{theStudent?.Level}</StudDetailData>
         </StudDetailRow>
 
         <StudDetailRow>
         <StudDetailField>Emergency Name:</StudDetailField>
-        <StudDetailData>{theStudent?.emergencyContactName}</StudDetailData>
+        <StudDetailData>{theStudent?.EmergencyContactName}</StudDetailData>
         </StudDetailRow>
 
         <StudDetailRow>
         <StudDetailField>Emergency Phone 1:</StudDetailField>
-        <StudDetailData>{theStudent?.emergencyPhoneNumber}</StudDetailData>
+        <StudDetailData>{theStudent?.EmergencyPhoneNumber}</StudDetailData>
         </StudDetailRow>
 
         <StudDetailRow>
         <StudDetailField>Emergency Phone 2:</StudDetailField>
-        <StudDetailData>{theStudent?.emergencyAlternatePhoneNumber}</StudDetailData>
+        <StudDetailData>{theStudent?.EmergencyAlternatePhoneNumber}</StudDetailData>
         </StudDetailRow>
 
         </StudRight>

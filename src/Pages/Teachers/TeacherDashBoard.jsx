@@ -74,7 +74,7 @@ import {CiSettings,CiGlobe} from 'react-icons/ci'
 
 
 const Dashboard = ({openNav}) => {
-  const [specificRole, setspecificRole] = useState("");
+   const specificRole="SuperiorUser"
   
 
   const [SchoolData, SetSchoolData] = useState({})

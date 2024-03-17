@@ -21,7 +21,7 @@ const MenuButtons = () => {
   const navigate = useNavigate();
 
  
-  const [specificRole, setspecificRole] = useState("");
+   const specificRole="SuperiorUser"
   const [role, setrole] = useState("");
 
   

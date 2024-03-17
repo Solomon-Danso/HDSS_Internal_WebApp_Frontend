@@ -17,7 +17,7 @@ import { Show } from '../../../Constants /Alerts'
 
 export const ViewTimeTablesCard = ({ data,index }) => {
    
-  const [specificRole, setspecificRole] = useState("");
+   const specificRole="SuperiorUser"
 
 
  

@@ -22,7 +22,7 @@ import { MyStudentCardM } from './MyStudentCardM';
 const Home = () => {
   
   const navigate = useNavigate();
-  const [specificRole, setspecificRole] = useState("");
+   const specificRole="SuperiorUser"
   const [role, setrole] = useState("");
 
  

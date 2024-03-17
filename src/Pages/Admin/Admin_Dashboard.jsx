@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { DashboardContainer, FixedTop, HomeLogoL, HomeLogoM, HomeSchoolNameM, MenuInfo } from '../../Designs/Styles/Styles';
+import { DashboardContainer, FixedTop, HomeLogoL, HomeLogoM, HomeSchoolNameM, MenuButtonIcon, MenuButtonLink, MenuInfo } from '../../Designs/Styles/Styles';
 import { AES, enc } from 'crypto-js';
 import Pass from '../../Portals/Admin/Pass';
 import PermissionDenied from '../../Portals/Admin/PermissionDenied';
@@ -69,13 +69,17 @@ import { colors } from '../../Designs/Colors';
 import { Show } from '../../Constants /Alerts';
 import { BiBusSchool } from 'react-icons/bi';
 import { IoFastFoodOutline } from 'react-icons/io5';
+import StraightLink from "../../Pages/Student/StraightLink"
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 
-
-
+import Transport from '../../Portals/Admin/Transport';
+import PickUp from '../../Portals/Admin/PickUp';
+import Departure from '../../Portals/Admin/Departure';
+import Destination from '../../Portals/Admin/Destination';
 
 
 const Dashboard = ({openNav,openfunction}) => {
-  const [specificRole, setspecificRole] = useState("");
+   const specificRole="SuperiorUser"
   const [RoleList, setRoleList] = useState([])
  
 
@@ -257,6 +261,13 @@ const handleRoles = async () => {
  <>
   <MenuCard >
   
+  
+  <div style={{display:"flex", flexDirection:"flex-end", gap:"1rem"}} onClick={() => {openfunction() }}>
+          <MenuButtonIcon ><AiOutlineCloseCircle /></MenuButtonIcon>
+          <MenuButtonLink >Close</MenuButtonLink>
+  </div>
+
+
   <MenuInfo onClick={() => { navigate("/admin");openfunction() }}>
 DashBoard
 </MenuInfo>
@@ -290,7 +301,7 @@ DashBoard
  ) : (<></>)}
 
 {checkRole("SuperAdmin") || checkRole('Transport') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/students"); openfunction() }}>Transport</MenuButtonOptionLink>
+  <MenuButtonOptionLink onClick={() => { navigate("/admin/transport"); openfunction() }}>Transport</MenuButtonOptionLink>
   ) : (<></>)}
 
 {checkRole("SuperAdmin") || checkRole('Feeding') ? (   
@@ -540,6 +551,30 @@ DashBoard
  <MenuButtonOptionLink onClick={() => { navigate("/admin/test") }}>Mark Typed Notes</MenuButtonOptionLink>
 
  </InnerDroplist> ) : (<></>)}
+
+
+  </DropList>
+  ) : (<></>)}
+
+{/*Transport */}
+{checkRole("SuperAdmin")|| checkRole("DestinationArrival")|| checkRole("Departure")|| checkRole("Pickup")|| checkRole('TransportAdmin') ? (   
+  <DropList logo={<BiBusSchool />} title="Transport">
+
+{checkRole("SuperAdmin") || checkRole('TransportAdmin') ? (   
+  <MenuButtonOptionLink onClick={() => { navigate("/admin/transport") }}>Administration</MenuButtonOptionLink>
+  ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole("Pickup") ? (   
+ <MenuButtonOptionLink onClick={() => { navigate("/admin/pickup") }}>Pickup</MenuButtonOptionLink>
+ ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole("Departure") ? (   
+ <MenuButtonOptionLink onClick={() => { navigate("/admin/departure") }}>Departure</MenuButtonOptionLink>
+ ) : (<></>)}
+
+{checkRole("SuperAdmin") || checkRole("DestinationArrival") ? (   
+   <MenuButtonOptionLink onClick={() => { navigate("/admin/arrivals") }}>Arrivals</MenuButtonOptionLink>
+   ) : (<></>)}
 
 
   </DropList>
@@ -1273,56 +1308,7 @@ DashBoard
   ) : (<></>)}
 
 
-{/*Transport */}
-{checkRole("SuperAdmin")|| checkRole('Annoucements') ? (   
-  <DropList logo={<BiBusSchool />} title="Transport">
 
-{checkRole("SuperAdmin") || checkRole('FeesConfig') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/students"); openfunction() }}>Fees Configuration</MenuButtonOptionLink>
-  ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole("ViewStudent") ? (   
- <MenuButtonOptionLink onClick={() => { navigate("/admin/studentsInfo"); openfunction() }}>Student Info</MenuButtonOptionLink>
- ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole("UpdateStudent") ? (   
- <MenuButtonOptionLink onClick={() => { navigate("/admin/updateStudent"); openfunction() }}>Update Students</MenuButtonOptionLink>
- ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole("DeleteStudent") ? (   
-   <MenuButtonOptionLink onClick={() => { navigate("/admin/deleteStudent"); openfunction() }}>Delete Students</MenuButtonOptionLink>
-   ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole('ViewAssessment') ? (   
- <MenuButtonOptionLink onClick={() => { navigate("/admin/test"); openfunction() }}>Assessments</MenuButtonOptionLink>
- ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole('ViewSchoolFees') ? (   
- <MenuButtonOptionLink onClick={() => { navigate("/admin/schoolfees"); openfunction()  }}>School Fees</MenuButtonOptionLink>
- ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole('Transport') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/students"); openfunction() }}>Transport</MenuButtonOptionLink>
-  ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole('Feeding') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/students"); openfunction() }}>Feeding</MenuButtonOptionLink>
-  ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole('Attendance') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/students"); openfunction() }}>Attendance</MenuButtonOptionLink>
-  ) : (<></>)}
-
-{checkRole("SuperAdmin") || checkRole('Annoucements') ? (   
-  <MenuButtonOptionLink onClick={() => { navigate("/admin/students"); openfunction() }}>Annoucements</MenuButtonOptionLink>
-  ) : (<></>)}
-
-
-
-
-
-  </DropList>
-  ) : (<></>)}
 
 
   {/*Kitchen */}
@@ -1679,6 +1665,10 @@ DashBoard
         <Route path="annoucementt" element={<AddAnnoucementT />} />
         <Route path="annoucementp" element={<AddAnnoucementP />} />
         <Route path="annoucementh" element={<AddAnnoucementH />} />
+        <Route path="transport" element={<Transport />} />
+        <Route path="pickup" element={<PickUp />} />
+        <Route path="departure" element={<Departure />} />
+        <Route path="arrivals" element={<Destination />} />
         <Route path="pass" element={<Pass />} />  
           
           

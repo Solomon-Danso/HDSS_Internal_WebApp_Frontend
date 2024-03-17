@@ -17,7 +17,7 @@ import { Show } from '../../../Constants /Alerts'
 
 export const ViewVideosCard = ({ data,index }) => {
    
-  const [specificRole, setspecificRole] = useState("");
+   const specificRole="SuperiorUser"
 
 
  

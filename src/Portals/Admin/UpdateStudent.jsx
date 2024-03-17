@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { apiServer,RegisterStudent, UpdateStudent, ViewClasses, ViewOneStudent } from '../../Constants /Endpoints'
-import { AdmitStudentCard, AdmitStudentRole, FormLable, HeaderTitle, MainTitle,FormInputStudent, SelectStage, SelectForStudent, FormTextAreaStudent, SelectStageButton, AdmitButton, SelectForStudentRel, AdmitButton2, FormInputStudent2} from '../../Designs/Styles/Profile'
+import { apiMedia, apiServer,RegisterStudent, UpdateStudent, ViewClasses, ViewOneStudent } from '../../Constants /Endpoints'
+import { AdmitStudentCard, AdmitStudentRole, FormLable, HeaderTitle, MainTitle,FormInputStudent, SelectStage, SelectForStudent, FormTextAreaStudent, SelectStageButton, AdmitButton, SelectForStudentRel, AdmitButton2, FormInputStudent2, CardImage, UpdateProfileImage} from '../../Designs/Styles/Profile'
 import { colors } from '../../Designs/Colors'
 import { Show } from '../../Constants /Alerts'
 import { AES,enc } from 'crypto-js'
+import { useNavigate } from 'react-router-dom'
 
 const Students = () => {
 
@@ -45,54 +46,68 @@ const Students = () => {
 
 
     const [userInfo, setUserInfo] = useState({});
+    const navigate = useNavigate()
 
     useEffect(() => {
-      const encryptedData = sessionStorage.getItem("userDataEnc");
-      const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
-      const decryptedData = AES.decrypt(encryptedData, encryptionKey);
-      const decryptedString = decryptedData.toString(enc.Utf8);
-      const parsedData = JSON.parse(decryptedString);
-        setUserInfo(parsedData);
+      try{
+        const encryptedData = sessionStorage.getItem("userDataEnc");
+        const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
+        const decryptedData = AES.decrypt(encryptedData, encryptionKey);
+        const decryptedString = decryptedData.toString(enc.Utf8);
+        const parsedData = JSON.parse(decryptedString);
+          setUserInfo(parsedData);
+      }catch(e){
+        navigate("/")
+        window.location.reload();
+      }
+    
     }, []);
+
+
+    const CompanyId = userInfo.CompanyId;
+    const SenderId = userInfo.UserId;
+     
 
       const studentDetails = async (event) => {
         event.preventDefault();
         try {
-         const URL = `api/students/getSpecificUser?StudentId=${studentId}&ID=${userInfo.staffID}`
-          const response = await fetch(apiServer + URL, {
+         const url = `GetStudent/${studentId}/${CompanyId}/${SenderId}`
+         const response = await fetch(apiServer + url, {
             method: "GET",
           });
           const data = await response.json();
           if (response.ok) {
             setStudent([data]);
-            setFirstname(data.firstName);
-            setLastName(data.lastName);
-            setOtherName(data.otherName);
-            setDateOfBirth(data.dateOfBirth);
-            setGender(data.gender);
-            setLocation(data.location);
-            setHometown(data.homeTown);
-            setCountry(data.country)
-            setreligion(data.religion)
-            setStudentEmail(data.email)
-            setStudentPhoneNumber(data.phoneNumber)
-            setlevel(data.level)
-            setmedicalIInformation(data.medicalIInformation)
-            setfatherName(data.fathersName)
-            setmotherName(data.mothersName)
-            setfatherOccupation(data.fatherOccupation)
-            setmotherOccupation(data.motherOccupation)
-            setGuardianName(data.guardianName)
-            setguardianOccupation(data.guardianOccupation)
-            setParentDigitalAddress(data.parentDigitalAddress)
-            setParentReligion(data.parentReligion)
-            setParentEmail(data.parentEmail)
-            setparentPhoneNumber(data.parentPhoneNumber)
-            setParentAltphoneNumber(data.alternatePhoneNumber)
-            setEmgPhone(data.emergencyPhoneNumber)
-            setEmgContName(data.emergencyContactName)
-            setEmgAltPhone(data.emergencyAlternatePhoneNumber)
-            setRelWithChild(data.relationshipWithChild)
+            setFirstname(data.FirstName);
+            setLastName(data.LastName);
+            setOtherName(data.OtherName);
+            setDateOfBirth(data.DateOfBirth);
+            setGender(data.Gender);
+            setLocation(data.Location);
+            setHometown(data.HomeTown);
+            setCountry(data.Country)
+            setreligion(data.Religion)
+            setStudentEmail(data.Email)
+            setStudentPhoneNumber(data.PhoneNumber)
+            setlevel(data.Level)
+            setmedicalIInformation(data.MedicalIInformation)
+            setfatherName(data.FathersName)
+            setmotherName(data.MothersName)
+            setfatherOccupation(data.FatherOccupation)
+            setmotherOccupation(data.MotherOccupation)
+            setGuardianName(data.GuardianName)
+            setguardianOccupation(data.GuardianOccupation)
+            setParentDigitalAddress(data.ParentDigitalAddress)
+            setParentReligion(data.ParentReligion)
+            setParentEmail(data.ParentEmail)
+            setparentPhoneNumber(data.ParentPhoneNumber)
+            setParentAltphoneNumber(data.AlternatePhoneNumber)
+            setEmgPhone(data.EmergencyPhoneNumber)
+            setEmgContName(data.EmergencyContactName)
+            setEmgAltPhone(data.EmergencyAlternatePhoneNumber)
+            setRelWithChild(data.RelationshipWithChild)
+            setParentLocation(data.ParentLocation)
+            setProfilePic(apiMedia+data.ProfilePic)
 
             
             Show.Success("Student information loaded successfully");
@@ -144,11 +159,17 @@ const Students = () => {
           formData.append("AlternatePhoneNumber",parentAltphoneNumber );
           formData.append("ParentPhoneNumber", parentPhoneNumber);
 
+          formData.append("CompanyId", CompanyId);
+          formData.append("SenderId", SenderId);
+          formData.append("ProfilePic", profilePic);
+
+          formData.append("StudentId", studentId);
+
           
 
           
       
-          const response = await fetch(apiServer + UpdateStudent + studentId, {
+          const response = await fetch(apiServer + "UpdateStudent", {
             method: "POST",
             body: formData,
           });
@@ -174,13 +195,48 @@ useEffect(() => {
       .catch(error => console.error(error));
   }, []);
   
+  const getOrdinalSuffix = (day) => {
+   if (day >= 11 && day <= 13) {
+     return "th";
+   }
+   switch (day % 10) {
+     case 1:
+       return "st";
+     case 2:
+       return "nd";
+     case 3:
+       return "rd";
+     default:
+       return "th";
+   }
+ };
+
+ const formatMonthAbbreviation = (month) => {
+   const months = [
+     "Jan.", "Feb.", "Mar.", "Apr.",
+     "May", "Jun.", "Jul.", "Aug.",
+     "Sep.", "Oct.", "Nov.", "Dec."
+   ];
+   return months[month];
+ };
+ 
+ const formatDate = (dateString) => {
+   const date = new Date(dateString);
+   const day = date.getDate();
+   const month = date.getMonth();
+   const year = date.getFullYear();
+ 
+   const formattedDate = `${day}${getOrdinalSuffix(day)} ${formatMonthAbbreviation(month)} ${year}`;
+ 
+   return formattedDate;
+ };
 
 
 
   
     return (
         <>
-         <form onSubmit={studentDetails}>
+   <form onSubmit={studentDetails}>
     < AdmitStudentCard>
     
     <div>
@@ -220,6 +276,24 @@ useEffect(() => {
      <hr/>
      <HeaderTitle>Student Information</HeaderTitle>
 
+     <AdmitStudentRole>
+    <div style={{display:"flex", flexDirection:"column"}}>
+        <UpdateProfileImage src={profilePic}/>
+        <FormInputStudent
+        type="file"
+       
+        placeholder=""
+        accept=".jpg, .png, .jpeg, .ico"
+        onChange={(e) => setProfilePic(e.target.files[0])}
+       
+        />
+     </div>
+ 
+
+
+    </AdmitStudentRole>
+
+
     <AdmitStudentRole>
     <div>
         <FormLable>First Name</FormLable>
@@ -255,12 +329,12 @@ useEffect(() => {
      </div>
 
      <div>
-        <FormLable>Date of Birth</FormLable>
+        <FormLable>Date of Birth ({formatDate(dateOfBirth)})</FormLable>
         <FormInputStudent
         type="date"
         
         placeholder="Isaac"
-        value={dateOfBirth}
+        
         onChange={(e) => setDateOfBirth(e.target.value)}
        
         />

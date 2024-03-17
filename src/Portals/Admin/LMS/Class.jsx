@@ -23,7 +23,7 @@ const StudentInfo = () => {
     const [searchResult, setSearchResult] = useState(false)
     const [searchTerm, setSearchTerm] = useState()
 
-    const [specificRole, setspecificRole] = useState("");
+     const specificRole="SuperiorUser"
 
 
  

@@ -29,14 +29,10 @@ const StudentInfo = () => {
     
     const [theClass2, setTheClass2] = useState([])
 
-    const [specificRole, setspecificRole] = useState("");
+     const specificRole="SuperiorUser"
 
 
-    useEffect(() => {
-      const spRole =  AES.decrypt(sessionStorage.getItem("SpecificRole"), '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK').toString(enc.Utf8);
-      setspecificRole(spRole);
-      
-    }, []);
+    
     
 
     const [currentIndex, setCurrentIndex] = useState(0);

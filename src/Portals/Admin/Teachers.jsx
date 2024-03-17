@@ -5,10 +5,13 @@ import { colors } from '../../Designs/Colors'
 import { Show } from '../../Constants /Alerts'
 
 import { AES,enc } from 'crypto-js'
+import { useNavigate } from 'react-router-dom'
 
 
 
 const Students = () => {
+
+  const navigate = useNavigate();
 
 const [a,sa] = useState("")
 const [b,sb] = useState("")
@@ -39,14 +42,25 @@ const [y,sy] = useState("")
    
    const [userInfo, setUserInfo] = useState({});
 
-   useEffect(() => {
-     const encryptedData = sessionStorage.getItem("userDataEnc");
-     const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
-     const decryptedData = AES.decrypt(encryptedData, encryptionKey);
-     const decryptedString = decryptedData.toString(enc.Utf8);
-     const parsedData = JSON.parse(decryptedString);
-       setUserInfo(parsedData);
-   }, []);
+      useEffect(() => {
+      try{
+  
+        const encryptedData = sessionStorage.getItem("userDataEnc");
+        const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
+        const decryptedData = AES.decrypt(encryptedData, encryptionKey);
+        const decryptedString = decryptedData.toString(enc.Utf8);
+        const parsedData = JSON.parse(decryptedString);
+          setUserInfo(parsedData);
+  
+          
+  
+      }catch(e){
+        navigate("/")
+        window.location.reload()
+      }
+     
+    }, []);
+
 
    
   

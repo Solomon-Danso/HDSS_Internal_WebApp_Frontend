@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { CardImage, CardText, NewStudentListCard, SelectStageButton } from '../../Designs/Styles/Profile'
-import { apiServer } from '../../Constants /Endpoints'
+import { apiServer,apiMedia } from '../../Constants /Endpoints'
 import { colors } from '../../Designs/Colors'
 import AnimateHeight from 'react-animate-height'
 import "../../Designs/Card/DuesTable.scss";
@@ -30,7 +30,7 @@ const Eachrow = (rowdata) =>(
 
 export const TeacherCard = ({ data }) => {
     const navigate = useNavigate();
-    const thelink = apiServer+data?.filePath
+    const thelink = apiMedia+data?.ProfilePic
 
     const getOrdinalSuffix = (day) => {
         if (day >= 11 && day <= 13) {
@@ -75,20 +75,20 @@ const [dropper, setDropper] = useState(false)
   return (
     <>
     <NewStudentListCard>
-     <CardText>{data?.staffID}</CardText>
+     <CardText>{data?.StaffId}</CardText>
      <CardImage src={thelink}/>
-     <CardText>{data?.lastName}, {data?.firstName} {data?.otherName} </CardText>
-     <CardText>{data?.gender}</CardText>
-     <CardText> {formatDate(data?.dateOfBirth)}</CardText>
-     <CardText> {data?.position}</CardText>
-     <CardText> {data?.phoneNumber}</CardText>
-     <CardText> {data?.email}</CardText>
+     <CardText>{data?.LastName}, {data?.FirstName} {data?.OtherName} </CardText>
+     <CardText>{data?.Gender}</CardText>
+     <CardText> {formatDate(data?.DateOfBirth)}</CardText>
+     <CardText> {data?.Position}</CardText>
+     <CardText> {data?.PhoneNumber}</CardText>
+     <CardText> {data?.Email}</CardText>
      <SelectStageButton
      background={colors.darkBlue}
      color="white"
      border={colors.darkBlue}
      onClick={(e)=>{
-        navigate(`/admin/teacherDetails/${data?.staffID}`)
+        navigate(`/admin/teacherDetails/${data?.StaffId}`)
      }}
      >
        View Details

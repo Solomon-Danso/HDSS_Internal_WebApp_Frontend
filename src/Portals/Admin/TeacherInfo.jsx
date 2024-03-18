@@ -6,12 +6,13 @@ import { Show } from '../../Constants /Alerts'
 import { colors } from '../../Designs/Colors'
 import { AES,enc } from 'crypto-js'
 import {TeacherCard} from "./TeacherCard"
+import { useNavigate } from 'react-router-dom'
 
 const StudentInfo = () => {
 
-
+    const navigate = useNavigate()
     const [studentList, setStudentList] = useState([])
-    const [specificClass, setSpecificClass] = useState("")
+  
     const [closeOther, setCloseOther] = useState(false)
     const [searchResult, setSearchResult] = useState(false)
     const [searchTerm, setSearchTerm] = useState()
@@ -62,24 +63,137 @@ const StudentInfo = () => {
       const [userInfo, setUserInfo] = useState({});
 
       useEffect(() => {
-        const encryptedData = sessionStorage.getItem("userDataEnc");
-        const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
-        const decryptedData = AES.decrypt(encryptedData, encryptionKey);
-        const decryptedString = decryptedData.toString(enc.Utf8);
-        const parsedData = JSON.parse(decryptedString);
-          setUserInfo(parsedData);
-      }, []);
-      useEffect(() => {
-        if(userInfo.staffID){
-          fetch(apiServer + ViewTeachers+userInfo.staffID)
-          .then(response => response.json()) // Parse the response as JSON
-          .then(data => setTheStudents(data))
-          .catch(error => console.error(error));
+        try{
+    
+          const encryptedData = sessionStorage.getItem("userDataEnc");
+          const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
+          const decryptedData = AES.decrypt(encryptedData, encryptionKey);
+          const decryptedString = decryptedData.toString(enc.Utf8);
+          const parsedData = JSON.parse(decryptedString);
+            setUserInfo(parsedData);
+    
+            
+    
+        }catch(e){
+          navigate("/")
+          window.location.reload()
         }
        
-      }, [userInfo.staffID]);
+      }, []);
   
 
+  
+
+      const CompanyId = userInfo.CompanyId;
+      const UserId = userInfo.UserId;
+       
+
+    useEffect(()=>{
+      if(CompanyId!==undefined && UserId!==undefined){
+        LoadStudent()
+      }
+
+    },[CompanyId,UserId ])
+    
+  
+      const LoadStudent = async () => {
+     
+          
+        Show.showLoading("Loading Staff Members....");
+
+        if(CompanyId!==undefined && UserId!==undefined){
+
+
+          try {
+            const formData = new FormData();
+      
+            formData.append("CompanyId", userInfo.CompanyId);
+        formData.append("SenderId", userInfo.UserId);
+      
+      
+        
+            const response = await fetch(apiServer+"GetStaffMemberssInASchool", {
+              method: "POST",
+              body: formData
+            });
+      
+            const data = await response.json();
+        
+            if (response.ok) {
+              
+              Show.hideLoading();
+      
+              setTheStudents(data)
+      
+      
+              
+            } else {
+              Show.Attention(data.message);
+            }
+          } catch (error) {
+      
+            Show.Attention(error.message);
+          }
+          
+        } else{
+          Show.Attention("CompanyId is undefined")
+        }
+        
+
+      
+      }
+
+
+
+      const [RoleList, setRoleList] = useState([])
+      useEffect(()=>{
+        handleRoles()
+      
+      },[userInfo])
+      
+      
+      
+      const handleRoles = async () => {
+       
+       
+          try {
+            const formData = new FormData();
+      
+            const CompanyId = userInfo.CompanyId;
+            const UserId = userInfo.UserId;
+          
+            formData.append("CompanyId",CompanyId)
+            formData.append("UserId",UserId)
+      
+        
+            const response = await fetch(apiServer+"ViewUserDetailedRole", {
+              method: "POST",
+              body: formData
+            });
+      
+            const data = await response.json();
+        
+            if (response.ok) {
+              
+             
+              setRoleList(data)
+              
+            } else {
+            
+            }
+          } catch (error) {
+      
+            Show.Attention("An error has occurred");
+            navigate("/")
+            window.location.reload()
+          }
+      
+      }
+
+
+    const checkRole = (role) => {
+      return RoleList.includes(role);
+    };
 
 
 

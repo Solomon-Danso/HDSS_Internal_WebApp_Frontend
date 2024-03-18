@@ -9,6 +9,8 @@ import {
   IconDashEContacts,
   IconDashHistory,
   IconDashEContacts2,
+  HomeBanner,
+  ChartsCard,
 } from "../../Designs/Styles/Profile";
 import {
   ProfileCoverContainer,
@@ -41,7 +43,7 @@ import { Show } from "../../Constants /Alerts";
 
 const Profile = () => {   
 
-      const { studentId } = useParams();
+      const { staffId } = useParams();
       const [theStudent, setTheStudent] = useState([])
       const [userInfo, setUserInfo] = useState({});
       const navigate = useNavigate()
@@ -141,7 +143,7 @@ const Profile = () => {
         const LoadStudent = async () => {
        
             
-          Show.showLoading("Loading Students....");
+          Show.showLoading("Loading StaffMember Details....");
   
           if(CompanyId!==undefined && UserId!==undefined){
   
@@ -152,7 +154,7 @@ const Profile = () => {
               formData.append("CompanyId", userInfo.CompanyId);
           formData.append("SenderId", userInfo.UserId);
         
-        const url = `GetStudent/${studentId}/${CompanyId}/${UserId}`
+        const url = `ViewStaffMembers/${staffId}/${CompanyId}/${UserId}`
           
               const response = await fetch(apiServer+url, {
                 method: "GET",
@@ -274,12 +276,12 @@ const checkRole = (role) => {
                 <ProfileInfoSub>
                   
                   <ProfileName>
-                  {theStudent?.LastName}, {theStudent?.FirstName} {theStudent?.OtherName}
+                  {theStudent?.LastName}, {theStudent?.FirstName} {theStudent?.OtherName=="null"?<> </>:<>{theStudent?.OtherName}</>}
                   </ProfileName>
-                  <ProfileType> {theStudent.Level}</ProfileType>
+                  <ProfileType> {theStudent.AccountType}</ProfileType>
                   <ProfileType>
                     <span style={{ color: colors.maingreen, fontWeight: "bold" }}>
-                    {theStudent.Role}
+                    {theStudent.PrimaryRole}
                     </span>
                     , {theStudent.Gender}
                   </ProfileType>
@@ -292,7 +294,7 @@ const checkRole = (role) => {
       color="black"
       border="#CDCDCD"
       style={{ alignSelf: "flex-end" }}
-      onClick={() => navigate(`/admin/updateStudentFromProfile/${studentId}`)}
+      onClick={() => navigate(`/admin/updateTeachersFromProfile/${staffId}`)}
     >
       Edit  
     </GlobalDashButton>):(<></>)
@@ -348,7 +350,7 @@ const checkRole = (role) => {
                   style={{ marginRight: 5 }}
                 />
 
-               Level: {theStudent.Level}
+               Role: {theStudent.PrimaryRole}
               </ProfileSchoolCourse>
 
             </div>
@@ -380,15 +382,15 @@ const checkRole = (role) => {
                   <IconDashAcademic />
                 </div>
                 <p style={{ fontSize: 14, marginTop: 10, marginBottom: 5 }}>
-                  Student no. <span style={{ fontWeight: "bold" }}>{theStudent.StudentId}</span>
+                  Staff no. <span style={{ fontWeight: "bold" }}>{theStudent.StaffId}</span>
                 </p>
                 <p style={{ fontSize: 14, marginTop: 10, marginBottom: 5 }}>
-                  Admitted. <span style={{ fontWeight: "bold" }}>{formatDate(theStudent.created_at)}</span>
+                  Employed. <span style={{ fontWeight: "bold" }}>{formatDate(theStudent.created_at)}</span>
                 </p>
                 <p style={{ fontSize: 14, marginTop: 10, marginBottom: 5 }}>
-                  Session.{" "}
+                  AccountType.{" "}
                   <span style={{ fontWeight: "bold" }}>
-                    {theStudent.TheAcademicTerm}, {theStudent.TheAcademicYear}
+                    {theStudent.AccountType}
                   </span>
                 </p>
                
@@ -451,10 +453,10 @@ const checkRole = (role) => {
                   Age: {calculateAge(theStudent.DateOfBirth)} {calculateAge(theStudent.DateOfBirth)>1?<>years</>:<>year</>} old 
                 </p>
                 <p style={{ fontSize: 14, marginTop: 10, marginBottom: 5 }}>
-                  Religion: {theStudent.Religion}
+                Marital Status: {theStudent.MaritalStatus}
                 </p>
                 <p style={{ fontSize: 14, marginTop: 10, marginBottom: 5 }}>
-                  Hometown: {theStudent.HomeTown}
+                  Country: {theStudent.Country}
                 </p>
                 <p style={{ fontSize: 14, marginTop: 10, marginBottom: 5 }}>
                   Location: {theStudent.Location}
@@ -484,13 +486,13 @@ const checkRole = (role) => {
                   <IconDashEContacts />
                 </div>
                 <p style={{ fontSize: 14, marginTop: 10, marginBottom: 5 }}>
-                  {theStudent.EmergencyContactName}
+                  {theStudent.EmergencyPerson}
                 </p>
                 <p style={{ fontSize: 14, marginTop: 10, marginBottom: 5 }}>
-                {theStudent.EmergencyPhoneNumber}
+                {theStudent.EmergencyPhone1}
                 </p>
                 <p style={{ fontSize: 14, marginTop: 10, marginBottom: 5 }}>
-                {theStudent.EmergencyAlternatePhoneNumber}
+                {theStudent.EmergencyPhone2}
                 </p>
                
               </div>
@@ -512,21 +514,21 @@ const checkRole = (role) => {
                     justifyContent: "space-between",
                   }}
                 >
-                  <h5>Parent Information</h5>
+                  <h5>General Information</h5>
                   <IconDashEContacts2 />
                 </div>
                 <p style={{ fontSize: 14, marginTop: 10, marginBottom: 5 }}>
-                 <b style={{ color:`${colors.maingreen}`}}>Father's Name:</b> <i>{theStudent.FathersName}</i>
+                 <b style={{ color:`${colors.maingreen}`}}>Tax Number:</b> <i>{theStudent.TaxNumber}</i>
                 </p>
                 <p style={{ fontSize: 14, marginTop: 10, marginBottom: 5 }}>
-                <b style={{ color:`${colors.yellow}`}}> Father's Occupation:</b> <i>{theStudent.FatherOccupation}</i>
+                <b style={{ color:`${colors.yellow}`}}> Social Security:</b> <i>{theStudent.SocialSecurity}</i>
                 </p>
 
                 <p style={{ fontSize: 14, marginTop: 10, marginBottom: 5 }}>
-                <b style={{ color:`${colors.mainsecondgreen}`}}> Mother's Name:</b> <i>{theStudent.MothersName}</i>
+                <b style={{ color:`${colors.mainsecondgreen}`}}> Highest Educational Level:</b> <i>{theStudent.HighestEducationalLevel}</i>
                 </p>
                 <p style={{ fontSize: 14, marginTop: 10, marginBottom: 5 }}>
-                <b style={{ color:`${colors.aqua}`}}>Mother's Occupation:</b>  <i>{theStudent.MotherOccupation}</i>
+                <b style={{ color:`${colors.aqua}`}}>Teaching Experience:</b>  <i>{theStudent.TeachingExperience}</i>
                 </p>
                
                
@@ -550,8 +552,40 @@ const checkRole = (role) => {
                 marginBottom: 15,
               }}
             >
-              Internship History <IconDashHistory />
+              Advance Details <IconDashHistory />
             </h5>
+
+
+            <HomeBanner>
+  
+  <ChartsCard>
+<iframe
+src={apiMedia+theStudent.Cert1}
+width="100%"
+height="100%"
+>
+
+
+</iframe>
+
+  </ChartsCard>
+  
+  <ChartsCard>
+
+  <img
+          alt="logo"
+          src={apiMedia+theStudent.IdCards}
+          width="100%"
+          height="100%"
+         
+        />
+
+  </ChartsCard>
+    
+  </HomeBanner> 
+
+
+
         {
           /*
           

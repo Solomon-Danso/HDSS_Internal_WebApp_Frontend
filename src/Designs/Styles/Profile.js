@@ -2295,7 +2295,7 @@ export const ProfileName = styled.h5`
 
 export const ProfileType = styled.p`
   font-size: 13px;
-  color: grey;
+  color: aqua;
   margin-top: 2px;
   font-family: OpenSans, NotoSans, sans-serif;
 

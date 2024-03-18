@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 
 const DeleteStudent = () => {
 
-const [studentId, setStudentId] = useState()
+const [staffId, setStaffId] = useState()
 const [userInfo, setUserInfo] = useState({});
 const navigate = useNavigate()
    
@@ -27,24 +27,28 @@ navigate("/")
 
     }, []);
 
+    const CompanyId = userInfo.CompanyId;
+const SenderId = userInfo.UserId;
+
     const studentDetails = async (event) => {
-        const url = `api/Admin/deleteTeacherAccount?StaffID=${studentId}&ID=${userInfo.staffID}`
-        event.preventDefault();
+      const url = `DeleteStaffMembers/${staffId}/${CompanyId}/${SenderId}`
+      event.preventDefault();
         try {
           const response = await fetch(apiServer + url, {
-            method: "DELETE",
+            method: "POST",
           });
+          const data = await response.json()
           if (response.ok) {
 
             
-            Show.Success("Teacher deleted successfully");
+            Show.Success(data.message);
             window.location.reload();
             
           } else {
-            Show.Attention("Teacher not found");
+            Show.Attention(data.message);
           }
         } catch (err) {
-          Show.Attention("An error has occurred");
+          Show.Attention(err.message);
         }
       };
     
@@ -63,7 +67,7 @@ navigate("/")
         type="text"
         
         placeholder="35678"
-        onChange={(e) => setStudentId(e.target.value)}
+        onChange={(e) => setStaffId(e.target.value)}
        
         />
          <AdmitButton2

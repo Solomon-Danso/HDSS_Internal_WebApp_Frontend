@@ -11,11 +11,19 @@ import AnimateHeight from 'react-animate-height';
 import { apiMedia, apiServer } from '../../Constants /Endpoints';
 import Home from '../../Portals/Admin/Home';
 import Test from '../../Portals/Admin/Test'
+
 import StudentProfile from '../../Portals/Admin/StudentProfile'
+import TeacherProfile from '../../Portals/Admin/TeacherProfile'
+
+
 import Students from '../../Portals/Admin/Students';
 import StudentInfo from '../../Portals/Admin/StudentIInfo';
 import StudentDetails from '../../Portals/Admin/StudentDetails';
 import UpdateStudent from "../../Portals/Admin/UpdateStudent";
+
+import UpdateStudentFromProfile from "../../Portals/Admin/UpdateStudentFromProfile";
+import UpdateTeachersFromProfile from "../../Portals/Admin/UpdateTeachersFromProfile";
+
 import DeleteStudent from "../../Portals/Admin/DeleteStudent"
 import MainFees from "../../Portals/Admin/MainFeesPage"
 import FeesDetail from "../../Portals/Admin/FeesDetails"
@@ -1640,9 +1648,13 @@ DashBoard
         <Route path="students" element={<Students />} /> 
         <Route path="studentsInfo" element={<StudentInfo />} />
         <Route path="studentsDetails/:studentId" element={<StudentProfile />} />
-        <Route path="teacherDetails/:teacherId" element={<TeacherDetails />} />
+        <Route path="teacherDetails/:staffId" element={<TeacherProfile />} />
         <Route path="feesDetails/:studentId" element={<FeesDetail />} />
         <Route path="updateStudent" element={<UpdateStudent />} /> 
+        <Route path="updateStudentFromProfile/:studentId" element={<UpdateStudentFromProfile />} /> 
+        <Route path="updateTeachersFromProfile/:staffId" element={<UpdateTeachersFromProfile />} /> 
+
+        
         <Route path="deleteStudent" element={<DeleteStudent />} />  
         <Route path="schoolfees" element={<MainFees />} /> 
         <Route path="teachers" element={<Teachers />} /> 

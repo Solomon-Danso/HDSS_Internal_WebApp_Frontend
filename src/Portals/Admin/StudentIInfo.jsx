@@ -142,7 +142,7 @@ const StudentInfo = () => {
           }
           
         } else{
-          alert("CompanyId is undefined")
+          Show.Attention("CompanyId is undefined")
         }
         
 

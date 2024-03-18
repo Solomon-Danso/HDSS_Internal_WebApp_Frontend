@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import AnimateHeight from 'react-animate-height';
 import { apiMedia, apiServer } from '../../Constants /Endpoints';
 import Home from '../../Portals/Admin/Home';
-import Profile from '../../Portals/Admin/Profile'
+import StudentProfile from '../../Portals/Admin/StudentProfile'
 
 import StudentInfo from '../../Portals/Admin/StudentIInfo';
 import StudentDetails from '../../Portals/Admin/StudentDetails';
@@ -514,7 +514,7 @@ const [sysDate, setSysDate] = useState("")
 
         <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="viewProfile" element={<Profile/>} />
+        <Route path="viewProfile" element={<StudentProfile/>} />
           
           
           

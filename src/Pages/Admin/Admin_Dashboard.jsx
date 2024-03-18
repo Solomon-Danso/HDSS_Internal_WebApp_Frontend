@@ -11,7 +11,7 @@ import AnimateHeight from 'react-animate-height';
 import { apiMedia, apiServer } from '../../Constants /Endpoints';
 import Home from '../../Portals/Admin/Home';
 import Test from '../../Portals/Admin/Test'
-import Profile from '../../Portals/Admin/Profile'
+import StudentProfile from '../../Portals/Admin/StudentProfile'
 import Students from '../../Portals/Admin/Students';
 import StudentInfo from '../../Portals/Admin/StudentIInfo';
 import StudentDetails from '../../Portals/Admin/StudentDetails';
@@ -76,6 +76,7 @@ import Transport from '../../Portals/Admin/Transport';
 import PickUp from '../../Portals/Admin/PickUp';
 import Departure from '../../Portals/Admin/Departure';
 import Destination from '../../Portals/Admin/Destination';
+
 
 
 const Dashboard = ({openNav,openfunction}) => {
@@ -263,8 +264,8 @@ const handleRoles = async () => {
   
   
   <div style={{display:"flex", flexDirection:"flex-end", gap:"1rem"}} onClick={() => {openfunction() }}>
-          <MenuButtonIcon ><AiOutlineCloseCircle /></MenuButtonIcon>
-          <MenuButtonLink >Close</MenuButtonLink>
+          <MenuButtonIcon style={{color:`${colors.red}`}}><AiOutlineCloseCircle /></MenuButtonIcon>
+         
   </div>
 
 
@@ -1632,13 +1633,13 @@ DashBoard
 
         <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="viewProfile" element={<Profile/>} />
+        <Route path="viewProfile" element={<StudentProfile/>} />
         
         <Route path="test" element={<Test />} />  
         <Route path="*" element={<PermissionDenied />} />
         <Route path="students" element={<Students />} /> 
         <Route path="studentsInfo" element={<StudentInfo />} />
-        <Route path="studentsDetails/:studentId" element={<StudentDetails />} />
+        <Route path="studentsDetails/:studentId" element={<StudentProfile />} />
         <Route path="teacherDetails/:teacherId" element={<TeacherDetails />} />
         <Route path="feesDetails/:studentId" element={<FeesDetail />} />
         <Route path="updateStudent" element={<UpdateStudent />} /> 

@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import AnimateHeight from 'react-animate-height';
 import { apiMedia, apiServer } from '../../Constants /Endpoints';
 import Home from '../../Portals/Admin/Home';
-import Profile from '../../Portals/Admin/Profile'
+import StudentProfile from '../../Portals/Admin/StudentProfile'
 
 
 import ViewBook from "../../Portals/Admin/LMS/ViewBooks"
@@ -355,7 +355,7 @@ alignItems: 'center',
 
         <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="viewProfile" element={<Profile/>} />             
+        <Route path="viewProfile" element={<StudentProfile/>} />             
           
           <Route path="TimeTable" element={<TimeTable />} />
           <Route path="lesson" element={<Lessons />} />

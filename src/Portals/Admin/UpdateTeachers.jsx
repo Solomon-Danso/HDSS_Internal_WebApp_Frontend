@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { apiServer,RegisterStudent, UpdateStudent, ViewClasses, ViewOneStudent } from '../../Constants /Endpoints'
-import { AdmitStudentCard, AdmitStudentRole, FormLable, HeaderTitle, MainTitle,FormInputStudent, SelectStage, SelectForStudent, FormTextAreaStudent, SelectStageButton, AdmitButton, SelectForStudentRel, AdmitButton2, FormInputStudent2} from '../../Designs/Styles/Profile'
+import { apiMedia, apiServer,RegisterStudent, UpdateStudent, ViewClasses, ViewOneStudent } from '../../Constants /Endpoints'
+import { AdmitStudentCard, AdmitStudentRole, FormLable, HeaderTitle, MainTitle,FormInputStudent, SelectStage, SelectForStudent, FormTextAreaStudent, SelectStageButton, AdmitButton, SelectForStudentRel, AdmitButton2, FormInputStudent2, UpdateProfileImage} from '../../Designs/Styles/Profile'
 import { colors } from '../../Designs/Colors'
 import { Show } from '../../Constants /Alerts'
 import { AES,enc } from 'crypto-js'
@@ -18,7 +18,7 @@ const Students = () => {
     const [i,si] = useState("")
     const [j,sj] = useState("")
     const [k,sk] = useState("")
-   
+    const [l,sl] = useState("")
     const [m,sm] = useState("")
     const [n,sn] = useState("")
     const [o,so] = useState("")
@@ -34,15 +34,28 @@ const Students = () => {
     const [y,sy] = useState("")
     
     const [student, setStudent] = useState([])
-    const [studentId, setStudentId] = useState("")
+    const [StaffId, setStaffId] = useState("")
+
+    const [userInfo, setUserInfo] = useState({});
+
+    useEffect(() => {
+      const encryptedData = sessionStorage.getItem("userDataEnc");
+      const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
+      const decryptedData = AES.decrypt(encryptedData, encryptionKey);
+      const decryptedString = decryptedData.toString(enc.Utf8);
+      const parsedData = JSON.parse(decryptedString);
+        setUserInfo(parsedData);
+    }, []);
 
 
 
+    const CompanyId = userInfo.CompanyId;
+    const SenderId = userInfo.UserId;
 
       const studentDetails = async (event) => {
         event.preventDefault();
         
-        const url = `api/Teacher/viewTeacher?StaffId=${studentId}&ID=${userInfo.staffID}` 
+        const url = `ViewStaffMembers/${StaffId}/${CompanyId}/${SenderId}` 
 
         try {
           const response = await fetch(apiServer + url, {
@@ -52,27 +65,28 @@ const Students = () => {
           const data = await response.json();
           if (response.ok) {
             setStudent([data]);
-            sa(data.title)
-            sb(data.firstName)
-            sc(data.otherName)
-            sd(data.lastName)
-            se(data.dateOfBirth)
-            sf(data.gender)
-            sg(data.maritalStatus)
-            sh(data.location)
-            si(data.country)
-            sj(data.email)
-            sk(data.phoneNumber)
-            sm(data.healthStatus)
-            sn(data.education)
-            sp(data.teachingExperience)
-            sr(data.taxNumber)
-            ss(data.ssnitNumber)
-            st(data.emergencyContacts)
-            su(data.emergencyPhone)
-            sv(data.salary)
-            sw(data.position)
-            sx(data.reportingTime)
+            sa(data.Title)
+            sb(data.FirstName)
+            sc(data.OtherName)
+            sd(data.LastName)
+            se(data.DateOfBirth)
+            sf(data.Gender)
+            sg(data.MaritalStatus)
+            sh(data.Location)
+            si(data.Country)
+            sj(data.Email)
+            sk(data.PhoneNumber)
+            sm(data.HealthStatus)
+            sn(data.HighestEducationalLevel)
+            sp(data.TeachingExperience)
+            sr(data.TaxNumber)
+            ss(data.SocialSecurity)
+            st(data.EmergencyPerson)
+            su(data.EmergencyPhone1)
+            sv(data.Salary)
+            sw(data.Position)
+            sx(data.ReportingTime)
+            sl(apiMedia+data.ProfilePic)
             
             Show.Success("Teacher information loaded successfully");
             
@@ -84,17 +98,7 @@ const Students = () => {
         }
       };
       
-      const [userInfo, setUserInfo] = useState({});
-
-      useEffect(() => {
-        const encryptedData = sessionStorage.getItem("userDataEnc");
-        const encryptionKey = '$2a$11$3lkLrAOuSzClGFmbuEAYJeueRET0ujZB2TkY9R/E/7J1Rr2u522CK';
-        const decryptedData = AES.decrypt(encryptedData, encryptionKey);
-        const decryptedString = decryptedData.toString(enc.Utf8);
-        const parsedData = JSON.parse(decryptedString);
-          setUserInfo(parsedData);
-      }, []);
-  
+     
     const handlesubmit = async (event) => {
         event.preventDefault();
       
@@ -102,6 +106,9 @@ const Students = () => {
         try {
             const formData = new FormData();
          
+            formData.append("CompanyId", CompanyId);
+            formData.append("SenderId", SenderId);
+            formData.append("StaffId", StaffId);
             formData.append("Title", a);
             formData.append("FirstName", b);
             formData.append("OtherName", c);
@@ -113,42 +120,45 @@ const Students = () => {
             formData.append("Country", i);
             formData.append("Email", j);
             formData.append("PhoneNumber", k);
-            
+            formData.append("ProfilePic", l);
+  
             formData.append("HealthStatus", m);
-            formData.append("Education", n);
-           
+            formData.append("HighestEducationalLevel", n);
+            formData.append("Cert1", o);
             formData.append("TeachingExperience", p);
   
-           
+            formData.append("IdCards", q);
   
             formData.append("TaxNumber", r);
-            formData.append("SSNITNumber", s);
-            formData.append("EmergencyContacts", t);
-            formData.append("EmergencyPhone", u);
+            formData.append("SocialSecurity", s);
+            formData.append("EmergencyPerson", t);
+            formData.append("EmergencyPhone1", u);
   
             formData.append("Salary", v);
             formData.append("Position", w);
             formData.append("ReportingTime", x);
+            formData.append("StartDate", y);
+  
           
   
           
 
-const url = `api/Teacher/updateTeacher?StaffId=${studentId}&ID=${userInfo.staffID}`          
+  
       
-          const response = await fetch(apiServer + url, {
+          const response = await fetch(apiServer + "UpdateStaffMemberss", {
             method: "POST",
             body: formData,
           });
-      
+      const data = await response.json()
           if (response.ok) {
-            Show.Success("Teacher Updated Successfully");
+            Show.Success(data.message);
             //navigate("/dashboard/profile");
             window.location.reload();
           } else {
-            Show.Attention("Teacher Update Failed");
+            Show.Attention(data.message);
           }
         } catch (error) {
-          Show.Attention("Student Update Failed");
+          Show.Attention(error.message);
         }
       };
     
@@ -161,14 +171,48 @@ useEffect(() => {
       .catch(error => console.error(error));
   }, []);
   
-
+  const getOrdinalSuffix = (day) => {
+    if (day >= 11 && day <= 13) {
+      return "th";
+    }
+    switch (day % 10) {
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
+    }
+  };
+ 
+  const formatMonthAbbreviation = (month) => {
+    const months = [
+      "Jan.", "Feb.", "Mar.", "Apr.",
+      "May", "Jun.", "Jul.", "Aug.",
+      "Sep.", "Oct.", "Nov.", "Dec."
+    ];
+    return months[month];
+  };
+  
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+  
+    const formattedDate = `${day}${getOrdinalSuffix(day)} ${formatMonthAbbreviation(month)} ${year}`;
+  
+    return formattedDate;
+  };
 
 
   
     return (
         <>
          <form onSubmit={studentDetails}>
-    < AdmitStudentCard>
+         < AdmitStudentCard>
     
     <div>
         <FormLable>Enter Teacher Id</FormLable>
@@ -177,7 +221,7 @@ useEffect(() => {
         type="text"
         
         placeholder="35678"
-        onChange={(e) => setStudentId(e.target.value)}
+        onChange={(e) => setStaffId(e.target.value)}
        
         />
          <AdmitButton2
@@ -202,6 +246,23 @@ useEffect(() => {
         <form
     onSubmit={handlesubmit}
     >
+         <AdmitStudentRole>
+    <div style={{display:"flex", flexDirection:"column"}}>
+        <UpdateProfileImage src={l}/>
+        <FormInputStudent
+        type="file"
+       
+        placeholder=""
+        accept=".jpg, .png, .jpeg, .ico"
+        onChange={(e) => sl(e.target.files[0])}
+       
+        />
+     </div>
+ 
+
+
+    </AdmitStudentRole>
+ 
       < AdmitStudentCard>
      <MainTitle>Update Teacher Form</MainTitle>
      <hr/>
@@ -249,7 +310,7 @@ useEffect(() => {
         <FormLable>First Name</FormLable>
         <FormInputStudent
         type="text"
-        required
+        
         placeholder=""
         value={b}
         onChange={(e) => sb(e.target.value)}
@@ -270,7 +331,7 @@ useEffect(() => {
         <FormLable>Last Name</FormLable>
         <FormInputStudent
         type="text"
-        required
+        
         placeholder=""
         value={d}
         onChange={(e) => sd(e.target.value)}
@@ -284,12 +345,10 @@ useEffect(() => {
 
     <AdmitStudentRole>
     <div>
-        <FormLable>Date of Birth</FormLable>
+        <FormLable>Date of Birth ({formatDate(e)})</FormLable>
         <FormInputStudent
         type="date"
-        required
-        
-        value={e}
+
         onChange={(e) => se(e.target.value)}
        
         />
@@ -334,7 +393,7 @@ useEffect(() => {
         <FormLable>Location</FormLable>
         <FormInputStudent
         type="text"
-        required
+        
         placeholder=""
         onChange={(e) => sh(e.target.value)}
         value={h}
@@ -351,7 +410,7 @@ useEffect(() => {
         <FormLable>Country</FormLable>
         <FormInputStudent
         type="text"
-        required
+        
         placeholder=""
         onChange={(e) => si(e.target.value)}
         value={i}
@@ -373,7 +432,7 @@ useEffect(() => {
         <FormLable>Phone</FormLable>
         <FormInputStudent
         type="text"
-        required
+        
         placeholder=""
         onChange={(e) => sk(e.target.value)}
         value={k}

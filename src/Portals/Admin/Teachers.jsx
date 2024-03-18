@@ -64,48 +64,7 @@ const [y,sy] = useState("")
 
    
   
-  const handleGeneratePDF = async (Id, fn,mn,ln) => {
-    try {
-   
-      // Send a request to the backend to generate the PDF
-      const response = await fetch(apiServer + Appointment+Id, {
-        method: 'GET',
-      });
-  
-      if (response.ok) {
-        // Convert the response to a blob
-        const blob = await response.blob();
-  
-        // Create a URL for the blob
-        const url = window.URL.createObjectURL(blob);
-  
-        // Create an anchor element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `${fn} ${mn} ${ln}.pdf`
-        document.body.appendChild(a);
-        a.click();
-  
-        // Clean up the URL and remove the anchor element
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(a);
-      
-     
-      } else {
-        // Handle HTTP error responses
-        console.error('HTTP Error:', response.status, response.statusText);
-      }
-    } catch (error) {
-      // Handle other errors (e.g., network issues)
-      console.error('Error generating PDF:', error);
-    } finally {
-        Show.hideLoading();
-      Show.Success("Teacher Admitted Successfully");
-      window.location.reload();
-    
-            
-    }
-  };
+
   
 
 
@@ -123,12 +82,16 @@ const [y,sy] = useState("")
             return;
           }
   
-
+          const companyId = userInfo.CompanyId;
+          const senderId  = userInfo.UserId;
        
       
         try {
             
           const formData = new FormData();
+
+          formData.append("CompanyId", companyId);
+          formData.append("SenderId", senderId);
          
           formData.append("Title", a);
           formData.append("FirstName", b);
@@ -141,19 +104,19 @@ const [y,sy] = useState("")
           formData.append("Country", i);
           formData.append("Email", j);
           formData.append("PhoneNumber", k);
-          formData.append("File", l);
+          formData.append("ProfilePic", l);
 
           formData.append("HealthStatus", m);
-          formData.append("Education", n);
-          formData.append("CertFile", o);
+          formData.append("HighestEducationalLevel", n);
+          formData.append("Cert1", o);
           formData.append("TeachingExperience", p);
 
-          formData.append("IdCardsFile", q);
+          formData.append("IdCards", q);
 
           formData.append("TaxNumber", r);
-          formData.append("SSNITNumber", s);
-          formData.append("EmergencyContacts", t);
-          formData.append("EmergencyPhone", u);
+          formData.append("SocialSecurity", s);
+          formData.append("EmergencyPerson", t);
+          formData.append("EmergencyPhone1", u);
 
           formData.append("Salary", v);
           formData.append("Position", w);
@@ -164,22 +127,31 @@ const [y,sy] = useState("")
          Show.showLoading("Processing Data")
           
       
-          const response = await fetch(apiServer + RegisterTeacher+userInfo.staffID, {
+          const response = await fetch(apiServer + "RegisterStaffMemberss", {
             method: "POST",
             body: formData,
           });
 
-          const data = await response.json();
+         
       
           if (response.ok) {
-          handleGeneratePDF(data.staffID, data.firstName, data.otherName, data.lastName)
+            const blob = await response.blob();
            
-            
+            const url = window.URL.createObjectURL(blob);
+    
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${b}_${c}_${d}.pdf`
+            document.body.appendChild(a);
+            a.click();
+      
            
-            //navigate("/dashboard/profile");
-            //window.location.reload();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+            Show.Success(b+" "+c+" "+d+" has been employed successfully")
           } else {
-            Show.Attention("Teacher Admission Failed");
+            const data = await response.json()
+            Show.Attention(data.message);
           }
         } catch (error) {
             console.error("Error:", error);
@@ -386,6 +358,7 @@ const [y,sy] = useState("")
         type="file"
         required
         placeholder=""
+        accept=".jpg, .png, .jpeg,"
         onChange={(e) => sl(e.target.files[0])}
        
         />
@@ -484,6 +457,7 @@ const [y,sy] = useState("")
         type="file"
         required
         placeholder=""
+        accept=".jpg, .png, .jpeg, .ico"
         onChange={(e) => sq(e.target.files[0])}
        
         />
@@ -528,7 +502,7 @@ const [y,sy] = useState("")
     </div>
 
     <div>
-       <FormLable>Phone Number</FormLable>
+       <FormLable>Emergency Phone Number</FormLable>
        <FormInputStudent
        type="text"
        

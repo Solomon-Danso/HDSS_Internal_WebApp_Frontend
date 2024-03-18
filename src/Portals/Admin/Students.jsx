@@ -149,9 +149,10 @@ const navigate = useNavigate()
            
             window.URL.revokeObjectURL(url);
             document.body.removeChild(a);
-            Show.Success("Student Admitted Successfully")
+            Show.Success(firstName+" "+otherName+" "+lastName+" has been admitted successfully")
           } else {
-            Show.Attention("Student Admission Failed");
+            const data = await response.json()
+            Show.Attention(data.message);
           }
         } catch (error) {
           Show.Attention(error.message);

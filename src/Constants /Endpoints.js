@@ -1,6 +1,6 @@
 //export const apiServer = "http://10.42.0.1:5000/"
 //export const apiServer = "http://192.168.100.4:8000/api/"
-//export const apiMedia = "http://192.168.100.4:8000/"
+//export const apiMedia = "http://192.168.100.4:8000/storage/"
 
 export const apiServer = "http://localhost:8000/api/"
 export const apiMedia = "http://localhost:8000/storage/"

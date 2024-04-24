@@ -125,7 +125,8 @@ DashBoard
 
 {checkRole("SuperAdmin") || checkRole('AddStudent') ? (   
   <MenuButtonOptionLink onClick={() => { navigate("/admin/students") }}>Admit Student</MenuButtonOptionLink>
-  ) : (<></>)}
+  ) : (<></>)
+  }
 
 {checkRole("SuperAdmin") || checkRole("ViewStudent") ? (   
  <MenuButtonOptionLink onClick={() => { navigate("/admin/studentsInfo") }}>Student Info</MenuButtonOptionLink>

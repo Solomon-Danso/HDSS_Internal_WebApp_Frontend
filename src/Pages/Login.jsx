@@ -118,7 +118,7 @@ const handleSubmit = async (event) => {
             style={{ width: 65, height: 65 }}
           />
           <AppDesc style={{ color: "black", marginTop: 20, marginBottom: 50 }}>
-            Sign in to you account
+            Sign in to your account
           </AppDesc>
 
           <HDSS_Form

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 import { ViewOneStudent, apiMedia, apiServer } from '../../Constants /Endpoints';
 import { AboutHeader, BiggerImage, FormInputStudent, FormLable, HomeCardTextEvent, StudDetailData, StudDetailField, StudDetailRow, StudDetails, StudLeft, StudRight } from '../../Designs/Styles/Profile';
 import { AES,enc } from 'crypto-js';

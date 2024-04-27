@@ -85,7 +85,10 @@ navigate("/")
     }
     
   }, []);
-  const profilePic = apiServer+userInfo.profilePic
+  const profilePic = apiMedia+userInfo.ProfilePic
+
+
+
 
   
   const toggleDropdown = () => {
@@ -141,11 +144,11 @@ const [sysDate, setSysDate] = useState("")
 const [SchoolData, SetSchoolData] = useState({})
 
 useEffect(()=>{
-fetch(apiServer+"api/Setup/GetSchoolData")
-.then(res=>res.json())
-.then(data=>SetSchoolData(data))
-.catch(error=>console.error(error))
-},[])
+  fetch(apiServer+"ViewSchoolData")
+  .then(res=>res.json())
+  .then(data=>SetSchoolData(data))
+  .catch(error=>console.error(error))
+  },[])
 
 
 
@@ -292,8 +295,8 @@ alignItems: 'center',
     </>):(
     <>
    <HomeDetailsGrouper >
-   <HomeUserName onClick={toggleDropdown}>{userInfo.title} {userInfo.firstName} {userInfo.otherName} {userInfo.lastName}</HomeUserName>
-   <HomeUserSpecificRole onClick={toggleDropdown}>{userInfo.level}</HomeUserSpecificRole>
+   <HomeUserName onClick={toggleDropdown}>{userInfo.FullName}</HomeUserName>
+   <HomeUserSpecificRole onClick={toggleDropdown}>{userInfo.AccountType}</HomeUserSpecificRole>
    
   </HomeDetailsGrouper>   
     </>)
